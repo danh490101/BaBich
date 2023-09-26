@@ -13,7 +13,7 @@ class AdminCategoriesComponent extends Component
     public function render()
     {
         // $categories = Category::orderBy('name','asc');
-        $categories = DB::table('categories')->select('id', 'name')->get();
+        $categories = \Illuminate\Support\Facades\DB::table('categories')->select('id', 'name')->get();
         // foreach ($categories as $category) {
         //     echo "ID: " . $category->id . ", Name: " . $category->name . "<br>";
         // }

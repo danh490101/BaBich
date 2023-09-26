@@ -70,11 +70,6 @@
                             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
-                        <!-- <div class="wrap-input100 validate-input" data-validate="Password is required">
-                            <input class="input100" type="password" name="pass">
-                            <span class="focus-input100"></span>
-                            <span class="label-input100">Password</span>
-                        </div> -->
                         <div class="mt-4">
                             <x-input-label for="password" :value="__('Password')" />
                             <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
@@ -133,8 +128,6 @@
         <script src="vendor/daterangepicker/daterangepicker.js"></script>
         <script src="vendor/countdowntime/countdowntime.js"></script>
         <script src="js/main.js"></script>
-
     </body>
-
     </html>
 </x-guest-layout>

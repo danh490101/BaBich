@@ -13,20 +13,25 @@ return new class extends Migration
      */
     public function up()
     {
+        //
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
             $table->text('desc')->nullable();
-            $table->string('price',10,2);
+            $table->decimal('price',10,2);
             $table->enum('stock_status',['instock','outofstock']);
-            $table->unsignedBigInteger('quantity')->default(10);
+            $table->integer('quantity')->default(10);
             $table->string('image');
-            $table->text('images')->nullable();
+            $table->string('images')->nullable();
             $table->bigInteger('category_id')->unsigned()->nullable();
+            $table->bigInteger('brand_id')->unsigned()->nullable();
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
         });
+
     }
+
     /**
      * Reverse the migrations.
      *
@@ -34,6 +39,7 @@ return new class extends Migration
      */
     public function down()
     {
+        //
         Schema::dropIfExists('products');
     }
 };

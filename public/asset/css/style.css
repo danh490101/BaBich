@@ -40,6 +40,34 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+  .InputContainer {
+    width: 210px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent; 
+    opacity: 0.5; 
+    border-radius: 30px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
+  }
+  
+  .input {
+    width: 200px;
+    height: 40px;
+    border: none;
+    outline: none;
+    caret-color: rgb(255, 81, 0);
+    background-color: rgb(255, 255, 255);
+    border-radius: 30px;
+    padding-left: 15px;
+    letter-spacing: 0.8px;
+    color: rgb(19, 19, 19);
+    font-size: 13.4px;
+  }
+  
 html {
   font-family: sans-serif;
   line-height: 1.15;
@@ -9961,3 +9989,154 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+    .rating {
+      display: flex;
+      flex-direction: row-reverse;
+     /* Reverse the order of the stars */
+      font-size: 0;
+     /* Remove the space between the elements */
+    }
+    
+    .rating input[type="radio"] {
+      display: none;
+     /* Hide the radio buttons */
+    }
+    
+    .rating label {
+      font-size: 30px;
+      color: rgba(187, 183, 183, 0.726);
+     /* Empty star color */
+      margin: 0 2px;
+      cursor: pointer;
+    }
+    
+    .rating label:before {
+      content: "\2605";
+     /* Unicode character for filled star */
+    }
+    
+    .rating input[type="radio"]:checked ~ label:before {
+      content: "\2606";
+     /* Unicode character for empty star */
+      color: #016bf5;
+     /* Filled star color */
+    }
+
+    .wave-group {
+      position: relative;
+    }
+    
+    .wave-group .input {
+      font-size: 16px;
+      padding: 10px 10px 10px 5px;
+      display: block;
+      width: 1100px;
+      border: none;
+      background: transparent;
+    }
+    
+    .wave-group .input:focus {
+      outline: none;
+    }
+    
+    .wave-group .label {
+      color: #999;
+      font-size: 18px;
+      font-weight: normal;
+      position: absolute;
+      pointer-events: none;
+      left: 5px;
+      top: 10px;
+      display: flex;
+    }
+    
+    .wave-group .label-char {
+      transition: 0.2s ease all;
+      transition-delay: calc(var(--index) * .05s);
+    }
+    
+    .wave-group .input:focus ~ label .label-char,
+    .wave-group .input:valid ~ label .label-char {
+      transform: translateY(-20px);
+      font-size: 14px;
+      color: #b7472a;
+    }
+    
+    .wave-group .bar {
+      position: relative;
+      display: block;
+      width: 200px;
+    }
+    
+    .wave-group .bar:before,.wave-group .bar:after {
+      content: '';
+      height: 2px;
+      width: 0;
+      bottom: 1px;
+      position: absolute;
+      background: #b7472a;
+      transition: 0.2s ease all;
+      -moz-transition: 0.2s ease all;
+      -webkit-transition: 0.2s ease all;
+    }
+    
+    .wave-group .bar:before {
+      left: 50%;
+    }
+    
+    .wave-group .bar:after {
+      right: 50%;
+    }
+    
+    .wave-group .input:focus ~ .bar:before,
+    .wave-group .input:focus ~ .bar:after {
+      width: 50%;
+    }
+
+    .button {
+      height: 50px;
+      width: 200px;
+      position: relative;
+      background-color: transparent;
+      cursor: pointer;
+      border: 2px solid #252525;
+      overflow: hidden;
+      border-radius: 30px;
+      color: #333;
+      transition: all 0.5s ease-in-out;
+    }
+    
+    .btn-txt {
+      z-index: 1;
+      font-weight: 800;
+      letter-spacing: 4px;
+    }
+    
+    .type1::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: all 0.5s ease-in-out;
+      background-color: #333;
+      border-radius: 30px;
+      visibility: hidden;
+      height: 10px;
+      width: 10px;
+      z-index: -1;
+    }
+    
+    .button:hover {
+      box-shadow: 1px 1px 200px #252525;
+      color: #fff;
+      border: none;
+    }
+    
+    .type1:hover::after {
+      visibility: visible;
+      transform: scale(100) translateX(2px);
+    }
+    
+    
+    

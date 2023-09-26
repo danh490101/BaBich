@@ -83,44 +83,44 @@
             <div class="row">
                 <div class="col-lg-2 col-md-4 ">
                     <div class="sort w-100 text-center ftco-animate">
-                        <div class="img" style="background-image: url(asset/images/pd1.jpg);"></div>
-                        <h3>Brandy</h3>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 ">
-                    <div class="sort w-100 text-center ftco-animate">
-                        <div class="img" style="background-image: url(asset/images/pd2.jpg);"></div>
-                        <h3>Gin</h3>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 ">
-                    <div class="sort w-100 text-center ftco-animate">
-                        <div class="img" style="background-image: url(asset/images/pd3.jpg);"></div>
-                        <h3>LAROCHE POSSAY</h3>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 ">
-                    <div class="sort w-100 text-center ftco-animate">
-                        <div class="img" style="background-image: url(asset/images/pd44.jpg);"></div>
+                        <div class="img" style="background-image: url(asset/images/bn1.jpg);"></div>
                         <h3>SVR</h3>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 ">
                     <div class="sort w-100 text-center ftco-animate">
-                        <div class="img" style="background-image: url(asset/images/pd5.jpg);"></div>
+                        <div class="img" style="background-image: url(asset/images/bn2.jpg);"></div>
+                        <h3>COCOON</h3>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 ">
+                    <div class="sort w-100 text-center ftco-animate">
+                        <div class="img" style="background-image: url(asset/images/bn3.jpg);"></div>
+                        <h3>LAROCHE POSSAY</h3>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 ">
+                    <div class="sort w-100 text-center ftco-animate">
+                        <div class="img" style="background-image: url(asset/images/bn4.jpg);"></div>
                         <h3>MARTIDERM</h3>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 ">
                     <div class="sort w-100 text-center ftco-animate">
-                        <div class="img" style="background-image: url(asset/images/pd6.jpg);"></div>
-                        <h3>COCOON</h3>
+                        <div class="img" style="background-image: url(asset/images/bn5.jpg);"></div>
+                        <h3>DR.CEUTICS</h3>
                     </div>
                 </div>
-
+                <div class="col-lg-2 col-md-4 ">
+                    <div class="sort w-100 text-center ftco-animate">
+                        <div class="img" style="background-image: url(asset/images/bn6.jpg);"></div>
+                        <h3>INNISFREE</h3>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center pb-5">
@@ -132,7 +132,7 @@
             <div class="row">
                 <div class="col-md-3 d-flex">
                     <div class="product ftco-animate">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/prod-1.jpg);">
+                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/pd1.jpg);">
                             <div class="desc">
                                 <p class="meta-prod d-flex">
                                     <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
@@ -151,7 +151,7 @@
                 </div>
                 <div class="col-md-3 d-flex">
                     <div class="product ftco-animate">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/prod-2.jpg);">
+                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/pd2.jpg);">
                             <div class="desc">
                                 <p class="meta-prod d-flex">
                                     <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
@@ -170,7 +170,7 @@
                 </div>
                 <div class="col-md-3 d-flex">
                     <div class="product ftco-animate">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/prod-3.jpg);">
+                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/pd3.jpg);">
                             <div class="desc">
                                 <p class="meta-prod d-flex">
                                     <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
@@ -189,7 +189,7 @@
                 </div>
                 <div class="col-md-3 d-flex">
                     <div class="product ftco-animate">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/prod-4.jpg);">
+                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/pd4.jpg);">
                             <div class="desc">
                                 <p class="meta-prod d-flex">
                                     <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
@@ -208,7 +208,7 @@
 
                 <div class="col-md-3 d-flex">
                     <div class="product ftco-animate">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/prod-5.jpg);">
+                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/pd5.jpg);">
                             <div class="desc">
                                 <p class="meta-prod d-flex">
                                     <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
@@ -226,7 +226,7 @@
                 </div>
                 <div class="col-md-3 d-flex">
                     <div class="product ftco-animate">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/prod-6.jpg);">
+                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/pd6.jpg);">
                             <div class="desc">
                                 <p class="meta-prod d-flex">
                                     <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
@@ -244,7 +244,7 @@
                 </div>
                 <div class="col-md-3 d-flex">
                     <div class="product ftco-animate">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/prod-7.jpg);">
+                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/pd7.jpg);">
                             <div class="desc">
                                 <p class="meta-prod d-flex">
                                     <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
@@ -262,7 +262,7 @@
                 </div>
                 <div class="col-md-3 d-flex">
                     <div class="product ftco-animate">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/prod-8.jpg);">
+                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/pd8.jpg);">
                             <div class="desc">
                                 <p class="meta-prod d-flex">
                                     <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
@@ -382,7 +382,7 @@
 
 
 
-    <section class="ftco-section">
+    <!-- <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center mb-5">
                 <div class="col-md-7 heading-section text-center ftco-animate">
@@ -453,6 +453,6 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 </div>
 @endsection

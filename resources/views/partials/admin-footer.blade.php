@@ -39,7 +39,7 @@
 <script src="{{asset('ad_asset/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
 <script src="{{asset('ad_asset/assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
 <script src="{{asset('ad_asset/assets/js/argon.js?v=1.2.0')}}"></script>
-<script src="/{{asset('/ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js')}}"></script>
+<script src="{{asset('/ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js')}}"></script>
 <script src="{{asset('//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js')}}"></script>
 <script src="{{asset('//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js')}}"></script>
 <script src="{{asset('https://code.jquery.com/jquery-3.6.0.min.js')}}"></script>

@@ -24,9 +24,9 @@
 								<div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/{{$product->image}});">
 									<div class="desc">
 										<p class="meta-prod d-flex">
-											<a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
+											<a href="{{ route('add_to_cart', $product->id)}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
 											<a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
-											<a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
+											<a href="{{ route('product.details', ['id' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
 										</p>
 									</div>
 								</div>
@@ -56,7 +56,7 @@
 								</div>
 							</div>
 						</div> -->
-
+						
 						@endforeach
 					</div>
 					<div class="row mt-5">
@@ -80,14 +80,16 @@
 					<div class="sidebar-box ftco-animate">
 						<div class="categories">
 							<h3>Product Types</h3>
+							@foreach($categories as $category)
 							<ul class="p-0">
-								<li><a href="#">Brandy <span class="fa fa-chevron-right"></span></a></li>
-								<li><a href="#">Gin <span class="fa fa-chevron-right"></span></a></li>
+								<li><a href="#">{{$category->name}}<span class="fa fa-chevron-right"></span></a></li>
+								<!-- <li><a href="#">Gin <span class="fa fa-chevron-right"></span></a></li>
 								<li><a href="#">Rum <span class="fa fa-chevron-right"></span></a></li>
 								<li><a href="#">Tequila <span class="fa fa-chevron-right"></span></a></li>
 								<li><a href="#">Vodka <span class="fa fa-chevron-right"></span></a></li>
-								<li><a href="#">Whiskey <span class="fa fa-chevron-right"></span></a></li>
+								<li><a href="#">Whiskey <span class="fa fa-chevron-right"></span></a></li> -->
 							</ul>
+							@endforeach
 						</div>
 					</div>
 

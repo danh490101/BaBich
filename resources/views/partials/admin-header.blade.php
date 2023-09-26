@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-    <meta name="author" content="Creative Tim">
-    <title>BABICH</title>
-    <link rel="icon" href="{{asset('img/khac/favicon.png')}}" type="image/png">
-    <link rel="stylesheet" href="{{asset('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700')}}">
-    <link rel="stylesheet" href="{{asset('ad_asset/assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('ad_asset/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('ad_asset/assets/css/argon.css?v=1.2.0')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css')}}">
-</head>
-
-<body>
     <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
         <div class="scrollbar-inner">
             <div class="sidenav-header  align-items-center">
@@ -27,25 +10,28 @@
                 <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php">
-
+                            <a class="nav-link" href="{{route('admin.orders.index')}}">
                                 <span class="nav-link-text">Đơn đặt hàng mới</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="don-dat-hang.php">
-
+                            <a class="nav-link" href="{{route('admin.order_details.index')}}">
                                 <span class="nav-link-text">Đơn đặt hàng đã xử lý</span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{route('admin.products')}}">
+                            <a class="nav-link" href="{{ route('admin.products.index')}}">
                                 <span class="nav-link-text">Hàng hóa</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('admin.categories')}}">
+                            <a class="nav-link" href="{{ route('admin.categories.index') }}">
                                 <span class="nav-link-text">Loại hàng</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.brands.index') }}">
+                                <span class="nav-link-text">Thương hiệu</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -54,7 +40,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="khachhang.php">
+                            <a class="nav-link" href="{{route('admin.feedback.index')}}">
+                                <span class="nav-link-text">Đánh giá</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{'admin.users.index'}}">
                                 <span class="nav-link-text">Danh sách khách hàng</span>
                             </a>
                         </li>
@@ -133,4 +124,3 @@
                 </div>
             </div>
         </nav>
-        <!-- Header -->

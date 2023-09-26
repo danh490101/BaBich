@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Admin;
 
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
-use DB;
 class AdminProductsComponent extends Component
 {
     public function render()
