@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Events\SendMailConfirmEvent;
+use App\Listeners\SendMailConfirmEventListener;
+use App\Mail\ConfirmEmail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Symfony\Component\Mailer\Transport\SendmailTransportFactory;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,6 +21,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        SendMailConfirmEvent::class => [
+            SendMailConfirmEventListener::class,
         ],
     ];
 

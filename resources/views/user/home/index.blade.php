@@ -81,193 +81,141 @@
         <div class="container">
             <div class="row">
                 @foreach($brands as $brand)
-                    <div class="col-lg-2 col-md-4 ">
-                        <div class="sort w-100 text-center ftco-animate">
-                            <div class="img" style="background-image: url({{asset('storage/'.$brand->image)}});"></div>
-                            <h3>{{$brand->name}}</h3>
-                        </div>
+                <div class="col-lg-2 col-md-4 ">
+                    <div class="sort w-100 text-center ftco-animate">
+                        <div class="img" style="background-image: url({{asset('storage/'.$brand->image)}});"></div>
+                        <h3>{{$brand->name}}</h3>
                     </div>
+                </div>
                 @endforeach
             </div>
         </div>
     </section>
-
-    <section class="ftco-section">
-        <div class="container">
-            <div class="row justify-content-center pb-5">
-                <div class="col-md-7 heading-section text-center ftco-animate">
-                    <span class="subheading">Our Delightful offerings</span>
-                    <h2>Tastefully Yours</h2>
-                </div>
-            </div>
-           
-            <div class="row">
-            @foreach($products as $product)
-                <div class="col-md-3 d-flex">
-                    <div class="product ftco-animate">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
-                            <div class="desc">
-                                <p class="meta-prod d-flex">
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="text text-center">
-                            <span class="sale">Sale</span>
-                            <span class="category">Brandy</span>
-                            <h2>{{$product->name}}</h2>
-                            <p class="mb-0"><span class="price price-sale">$69.00</span> <span class="price">{{$product->price}}</span></p>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-                <!-- <div class="col-md-3 d-flex">
-                    <div class="product ftco-animate">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/pd2.jpg);">
-                            <div class="desc">
-                                <p class="meta-prod d-flex">
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="text text-center">
-                            <span class="seller">Best Seller</span>
-                            <span class="category">Gin</span>
-                            <h2>Jim Beam Kentucky Straight</h2>
-                            <span class="price">$69.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 d-flex">
-                    <div class="product ftco-animate">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/pd3.jpg);">
-                            <div class="desc">
-                                <p class="meta-prod d-flex">
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="text text-center">
-                            <span class="new">New Arrival</span>
-                            <span class="category">Rum</span>
-                            <h2>Citadelle</h2>
-                            <span class="price">$69.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 d-flex">
-                    <div class="product ftco-animate">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/pd4.jpg);">
-                            <div class="desc">
-                                <p class="meta-prod d-flex">
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="text text-center">
-                            <span class="category">Rum</span>
-                            <h2>The Glenlivet</h2>
-                            <span class="price">$69.00</span>
-                        </div>
+    @if(Auth::check())
+        <!-- San pham goi y -->
+        <section class="ftco-section">
+            <div class="container">
+                <div class="row justify-content-center pb-5">
+                    <div class="col-md-7 heading-section text-center ftco-animate">
+                        <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span>
+                        <h2>Sản phẩm bạn đã mua</h2>
                     </div>
                 </div>
 
-                <div class="col-md-3 d-flex">
-                    <div class="product ftco-animate">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/pd5.jpg);">
-                            <div class="desc">
-                                <p class="meta-prod d-flex">
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
-                                </p>
+                <div class="row">
+                    @foreach($suggestion as $product)
+                    <div class="col-md-3 d-flex">
+                        <div class="product ftco-animate">
+                            <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
+                                <div class="desc">
+                                    <p class="meta-prod d-flex">
+                                        <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
+                                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
+                                        <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="text text-center">
+                                <span class="sale">Hot</span>
+                                <!-- <span class="category">Brandy</span> -->
+                                <h2>{{$product->name}}</h2>
+                                <p class="mb-0"><span class="price" style="height:500px">{{$product->price}}</span></p>
                             </div>
                         </div>
-                        <div class="text text-center">
-                            <span class="category">Whiskey</span>
-                            <h2>Black Label</h2>
-                            <span class="price">$69.00</span>
-                        </div>
                     </div>
-                </div>
-                <div class="col-md-3 d-flex">
-                    <div class="product ftco-animate">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/pd6.jpg);">
-                            <div class="desc">
-                                <p class="meta-prod d-flex">
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="text text-center">
-                            <span class="category">Tequila</span>
-                            <h2>Macallan</h2>
-                            <span class="price">$69.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 d-flex">
-                    <div class="product ftco-animate">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/pd7.jpg);">
-                            <div class="desc">
-                                <p class="meta-prod d-flex">
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="text text-center">
-                            <span class="category">Vodka</span>
-                            <h2>Old Monk</h2>
-                            <span class="price">$69.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 d-flex">
-                    <div class="product ftco-animate">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(asset/images/pd8.jpg);">
-                            <div class="desc">
-                                <p class="meta-prod d-flex">
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
-                                    <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="text text-center">
-                            <span class="category">Whiskey</span>
-                            <h2>Jameson Irish Whiskey</h2>
-                            <span class="price">$69.00</span>
-                        </div>
-                    </div>
-                </div> -->
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-4">
-                    <a href="product.html" class="btn btn-primary d-block">View All Products <span class="fa fa-long-arrow-right"></span></a>
+                    @endforeach
                 </div>
             </div>
-        </div>
-    </section>
-
+        </section>
+        @foreach ($products as $index => $group)
+        <section class="ftco-section">
+            <div class="container">
+                <div class="row justify-content-center pb-5">
+                    <div class="col-md-7 heading-section text-center ftco-animate">
+                        <!-- <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span> -->
+                        <h2>Sản Phẩm {{ $index }}</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach($group as $product)
+                    <div class="col-md-3 d-flex">
+                        <div class="product ftco-animate">
+                            <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
+                                <div class="desc">
+                                    <p class="meta-prod d-flex">
+                                        <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
+                                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
+                                        <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="text text-center">
+                                <!-- <span class="sale">Sale</span> -->
+                                <!-- <span class="category">Brandy</span> -->
+                                <h2>{{$product->name}}</h2>
+                                <p class="mb-0 fw-bolder"><span class="price">{{$product->price}}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <a href="{{ route('user.shop', ['categoryId' => $product->category_id]) }}" class="btn btn-primary d-block">Tất cả sản phẩm<span class="fa fa-long-arrow-right"></span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        @endforeach
+    @else
+         @foreach ($products as $index => $group)
+        <section class="ftco-section">
+            <div class="container">
+                <div class="row justify-content-center pb-5">
+                    <div class="col-md-7 heading-section text-center ftco-animate">
+                        <!-- <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span> -->
+                        <h2>Sản Phẩm {{ $index }}</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach($group as $product)
+                    <div class="col-md-3 d-flex">
+                        <div class="product ftco-animate">
+                            <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
+                                <div class="desc">
+                                    <p class="meta-prod d-flex">
+                                        <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
+                                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
+                                        <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="text text-center">
+                                <!-- <span class="sale">Sale</span> -->
+                                <!-- <span class="category">Brandy</span> -->
+                                <h2>{{$product->name}}</h2>
+                                <p class="mb-0 fw-bolder"><span class="price">{{$product->price}}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <a href="{{ route('user.shop', ['categoryId' => $product->category_id]) }}" class="btn btn-primary d-block">Tất cả sản phẩm<span class="fa fa-long-arrow-right"></span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        @endforeach
+    @endif
     <section class="ftco-section testimony-section img" style="background-image: url(asset/images/bg_4.jpg);">
         <div class="overlay"></div>
         <div class="container">
             <div class="row justify-content-center mb-5">
                 <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-                    <span class="subheading">Testimonial</span>
-                    <h2 class="mb-3">Happy Clients</h2>
+                    <span class="subheading">Lời Chứng Thực</span>
+                    <h2 class="mb-3">Khách Hàng Phản Hồi</h2>
                 </div>
             </div>
             <div class="row ftco-animate">

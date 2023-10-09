@@ -5,7 +5,7 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">Loại hàng hóa</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">THƯƠNG HIỆU</h6>
                 </div>
                 <div class="col-lg-6 col-5 text-right">
                     <li class="nav-item dropdown">
@@ -13,7 +13,7 @@
                             <div class="media align-items-center">
                                 <span class="btn btn-sm btn-neutral">
                                     <i class="ni ni-fat-add text-blue"></i>
-                                    <span> Thêm loại hàng</span>
+                                    <span> Thêm thương hiệu</span>
                                 </span>
                             </div>
                         </a>
@@ -31,8 +31,8 @@
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col" class="sort" data-sort="name">Mã hàng</th>
-                                <th scope="col" class="sort" data-sort="name">Tên hàng</th>
+                                <th scope="col" class="sort" data-sort="name">Mã </th>
+                                <th scope="col" class="sort" data-sort="name">Tên thương hiệu</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>

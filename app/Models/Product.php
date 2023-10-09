@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
     protected $table = 'products';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'desc', 'price', 'quantity', 'image','brand_id', 'category_id'];
+    protected $fillable = ['name', 'desc', 'price', 'quantity', 'image', 'brand_id', 'category_id'];
 
     public function brand()
     {
@@ -20,5 +20,12 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    // Trong model Product
+    public function favoritedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'user_favorite_products', 'product_id', 'user_id')
+            ->withTimestamps();
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Feedback;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -19,10 +20,12 @@ class ProductDetailsController extends Controller
     public function index()
     {
         //
+        
     }
     public function getDetails($id){
+        $categories = Category::all();
         $comments = Product::where('id', $id)->get();
-        return view('product',['id' => $id['id']]);
+        return view('product',['id' => $id['id']], compact('categories'));
     }
 
     /**
@@ -53,7 +56,7 @@ class ProductDetailsController extends Controller
      */
     public function show(Product $product)
     {
-
+        $categories = Category::all();
         $ratings = Feedback::where('product_id', $product->id)->get('rating')->toArray();
         $ratingValue = array_map(function ($rating) {
             $rating = $rating['rating'];
@@ -70,7 +73,7 @@ class ProductDetailsController extends Controller
             return $comment;
         }, $comments);
 
-        return view('user.product-details', compact('product', 'comments', 'avgRating'));
+        return view('user.product-details', compact('product', 'comments', 'avgRating','categories'));
     }
 
     /**

@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row no-gutters slider-text align-items-end justify-content-center">
                 <div class="col-md-9 ftco-animate mb-5 text-center">
-                    <p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Checkout <i class="fa fa-chevron-right"></i></span></p>
+                    <p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Trang chủ <i class="fa fa-chevron-right"></i></a></span> <span>Thanh toán <i class="fa fa-chevron-right"></i></span></p>
                     <h2 class="mb-0 bread">Thanh Toán</h2>
                 </div>
             </div>
@@ -22,29 +22,35 @@
                         <div class="row align-items-end">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="firstname">Tên khách hàng</label>
-                                    <input type="text" class="form-control" placeholder="{{$user->name}}">
+                                    <label for="name">Tên khách hàng</label>
+                                    <input id="name" type="text" name="name" class="form-control" placeholder="" value="{{$user->name}}">
+                                    @error('name')
+                                        <p class="text-danger">{{$message}}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="w-100"></div>
                             <div class="w-100"></div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="streetaddress">Địa chỉ</label>
-                                    <input type="text" class="form-control" placeholder="House number and street name">
+                                    <label for="address">Địa chỉ</label>
+                                    <input type="text" name="address" class="form-control" placeholder="" value="{{$user->address}}">
+                                    @error('address')
+                                        <p class="text-danger">{{$message}}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="w-100"></div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="phone">Số điện thoại</label>
-                                    <input type="text" class="form-control" placeholder="" value="{{$user->email}}">
+                                    <input type="text" name="phone" class="form-control" placeholder="" value="{{$user->phone}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="emailaddress">Email</label>
-                                    <input type="text" class="form-control" placeholder="" value="{{$user->email}}">
+                                    <label for="email">Email</label>
+                                    <input type="text" name="email" class="form-control" placeholder="" value="{{$user->email}}">
                                 </div>
                             </div>
                             <div class="w-100"></div>
@@ -61,6 +67,7 @@
                                     </p>
                                     <p class="d-flex">
                                         <span>Delivery</span>
+                                        <input type="text" name="delivery_cost" class="form-control" placeholder="" value="{{ number_format(round($cart['totalPrice']*0.05),3) }}" hidden>
                                         <span>{{ number_format(round($cart['totalPrice']*0.05),3) }}</span>
                                     </p>
                                     <p class="d-flex">
@@ -70,6 +77,7 @@
                                     <hr>
                                     <p class="d-flex total-price">
                                         <span>Total</span>
+                                        <input type="text" name="totalamount" class="form-control" placeholder="" value="{{ number_format(round($cart['totalPrice']*0.05 + $cart['totalPrice']),3) }}" hidden>
                                         <span>{{ number_format(round($cart['totalPrice']*0.05 + $cart['totalPrice']),3) }}</span>
                                     </p>
                                 </div>
@@ -80,14 +88,14 @@
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <div class="radio">
-                                                <label><input type="radio" name="optradio" class="mr-2">Thanh toán nhận hàng</label>
+                                                <label><input name="payment_method" value="1" type="radio" name="optradio" class="mr-2">Thanh toán nhận hàng</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <div class="radio">
-                                                <label><input type="radio" name="optradio" class="mr-2"> Paypal</label>
+                                                <label><input name="payment_method" value="2" type="radio" name="optradio" class="mr-2"> Paypal</label>
                                             </div>
                                         </div>
                                     </div>

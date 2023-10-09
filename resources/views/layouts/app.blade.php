@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{asset('ad_asset/assets/css/argon.css?v=1.2.0')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css')}}">
     @livewireStyles
+
 </head>
 
 <body>
@@ -37,6 +38,7 @@
 
     @endif
     @livewireScripts    
+    @yield('scripts')
 </body>
 
 </html>

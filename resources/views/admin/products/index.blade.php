@@ -51,8 +51,10 @@
                                     </a>
                                 </td>
                                 <td>
+                                
+
                                     <span>
-                                        {{$product->name}}
+                                        {{ Illuminate\Support\Str::limit($product->name, 15) }}
                                     </span>
                                 </td>
                                 <td>

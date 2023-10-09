@@ -19,8 +19,14 @@ return new class extends Migration
             $table->date('delivery_date');
             $table->decimal('totalamount',10,3);
             $table->bigInteger('user_id')->unsigned()->nullable();
-            $table->smallInteger('status');
+            $table->smallInteger('status')->default(0);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('name');
+            $table->string('email');
+            $table->string('address');
+            $table->string('phone',10);
+            $table->string('payment_method');
+            $table->text('order_notes')->nullable();
             $table->timestamps();
         });
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdFeedbackController;
+use App\Http\Controllers\Admin\AdProfileController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
@@ -26,10 +27,13 @@ use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
+use App\Mail\ConfirmEmail;
 use App\Models\Brand;
 use App\Models\Feedback;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
+use App\Events\SendMailConfirmEvent;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,8 +72,22 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/dasboard', UserDashboardComponent::class)->name ('user.dasboard');
         Route::resource('/feedback', FeedbackController::class);
         Route::resource('/checkout', CheckoutController::class);
+        Route::post('/add-to-favorites/{productId}', [App\Http\Controllers\User\ProductController::class,'addToFavorites'])->name('addToFavorites');
+        Route::get('/thanks', [CheckoutController::class, 'thanks'])->name('thanks');
+        Route::get('/favorite', [App\Http\Controllers\User\ProductController::class,'favorites'])->name('favorites');
+        Route::get('/suggestion', [HomeController::class, 'getProductSuggestion'])->name('suggestion');
+
+        Route::get('/sendmail', function() {
+            $data = [
+                'user_name' => 'Danh'
+            ];
+            SendMailConfirmEvent::dispatch(
+                $data
+            );
+        });
     });
 });
+
 Route::middleware(['auth','authadmin'])->group(function(){
     Route::group(['prefix' => '/admin', 'as' => 'admin.'], function () {
         Route::get('/dasboard',AdminDashboardComponent::class)->name ('dasboard');
@@ -81,6 +99,7 @@ Route::middleware(['auth','authadmin'])->group(function(){
         Route::resource('/order_details', OrderDetailsController::class);
         Route::resource('/feedback', AdFeedbackController::class);
         Route::get('/feedback/change-status/{feedback}', [AdFeedbackController::class, 'changeStatus'])->name('feedback.changeStatus');
+        // Route::resource('/profile/{id}', AdProfileController::class);
     });
 });
 // Route::middleware('auth')->group(function () {
@@ -88,7 +107,5 @@ Route::middleware(['auth','authadmin'])->group(function(){
 //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
-
-//
 
 require __DIR__.'/auth.php';

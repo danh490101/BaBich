@@ -10137,6 +10137,40 @@ textarea.form-control {
       visibility: visible;
       transform: scale(100) translateX(2px);
     }
+
+    .container1 input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+    
+    .container1 {
+      display: block;
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    .container1 svg {
+      position: relative;
+      top: 0;
+      left: 0;
+      height: 50px;
+      width: 50px;
+      transition: all 0.3s;
+      fill: #666;
+    }
+    
+    .container1 svg:hover {
+      transform: scale(1.1);
+    }
+    
+    .container1 input:checked ~ svg {
+      fill: #E3474F;
+    }
+    
     
     
     

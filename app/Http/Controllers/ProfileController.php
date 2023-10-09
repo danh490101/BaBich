@@ -57,4 +57,11 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+    public function showFavorites()
+    {
+        $user = Auth::user(); // Lấy người dùng hiện tại
+        $favoriteProducts = $user->favoriteProducts; // Lấy danh sách sản phẩm yêu thích
+
+        return view('user.favorite_products', compact('favoriteProducts'));
+    }
 }

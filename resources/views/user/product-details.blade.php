@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mb-5 ftco-animate">
-                <a class="image-popup prod-img-bg"><img src="{{asset('storage/'.$product->image)}} " width="550px" height="auto" class="img-fluid" alt="Colorlib Template"></a>
+                <a href="{{asset('storage/'.$product->image)}} " class="image-popup prod-img-bg"><img src="{{asset('storage/'.$product->image)}} " width="550px" height="auto" class="img-fluid" alt="Colorlib Template"></a>
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate mt-5">
                 <h3>{{$product->name}}</h3>
@@ -41,9 +41,19 @@
                 </div>
                 <p>
                     <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>
-                    <a href="#" class="d-flex align-items-center justify-content-center mb-5"><span class="flaticon-heart mb-5"></span></a>
+
+              
+                <form action="{{route('user.addToFavorites',['productId'=>$product->id])}}" method="post">
+                    @csrf
+
+                    <label class="container1">
+                        <input type="submit" name="{{$product->id}}">
+                        <svg id="Layer_1" version="1.0" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <path d="M16.4,4C14.6,4,13,4.9,12,6.3C11,4.9,9.4,4,7.6,4C4.5,4,2,6.5,2,9.6C2,14,12,22,12,22s10-8,10-12.4C22,6.5,19.5,4,16.4,4z"></path>
+                        </svg>
+                    </label>
+                </form>
                 </p>
-            
             </div>
         </div>
 
@@ -52,42 +62,10 @@
                 <div class="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link ftco-animate active mr-lg-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Mô Tả</a>
                     <a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Đánh Giá
-
                     </a>
                 </div>
             </div>
-            <form action="{{route('user.feedback.store')}}" method="post">
-                @csrf
-                <div class="col-md-12 tab-wrap">
-                    <div class="tab-content bg-light" id="v-pills-tabContent">
-                        <div class="rating">
-                            <input value="5" name="rating" id="star5" type="radio">
-                            <label for="star5"></label>
-                            <input value="4" name="rating" id="star4" type="radio">
-                            <label for="star4"></label>
-                            <input value="3" name="rating" id="star3" type="radio">
-                            <label for="star3"></label>
-                            <input value="2" name="rating" id="star2" type="radio">
-                            <label for="star2"></label>
-                            <input value="1" name="rating" id="star1" type="radio">
-                            <label for="star1"></label>
-                        </div>
-                        <div class="wave-group">
-                            <input required="" type="text" class="input" name="comment">
-                            <span class="bar"></span>
-                            <label class="label">
-                                <span class="label-char" style="--index: 0">Bình luận</span>
-                            </label>
-                        </div>
-                        <div class="wave-group">
-                            <input type="text" class="input" name="product_id" hidden value="{{ $product->id }}">
-                        </div>
-                        <button class="button type1" type="submit">
-                            <span class="btn-txt">Gửi</span>
-                        </button>
-                    </div>
-                </div>
-            </form>
+
             <div class="col-md-12 tab-wrap">
                 <div class="tab-content bg-light" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
@@ -99,10 +77,9 @@
                     <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-day-3-tab">
                         <div class="row p-4">
                             <div class="col-md-7">
-                                <h3 class="mb-4">Đánh giá 
-                                    (@for ($i=1; $i<=$avgRating +1; $i++) 
-                                        <i class="fa fa-star"></i>
-                                    @endfor)
+                                <h3 class="mb-4">Đánh giá
+                                    (@for ($i=1; $i<=$avgRating +1; $i++) <i class="fa fa-star"></i>
+                                        @endfor)
                                 </h3>
                                 @foreach($comments as $comment)
                                 <div class="review">
@@ -125,6 +102,38 @@
                                 @endforeach
                             </div>
                         </div>
+                        <form action="{{route('user.feedback.store')}}" method="post">
+                            @csrf
+                            <div class="col-md-12 tab-wrap">
+                                <div class="tab-content bg-light" id="v-pills-tabContent">
+                                    <div class="rating">
+                                        <input value="5" name="rating" id="star5" type="radio">
+                                        <label for="star5"></label>
+                                        <input value="4" name="rating" id="star4" type="radio">
+                                        <label for="star4"></label>
+                                        <input value="3" name="rating" id="star3" type="radio">
+                                        <label for="star3"></label>
+                                        <input value="2" name="rating" id="star2" type="radio">
+                                        <label for="star2"></label>
+                                        <input value="1" name="rating" id="star1" type="radio">
+                                        <label for="star1"></label>
+                                    </div>
+                                    <div class="wave-group">
+                                        <input required="" type="text" class="input" name="comment">
+                                        <span class="bar"></span>
+                                        <label class="label">
+                                            <span class="label-char" style="--index: 0">Bình luận</span>
+                                        </label>
+                                    </div>
+                                    <div class="wave-group">
+                                        <input type="text" class="input" name="product_id" hidden value="{{ $product->id }}">
+                                    </div>
+                                    <button class="button type1" type="submit">
+                                        <span class="btn-txt">Gửi</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

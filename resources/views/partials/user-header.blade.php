@@ -49,13 +49,13 @@
             </div>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="#" class="nav-link">Trang chủ</a></li>
+                    <li class="nav-item active"><a href="{{route('index')}}" class="nav-link">Trang chủ</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sản phẩm</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="{{ route('user.shop')}}">Products</a>
-                            <a class="dropdown-item" href="{{ route('user.shop')}}">Products</a>
-                            <a class="dropdown-item" href="{{ route('user.shop')}}">Products</a>
+                            <a class="dropdown-item" href="{{ route('user.shop')}}">shop</a>
+                            <!-- <a class="dropdown-item" href="{{ route('user.shop')}}">Products</a>
+                            <a class="dropdown-item" href="{{ route('user.shop')}}">Products</a> -->
                             <!-- <a class="dropdown-item" href="product-single.html">Single Product</a>
                             <a class="dropdown-item" href="cart.html">Cart</a>
                             <a class="dropdown-item" href="checkout.html">Checkout</a> -->
@@ -74,10 +74,11 @@
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
                             <form method="POST" action="{{route('logout')}}">
                                 @csrf
-                                <a class="dropdown-item" href="{{route('shop')}}">Thông tin</a>
+                                <a class="dropdown-item" href="#">Thông tin</a>
                                 <a href="{{route('logout')}}" class="dropdown-item" onclick="event.preventDefault(); this.closest('form').submit();">
                                     <span>Đăng xuất</span>
                                 </a>
+                                <a class="dropdown-item" href="{{route('user.favorites')}}">Yêu thích</a>
                             </form>
                         </div>
                     </li>

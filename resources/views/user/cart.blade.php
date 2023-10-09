@@ -6,8 +6,8 @@
         <div class="container">
             <div class="row no-gutters slider-text align-items-end justify-content-center">
                 <div class="col-md-9 ftco-animate mb-5 text-center">
-                    <p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Cart <i class="fa fa-chevron-right"></i></span></p>
-                    <h2 class="mb-0 bread">My Cart</h2>
+                    <p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Trang chủ <i class="fa fa-chevron-right"></i></a></span> <span>Giỏ hàng <i class="fa fa-chevron-right"></i></span></p>
+                    <h2 class="mb-0 bread">Giỏ Hàng</h2>
                 </div>
             </div>
         </div>
@@ -50,12 +50,12 @@
                                 <td>{{ $detail['price'] }}</td>
                                 <td class="quantity">
                                     <div class="input-group">
-                                        <input type="text" name="quantity" class="quantity form-control input-number" value="{{ $detail['quantity'] }}" min="1" max="100">
+                                        <input type="text" name="quantity" class="cart_update input-quantity form-control input-number" value="{{ $detail['quantity'] }}" min="1" max="100">
                                     </div>
                                 </td>
                                 <td>{{ number_format($detail['price']*$detail['quantity'],3) }}</td>
                                 <td>
-                                    <button type="button" onclick="Testfunction()" class="close" data-dismiss="alert" aria-label="Close">
+                                    <button type="button" class="close cart_remove" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true"><i class="fa fa-close"></i></span>
                                     </button>
                                 </td>
@@ -100,13 +100,14 @@
     $(".cart_update").change(function (e) {
         e.preventDefault();
         var ele = $(this);
+        console.log(ele.parents("tr").find(".input-quantity").val());
         $.ajax({
             url: "{{ route('update_cart') }}",
             method: "patch",
             data: {
                 _token: '{{ csrf_token() }}', 
                 id: ele.parents("tr").attr("data-id"), 
-                quantity: ele.parents("tr").find(".quantity").val()
+                quantity: ele.parents("tr").find(".input-quantity").val()
             },
             success: function (response) {
                window.location.reload();
@@ -114,16 +115,8 @@
         });
     });
 
-    function Testfunction() {
-        e.preventDefault();
-        console.log('222');
-    };
-
     $(".cart_remove").click(function (e) {
         e.preventDefault();
-        var_dump("hello");
-        die();
-   
         var ele = $(this);
    
         if(confirm("Do you really want to remove?")) {

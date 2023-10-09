@@ -96,7 +96,7 @@
                             </div>
                             <div class="dropdown-menu  dropdown-menu-right ">
                                 @auth
-                                <a href="profile.php" class="dropdown-item">
+                                <a href="#" class="dropdown-item">
                                     <span>{{ Auth::user()->name}}</span>
                                 </a>
                                 <form method="POST" action="{{route('logout')}}">

@@ -59,7 +59,7 @@
                                         {{$feedback->rating}} sao
                                     </span>
                                 </td>
-                                <!-- <td>
+                                <td>
                                     <span>
                                         @if ($feedback->status)
                                         Show
@@ -67,14 +67,14 @@
                                         Hide
                                         @endif
                                     </span>
-                                </td> -->
-                                <td>
+                                </td>
+                                <!-- <td>
                                     <label class="rocker rocker-small">
                                         <input type="checkbox">
                                         <span class="switch-left">Yes</span>
                                         <span class="switch-right">No</span>
                                     </label>
-                                </td>
+                                </td> -->
                                 <td class="text-right">
                                     <div class="dropdown">
                                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

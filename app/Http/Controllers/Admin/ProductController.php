@@ -41,7 +41,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = $request->validate([
-            'name' => 'required|string|min:1|max:30|unique:products',
+            'name' => 'required|string|unique:products',
             'desc' => 'required|string',
             'price' => 'required|string',
             'quantity' => 'required|string',
@@ -51,6 +51,7 @@ class ProductController extends Controller
         ]);
         $imageUrl = substr($request->file('fileUpload')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
         $product['image'] = $imageUrl;
+        // dd($product);
         $product = Product::create($product);
        return redirect()->route('admin.products.index');
     }
