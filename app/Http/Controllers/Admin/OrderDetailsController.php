@@ -46,6 +46,7 @@ class OrderDetailsController extends Controller
     public function show(OrderDetails $orderDetails)
     {
         //
+        
     }
 
     /**

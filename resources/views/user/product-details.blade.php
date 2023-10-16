@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-center">
             <div class="col-md-9 ftco-animate mb-5 text-center">
-                <p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span><a href="product.html">Products <i class="fa fa-chevron-right"></i></a></span> <span>Products Single <i class="fa fa-chevron-right"></i></span></p>
+                <p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Trang chủ <i class="fa fa-chevron-right"></i></a></span> <span><a href="product.html">Sản phẩm <i class="fa fa-chevron-right"></i></a></span> <span>Chi tiết sản phẩm<i class="fa fa-chevron-right"></i></span></p>
                 <h2 class="mb-0 bread">Chi tiết sản phẩm</h2>
             </div>
         </div>
@@ -42,7 +42,7 @@
                 <p>
                     <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>
 
-              
+
                 <form action="{{route('user.addToFavorites',['productId'=>$product->id])}}" method="post">
                     @csrf
 
@@ -118,19 +118,30 @@
                                         <input value="1" name="rating" id="star1" type="radio">
                                         <label for="star1"></label>
                                     </div>
-                                    <div class="wave-group">
+                                    <!-- <div class="wave-group">
                                         <input required="" type="text" class="input" name="comment">
                                         <span class="bar"></span>
                                         <label class="label">
                                             <span class="label-char" style="--index: 0">Bình luận</span>
                                         </label>
+                                    </div> -->
+                                    <div class="input-container2">
+                                        <input type="text" id="input" name="comment">
+                                        <label for="input" class="label">Bình luận:</label>
+                                        <div class="underline"></div>
                                     </div>
-                                    <div class="wave-group">
+                                    <div class="input-container2">
                                         <input type="text" class="input" name="product_id" hidden value="{{ $product->id }}">
                                     </div>
                                     <button class="button type1" type="submit">
                                         <span class="btn-txt">Gửi</span>
                                     </button>
+                                    <!-- <button type="submit">
+                                        <p>Subscribe</p>
+                                        <svg stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" fill="none" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linejoin="round" stroke-linecap="round"></path>
+                                        </svg>
+                                    </button> -->
                                 </div>
                             </div>
                         </form>

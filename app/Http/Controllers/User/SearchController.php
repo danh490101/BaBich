@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,7 @@ class SearchController extends Controller
     {
         //  $result = $request->result;
         //dd($request->get('keyword'));
+        $categories = Category::all();
         $searchTerm = $request->get('keyword'); // Lấy từ request
        // dd($searchTerm);
         $results = Product::where('name', 'like', "%$searchTerm%")
@@ -23,7 +25,7 @@ class SearchController extends Controller
             })
             ->get();
            // dd($results);
-            return view('user.home.search', ['results' => $results]);
+            return view('user.home.search', ['results' => $results], compact('categories'));
 
     }
 //     public function getSearch(Request $request)

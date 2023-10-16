@@ -25,7 +25,7 @@
                       <div class="col-lg-6 col-md-6">
                           <div class="form-group">
                               <label class="form-control-label" for="id">Mã đơn hàng</label>
-                              <span id="id" class="form-control" >{{$order->id}}</span>
+                              <span id="id" class="form-control" >{{$orders->id}}</span>
                           </div>
                       </div>
                       <div class="col-lg-6 col-md-6">
@@ -39,7 +39,7 @@
                       <div class="col-lg-6 col-md-6">
                           <div class="form-group">
                               <label class="form-control-label" for="id">Ngày đặt hàng</label>
-                              <span class="form-control">{{$order->order_date}}</span>
+                              <span class="form-control">{{$orders->order_date}}</span>
                           </div>
                       </div>
                   </div>
@@ -47,13 +47,13 @@
                       <div class="col-lg-6 col-md-6">
                           <div class="form-group">
                               <label class="form-control-label" for="id">Mã khách hàng</label>
-                              <span class="form-control" >{{$order->user_id}}</span>
+                              <span class="form-control" >{{$orders->user_id}}</span>
                           </div>
                       </div>
                       <div class="col-lg-6 col-md-6">
                           <div class="form-group">
                               <label class="form-control-label" for="office">Tên khách hàng</label>
-                              <span id="office" class="form-control" >Khánh Băng</span>
+                              <span id="office" class="form-control" >{{$orders->name}}</span>
                           </div>
                       </div>
                   </div>
@@ -61,13 +61,13 @@
                       <div class="col-lg-6 col-md-6">
                           <div class="form-group">
                               <label class="form-control-label" for="id">Số điện thoại</label>
-                              <span class="form-control" >0328292987</span>
+                              <span class="form-control" >{{$orders->phone}}</span>
                           </div>
                       </div>
                       <div class="col-lg-6 col-md-6">
                           <div class="form-group">
                               <label class="form-control-label" for="office">Email</label>
-                              <span id="office" class="form-control" >bang123@gmail.com</span>
+                              <span id="office" class="form-control" >{{$orders->email}}</span>
                           </div>
                       </div>
                   </div>
@@ -75,7 +75,7 @@
                       <div class="col-lg-12 col-md-12">
                           <div class="form-group">
                               <label class="form-control-label" for="id">Địa chỉ </label>
-                              <span class="form-control" >Hẻm 520, đường 30/4, phường Hưng Lợi, quận Ninh Kiều, thành phố Cần Thơ</span>
+                              <span class="form-control" >{{$orders->address}}</span>
                           </div>
                       </div>
                   </div>
@@ -110,22 +110,27 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach($order as $or)
+                  @if($orders->id === $or->id)
                   <tr>
                     <th scope="row">
-                    {{$order->product_id}}
+                    {{$or->product_id}}
                     </th>
                     <td>
-                    <a href="#">Kem Chống Nắng Cocoon</a>
+                    <a href="#">{{ $or->product_name }}</a>
                     </td>
                     <td>
-                    395.000  
+                    {{ $or->price }} 
                     </td>
                     <td>
-                    2
+                    {{ $or->quantity }} 
                     </td>
                     <td>
+                    {{ number_format($or->price * $or->quantity,3) }} 
                     </td>
                   </tr>
+                  @endif
+                  @endforeach
                 </tbody>
               </table>
               
@@ -144,18 +149,20 @@
               </div>
               <div class="col-6 text-right pr-2">
                   <h5 class="card-title text-uppercase text-muted mb-2">Tổng thanh toán </h5>
-                  <span class="h2 font-weight-bold mb-2 ">{{$order->totalamount}}</span>
+                  <span class="h2 font-weight-bold mb-2 ">{{$orders->totalamount}}</span>
               </div>
           </div>
       </div>
     </div>
     
-    <form action="" method="POST">
+    <form action="{{ route('admin.orders.update', ['order' => $orders]) }}" method="POST" enctype="multipart/form-data">
+      @csrf
+      @method('PATCH')
       <div class="container-fluid">
         <div class="card-body bg-white">
             <div class="row">
                 <label class="form-control-label" for="id">Ngày giao hàng</label>
-                <input class="form-control" type="date" name="ngaygh" value="" placeholder="VD: 2022-11-01"> 
+                <input class="form-control" type="date" name="delivery_date" value="" placeholder="VD: 2023-11-01"> 
             </div>
         </div>
       </div>

@@ -34,6 +34,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 use App\Events\SendMailConfirmEvent;
+use App\Http\Controllers\Admin\StatisticalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,11 +52,11 @@ use App\Events\SendMailConfirmEvent;
 // });
 // Route::get('/', HomeComponent::class)->name('home.index');
 Route::resource('/', HomeController::class);
-Route::get('/admin', AdminComponent::class)->name('admin.index');
+//Route::get('/admin', AdminComponent::class)->name('admin.index');
 Route::get('/shop', ShopComponent::class)->name('shop');
 Route::get('/user/shop', [App\Http\Controllers\User\ProductController::class,'index'])->name('user.shop');
 Route::get('/about', [HomeController::class, 'contact'])->name('user.about');
-Route::get('/product/{id}', DetailsComponent::class)->name('product.details');
+//Route::get('/product/{id}', DetailsComponent::class)->name('product.details');
 Route::get('/product-details/{product}',[ProductDetailsController::class, 'show'])->name('user.product-details');
 //cart
 Route::get('/user/cart', [App\Http\Controllers\User\ProductController::class, 'cart'])->name('user.cart');
@@ -64,6 +65,8 @@ Route::patch('/user/update-cart', [App\Http\Controllers\User\ProductController::
 Route::delete('/user/remove-from-cart', [App\Http\Controllers\User\ProductController::class, 'remove'])->name('remove_from_cart');
 Route::post('/user/home/search', [SearchController::class,'getSearch'])->name('user.search');
 Route::get('add-to-cart/{id}', [UserProductController::class, 'addToCart'])->name('add-to-cart');
+// Route::get('/shop/{categoryId}', 'ProductController@showByCategory')->name('user.shop');
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -73,7 +76,7 @@ Route::middleware(['auth'])->group(function(){
         Route::resource('/feedback', FeedbackController::class);
         Route::resource('/checkout', CheckoutController::class);
         Route::post('/add-to-favorites/{productId}', [App\Http\Controllers\User\ProductController::class,'addToFavorites'])->name('addToFavorites');
-        Route::get('/thanks', [CheckoutController::class, 'thanks'])->name('thanks');
+      //  Route::get('/thanks', [CheckoutController::class, 'thanks'])->name('thanks');
         Route::get('/favorite', [App\Http\Controllers\User\ProductController::class,'favorites'])->name('favorites');
         Route::get('/suggestion', [HomeController::class, 'getProductSuggestion'])->name('suggestion');
 
@@ -99,7 +102,10 @@ Route::middleware(['auth','authadmin'])->group(function(){
         Route::resource('/order_details', OrderDetailsController::class);
         Route::resource('/feedback', AdFeedbackController::class);
         Route::get('/feedback/change-status/{feedback}', [AdFeedbackController::class, 'changeStatus'])->name('feedback.changeStatus');
-        // Route::resource('/profile/{id}', AdProfileController::class);
+        Route::resource('/profile', AdProfileController::class);
+        Route::resource('/statistical', StatisticalController::class);
+        Route::post('/statistical/search', [StatisticalController::class, 'search'])->name('statistical.search');
+        // Route::get('/statistical',[StatisticalController::class,'getQuantityOrder'])->name('statistical.getQuantityOrder');
     });
 });
 // Route::middleware('auth')->group(function () {

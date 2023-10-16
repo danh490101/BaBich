@@ -40,7 +40,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-
                         <p class="mb-0" style="color: rgba(255,255,255,.5);"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             Copyright &copy;<script>
                                 document.write(new Date().getFullYear());
@@ -60,7 +59,7 @@
             <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
         </svg></div>
 
-
+    <script src="{{asset('https://cdn.jsdelivr.net/npm/sweetalert2@11')}}"></script>
     <script src="{{asset('asset/js/jquery.min.js')}}"></script>
     <script src="{{asset('asset/js/jquery-migrate-3.0.1.min.js')}}"></script>
     <script src="{{asset('asset/js/popper.min.js')}}"></script>

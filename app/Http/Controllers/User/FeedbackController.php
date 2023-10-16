@@ -53,7 +53,7 @@ class FeedbackController extends Controller
         $feedback = Feedback::create($feedback);
 
        // dd($feedback);
-        return redirect()->route('product.details', ['id' => $data['product_id']]);
+        return redirect()->route('user.product-details', ['id' => $data['product_id']]);
         // dd($data);
     }
 

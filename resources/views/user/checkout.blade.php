@@ -106,7 +106,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary py-3 px-4">
+                                    <button type="submit" id="orderButton" class="btn btn-primary py-3 px-4">
                                         <span class="btn-txt">Đặt hàng</span>
                                     </button>
                                 </div>
@@ -118,4 +118,19 @@
         </div>
     </section>
 </div>
+<script>
+    document.getElementById('orderButton').addEventListener('click', function() {
+        Swal.fire({
+            title: 'Đặt hàng thành công',
+            text: 'Cảm ơn bạn đã đặt hàng!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/'; // Chuyển hướng về trang chủ
+            }
+        });
+    });
+</script>
+
 @endsection

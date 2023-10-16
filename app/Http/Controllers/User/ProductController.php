@@ -39,23 +39,27 @@ class ProductController extends Controller
         session()->put('cart', $cart);
         return redirect()->back();
     }
-    
+
     public function index(Request $request)
     {
         $categories = Category::all();
         $categoryId = $request->get('categoryId', null);
-       
+
         if (!$categoryId) {
             $products = Product::all();
         } else {
             $products = $this->getProductById($categoryId);
         }
-        
-        return view('user.shop', compact('products', 'categories'));
+
+        $minPrice = $request->input('min_price', 0);
+        $maxPrice = $request->input('max_price', 1000);
+        $filters = Product::whereBetween('price', [$minPrice, $maxPrice])->get();
+
+        return view('user.shop', compact('products', 'categories', 'filters'));
     }
 
     public function cart(Request $request)
-    { 
+    {
         $categories = Category::all();
         $cart = $request->session()->get('cart');
         $totalPrice = 0;
@@ -73,7 +77,7 @@ class ProductController extends Controller
     {
         $user = Auth::user(); // Lấy người dùng 
         $product = Product::find($productId); // Lấy sản phẩm bạn muốn thêm 
-       // dd($product);
+        // dd($product);
         if (!$product) {
             // 
             return redirect()->back()->with('error', 'Không tìm thấy sản phẩm.');
@@ -88,15 +92,16 @@ class ProductController extends Controller
         }
     }
 
-    public function favorites(){
-        $user = Auth::user(); 
+    public function favorites()
+    {
+        $user = Auth::user();
         $favorites = Favorite::where('user_id', '=', $user->id)->get();
         $products = [];
-        foreach($favorites as $item){
+        foreach ($favorites as $item) {
             $products[] = Product::find($item->product_id);
         }
         $categories = Category::all();
-        return view('user.favorite', compact('products','categories'));
+        return view('user.favorite', compact('products', 'categories'));
     }
 
     /**
@@ -112,8 +117,8 @@ class ProductController extends Controller
             $cart[$request->id]["quantity"] = $request->quantity;
             $totalAmount = 0;
 
-            foreach($cart as $key => $item) {
-                if($key === 'totalAmount') {
+            foreach ($cart as $key => $item) {
+                if ($key === 'totalAmount') {
                     continue;
                 }
 
@@ -123,7 +128,7 @@ class ProductController extends Controller
             $cart['totalAmount'] = $totalAmount;
             session()->put('cart', $cart);
             session()->flash('success', 'Cart successfully updated!');
-        
+
             return true;
         }
 
@@ -142,7 +147,8 @@ class ProductController extends Controller
         }
     }
 
-    public function getProductById($categoryId) {
+    public function getProductById($categoryId)
+    {
         $products = Product::where('category_id', '=', $categoryId)->get();
 
         return $products;

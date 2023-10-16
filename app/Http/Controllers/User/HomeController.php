@@ -21,7 +21,6 @@ class HomeController extends Controller
     {
         if (Auth::check()) {
             // Người dùng đã đăng nhập
-
             $products = $this->groupProductByCategory();
             $brands = Brand::all();
             $categories = Category::all();
@@ -89,7 +88,15 @@ class HomeController extends Controller
                 $productList[$product->category_id][] = $product;
             }
         }
-
         return $productList;
     }
+
+    // public function showByCategory($categoryId)
+    // {
+    //     // Lấy danh sách sản phẩm thuộc vào danh mục có ID là $categoryId
+    //     $products = Product::where('category_id', $categoryId)->get();
+
+    //     // Trả về view để hiển thị sản phẩm theo phân loại
+    //     return view('products.by_category', ['products' => $products]);
+    // }
 }

@@ -74,7 +74,7 @@ class CheckoutController extends Controller
         );
         
        // return view('user.thanks');
-        return redirect()->route('user.thanks');
+        return redirect()->route('index');
         //dd($dataUpdate);
        // $cart = $request->session()->get('cart');
         // dd($cart);

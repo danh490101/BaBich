@@ -98,10 +98,9 @@
                 <div class="row justify-content-center pb-5">
                     <div class="col-md-7 heading-section text-center ftco-animate">
                         <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span>
-                        <h2>Sản phẩm bạn đã mua</h2>
+                        <h2>Có Thể Bạn Sẽ Thích</h2>
                     </div>
                 </div>
-
                 <div class="row">
                     @foreach($suggestion as $product)
                     <div class="col-md-3 d-flex">
@@ -119,7 +118,7 @@
                                 <span class="sale">Hot</span>
                                 <!-- <span class="category">Brandy</span> -->
                                 <h2>{{$product->name}}</h2>
-                                <p class="mb-0"><span class="price" style="height:500px">{{$product->price}}</span></p>
+                                <p class="mb-0"><span class="price">{{$product->price}}</span></p>
                             </div>
                         </div>
                     </div>
@@ -194,7 +193,7 @@
                                 <!-- <span class="sale">Sale</span> -->
                                 <!-- <span class="category">Brandy</span> -->
                                 <h2>{{$product->name}}</h2>
-                                <p class="mb-0 fw-bolder"><span class="price">{{$product->price}}</span></p>
+                                <p class="mb-0 "><span class="price">{{$product->price}}</span></p>
                             </div>
                         </div>
                     </div>

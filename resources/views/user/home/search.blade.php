@@ -6,8 +6,8 @@
 		<div class="container">
 			<div class="row no-gutters slider-text align-items-end justify-content-center">
 				<div class="col-md-9 ftco-animate mb-5 text-center">
-					<p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Products <i class="fa fa-chevron-right"></i></span></p>
-					<h2 class="mb-0 bread">Search:</h2>
+					<p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Trang chủ <i class="fa fa-chevron-right"></i></a></span> <span>Sản phẩm tìm kiếm <i class="fa fa-chevron-right"></i></span></p>
+					<h2 class="mb-0 bread">Tìm kiếm</h2>
 				</div>
 			</div>
 		</div>
@@ -30,7 +30,7 @@
 									</div>
 								</div>
 								<div class="text text-center">
-									<span class="sale">Sale</span>
+									<!-- <span class="sale">Sale</span> -->
 									<span class="category">Brandy</span>
 									<h2>{{$result->name}}</h2>
 									<p class="mb-0"><span class="price ">{{$result->price}}</span></p>
@@ -51,6 +51,53 @@
 									<li><a href="#">5</a></li>
 									<li><a href="#">&gt;</a></li>
 								</ul>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				<div class="col-md-3">
+					<div class="sidebar-box ftco-animate">
+						<div class="categories">
+							<h3>Phân loại</h3>
+							@foreach($categories as $category)
+							<ul class="p-0">
+								<li><a href="{{ route('user.shop', ['categoryId' => $category->id]) }}">{{$category->name}}<span class="fa fa-chevron-right"></span></a></li>
+							</ul>
+							@endforeach
+						</div>
+					</div>
+
+					<div class="sidebar-box ftco-animate">
+						<h3>Recent Blog</h3>
+						<div class="block-21 mb-4 d-flex">
+							<a class="blog-img mr-4" style="background-image: url(asset/images/image_1.jpg);"></a>
+							<div class="text">
+								<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+								<div class="meta">
+									<div><a href="#"><span class="fa fa-calendar"></span> Apr. 18, 2020</a></div>
+									<div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
+								</div>
+							</div>
+						</div>
+						<div class="block-21 mb-4 d-flex">
+							<a class="blog-img mr-4" style="background-image: url(asset/images/image_2.jpg);"></a>
+							<div class="text">
+								<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+								<div class="meta">
+									<div><a href="#"><span class="fa fa-calendar"></span> Apr. 18, 2020</a></div>
+									<div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
+								</div>
+							</div>
+						</div>
+						<div class="block-21 mb-4 d-flex">
+							<a class="blog-img mr-4" style="background-image: url(asset/images/image_3.jpg);"></a>
+							<div class="text">
+								<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+								<div class="meta">
+									<div><a href="#"><span class="fa fa-calendar"></span> Apr. 18, 2020</a></div>
+									<div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
+								</div>
 							</div>
 						</div>
 					</div>

@@ -32,7 +32,7 @@
                 </tr>
 
                 <tr style="color: red;font-size:20px">
-                    <td><b>Tổng tiền:</b>{{$order->totalamount}}</td>
+                    <td><b>Tổng tiền:</b> {{$order->totalamount}}</td>
                     <td class="total-price">VND</td>
                 </tr>
             </table>

@@ -42,7 +42,6 @@
                                         <label class="form-control-label" for="name">Tên loại hàng</label>
                                         <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
                                         <input type="text" name="name" class="form-control" placeholder="Tên sản phẩm" value="{{$brand->name}}" >
-                                    
                                             @error('name')
                                             <p class="text-danger">{{$message}}</p>
                                             @enderror
