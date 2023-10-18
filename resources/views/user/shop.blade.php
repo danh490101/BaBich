@@ -64,27 +64,7 @@
 							<input type="range" id="max_price" name="max_price" min="0" max="1000" step="10" value="{{ request('max_price', 1000) }}">
 							<button type="submit">Lọc</button>
 						</form>
-						<script>
-							const minPriceRange = document.getElementById('min_price');
-							const maxPriceRange = document.getElementById('max_price');
 
-							// Lấy các thẻ hiển thị mức giá
-							const minPriceDisplay = document.getElementById('min_price_display');
-							const maxPriceDisplay = document.getElementById('max_price_display');
-
-							// Cập nhật mức giá hiện tại khi người dùng thay đổi thanh điều chỉnh
-							minPriceRange.addEventListener('input', function() {
-								minPriceDisplay.textContent = minPriceRange.value;
-							});
-
-							maxPriceRange.addEventListener('input', function() {
-								maxPriceDisplay.textContent = maxPriceRange.value;
-							});
-
-							// Hiển thị giá ban đầu
-							minPriceDisplay.textContent = minPriceRange.value;
-							maxPriceDisplay.textContent = maxPriceRange.value;
-						</script>
 					</div>
 					<div class="sidebar-box ftco-animate">
 						<div class="categories">
@@ -151,14 +131,14 @@
 								<div class="text text-center">
 									<!-- <span class="sale">Sale</span> -->
 									<!-- <span class="category">Brandy</span> -->
-									<h2>{{$product->name}}</h2>
+									<h2>{{ Illuminate\Support\Str::limit($product->name, 25) }}
+									</h2>
 									<p class="mb-0"><span class="price ">{{$product->price}}</span></p>
 								</div>
 							</div>
 						</div>
 						@endforeach
 					</div>
-
 					<div class="row mt-5">
 						<div class="col text-center">
 							<div class="block-27">
@@ -175,7 +155,6 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="col-md-3">
 					<div class="sidebar-box ftco-animate">
 						<div class="categories">
@@ -187,7 +166,6 @@
 							@endforeach
 						</div>
 					</div>
-
 					<div class="sidebar-box ftco-animate">
 						<h3>Recent Blog</h3>
 						<div class="block-21 mb-4 d-flex">
@@ -227,13 +205,23 @@
 		</div>
 	</section>
 </div>
-<!-- <script>
-	const priceRange = document.getElementById('price-range');
-	const priceValue = document.getElementById('price-value');
-
-	priceRange.addEventListener('input', function() {
-		priceValue.textContent = priceRange.value;
+@endsection
+@section('scripts')
+<script>
+	const minPriceRange = document.getElementById('min_price');
+	const maxPriceRange = document.getElementById('max_price');
+	// Lấy các thẻ hiển thị mức giá
+	const minPriceDisplay = document.getElementById('min_price_display');
+	const maxPriceDisplay = document.getElementById('max_price_display');
+	// Cập nhật mức giá hiện tại khi người dùng thay đổi thanh điều chỉnh
+	minPriceRange.addEventListener('input', function() {
+		minPriceDisplay.textContent = minPriceRange.value;
 	});
-</script> -->
-
+	maxPriceRange.addEventListener('input', function() {
+		maxPriceDisplay.textContent = maxPriceRange.value;
+	});
+	// Hiển thị giá ban đầu
+	minPriceDisplay.textContent = minPriceRange.value;
+	maxPriceDisplay.textContent = maxPriceRange.value;
+</script>
 @endsection

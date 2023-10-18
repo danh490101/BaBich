@@ -15,28 +15,46 @@ class ProductController extends Controller
      * Display a listing of the resource.
      *
      */
-    public function addToCart($id)
+    public function addToCart(Request $request, $id)
     {
+        $data = $request->validate([
+            'quantity'=>'required|numeric|min:1'
+        ]);
+
         $product = Product::findOrFail($id);
+
         if (!$product) {
+            return redirect()->back();
+        }
+
+
+        if($data['quantity'] > $product->quantity) {
+            toastr()->warning('Số lượng hàng trong kho không đủ!');
             return redirect()->back();
         }
 
         $cart = session()->get('cart', []);
         $cart['totalAmount'] = $cart['totalAmount'] ?? 0;
         if (isset($cart[$id])) {
+            if($data['quantity'] > 1) {
+                $cart[$id]['quantity'] = $cart[$id]['quantity'] + $data['quantity'];
+            } 
+            else {
             $cart[$id]['quantity']++;
+            }
         } else {
             $cart[$id] = [
                 "id" => $id,
                 "name" => $product->name,
                 "price" => $product->price,
-                "quantity" => 1,
+                "quantity" => $data['quantity'],
                 "image" => $product->image
             ];
         }
-        $cart['totalAmount'] += 1;
+        // $cart['totalAmount'] += 1;
+        $cart['totalAmount'] += $data['quantity'];
         session()->put('cart', $cart);
+        toastr()->success('Thêm vào giỏ hàng thành công');
         return redirect()->back();
     }
 
@@ -44,18 +62,17 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $categoryId = $request->get('categoryId', null);
-
-        if (!$categoryId) {
-            $products = Product::all();
-        } else {
-            $products = $this->getProductById($categoryId);
-        }
-
         $minPrice = $request->input('min_price', 0);
         $maxPrice = $request->input('max_price', 1000);
-        $filters = Product::whereBetween('price', [$minPrice, $maxPrice])->get();
 
-        return view('user.shop', compact('products', 'categories', 'filters'));
+        if (is_null($categoryId)) {
+            $products = Product::whereBetween('price', [$minPrice, $maxPrice])->get();
+        } else {
+            $products = $this->getProductById($categoryId, [$minPrice, $maxPrice]);
+        }
+        
+
+        return view('user.shop', compact('products', 'categories'));
     }
 
     public function cart(Request $request)
@@ -147,9 +164,11 @@ class ProductController extends Controller
         }
     }
 
-    public function getProductById($categoryId)
+    public function getProductById($categoryId, $filter)
     {
-        $products = Product::where('category_id', '=', $categoryId)->get();
+        $products = Product::where('category_id', '=', $categoryId)->where(function($query) use ($filter){
+            $query->whereBetween('price', $filter);
+        })->get();
 
         return $products;
     }

@@ -84,19 +84,26 @@ class HomeController extends Controller
 
         $productList = [];
         foreach ($products as $product) {
-            if (!isset($productList[$product->category_id])) {
-                $productList[$product->category_id][] = $product;
-            }
+            $productList[$product->category_id][] = $product;
+
         }
         return $productList;
     }
 
     // public function showByCategory($categoryId)
     // {
-    //     // Lấy danh sách sản phẩm thuộc vào danh mục có ID là $categoryId
     //     $products = Product::where('category_id', $categoryId)->get();
-
-    //     // Trả về view để hiển thị sản phẩm theo phân loại
     //     return view('products.by_category', ['products' => $products]);
     // }
+
+    public function showProductsByCategory($categoryId)
+{
+    $productList = $this->groupProductByCategory(); // Gọi hàm để nhóm sản phẩm theo loại
+
+    return view('user.shop', [
+        'categoryId' => $categoryId,
+        'products' => $productList[$categoryId]
+    ]);
+}
+
 }

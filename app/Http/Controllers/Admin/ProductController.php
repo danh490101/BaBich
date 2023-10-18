@@ -46,12 +46,17 @@ class ProductController extends Controller
             'price' => 'required|string',
             'quantity' => 'required|string',
             'fileUpload' => 'required|image',
+            'fileUpload1' => 'required|image',
             'brand_id' => 'numeric|required|min:1',
             'category_id' => 'numeric|required|min:1'
         ]);
         $imageUrl = substr($request->file('fileUpload')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
         $product['image'] = $imageUrl;
-        // dd($product);
+
+        $imageUrl1 = substr($request->file('fileUpload1')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
+        $product['images'] = $imageUrl1;
+        //dd($product);
+
         $product = Product::create($product);
        return redirect()->route('admin.products.index');
     }

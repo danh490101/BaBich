@@ -55,12 +55,13 @@ Route::resource('/', HomeController::class);
 //Route::get('/admin', AdminComponent::class)->name('admin.index');
 Route::get('/shop', ShopComponent::class)->name('shop');
 Route::get('/user/shop', [App\Http\Controllers\User\ProductController::class,'index'])->name('user.shop');
+Route::get('/products/{categoryId}', 'HomeController@showProductsByCategory');
 Route::get('/about', [HomeController::class, 'contact'])->name('user.about');
 //Route::get('/product/{id}', DetailsComponent::class)->name('product.details');
 Route::get('/product-details/{product}',[ProductDetailsController::class, 'show'])->name('user.product-details');
 //cart
 Route::get('/user/cart', [App\Http\Controllers\User\ProductController::class, 'cart'])->name('user.cart');
-Route::get('/user/add-to-cart/{id}', [App\Http\Controllers\User\ProductController::class, 'addToCart'])->name('add_to_cart');
+Route::post('/user/add-to-cart/{id}', [App\Http\Controllers\User\ProductController::class, 'addToCart'])->name('add_to_cart');
 Route::patch('/user/update-cart', [App\Http\Controllers\User\ProductController::class, 'update'])->name('update_cart');
 Route::delete('/user/remove-from-cart', [App\Http\Controllers\User\ProductController::class, 'remove'])->name('remove_from_cart');
 Route::post('/user/home/search', [SearchController::class,'getSearch'])->name('user.search');

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Checkout;
 use App\Models\Order;
 use App\Models\OrderDetails;
+use App\Models\Product;
 use App\Models\User;
 use App\Models\Category;
 use Carbon\Carbon;
@@ -30,7 +31,7 @@ class CheckoutController extends Controller
         unset($cart['totalAmount']);
         $user_id = $request->user()->id;
         $user = User::findOrFail($user_id);
-        return view('user.checkout', compact('cart', 'user','categories'));
+        return view('user.checkout', compact('cart', 'user', 'categories'));
     }
     /**
      * Show the form for creating a new resource.
@@ -41,9 +42,10 @@ class CheckoutController extends Controller
         //
     }
 
-    public function thanks(){
+    public function thanks()
+    {
         $categories = Category::all();
-        return view('user.thanks',compact('categories'));
+        return view('user.thanks', compact('categories'));
     }
 
     /**
@@ -53,7 +55,7 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-       // dd($request->session()->get('cart'));
+        // dd($request->session()->get('cart'));
         $data = $request->all();
         $dataUpdate = $request->validate([
             'name' => 'required',
@@ -64,24 +66,34 @@ class CheckoutController extends Controller
             'delivery_cost' => 'required',
             'payment_method' => ' required|numeric|min:1|max:2'
         ]);
+
         $dataUpdate['order_date'] = Carbon::now()->format('Y-m-d');
         $dataUpdate['user_id'] = $request->user()->id;
-        $order = Order::create($dataUpdate);
+        $order = Order::create([
+            'name' => $dataUpdate['name'],
+            'address' => $dataUpdate['address'],
+            'phone' => $dataUpdate['phone'],
+            'email' => $dataUpdate['email'],
+            'totalamount' => (float) $dataUpdate['totalamount'],
+            'delivery_cost' => $dataUpdate['delivery_cost'],
+            'payment_method' => $dataUpdate['payment_method']
+        ]);
         $this->processOrderDetais($request, $order->id);
-
         SendMailConfirmEvent::dispatch(
             $order
         );
-        
-       // return view('user.thanks');
+
+
+        // return view('user.thanks');
         return redirect()->route('index');
         //dd($dataUpdate);
-       // $cart = $request->session()->get('cart');
+        // $cart = $request->session()->get('cart');
         // dd($cart);
         //dd($checkout);
     }
-    public function processOrderDetais(Request $request, $orderId){
-        $cart = $request ->session()->get('cart');
+    public function processOrderDetais(Request $request, $orderId)
+    {
+        $cart = $request->session()->get('cart');
         $order_details = [];
         foreach ($cart as $item) {
             if (!is_array($item)) continue;
@@ -89,12 +101,19 @@ class CheckoutController extends Controller
                 'order_id' => $orderId,
                 'product_id' => $item['id'],
                 'price' => $item['price'],
-                'quantity'=>$item['quantity'],
-                'totalamount'=> $item['price']*$item['quantity'],
+                'quantity' => $item['quantity'],
+                'totalamount' => $item['price'] * $item['quantity'],
             ];
+            $product = Product::findOrFail($item['id']);
+            $product -> update([
+                'quantity' =>  $product->quantity - $item['quantity']
+            ]);
         }
         $order_details = OrderDetails::insert($order_details);
-        session()->put('cart',[]);
+        // $product = Product::find($product_id); // Thay $productID bằng ID của sản phẩm cần giảm số lượng.
+        // $newQuantity = $product->quantity - $quantity; // Giảm đi số lượng cần giảm.
+        // $product->update(['quantity' => $newQuantity]);
+        session()->put('cart', []);
         //dd($order_details);
     }
 

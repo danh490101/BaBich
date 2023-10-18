@@ -5,18 +5,15 @@
     <title>Ba Bich</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="{{asset('https://cdn.jsdelivr.net/npm/sweetalert2@11')}}">
+    <!-- <link rel="stylesheet" href="{{asset('https://cdn.jsdelivr.net/npm/sweetalert2@11')}}"> -->
 
-    <link href="{{asset('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,700;0,800;1,200;1,300;1,400;1,500;1,700&display=swap')}}" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{asset('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')}}">
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,700;0,800;1,200;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{asset('asset/css/animate.css')}}">
-
     <link rel="stylesheet" href="{{asset('asset/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('asset/css/owl.theme.default.min.css')}}">
     <link rel="stylesheet" href="{{asset('asset/css/magnific-popup.css')}}">
-
     <link rel="stylesheet" href="{{asset('asset/css/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
 </head>
@@ -25,16 +22,16 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html">BA <span>BICH</span></a>
+            <a class="navbar-brand" href="{{route('index')}}">BA <span>BICH</span></a>
             <div class="order-lg-last btn-group">
-                <a href="{{route('user.cart')}}" class="btn-cart dropdown-toggle dropdown-toggle-split" >
+                <a href="{{route('user.cart')}}" class="btn-cart dropdown-toggle dropdown-toggle-split">
                     <span class="flaticon-shopping-bag"></span>
                     <div class="d-flex justify-content-center align-items-center"><small>
-                        @if ( $cart = session('cart') )
+                            @if ( $cart = session('cart') )
                             {{ $cart['totalAmount'] }}
-                        @else {{0}}
-                        @endif
-                    </small></div>
+                            @else {{0}}
+                            @endif
+                        </small></div>
                 </a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">

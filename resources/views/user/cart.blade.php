@@ -33,18 +33,18 @@
                             @foreach ($cart as $id => $detail)
                             @if (!is_numeric($id)) @continue @endif
                             <tr class="alert" role="alert" data-id="{{ $detail['id'] }}">
-                                <td>
+                                <!-- <td>
                                     <label class="checkbox-wrap checkbox-primary">
                                         <input type="checkbox" checked>
                                         <span class="checkmark"></span>
                                     </label>
-                                </td>
+                                </td> -->
                                 <td>
                                     <div class="img" style="background-image: url({{asset('storage/'.$detail['image'])}});"></div>
                                 </td>
                                 <td>
                                     <div class="name">
-                                        <span>{{ $detail['name'] }}</span>
+                                        <span> {{ Illuminate\Support\Str::limit($detail['name'], 15) }}</span>
                                     </div>
                                 </td>
                                 <td>{{ $detail['price'] }}</td>

@@ -15,24 +15,50 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mb-5 ftco-animate">
-                <a href="{{asset('storage/'.$product->image)}} " class="image-popup prod-img-bg"><img src="{{asset('storage/'.$product->image)}} " width="550px" height="auto" class="img-fluid" alt="Colorlib Template"></a>
+                <div class="slider">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" src="{{ asset('storage/' . $product->image) }}" alt="First slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="{{ asset('storage/' . $product->images) }}" alt="Second slide">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+
+                    <!-- <div><img src="{{ asset('storage/' . $product->image) }}" width="550px" height="auto" class="img-fluid" alt="Image 1"></div>
+                    <div><img src="{{ asset('storage/' . $product->image) }}" width="550px" height="auto" class="img-fluid" alt="Image 2"></div> -->
+                    <!-- Thêm hình -->
+                </div>
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate mt-5">
                 <h3>{{$product->name}}</h3>
                 <p class="price"><span>Giá: {{$product->price}}</span></p>
+
+                <form action="{{route('add_to_cart',['id' => $product->id])}}" method="post">
                 <div class="row mt-4">
                     <div class="input-group col-md-6 d-flex mb-3">
                         <span class="input-group-btn mr-2">
-                            <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                            <button id="decQty" type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
                                 <i class="fa fa-minus"></i>
                             </button>
                         </span>
-                        <input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-                        <span class="input-group-btn ml-2">
-                            <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </span>
+                            @csrf
+                            <input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+                            <span class="input-group-btn ml-2">
+                                <button id="incQty" type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </span>
                     </div>
                     <div class="w-100"></div>
                     <div class="col-md-12">
@@ -40,23 +66,20 @@
                     </div>
                 </div>
                 <p>
-                    <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>
-
-
-                <form action="{{route('user.addToFavorites',['productId'=>$product->id])}}" method="post">
+                    <button type="submit" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</button>
+                    <!-- <form action="{{route('user.addToFavorites',['productId'=>$product->id])}}" method="post">
                     @csrf
-
                     <label class="container1">
                         <input type="submit" name="{{$product->id}}">
                         <svg id="Layer_1" version="1.0" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <path d="M16.4,4C14.6,4,13,4.9,12,6.3C11,4.9,9.4,4,7.6,4C4.5,4,2,6.5,2,9.6C2,14,12,22,12,22s10-8,10-12.4C22,6.5,19.5,4,16.4,4z"></path>
                         </svg>
                     </label>
-                </form>
+                </form> -->
                 </p>
+                </form>
             </div>
         </div>
-
         <div class="row mt-5">
             <div class="col-md-12 nav-link-wrap">
                 <div class="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -65,7 +88,6 @@
                     </a>
                 </div>
             </div>
-
             <div class="col-md-12 tab-wrap">
                 <div class="tab-content bg-light" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
@@ -78,8 +100,16 @@
                         <div class="row p-4">
                             <div class="col-md-7">
                                 <h3 class="mb-4">Đánh giá
-                                    (@for ($i=1; $i<=$avgRating +1; $i++) <i class="fa fa-star"></i>
-                                        @endfor)
+                                    (@if($avgRating == 0)
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    @else
+                                    @for ($i=1; $i<=$avgRating ; $i++) <i class="fa fa-star"></i>
+                                        @endfor
+                                        @endif)
                                 </h3>
                                 @foreach($comments as $comment)
                                 <div class="review">
@@ -145,10 +175,32 @@
                                 </div>
                             </div>
                         </form>
+                        </d.iv>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </section>
+
+@endsection
+@section('scripts')
+<script type="text/javascript">
+    const btnDec = document.querySelector('#decQty')
+    const btnInc = document.querySelector('#incQty')
+    const intQty = document.querySelector('#quantity')
+
+    btnDec.addEventListener('click', () => {
+        if (parseInt(intQty.value) > 1) {
+            intQty.value = parseInt(intQty.value) - 1;
+        }
+    });
+    
+    btnInc.addEventListener('click', () => {
+        intQty.value = parseInt(intQty.value) + 1;
+    });
+
+    const incQty = () => {
+        intQty.value = parseInt(intQty.value) + 1;
+    }
+</script>
 @endsection
