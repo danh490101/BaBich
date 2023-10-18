@@ -47,6 +47,7 @@ class ProductController extends Controller
             'quantity' => 'required|string',
             'fileUpload' => 'required|image',
             'fileUpload1' => 'required|image',
+            'fileUpload2' => 'required|image',
             'brand_id' => 'numeric|required|min:1',
             'category_id' => 'numeric|required|min:1'
         ]);
@@ -55,6 +56,9 @@ class ProductController extends Controller
 
         $imageUrl1 = substr($request->file('fileUpload1')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
         $product['images'] = $imageUrl1;
+
+        $imageUrl2 = substr($request->file('fileUpload2')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
+        $product['image2'] = $imageUrl2;
         //dd($product);
 
         $product = Product::create($product);

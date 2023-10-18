@@ -117,6 +117,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Ảnh minh họa</label>
+                                        <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
+                                        <div class="custom-file">
+                                            <input type="file" class=" form-control" name="fileUpload2">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="pl-lg-4">
                             <div class="row">

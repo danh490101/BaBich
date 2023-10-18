@@ -17,7 +17,7 @@
         <div id="hoa-don">
             <h3>Hóa đơn mua hàng</h3>
             <table class="table-bordered table-responsive">
-                <tr class="bold">
+                <!-- <tr class="bold">
                     <td width="25%"><b>Tên sản phẩm</b></td>
                     <td width="20%"><b>Giá</b></td>
                     <td width="20%"><b>Số lượng</b></td>
@@ -29,10 +29,10 @@
                     <td class="price"> VND</td>
                     <td></td>
                     <td class="price"> VND</td>
-                </tr>
+                </tr> -->
 
                 <tr style="color: red;font-size:20px">
-                    <td><b>Tổng tiền:</b> {{$order->totalamount}}</td>
+                    <td><b>Tổng tiền:</b> {{number_format($order->totalamount,3)}}</td>
                     <td class="total-price">VND</td>
                 </tr>
             </table>
