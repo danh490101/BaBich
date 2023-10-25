@@ -58,19 +58,21 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="{{ route('admin.brands.edit', ['brand' => $brand]) }}">Xem & chỉnh sửa</a>
-                                            <a class="dropdown-item" href="{{ route('admin.brands.destroy', ['brand' => $brand]) }}" onclick="alertFunction()">Xóa</a>
+                                            <a class="dropdown-item" href="{{ route('admin.brands.edit', ['brand' => $brand->id]) }}">Xem & chỉnh sửa</a>
+                                            
 
-                                            <form id="delete-form-{{ $brand->id }}" action="{{ route('admin.brands.destroy', ['brand' => $brand]) }}" method="POST" style="display: none;">
+                                            <form action="{{ route('admin.brands.destroy', ['brand' => $brand->id]) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
+                                                <button class="dropdown-item" type="submit">Xóa</button>
                                             </form>
                                             <script>
-                                                function alertFunction() {
+                                                function alertFunction(brand) {
+                                                    console.log(brand);
                                                     event.preventDefault();
-                                                    if (confirm("Are you sure to delete")) {
-                                                        document.getElementById('delete-form-{{ $brand->id }}').submit();
-                                                    }
+                                                    // if (confirm("Are you sure to delete")) {
+                                                    //     document.getElementById('delete-form-{{ $brand->id }}').submit();
+                                                    // }
                                                 }
                                             </script>
                                         </div>

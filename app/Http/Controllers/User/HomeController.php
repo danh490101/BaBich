@@ -8,35 +8,38 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderDetails;
+use App\Models\Skin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     */
     public function index(Request $request)
     {
         if (Auth::check()) {
-            // Người dùng đã đăng nhập
             $products = $this->groupProductByCategory();
+            $bproducts = $this->groupProductByBrand();
             $brands = Brand::all();
+            $skins = Skin ::all();
             $categories = Category::all();
             $suggestion = $this->getProductSuggestion($request);
-            return view('user.home.index', compact('categories', 'brands', 'products', 'suggestion'));
+            return view('user.home.index', compact('categories', 'brands', 'products', 'suggestion','skins'));
         } else {
             $products = $this->groupProductByCategory();
+            $bproducts = $this->groupProductByBrand();
             $brands = Brand::all();
+            $skins = Skin ::all();
             $categories = Category::all();
-            return view('user.home.index', compact('categories', 'brands', 'products'));
+            return view('user.home.index', compact('categories', 'brands', 'products','skins'));
         }
     }
 
     public function contact()
     {
-        return view('user.about');
+        $categories = Category::all();
+        $brands = Brand::all();
+        $skins = Skin ::all();
+        return view('user.about',compact('categories', 'brands', 'skins')) ;
     }
 
     //Product suggestion
@@ -77,7 +80,6 @@ class HomeController extends Controller
 
         return $orderDetails;
     }
-
     public function groupProductByCategory()
     {
         $products = Product::all();
@@ -85,25 +87,39 @@ class HomeController extends Controller
         $productList = [];
         foreach ($products as $product) {
             $productList[$product->category_id][] = $product;
-
         }
         return $productList;
     }
+    public function showByCategory($categoryId)
+    {
+        $products = Product::where('category_id', $categoryId)->get();
+        return view('products.by_category', ['products' => $products]);
+    }
 
-    // public function showByCategory($categoryId)
+    //     public function showProductsByCategory($categoryId)
     // {
-    //     $products = Product::where('category_id', $categoryId)->get();
-    //     return view('products.by_category', ['products' => $products]);
+    //     $productList = $this->groupProductByCategory(); // Gọi hàm để nhóm sản phẩm theo loại
+
+    //     return view('user.shop', [
+    //         'categoryId' => $categoryId,
+    //         'products' => $productList[$categoryId]
+    //     ]);
     // }
 
-    public function showProductsByCategory($categoryId)
-{
-    $productList = $this->groupProductByCategory(); // Gọi hàm để nhóm sản phẩm theo loại
+    public function groupProductByBrand()
+    {
+        $products = Product::all();
 
-    return view('user.shop', [
-        'categoryId' => $categoryId,
-        'products' => $productList[$categoryId]
-    ]);
-}
+        $productList1 = [];
+        foreach ($products as $product) {
+            $productList1[$product->brand_id][] = $product;
+        }
+        return $productList1;
+    }
 
+    public function showByBrand($brandId)
+    {
+        $products = Product::where('brand_id', $brandId)->get();
+        return view('products.by_brand', ['products' => $products]);
+    }
 }

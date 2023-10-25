@@ -52,11 +52,8 @@
         <link rel="stylesheet" type="text/css" href="{{asset('form_asset/vendor/daterangepicker/daterangepicker.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('form_asset/css/util.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('form_asset/css/main.css')}}">
-
     </head>
-
     <body style="background-color: #666666;">
-
         <div class="limiter">
             <div class="container-login100">
                 <div class="wrap-login100">

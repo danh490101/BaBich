@@ -31,17 +31,17 @@
                         @if(Session::has('message'))
                         <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
                         @endif
-                    <form  action="{{ route('admin.brands.update', ['brand' => $brand]) }}" method="POST" enctype="multipart/form-data" >
-                    @csrf
-                    @method('PATCH')
+                        <form action="{{ route('admin.brands.update', ['brand' => $brand]) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PATCH')
 
-                        <div class="pl-lg-4">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="name">Tên loại hàng</label>
-                                        <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
-                                        <input type="text" name="name" class="form-control" placeholder="Tên sản phẩm" value="{{$brand->name}}" >
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="name">Tên loại hàng</label>
+                                            <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
+                                            <input type="text" name="name" class="form-control" placeholder="Tên sản phẩm" value="{{$brand->name}}">
                                             @error('name')
                                             <p class="text-danger">{{$message}}</p>
                                             @enderror
@@ -50,19 +50,19 @@
                                 </div>
                             </div>
                             <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label">Ảnh minh họa</label>
-                                            <span style="display: block;">
-                                                <img src="{{ asset('storage/'.$brand->image) }}" width="70px" height="auto"/>
-                                            </span>
-                                            <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span> 
-                                            <div class="custom-file">
-                                                <input type="file" class=" form-control" name="fileUpload" value="{{$brand->image}}" >
-                                            </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Ảnh minh họa</label>
+                                        <span style="display: block;">
+                                            <img src="{{ asset('storage/'.$brand->image) }}" width="70px" height="auto" />
+                                        </span>
+                                        <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
+                                        <div class="custom-file">
+                                            <input type="file" class=" form-control" name="fileUpload" value="{{$brand->image}}">
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             <div class="pl-lg-4">
                                 <div class="row">
                                     <div class="col-6 text-left">

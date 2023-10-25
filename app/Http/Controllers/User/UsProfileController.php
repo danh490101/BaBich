@@ -1,28 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UsProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     */
     public function index()
     {
         //
-        $users = User ::all();
-        return view('admin.users.index');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     */
     public function create()
     {
         //
@@ -53,11 +42,14 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
         //
+        compact('products', 'categories', 'brands', 'skins') ;
+        $user = User::findOrFail($id);
+        // dd($user);
+        return view('user.user-profile.edit', compact('user', 'categories', 'brands', 'skins'));
     }
 
     /**

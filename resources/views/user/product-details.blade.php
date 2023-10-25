@@ -48,13 +48,13 @@
                 <p class="price"><span>Giá: {{$product->price}}</span></p>
 
                 <form action="{{route('add_to_cart',['id' => $product->id])}}" method="post">
-                <div class="row mt-4">
-                    <div class="input-group col-md-6 d-flex mb-3">
-                        <span class="input-group-btn mr-2">
-                            <button id="decQty" type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
-                                <i class="fa fa-minus"></i>
-                            </button>
-                        </span>
+                    <div class="row mt-4">
+                        <div class="input-group col-md-6 d-flex mb-3">
+                            <span class="input-group-btn mr-2">
+                                <button id="decQty" type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </span>
                             @csrf
                             <input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
                             <span class="input-group-btn ml-2">
@@ -62,15 +62,15 @@
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </span>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-12">
+                            <p style="color: #000;">Số lượng: {{$product ->quantity}}</p>
+                        </div>
                     </div>
-                    <div class="w-100"></div>
-                    <div class="col-md-12">
-                        <p style="color: #000;">Số lượng: {{$product ->quantity}}</p>
-                    </div>
-                </div>
-                <p>
-                    <button type="submit" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</button>
-                    <!-- <form action="{{route('user.addToFavorites',['productId'=>$product->id])}}" method="post">
+                    <p>
+                        <button type="submit" class="btn btn-primary">Thêm vào giỏ hàng</button>
+                        <!-- <form action="{{route('user.addToFavorites',['productId'=>$product->id])}}" method="post">
                     @csrf
                     <label class="container1">
                         <input type="submit" name="{{$product->id}}">
@@ -79,16 +79,17 @@
                         </svg>
                     </label>
                 </form> -->
-                </p>
+                    </p>
                 </form>
+
             </div>
         </div>
         <div class="row mt-5">
             <div class="col-md-12 nav-link-wrap">
                 <div class="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link ftco-animate active mr-lg-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Mô Tả</a>
-                    <a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Đánh Giá
-                    </a>
+                    <a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Đánh Giá</a>
+                    <a class="nav-link ftco-animate mr-lg-1" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Chính Sách và Dịch Vụ</a>
                 </div>
             </div>
             <div class="col-md-12 tab-wrap">
@@ -97,6 +98,49 @@
                         <div class="p-4">
                             <h3 class="mb-4">{{$product->name}}</h3>
                             <p>{{$product->desc}}</p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-day-2-tab">
+                        <div class="p-4">
+                            <h3 class="mb-4">Cửa Hàng Ba Bích</h3>
+                            <div class="product_poli_wrap mb-3 p-2 border rounded">
+                                <div class="h5 m-0 mb-2 font-weight-bold text-center">
+                                    Chính sách - Dịch vụ
+                                </div>
+                                <div class="product_poli list-unstyled flex-column d-flex align-items-start m-0">
+                                    <div class="row m-0">
+                                        <div class="item d-flex align-items-center pb-2 pt-2 border-top w-100 col-12 col-sm-6 col-xl-12">
+                                            <div class="w-32 mr-3">
+                                            </div>
+                                            <div class="media-body">
+                                                Sản phẩm an toàn (Thương hiệu nổi tiếng). <b>Chính hãng</b>
+                                            </div>
+                                        </div>
+                                        <div class="item d-flex align-items-center pb-2 pt-2 border-top w-100 col-12 col-sm-6 col-xl-12">
+                                            <div class="w-32 mr-3">
+                                            </div>
+                                            <div class="media-body">
+                                                Chất lượng cam kết - Hoàn trả <b> 100%</b> + đền bù thêm <b> 100% </b>giá trị nếu gặp vấn đề do nhà sản xuất hoặc cửa hàng.
+                                            </div>
+                                        </div>
+                                        <div class="item d-flex align-items-center pb-2 pt-2 border-top w-100 col-12 col-sm-6 col-xl-12">
+                                            <div class="w-32 mr-3">
+                                            </div>
+                                            <div class="media-body">
+                                                <b>Dịch vụ vượt trội</b> (Hỗ trợ tận tình)
+                                            </div>
+                                        </div>
+                                        <div class="item d-flex align-items-center pb-2 pt-2 border-top w-100 col-12 col-sm-6 col-xl-12">
+                                            <div class="w-32 mr-3">
+                                            </div>
+                                            <div class="media-body">
+                                                Giao hàng nhanh chóng<br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>"Trải nghiệm mua sắm trực tuyến tuyệt vời tại chỗ chỉ cách một cú click!"</p>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-day-3-tab">
@@ -139,7 +183,7 @@
                             @csrf
                             <div class="col-md-12 tab-wrap">
                                 <div class="tab-content bg-light" id="v-pills-tabContent">
-                                    <div class="rating">
+                                    <!-- <div class="rating">
                                         <input value="5" name="rating" id="star5" type="radio">
                                         <label for="star5"></label>
                                         <input value="4" name="rating" id="star4" type="radio">
@@ -150,6 +194,18 @@
                                         <label for="star2"></label>
                                         <input value="1" name="rating" id="star1" type="radio">
                                         <label for="star1"></label>
+                                    </div> -->
+                                    <div class="rating">
+                                        <input value="5" name="rating" id="star5" type="radio">
+                                        <label title="text" for="star5"></label>
+                                        <input value="4" name="rating" id="star4" type="radio">
+                                        <label title="text" for="star4"></label>
+                                        <input value="3" name="rating" id="star3" type="radio">
+                                        <label title="text" for="star3"></label>
+                                        <input value="2" name="rating" id="star2" type="radio">
+                                        <label title="text" for="star2"></label>
+                                        <input value="1" name="rating" id="star1" type="radio">
+                                        <label title="text" for="star1"></label>
                                     </div>
                                     <!-- <div class="wave-group">
                                         <input required="" type="text" class="input" name="comment">
@@ -164,11 +220,25 @@
                                         <div class="underline"></div>
                                     </div>
                                     <div class="input-container2">
-                                        <input type="text" class="input" name="product_id" hidden value="{{ $product->id }}">
+                                        <div class="row">
+                                            <div class="col-9"><input type="text" class="input" name="product_id" hidden value="{{ $product->id }}"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <button class="cssbuttons-io-button" type="submit">
+                                                    Bình luận
+                                                    <div class="icon">
+                                                        <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M0 0h24v24H0z" fill="none"></path>
+                                                            <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                                                        </svg>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+
+
                                     </div>
-                                    <button class="button type1" type="submit">
-                                        <span class="btn-txt">Gửi</span>
-                                    </button>
                                     <!-- <button type="submit">
                                         <p>Subscribe</p>
                                         <svg stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" fill="none" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg">
@@ -183,6 +253,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </section>
 
 @endsection
@@ -197,7 +268,7 @@
             intQty.value = parseInt(intQty.value) - 1;
         }
     });
-    
+
     btnInc.addEventListener('click', () => {
         intQty.value = parseInt(intQty.value) + 1;
     });

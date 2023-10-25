@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Skin;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -29,7 +31,8 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $brands = Brand::all();
-        return view('admin.products.add', compact('brands', 'categories'));
+        $skins = Skin::all();
+        return view('admin.products.add', compact('brands', 'categories','skins'));
     }
 
     /**
@@ -49,7 +52,8 @@ class ProductController extends Controller
             'fileUpload1' => 'required|image',
             'fileUpload2' => 'required|image',
             'brand_id' => 'numeric|required|min:1',
-            'category_id' => 'numeric|required|min:1'
+            'category_id' => 'numeric|required|min:1',
+            'skin_id' => 'numeric|required|min:1'
         ]);
         $imageUrl = substr($request->file('fileUpload')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
         $product['image'] = $imageUrl;
@@ -85,7 +89,10 @@ class ProductController extends Controller
     {
         //
         $product = Product::findOrFail($product->id);
-        return view('admin.products.edit', compact('product'));
+        $categories = Category::all();
+        $brands = Brand::all();
+        $skins = Skin::all();
+        return view('admin.products.edit', compact('product','brands', 'categories','skins'));
     }
 
     /**
@@ -97,6 +104,61 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
+        $product = Product::findOrFail($product->id);
+        // dd($product);
+        $productUpdate = $request->validate([
+            'name' => [
+               'nullable'
+            ],
+            'desc'=>[
+                'required'
+            ],
+            'price'=>[
+                'required'
+            ],
+            'quantity'=>[
+                'required'
+            ],
+            'brand_id'=>[
+                'required'
+            ],
+            'category_id'=>[
+                'required'
+            ],
+            'skin_id'=>['required'
+            ],
+            'fileUpload'=>[
+                'nullable',
+                'image'
+            ],
+            'fileUpload1'=>[
+                'nullable',
+                'image'
+            ],
+            
+            'fileUpload2'=>[
+                'nullable',
+                'image'
+            ] 
+        ]);
+
+        if ($request->file('fileUpload')) {
+            $imageUrl = substr($request->file('fileUpload')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
+            $product['image'] = $imageUrl;
+        }
+        if ($request->file('fileUpload1')) {
+            $imageUrl = substr($request->file('fileUpload1')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
+            $product['images'] = $imageUrl;
+        }
+        if ($request->file('fileUpload2')) {
+            $imageUrl = substr($request->file('fileUpload2')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
+            $product['image2'] = $imageUrl;
+        }
+        $product->update($productUpdate);
+        
+        session()->flash('success','Cập nhật thành công!');
+
+        return redirect()->route('admin.products.index');
     }
 
     /**
@@ -105,11 +167,12 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
         //
-        $product = Product::findOrFail($product->id);
+        $product = Product::findOrFail($id);
         $product->delete();
+        session()->flash('success','Xóa thành công!');
         return redirect()->route('admin.products.index');
     }
 }

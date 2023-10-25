@@ -86,15 +86,15 @@
                                 <div class="desc">
                                     <p class="meta-prod d-flex">
                                         <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
+                                        <a href="{{ route('add_to_favorites', ['productId' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
                                         <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
                                     </p>
                                 </div>
                             </div>
                             <div class="text text-center">
                                 <span class="sale">Gợi ý</span>
-                                <!-- <span class="category">Brandy</span> -->
-                                <h2>{{$product->name}}</h2>
+                                <span class="category">{{$product->category->name}}</span>
+                                <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
                                 <p class="mb-0"><span class="price">{{$product->price}}</span></p>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                 <div class="row">
                     @foreach($group as $product)
                     <div class="col-md-3 d-flex">
-                        <div class="product ftco-animate">
+                        <div class="product ftco-animate shadow">
                             <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
                                 <div class="desc">
                                     <p class="meta-prod d-flex">
@@ -127,8 +127,8 @@
                             </div>
                             <div class="text text-center">
                                 <!-- <span class="sale">Sale</span> -->
-                                <!-- <span class="category">Brandy</span> -->
-                                <h2>{{$product->name}}</h2>
+                                <span class="category">{{$product->category->name}}</span>
+                                <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
                                 <p class="mb-0 fw-bolder"><span class="price">{{$product->price}}</span></p>
                             </div>
                         </div>
@@ -150,12 +150,12 @@
                 <div class="row justify-content-center pb-5">
                     <div class="col-md-7 heading-section text-center ftco-animate">
                         <!-- <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span> -->
-                        <h2>Sản Phẩm {{ $index }}</h2>
+                        <h2>Sản Phẩm {{$index}}</h2>
                     </div>
                 </div>
-                <div class="row">
-                    @foreach($group as $product)
-                    <div class="col-md-3 d-flex">
+                <div class="row ">
+                @foreach($group as $product)
+                    <div class="col-md-3 d-flex ">
                         <div class="product ftco-animate">
                             <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
                                 <div class="desc">
@@ -168,8 +168,8 @@
                             </div>
                             <div class="text text-center">
                                 <!-- <span class="sale">Sale</span> -->
-                                <!-- <span class="category">Brandy</span> -->
-                                <h2>{{$product->name}}</h2>
+                                <span class="category">{{$product->category->name}}</span>
+                                <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
                                 <p class="mb-0 "><span class="price">{{$product->price}}</span></p>
                             </div>
                         </div>
