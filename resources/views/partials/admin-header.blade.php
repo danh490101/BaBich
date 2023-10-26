@@ -34,6 +34,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.skins.index') }}">
+                            <span class="nav-link-text">Tình trạng da</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{route('admin.statistical.index')}}">
                             <span class="nav-link-text">Thống kê</span>
                         </a>
@@ -76,23 +81,22 @@
                 </ul>
                 <!-- Tai khoan-->
                 <div class="navbar-nav align-items-center  ml-auto ml-md-0 ">
-
+                @auth
                     <div class="nav-item dropdown">
                         <div class="nav-link pr-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <div class="media align-items-center">
                                 <span class="avatar avatar-sm rounded-circle">
-                                    <img alt="Image placeholder" src="{{asset('ad_asset/img/khac/avatar.png')}}">
+                                    <img alt="Image placeholder" src="{{ asset('storage/' . Auth::user()->avatar) }}">
                                 </span>
                                 <div class="media-body  ml-2  d-none d-lg-block">
                                     <span class="mb-0 text-sm  font-weight-bold">
-                                        <?php //echo $_SESSION['tennv']; 
-                                        ?>
+                                        {{Auth::user()->name}}
                                     </span>
                                 </div>
                             </div>
                         </div>
                         <div class="dropdown-menu  dropdown-menu-right ">
-                            @auth
+                            
                             <a href="{{ route('admin.profile.edit', ['profile' => Auth::user()->id]) }}" class="dropdown-item">
                                 <span>{{ Auth::user()->name}}</span>
                             </a>

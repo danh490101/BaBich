@@ -9,32 +9,18 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\OrderDetailsController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\FeedbackController;
-use App\Http\Controllers\FrontendController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProductController as UserProductController;
 use App\Http\Controllers\User\ProductDetailsController;
 use App\Http\Controllers\User\SearchController;
-use App\Http\Livewire\Admin\AdminDashboardComponent;
-use App\Http\Livewire\Admin\AdminCategoriesComponent;
-use App\Http\Livewire\Admin\AdminProductsComponent;
-use App\Http\Livewire\Admin\AdminAddCategoryComponent;
-use App\Http\Livewire\Admin\AdminAddProductsComponent;
-use App\Http\Livewire\AdminComponent;
-use App\Http\Livewire\CartComponent;
-use App\Http\Livewire\CheckoutComponent;
-use App\Http\Livewire\DetailsComponent;
-use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
-use App\Mail\ConfirmEmail;
-use App\Models\Brand;
-use App\Models\Feedback;
-use App\Models\Product;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Mail;
 use App\Events\SendMailConfirmEvent;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\SkinController;
 use App\Http\Controllers\Admin\StatisticalController;
+use App\Http\Controllers\User\UsProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,13 +41,14 @@ Route::resource('/', HomeController::class);
 //Route::get('/admin', AdminComponent::class)->name('admin.index');
 Route::get('/shop', ShopComponent::class)->name('shop');
 Route::get('/user/shop', [App\Http\Controllers\User\ProductController::class,'index'])->name('user.shop');
-Route::get('/products/{categoryId}', 'HomeController@showProductsByCategory');
+Route::get('/products/{categoryId}', [HomeController::class, 'showProductsByCategory']);
 Route::get('/about', [HomeController::class, 'contact'])->name('user.about');
 //Route::get('/product/{id}', DetailsComponent::class)->name('product.details');
 Route::get('/product-details/{product}',[ProductDetailsController::class, 'show'])->name('user.product-details');
 //cart
 Route::get('/user/cart', [App\Http\Controllers\User\ProductController::class, 'cart'])->name('user.cart');
 Route::post('/user/add-to-cart/{id}', [App\Http\Controllers\User\ProductController::class, 'addToCart'])->name('add_to_cart');
+Route::get('/user/add-to-cart/{id}', [App\Http\Controllers\User\ProductController::class, 'addToCartGet'])->name('add_to_cart_get');
 Route::patch('/user/update-cart', [App\Http\Controllers\User\ProductController::class, 'update'])->name('update_cart');
 Route::delete('/user/remove-from-cart', [App\Http\Controllers\User\ProductController::class, 'remove'])->name('remove_from_cart');
 Route::post('/user/home/search', [SearchController::class,'getSearch'])->name('user.search');
@@ -76,11 +63,10 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/dasboard', UserDashboardComponent::class)->name ('user.dasboard');
         Route::resource('/feedback', FeedbackController::class);
         Route::resource('/checkout', CheckoutController::class);
-        Route::post('/add-to-favorites/{productId}', [App\Http\Controllers\User\ProductController::class,'addToFavorites'])->name('addToFavorites');
-      //  Route::get('/thanks', [CheckoutController::class, 'thanks'])->name('thanks');
+        Route::resource('/user-profile', UsProfileController::class);
+        Route::post('/add-to-favorites/{productId}', [ProductController::class,'addToFavorites'])->name('add_to_favorites');
         Route::get('/favorite', [App\Http\Controllers\User\ProductController::class,'favorites'])->name('favorites');
         Route::get('/suggestion', [HomeController::class, 'getProductSuggestion'])->name('suggestion');
-
         Route::get('/sendmail', function() {
             $data = [
                 'user_name' => 'Danh'
@@ -94,16 +80,16 @@ Route::middleware(['auth'])->group(function(){
 
 Route::middleware(['auth','authadmin'])->group(function(){
     Route::group(['prefix' => '/admin', 'as' => 'admin.'], function () {
-        Route::get('/dasboard',AdminDashboardComponent::class)->name ('dasboard');
+        Route::get('/dashboard',[AdminController::class, 'index'])->name('dasboard');
         Route::resource('/categories', CategoryController::class);
         Route::resource('/products', ProductController::class);
         Route::resource('/brands', BrandController::class);
+        Route::resource('/skins',SkinController::class);
+        Route::resource('/profile', AdProfileController::class);
         Route::resource('/orders', OrderController::class);
-        Route::resource('/users', UserController::class);
         Route::resource('/order_details', OrderDetailsController::class);
         Route::resource('/feedback', AdFeedbackController::class);
         Route::get('/feedback/change-status/{feedback}', [AdFeedbackController::class, 'changeStatus'])->name('feedback.changeStatus');
-        Route::resource('/profile', AdProfileController::class);
         Route::resource('/statistical', StatisticalController::class);
         Route::post('/statistical/search', [StatisticalController::class, 'search'])->name('statistical.search');
         // Route::get('/statistical',[StatisticalController::class,'getQuantityOrder'])->name('statistical.getQuantityOrder');

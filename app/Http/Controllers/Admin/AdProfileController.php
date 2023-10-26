@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
 
 class AdProfileController extends Controller
@@ -48,15 +49,10 @@ class AdProfileController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     */
-    public function edit(User $user)
+    public function edit($id)
     {
-        $user = User::findOrFail($user->id);
-        //dd($user);
+        $user = User::findOrFail($id);
+        // dd($user);
         return view('admin.profile.edit', compact('user'));
     }
     /**
@@ -65,9 +61,20 @@ class AdProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request,$id)
     {
         //
+        $user = User::findOrFail($id);
+        $userUpdate = $request->validate([
+            'phone'=>[
+                'required'
+            ],
+            'address'=>[
+                'required'
+            ]
+        ]);
+        $user->update($userUpdate);
+        return redirect()->route('admin.profile.edit', $id)->with('success','Cập nhật thành công!');
     }
 
     /**

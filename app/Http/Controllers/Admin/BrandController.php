@@ -101,7 +101,13 @@ class BrandController extends Controller
             ]
             
         ]);
+
+        if ($request->file('fileUpload')) {
+            $imageUrl = substr($request->file('fileUpload')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
+            $brand['image'] = $imageUrl;
+        }
         $brand->update($brandUpdate);
+        session()->flash('success','Cập nhật thành công!');
 
         return redirect()->route('admin.brands.index');
     }
@@ -114,9 +120,9 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
         $brand = Brand::findOrFail($brand->id);
         $brand->delete();
+        session()->flash('success','Xóa thành công!');
         return redirect()->route('admin.brands.index');
     }
 }

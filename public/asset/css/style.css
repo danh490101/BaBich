@@ -8110,6 +8110,7 @@ h1, h2, h3, h4, h5,
       top: 0;
       padding: 10px 15px; } }
   .ftco-navbar-light .navbar-brand {
+    font-size: 30px;
     color: rgba(255, 255, 255, 0.8); }
     .ftco-navbar-light .navbar-brand span {
       color: rgba(255, 255, 255, 0.5); }
@@ -8620,7 +8621,6 @@ h1, h2, h3, h4, h5,
       font-weight: 500;
       text-transform: uppercase;
       color: #fff; }
-
 .product {
   width: 100%;
   display: block;
@@ -9991,44 +9991,9 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
-
-    .rating {
-      display: flex;
-      flex-direction: row-reverse;
-     /* Reverse the order of the stars */
-      font-size: 0;
-     /* Remove the space between the elements */
-    }
-    
-    .rating input[type="radio"] {
-      display: none;
-     /* Hide the radio buttons */
-    }
-    
-    .rating label {
-      font-size: 30px;
-      color: rgba(187, 183, 183, 0.726);
-     /* Empty star color */
-      margin: 0 2px;
-      cursor: pointer;
-    }
-    
-    .rating label:before {
-      content: "\2605";
-     /* Unicode character for filled star */
-    }
-    
-    .rating input[type="radio"]:checked ~ label:before {
-      content: "\2606";
-     /* Unicode character for empty star */
-      color: #016bf5;
-     /* Filled star color */
-    }
-
     .wave-group {
       position: relative;
     }
-    
     .wave-group .input {
       font-size: 16px;
       padding: 10px 10px 10px 5px;
@@ -10037,11 +10002,9 @@ textarea.form-control {
       border: none;
       background: transparent;
     }
-    
     .wave-group .input:focus {
       outline: none;
     }
-    
     .wave-group .label {
       color: #999;
       font-size: 18px;
@@ -10052,25 +10015,21 @@ textarea.form-control {
       top: 10px;
       display: flex;
     }
-    
     .wave-group .label-char {
       transition: 0.2s ease all;
       transition-delay: calc(var(--index) * .05s);
     }
-    
     .wave-group .input:focus ~ label .label-char,
     .wave-group .input:valid ~ label .label-char {
       transform: translateY(-20px);
       font-size: 14px;
       color: #b7472a;
     }
-    
     .wave-group .bar {
       position: relative;
       display: block;
       width: 200px;
     }
-    
     .wave-group .bar:before,.wave-group .bar:after {
       content: '';
       height: 2px;
@@ -10219,6 +10178,152 @@ textarea.form-control {
     .input-container2 input[type="text"]:valid ~ .underline {
       transform: scaleX(1);
     }
+
+    .rating:not(:checked) > input {
+  position: absolute;
+  appearance: none;
+}
+
+.rating:not(:checked) > label {
+  float: right;
+  cursor: pointer;
+  font-size: 30px;
+  color: #666;
+}
+
+.rating:not(:checked) > label:before {
+  content: '★';
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+  color: #e58e09;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: #ff9e0b;
+}
+
+.rating > input:checked ~ label {
+  color: #ffa723;
+}
+
+.cssbuttons-io-button {
+  background: #b7472a;
+  color: white;
+  font-family: inherit;
+  padding: 0.35em;
+  padding-left: 1.2em;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 0.9em;
+  border: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 1.6em -0.6em #b7472a;
+  overflow: hidden;
+  position: relative;
+  height: 2.8em;
+  padding-right: 3.3em;
+  cursor: pointer;
+}
+
+.cssbuttons-io-button .icon {
+  background: white;
+  margin-left: 1em;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 0.7em;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em #b7472a;
+  right: 0.3em;
+  transition: all 0.3s;
+}
+
+.cssbuttons-io-button:hover .icon {
+  width: calc(100% - 0.6em);
+}
+
+.cssbuttons-io-button .icon svg {
+  width: 1.1em;
+  transition: transform 0.3s;
+  color: #b7472a;
+}
+
+.cssbuttons-io-button:hover .icon svg {
+  transform: translateX(0.1em);
+}
+
+.cssbuttons-io-button:active .icon {
+  transform: scale(0.95);
+}
+
+.cta {
+  position: relative;
+  margin: auto;
+  padding: 12px 18px;
+  transition: all 0.2s ease;
+  border: none;
+  background: none;
+ }
+ 
+ .cta:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 50px;
+  background: #b1dae7;
+  width: 45px;
+  height: 45px;
+  transition: all 0.3s ease;
+ }
+ 
+ .cta span {
+  position: relative;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #234567;
+ }
+ 
+ .cta svg {
+  position: relative;
+  top: 0;
+  margin-left: 10px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #234567;
+  stroke-width: 2;
+  transform: translateX(-5px);
+  transition: all 0.3s ease;
+ }
+ 
+ .cta:hover:before {
+  width: 100%;
+  background: #b1dae7;
+ }
+ 
+ .cta:hover svg {
+  transform: translateX(0);
+ }
+ 
+ .cta:active {
+  transform: scale(0.95);
+ }
+
+
     
   
   

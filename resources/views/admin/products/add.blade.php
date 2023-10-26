@@ -69,6 +69,20 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
+                                        <label class="form-control-label" for="goods">Thuộc loại da</label>
+                                        <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
+                                        <select class="form-control form-select mt-3" name='skin_id'>
+                                            @foreach ($skins as $skin)
+                                                <option value="{{ $skin->id }}">{{ $skin->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!-- <input type="text" name="id-goods" class="form-control" placeholder="Mã loại hàng" value=""> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
                                         <label class="form-control-label" for="goods">Giá</label>
                                         <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
                                         <input type="text" name="price" class="form-control" placeholder="Giá hàng hóa" value="">

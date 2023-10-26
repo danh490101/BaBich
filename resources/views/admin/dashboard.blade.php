@@ -18,7 +18,7 @@
                         <div class="col-lg-3 order-lg-2">
                             <div class="card-profile-image">
                                 <a href="#">
-                                <img src="{{ asset('storage/' . $user->avatar) }}" class="rounded-circle">
+                                <img src="img/khac/avatar.png" class="rounded-circle">
                                 </a>
                             </div>
                         </div>
@@ -30,13 +30,13 @@
                     <div class="card-body pt-0">
                         <div class="text-center">
                             <h5 class="h3">
-                            {{$user->name}}<span class="font-weight-light"></span>
+                            Danh<span class="font-weight-light"></span>
                             </h5>
-                            <!-- <div class="h5 font-weight-300">
+                            <div class="h5 font-weight-300">
                                 <i class="ni location_pin mr-2">Giám Đốc</i>
-                            </div> -->
+                            </div>
                             <div>
-                                <i class="ni education_hat mr-2"></i>Ba Bich Comestics
+                                <i class="ni education_hat mr-2"></i>Essence TEAM 
                             </div>
                         </div>
                     </div>
@@ -44,9 +44,7 @@
             </div>
             <div class="col-xl-8 order-xl-1">
                 <div class="card">
-                <form  action="{{ route ('admin.profile.update', ['profile' => $user->id]) }}" method="POST">
-                    @csrf
-                    @method('PATCH')
+                    <form action="" method="post">
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
@@ -58,12 +56,13 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            
                             <div class="pl-lg-4">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="id">Mã nhân viên</label>
-                                            <span name="id" class="form-control" >{{$user->id}}</span>
+                                            <span name="id" class="form-control" >sdfghj</span>
                                         </div>
                                     </div>
                                 </div>
@@ -72,8 +71,8 @@
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <label class="form-control-label" for="phone">Số điện thoại</label>
-                                            <input type="text" name="phone" class="form-control" placeholder="phone" value="{{$user->phone}}">
+                                            <label class="form-control-label" for="input-phone">Số điện thoại</label>
+                                            <input type="text" name="phone" class="form-control" placeholder="phone" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +80,7 @@
                                     <div class="col-md-12 col-md-12">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-address">Địa chỉ</label>
-                                            <input type="text" name="address" class="form-control" placeholder="Địa chỉ" value="{{$user->address}}" >
+                                            <input type="text" name="address" class="form-control" placeholder="Địa chỉ" value="" >
                                         </div>
                                     </div>
                                 </div>

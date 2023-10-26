@@ -3,23 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Skin;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
-
-class CategoryController extends Controller
+class SkinController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //$categories = Category::paginate(2);
-        $categories = Category::all();
+        //
+        $skins = Skin::all();
         // dd($categories);
-        return view('admin.categories.index', compact('categories'));
+        return view('admin.skins.index', compact('skins'));
     }
 
     /**
@@ -30,7 +30,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return view('admin.categories.add');
+        return view('admin.skins.add');
     }
 
     /**
@@ -41,25 +41,25 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //B1: Nhan request
+        //
         $data = $request->request->all();
         //B2: validation
-        $category = $request->validate([
+        $skin = $request->validate([
             'name' => 'required|string|min:1'
             
         ]);
         //dd($category);
-        $category = Category::create($category);
-        return redirect()->route('admin.categories.index');
+        $skin = Skin::create($skin);
+        return redirect()->route('admin.skins.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Skin  $skin
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Skin $skin)
     {
         //
     }
@@ -67,46 +67,49 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Skin  $skin
+     * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Skin $skin)
     {
-        $category = Category::findOrFail($category->id);
-        return view('admin.categories.edit', compact('category'));
+        //
+        $skin = Skin::findOrFail($skin->id);
+        return view('admin.skins.edit', compact('skin'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Skin  $skin
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Skin $skin)
     {
-        $category = Category::findOrFail($category->id);
+        //
+        $skin = Skin::findOrFail($skin->id);
         $categoryUpdate = $request->validate([
             'name' => [
                 'required',
-                Rule::unique('categories')->ignore($category->id),
+                Rule::unique('skins')->ignore($skin->id),
             ],
         ]);
-        $category->update($categoryUpdate);
+        $skin->update($categoryUpdate);
 
-        return redirect()->route('admin.categories.index');
+        return redirect()->route('admin.skins.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Skin  $skin
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Skin $skin)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
-        session()->flash('success','Xóa thành công!');
-        return redirect()->route('admin.categories.index');
+        //
+        $skin = Skin::findOrFail($skin->id);
+        $skin->delete();
+        return redirect()->route('admin.skins.index');
     }
 }

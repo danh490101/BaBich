@@ -4,10 +4,12 @@ namespace App\Http\Controllers\User;
 
 use App\Events\SendMailConfirmEvent;
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Checkout;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
+use App\Models\Skin;
 use App\Models\User;
 use App\Models\Category;
 use Carbon\Carbon;
@@ -21,6 +23,8 @@ class CheckoutController extends Controller
     public function index(Request $request)
     {
         $categories = Category::all();
+        $brands = Brand::all();
+        $skins = Skin ::all();
         $cart = $request->session()->get('cart');
         $totalPrice = 0;
         foreach ($cart as $id => $item) {
@@ -31,7 +35,7 @@ class CheckoutController extends Controller
         unset($cart['totalAmount']);
         $user_id = $request->user()->id;
         $user = User::findOrFail($user_id);
-        return view('user.checkout', compact('cart', 'user', 'categories'));
+        return view('user.checkout', compact('cart', 'user', 'categories','skins', 'brands'));
     }
     /**
      * Show the form for creating a new resource.
@@ -42,12 +46,6 @@ class CheckoutController extends Controller
         //
     }
 
-    public function thanks()
-    {
-        $categories = Category::all();
-        return view('user.thanks', compact('categories'));
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -56,7 +54,6 @@ class CheckoutController extends Controller
     public function store(Request $request)
     {
         // dd($request->session()->get('cart'));
-        $data = $request->all();
         $dataUpdate = $request->validate([
             'name' => 'required',
             'address' => 'required',
@@ -72,10 +69,10 @@ class CheckoutController extends Controller
         $order = Order::create([
             'name' => $dataUpdate['name'],
             'address' => $dataUpdate['address'],
-            'phone' => $dataUpdate['phone'],
+            'phone' => $dataUpdate['phone'],    
             'email' => $dataUpdate['email'],
             'totalamount' => (float) $dataUpdate['totalamount'],
-            'delivery_cost' => $dataUpdate['delivery_cost'],
+            'delivery_cost' => (float) $dataUpdate['delivery_cost'],
             'payment_method' => $dataUpdate['payment_method']
         ]);
         $this->processOrderDetais($request, $order->id);

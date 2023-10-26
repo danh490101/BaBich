@@ -53,7 +53,7 @@
                                         <input type="text" name="quantity" class="cart_update input-quantity form-control input-number" value="{{ $detail['quantity'] }}" min="1" max="100">
                                     </div>
                                 </td>
-                                <td>{{ number_format($detail['price']*$detail['quantity'],3) }}</td>
+                                <td>{{ number_format($detail['price']*$detail['quantity']) }}</td>
                                 <td>
                                     <button type="button" class="close cart_remove" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true"><i class="fa fa-close"></i></span>
@@ -71,11 +71,11 @@
                         <h3>Cart Totals</h3>
                         <p class="d-flex">
                             <span>Subtotal</span>
-                            <span>{{ number_format($cart['totalPrice'],3) }}</span>
+                            <span>{{ number_format($cart['totalPrice']) }}</span>
                         </p>
                         <p class="d-flex">
                             <span>Delivery</span>
-                            <span>{{ number_format(round($cart['totalPrice']*0.05),3) }}</span>
+                            <span>{{ number_format(round($cart['totalPrice']*0.05)) }}</span>
                         </p>
                         <p class="d-flex">
                             <span>Discount</span>
@@ -84,7 +84,7 @@
                         <hr>
                         <p class="d-flex total-price">
                             <span>Total</span>
-                            <span>{{ number_format(round($cart['totalPrice']*0.05 + $cart['totalPrice']),3) }}</span>
+                            <span>{{ number_format(round($cart['totalPrice']*0.05 + $cart['totalPrice'])) }}</span>
                         </p>
                     </div>
                     <p class="text-center"><a href="{{route('user.checkout.index')}}" class="btn btn-primary py-3 px-4">Đặt hàng</a></p>
