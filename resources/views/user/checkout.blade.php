@@ -75,7 +75,7 @@
                                     <hr>
                                     <p class="d-flex total-price">
                                         <span>Total</span>
-                                        <input type="text" name="totalamount" class="form-control" placeholder="" value="{{ number_format(round($cart['totalPrice']*0.05 + $cart['totalPrice'])) }}" hidden>
+                                        <input type="text" name="totalamount" class="form-control" placeholder="" value="{{ round($cart['totalPrice']*0.05 + $cart['totalPrice']) }}" hidden>
                                         <span>{{ number_format(round($cart['totalPrice']*0.05 + $cart['totalPrice'])) }}</span>
                                     </p>
                                 </div>
@@ -93,7 +93,7 @@
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <div class="radio">
-                                                <label><input name="payment_method" value="2" type="radio" name="optradio" class="mr-2"> Paypal</label>
+                                                <label><input name="payment_method" value="2" type="radio" name="optradio" class="mr-2"> VNPay</label>
                                             </div>
                                         </div>
                                     </div>

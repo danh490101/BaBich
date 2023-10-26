@@ -8,7 +8,7 @@
                 <div class="col-md-8 ftco-animate d-flex align-items-end">
                     <div class="text w-100 text-center">
                         <h1 class="mb-4">Một làn da <span>ĐẸP</span> và <span>TỰ TIN</span>.</h1>
-                        <p><a href="#" class="btn btn-primary py-2 px-4">Cửa hàng</a> <a href="{{route('user.about')}}" class="btn btn-white btn-outline-white py-2 px-4">Thông tin</a></p>
+                        <p><a href="{{route('user.shop')}}" class="btn btn-primary py-2 px-4">Cửa hàng</a> <a href="{{route('user.about')}}" class="btn btn-white btn-outline-white py-2 px-4">Thông tin</a></p>
                     </div>
                 </div>
             </div>
@@ -85,14 +85,15 @@
                                 <div class="desc">
                                     <p class="meta-prod d-flex">
                                         <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
+                                        <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
                                         <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
                                     </p>
                                 </div>
                             </div>
                             <div class="text text-center">
                                 <span class="sale">Gợi ý</span>
-                                <h2>{{ Illuminate\Support\Str::limit($product->name, 25) }}</h2>
+                                <span class="category">{{$product->category->name}}</span>
+                                <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
                                 <p class="mb-0"><span class="price">{{$product->price}}</span></p>
                             </div>
                         </div>
@@ -118,15 +119,16 @@
                                 <div class="desc">
                                     <p class="meta-prod d-flex">
                                         <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
+                                        <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
                                         <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
                                     </p>
                                 </div>
                             </div>
                             <div class="text text-center">
                                 <!-- <span class="sale">Sale</span> -->
-                                <!-- <span class="category">Brandy</span> -->
-                                <h2>{{ Illuminate\Support\Str::limit($product->name, 25) }}</h2>
+
+                                <span class="category">{{$product->category->name}}</span>
+                                <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
                                 <p class="mb-0 fw-bolder"><span class="price">{{$product->price}}</span></p>
                             </div>
                         </div>
@@ -142,32 +144,33 @@
         </section>
         @endforeach
     @else
-         @foreach ($products as $index => $group)
+        @foreach ($products as $index => $group)
         <section class="ftco-section">
             <div class="container">
                 <div class="row justify-content-center pb-5">
                     <div class="col-md-7 heading-section text-center ftco-animate">
                         <!-- <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span> -->
-                        <h2>Sản Phẩm {{ $index }}</h2>
+                        <h2>Sản Phẩm {{$index}}</h2>
                     </div>
                 </div>
-                <div class="row">
-                    @foreach($group as $product)
-                    <div class="col-md-3 d-flex">
+                <div class="row ">
+                @foreach($group as $product)
+                    <div class="col-md-3 d-flex ">
                         <div class="product ftco-animate shadow">
+
                             <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
                                 <div class="desc">
                                     <p class="meta-prod d-flex">
                                         <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
+                                        <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
                                         <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
                                     </p>
                                 </div>
                             </div>
                             <div class="text text-center">
                                 <!-- <span class="sale">Sale</span> -->
-                                <!-- <span class="category">Brandy</span> -->
-                                <h2>{{ Illuminate\Support\Str::limit($product->name, 25) }}</h2>
+                                <span class="category">{{$product->category->name}}</span>
+                                <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
                                 <p class="mb-0 "><span class="price">{{$product->price}}</span></p>
                             </div>
                         </div>
@@ -277,3 +280,31 @@
     </section>
 </div>
 @endsection
+<script>
+    // Chờ tài liệu tải xong
+    $(document).ready(function () {
+        // Xử lý sự kiện khi nút "Yêu thích" được nhấn
+        $('.favorite-button').click(function (e) {
+            e.preventDefault(); // Ngăn chặn mặc định hành vi điều hướng
+
+            var button = $(this);
+            var productId = button.data('product-id');
+
+            // Gửi yêu cầu AJAX
+            $.ajax({
+                type: 'POST', // Sử dụng phương thức POST
+                url: "{{ route('user.add_to_favorites', ['productId' => $product->id]) }}", // Đường dẫn đến tuyến đường xử lý
+                data: {
+                    productId: productId // Gửi productId của sản phẩm
+                },
+                success: function (response) {
+                    if (response === 'added') {
+                        button.addClass('favorited');
+                    } else if (response === 'removed') {
+                        button.removeClass('favorited');
+                    }
+                }
+            });
+        });
+    });
+</script>

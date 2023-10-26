@@ -39,24 +39,21 @@ class FeedbackController extends Controller
        // dd($request->user()->id);
         $data = $request->all();
        // dd($request);
-       //dd($data);
+    //    dd($data);
         $feedback = $request ->validate([
-           'comment'=> 'required|string|unique:feedback',
+           'comment'=> 'required|string',
            //add exist rule in product table
            //relationship of model
            'product_id' => 'numeric|required|min:1',
            'rating' => 'required|numeric|min:1|max:5'
         ]);
-
         $feedback['user_id'] = $request->user()->id;
-       // dd($feedback);
+        // dd($feedback['product_id']);
         $feedback = Feedback::create($feedback);
-
-       // dd($feedback);
-        return redirect()->route('user.product-details', ['id' => $data['product_id']]);
+        // dd($data['product_id']);
+        return redirect()->back();
         // dd($data);
     }
-
     /**
      * Display the specified resource.
      *

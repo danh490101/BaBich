@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
     protected $table = 'products';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'desc', 'price', 'quantity', 'image', 'images', 'image2', 'brand_id', 'category_id'];
+    protected $fillable = ['name', 'desc', 'price', 'quantity', 'image', 'images', 'image2', 'brand_id', 'category_id', 'skin_id'];
 
     public function brand()
     {
@@ -20,6 +20,10 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function skin()
+    {
+        return $this->belongsTo(Skin::class);
     }
 
     // Trong model Product

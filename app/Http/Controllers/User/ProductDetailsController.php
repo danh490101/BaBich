@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Feedback;
 use App\Models\Product;
+use App\Models\Skin;
 use App\Models\User;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -57,6 +60,8 @@ class ProductDetailsController extends Controller
     public function show(Product $product)
     {
         $categories = Category::all();
+        $brands = Brand::all();
+        $skins = Skin ::all();
         $ratings = Feedback::where('product_id', $product->id)->get('rating')->toArray();
         $ratingValue = array_map(function ($rating) {
             $rating = $rating['rating'];
@@ -73,7 +78,8 @@ class ProductDetailsController extends Controller
             return $comment;
         }, $comments);
 
-        return view('user.product-details', compact('product', 'comments', 'avgRating','categories'));
+
+        return view('user.product-details', compact('product', 'comments', 'avgRating','categories', 'skins', 'brands'));
     }
 
     /**
