@@ -69,7 +69,6 @@
         </div>
     </section>
     @if(Auth::check())
-        <!-- San pham goi y -->
         <section class="ftco-section">
             <div class="container">
                 <div class="row justify-content-center pb-5">
@@ -81,7 +80,7 @@
                 <div class="row">
                     @foreach($suggestion as $product)
                     <div class="col-md-3 d-flex">
-                        <div class="product ftco-animate">
+                        <div class="product ftco-animate shadow">
                             <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
                                 <div class="desc">
                                     <p class="meta-prod d-flex">
@@ -93,8 +92,7 @@
                             </div>
                             <div class="text text-center">
                                 <span class="sale">Gợi ý</span>
-                                <!-- <span class="category">Brandy</span> -->
-                                <h2>{{$product->name}}</h2>
+                                <h2>{{ Illuminate\Support\Str::limit($product->name, 25) }}</h2>
                                 <p class="mb-0"><span class="price">{{$product->price}}</span></p>
                             </div>
                         </div>
@@ -115,7 +113,7 @@
                 <div class="row">
                     @foreach($group as $product)
                     <div class="col-md-3 d-flex">
-                        <div class="product ftco-animate">
+                        <div class="product ftco-animate shadow">
                             <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
                                 <div class="desc">
                                     <p class="meta-prod d-flex">
@@ -128,7 +126,7 @@
                             <div class="text text-center">
                                 <!-- <span class="sale">Sale</span> -->
                                 <!-- <span class="category">Brandy</span> -->
-                                <h2>{{$product->name}}</h2>
+                                <h2>{{ Illuminate\Support\Str::limit($product->name, 25) }}</h2>
                                 <p class="mb-0 fw-bolder"><span class="price">{{$product->price}}</span></p>
                             </div>
                         </div>
@@ -156,7 +154,7 @@
                 <div class="row">
                     @foreach($group as $product)
                     <div class="col-md-3 d-flex">
-                        <div class="product ftco-animate">
+                        <div class="product ftco-animate shadow">
                             <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
                                 <div class="desc">
                                     <p class="meta-prod d-flex">
@@ -169,7 +167,7 @@
                             <div class="text text-center">
                                 <!-- <span class="sale">Sale</span> -->
                                 <!-- <span class="category">Brandy</span> -->
-                                <h2>{{$product->name}}</h2>
+                                <h2>{{ Illuminate\Support\Str::limit($product->name, 25) }}</h2>
                                 <p class="mb-0 "><span class="price">{{$product->price}}</span></p>
                             </div>
                         </div>

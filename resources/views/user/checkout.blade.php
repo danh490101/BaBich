@@ -55,20 +55,18 @@
                             </div>
                             <div class="w-100"></div>
                         </div>
-
                         <div class="row mt-5 pt-3 d-flex">
                             <div class="col-md-6 d-flex">
                                 <div class="cart-detail cart-total p-3 p-md-4">
-
                                     <h3 class="billing-heading mb-4">Cart Total</h3>
                                     <p class="d-flex">
                                         <span>Subtotal</span>
-                                        <span>{{ number_format($cart['totalPrice'],3) }}</span>
+                                        <span>{{ number_format($cart['totalPrice']) }}</span>
                                     </p>
                                     <p class="d-flex">
                                         <span>Delivery</span>
-                                        <input type="text" name="delivery_cost" class="form-control" placeholder="" value="{{ number_format(round($cart['totalPrice']*0.05),3) }}" hidden>
-                                        <span>{{ number_format(round($cart['totalPrice']*0.05),3) }}</span>
+                                        <input type="text" name="delivery_cost" class="form-control" placeholder="" value="{{ number_format(round($cart['totalPrice']*0.05)) }}" hidden>
+                                        <span>{{ number_format(round($cart['totalPrice']*0.05)) }}</span>
                                     </p>
                                     <p class="d-flex">
                                         <span>Discount</span>
@@ -77,8 +75,8 @@
                                     <hr>
                                     <p class="d-flex total-price">
                                         <span>Total</span>
-                                        <input type="text" name="totalamount" class="form-control" placeholder="" value="{{ number_format(round($cart['totalPrice']*0.05 + $cart['totalPrice']),3) }}" hidden>
-                                        <span>{{ number_format(round($cart['totalPrice']*0.05 + $cart['totalPrice']),3) }}</span>
+                                        <input type="text" name="totalamount" class="form-control" placeholder="" value="{{ number_format(round($cart['totalPrice']*0.05 + $cart['totalPrice'])) }}" hidden>
+                                        <span>{{ number_format(round($cart['totalPrice']*0.05 + $cart['totalPrice'])) }}</span>
                                     </p>
                                 </div>
                             </div>
@@ -132,5 +130,4 @@
         });
     });
 </script>
-
 @endsection

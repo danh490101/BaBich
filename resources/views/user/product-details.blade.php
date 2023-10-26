@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <p>
-                    <button type="submit" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</button>
+                    <button type="submit" class="btn btn-primary ">Thêm vào giỏ hàng</button>
                     <!-- <form action="{{route('user.addToFavorites',['productId'=>$product->id])}}" method="post">
                     @csrf
                     <label class="container1">

@@ -64,7 +64,6 @@
 							<input type="range" id="max_price" name="max_price" min="0" max="1000" step="10" value="{{ request('max_price', 1000) }}">
 							<button type="submit">Lọc</button>
 						</form>
-
 					</div>
 					<div class="sidebar-box ftco-animate">
 						<div class="categories">
@@ -77,39 +76,6 @@
 						</div>
 					</div>
 
-					<div class="sidebar-box ftco-animate">
-						<h3>Recent Blog</h3>
-						<div class="block-21 mb-4 d-flex">
-							<a class="blog-img mr-4" style="background-image: url(asset/images/image_1.jpg);"></a>
-							<div class="text">
-								<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-								<div class="meta">
-									<div><a href="#"><span class="fa fa-calendar"></span> Apr. 18, 2020</a></div>
-									<div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
-								</div>
-							</div>
-						</div>
-						<div class="block-21 mb-4 d-flex">
-							<a class="blog-img mr-4" style="background-image: url(asset/images/image_2.jpg);"></a>
-							<div class="text">
-								<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-								<div class="meta">
-									<div><a href="#"><span class="fa fa-calendar"></span> Apr. 18, 2020</a></div>
-									<div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
-								</div>
-							</div>
-						</div>
-						<div class="block-21 mb-4 d-flex">
-							<a class="blog-img mr-4" style="background-image: url(asset/images/image_3.jpg);"></a>
-							<div class="text">
-								<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-								<div class="meta">
-									<div><a href="#"><span class="fa fa-calendar"></span> Apr. 18, 2020</a></div>
-									<div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 			@else
@@ -156,6 +122,15 @@
 					</div>
 				</div>
 				<div class="col-md-3">
+					<div class="sidebar-box ftco-animate">
+						<form action="{{ route('user.shop') }}" method="GET">
+							<label for="min_price">Giá tối thiểu:</label>
+							<input type="range" id="min_price" name="min_price" min="0" max="1000" step="10" value="{{ request('min_price', 0) }}">
+							<label for="max_price">Giá tối đa:</label>
+							<input type="range" id="max_price" name="max_price" min="0" max="1000" step="10" value="{{ request('max_price', 1000) }}">
+							<button type="submit">Lọc</button>
+						</form>
+					</div>
 					<div class="sidebar-box ftco-animate">
 						<div class="categories">
 							<h3>Phân loại</h3>
