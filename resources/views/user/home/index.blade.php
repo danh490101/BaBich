@@ -94,7 +94,7 @@
                                 <span class="sale">Gợi ý</span>
                                 <span class="category">{{$product->category->name}}</span>
                                 <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
-                                <p class="mb-0"><span class="price">{{$product->price}}</span></p>
+                                <p class="mb-0"><span class="price">{{number_format($product->price,0, ',','.')}}</span></p>
                             </div>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
 
                                 <span class="category">{{$product->category->name}}</span>
                                 <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
-                                <p class="mb-0 fw-bolder"><span class="price">{{$product->price}}</span></p>
+                                <p class="mb-0 fw-bolder"><span class="price">{{number_format($product->price,0, ',','.')}}</span></p>
                             </div>
                         </div>
                     </div>
@@ -171,7 +171,7 @@
                                 <!-- <span class="sale">Sale</span> -->
                                 <span class="category">{{$product->category->name}}</span>
                                 <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
-                                <p class="mb-0 "><span class="price">{{$product->price}}</span></p>
+                                <p class="mb-0 "><span class="price">{{number_format($product->price,0, ',','.')}}</span></p>
                             </div>
                         </div>
                     </div>

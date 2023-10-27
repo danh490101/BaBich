@@ -20,6 +20,7 @@ use App\Events\SendMailConfirmEvent;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SkinController;
 use App\Http\Controllers\Admin\StatisticalController;
+use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\User\UsProfileController;
 
 /*
@@ -39,7 +40,7 @@ use App\Http\Controllers\User\UsProfileController;
 // Route::get('/', HomeComponent::class)->name('home.index');
 Route::resource('/', HomeController::class);
 //Route::get('/admin', AdminComponent::class)->name('admin.index');
-Route::get('/shop', ShopComponent::class)->name('shop');
+// Route::get('/shop', ShopComponent::class)->name('shop');
 Route::get('/user/shop', [App\Http\Controllers\User\ProductController::class,'index'])->name('user.shop');
 Route::get('/products/{categoryId}', [HomeController::class, 'showProductsByCategory']);
 Route::get('/about', [HomeController::class, 'contact'])->name('user.about');
@@ -85,6 +86,7 @@ Route::middleware(['auth','authadmin'])->group(function(){
         Route::resource('/products', ProductController::class);
         Route::resource('/brands', BrandController::class);
         Route::resource('/skins',SkinController::class);
+        Route::resource('/suppliers',SupplierController::class);
         Route::resource('/profile', AdProfileController::class);
         Route::resource('/orders', OrderController::class);
         Route::resource('/order_details', OrderDetailsController::class);

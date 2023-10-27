@@ -47,9 +47,7 @@
 							<label for="min_price">Giá tối thiểu:</label><span id="min_price_display"></span>
 							<br>
 							<input type="hidden" name="brandId" value="{{ Request::get('brandId', null) }}">
-
 							<input type="hidden" name="categoryId" value="{{ Request::get('categoryId', null) }}">
-
 							<input type="range" id="min_price" name="min_price" min="0" max="1000" step="10" value="{{ request('min_price', 0) }}">
 							<br>
 							<label for="max_price">Giá tối đa:</label><span id="max_price_display"></span>
