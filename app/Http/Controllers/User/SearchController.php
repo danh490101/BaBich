@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Skin;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -13,6 +15,8 @@ class SearchController extends Controller
     {
         //  $result = $request->result;
         //dd($request->get('keyword'));
+        $skins = Skin::all();
+        $brands = Brand::all();
         $categories = Category::all();
         $searchTerm = $request->get('keyword'); // Lấy từ request
        // dd($searchTerm);
@@ -23,9 +27,12 @@ class SearchController extends Controller
             ->orWhereHas('category', function ($query) use ($searchTerm) {
                 $query->where('name', 'like', "%$searchTerm%");
             })
+            ->orWhereHas('skin', function ($query) use ($searchTerm) {
+                $query->where('name', 'like', "%$searchTerm%");
+            })
             ->get();
            // dd($results);
-            return view('user.home.search', ['results' => $results], compact('categories'));
+            return view('user.home.search', ['results' => $results], compact('categories', 'brands', 'skins'));
 
     }
 

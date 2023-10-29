@@ -20,9 +20,9 @@
 					<div class="sidebar-box ftco-animate">
 						<form action="{{ route('user.shop') }}" method="GET">
 							<label for="min_price">Giá tối thiểu:</label>
-							<input type="range" id="min_price" name="min_price" min="0" max="1000" step="10" value="{{ request('min_price', 0) }}">
+							<input type="range" id="min_price" name="min_price" min="0" max="1000000" step="10" value="{{ request('min_price', 0) }}">
 							<label for="max_price">Giá tối đa:</label>
-							<input type="range" id="max_price" name="max_price" min="0" max="1000" step="10" value="{{ request('max_price', 1000) }}">
+							<input type="range" id="max_price" name="max_price" min="0" max="1000000" step="10" value="{{ request('max_price', 1000) }}">
 							<button type="submit">Lọc</button>
 						</form>
 					</div>
@@ -48,11 +48,11 @@
 							<br>
 							<input type="hidden" name="brandId" value="{{ Request::get('brandId', null) }}">
 							<input type="hidden" name="categoryId" value="{{ Request::get('categoryId', null) }}">
-							<input type="range" id="min_price" name="min_price" min="0" max="1000" step="10" value="{{ request('min_price', 0) }}">
+							<input type="range" id="min_price" name="min_price" min="0" max="1000000" step="10" value="{{ request('min_price', 0) }}">
 							<br>
 							<label for="max_price">Giá tối đa:</label><span id="max_price_display"></span>
 							<br>
-							<input type="range" id="max_price" name="max_price" min="0" max="1000" step="10" value="{{ request('max_price', 1000) }}">
+							<input type="range" id="max_price" name="max_price" min="0" max="1000000" step="10" value="{{ request('max_price', 1000) }}">
 							<br>
 							<button class="cta" type="submit">
 								<span>Lọc theo giá</span>

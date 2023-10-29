@@ -37,7 +37,6 @@
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
-
                     <!-- <div><img src="{{ asset('storage/' . $product->image) }}" width="550px" height="auto" class="img-fluid" alt="Image 1"></div>
                     <div><img src="{{ asset('storage/' . $product->image) }}" width="550px" height="auto" class="img-fluid" alt="Image 2"></div> -->
                     <!-- Thêm hình -->

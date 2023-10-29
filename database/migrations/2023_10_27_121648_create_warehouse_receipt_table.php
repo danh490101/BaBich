@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('warehouse_receipt', function (Blueprint $table) {
             $table->id();
-            $table->string('note');
-            $table->integer('total_warehouse');
+            $table->string('note')->nullable();
+            $table->integer('total_warehouse')->default(0);
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->bigInteger('supplier_id')->unsigned()->nullable();

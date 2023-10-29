@@ -21,6 +21,7 @@ class ProductController extends Controller
      */
     public function addToCart(Request $request, $id)
     {
+        $productList = $this->getDiscount();
         $data = $request->validate([
             'quantity'=>'required|numeric|min:1'
         ]);
@@ -50,7 +51,7 @@ class ProductController extends Controller
             $cart[$id] = [
                 "id" => $id,
                 "name" => $product->name,
-                "price" => $product->price,
+                "price" => isset($productList[$product->id])  ? $productList[$product->id]['value'] : $product->price,
                 "quantity" => $data['quantity'],
                 "image" => $product->image
             ];
@@ -64,6 +65,7 @@ class ProductController extends Controller
 
     public function addToCartGet(Request $request, $id)
     {
+        $productList = $this->getDiscount();
         $data['quantity']=1;
         $product = Product::findOrFail($id);
 
@@ -90,7 +92,7 @@ class ProductController extends Controller
             $cart[$id] = [
                 "id" => $id,
                 "name" => $product->name,
-                "price" => $product->price,
+                "price" => isset($productList[$product->id])  ? $productList[$product->id]['value'] : $product->price,
                 "quantity" => $data['quantity'],
                 "image" => $product->image
             ];
@@ -110,7 +112,7 @@ class ProductController extends Controller
         $categoryId = $request->get('categoryId', null);
         $brandId = $request->get('brandId', null);
         $minPrice = $request->input('min_price', 0);
-        $maxPrice = $request->input('max_price', 1000);
+        $maxPrice = $request->input('max_price', 1000000);
 
         if (is_null($categoryId) && is_null($brandId)) {
             $products = Product::whereBetween('price', [$minPrice, $maxPrice])->get();
@@ -119,8 +121,7 @@ class ProductController extends Controller
                 'categoryId' => $categoryId,
                 'brandId' => $brandId,
             ], [$minPrice, $maxPrice]);
-        }
-        
+        }  
 
         return view('user.shop', compact('products', 'categories', 'brands', 'skins'));
     }
@@ -258,7 +259,32 @@ class ProductController extends Controller
                                     $query->whereBetween('price', $filter);
                                 })->get();
         }
+
         return $products;
+    }
+
+    public function getDiscount()
+    {
+        //set discount with id products
+        $discounts = \App\Models\Discount::all()->toArray();
+        $productDiscounts = [];
+        foreach ($discounts as $item) {
+            foreach (json_decode($item['product_ids']) as $productId) {
+                $productDiscounts[$productId] = $item['value'];
+            }
+        }
+
+        //get list discount
+        $products = Product::all();
+        $discountList = [];
+        foreach ($products as $product) {
+            if (isset($productDiscounts[$product->id])) {
+                $discountList[$product->id]['item'] =  $product;
+                $discountList[$product->id]['value'] =  $product->price - $product->price*$productDiscounts[$product->id]/100;
+            }
+        }
+
+        return $discountList;
     }
     
 }

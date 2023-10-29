@@ -25,18 +25,18 @@
                                     <label for="name">Tên khách hàng</label>
                                     <input id="name" type="text" name="name" class="form-control" placeholder="" value="{{$user->name}}">
                                     @error('name')
-                                        <p class="text-danger">{{$message}}</p>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="w-100"></div>
-                            <div class="w-100"></div>
+                            <!-- <div class="w-100"></div>
+                            <div class="w-100"></div> -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="address">Địa chỉ</label>
                                     <input type="text" name="address" class="form-control" placeholder="" value="{{$user->address}}">
                                     @error('address')
-                                        <p class="text-danger">{{$message}}</p>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -68,10 +68,16 @@
                                         <input type="text" name="delivery_cost" class="form-control" placeholder="" value="{{ number_format(round($cart['totalPrice']*0.05)) }}" hidden>
                                         <span>{{ number_format(round($cart['totalPrice']*0.05)) }}</span>
                                     </p>
-                                    <p class="d-flex">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="discount">Nhập mã giảm giá</label>
+                                            <input type="text" name="code" class="form-control" placeholder="" value="">
+                                        </div>
+                                    </div>
+                                    <!-- <p class="d-flex">
                                         <span>Discount</span>
                                         <span>00</span>
-                                    </p>
+                                    </p> -->
                                     <hr>
                                     <p class="d-flex total-price">
                                         <span>Total</span>

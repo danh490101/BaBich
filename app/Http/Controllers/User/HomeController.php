@@ -16,23 +16,19 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        $discountList = $this->getDiscount();
+        $brands = Brand::all();
+        $skins = Skin ::all();
+        $categories = Category::all();
+        $products = $this->groupProductByCategory();
+        $bproducts = $this->groupProductByBrand();
+        $sproducts = $this->groupProductBySkin();
+        $mappingCates = Category::all()->pluck("name","id")->toArray();
         if (Auth::check()) {
-            $products = $this->groupProductByCategory();
-            $bproducts = $this->groupProductByBrand();
-            $sproducts = $this->groupProductBySkin();
-            $brands = Brand::all();
-            $skins = Skin ::all();
-            $categories = Category::all();
             $suggestion = $this->getProductSuggestion($request);
-            return view('user.home.index', compact('categories', 'brands', 'products', 'suggestion','skins'));
+            return view('user.home.index', compact('categories', 'brands', 'products', 'suggestion','skins', 'discountList', 'mappingCates'));
         } else {
-            $products = $this->groupProductByCategory();
-            $bproducts = $this->groupProductByBrand();
-            $sproducts = $this->groupProductBySkin();
-            $brands = Brand::all();
-            $skins = Skin ::all();
-            $categories = Category::all();
-            return view('user.home.index', compact('categories', 'brands', 'products','skins'));
+            return view('user.home.index', compact('categories', 'brands', 'products','skins', 'discountList', 'mappingCates'));
         }
     }
 
@@ -138,5 +134,29 @@ class HomeController extends Controller
     {
         $products = Product::where('skin_id', $skinId)->get();
         return view('products.by_skin', ['products' => $products]);
+    }
+
+    public function getDiscount()
+    {
+        //set discount with id products
+        $discounts = \App\Models\Discount::all()->toArray();
+        $productDiscounts = [];
+        foreach ($discounts as $item) {
+            foreach (json_decode($item['product_ids']) as $productId) {
+                $productDiscounts[$productId] = $item['value'];
+            }
+        }
+
+        //get list discount
+        $products = Product::all();
+        $discountList = [];
+        foreach ($products as $product) {
+            if (isset($productDiscounts[$product->id])) {
+                $discountList[$product->id]['item'] =  $product;
+                $discountList[$product->id]['value'] =  $product->price - $product->price*$productDiscounts[$product->id]/100;
+            }
+        }
+
+        return $discountList;
     }
 }

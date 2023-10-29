@@ -13,7 +13,6 @@ use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProductController as UserProductController;
 use App\Http\Controllers\User\ProductDetailsController;
 use App\Http\Controllers\User\SearchController;
-use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use Illuminate\Support\Facades\Route;
 use App\Events\SendMailConfirmEvent;
@@ -22,6 +21,7 @@ use App\Http\Controllers\Admin\SkinController;
 use App\Http\Controllers\Admin\StatisticalController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Auth\SocialiteController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\User\UsProfileController;
 
 /*
@@ -95,6 +95,11 @@ Route::middleware(['auth', 'authadmin'])->group(function () {
         Route::get('/feedback/change-status/{feedback}', [AdFeedbackController::class, 'changeStatus'])->name('feedback.changeStatus');
         Route::resource('/statistical', StatisticalController::class);
         Route::post('/statistical/search', [StatisticalController::class, 'search'])->name('statistical.search');
+        Route::group(['prefix'=> '/discounts','as'=> 'discounts.'], function () {
+            Route::get('/', [DiscountController::class,'index'])->name('list');
+            Route::get('/add-new', [DiscountController::class,'showFormAddDiscount'])->name('new-discount-form');
+            Route::post('/add-new', [DiscountController::class,'addDiscountCode'])->name('handle-new-discount');
+        });
         // Route::get('/statistical',[StatisticalController::class,'getQuantityOrder'])->name('statistical.getQuantityOrder');
     });
 });

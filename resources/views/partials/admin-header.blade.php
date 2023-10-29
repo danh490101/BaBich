@@ -55,6 +55,11 @@
                                     <span class="nav-link-text">Nhập kho</span>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.products.index') }}">
+                                    <span class="nav-link-text">Giảm giá</span>
+                                </a>
+                            </li>
                         </div>
                     </div>
                     <div class="dropdown">
@@ -87,6 +92,24 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{'admin.users.index'}}">
                                     <span class="nav-link-text">Danh sách khách hàng</span>
+                                </a>
+                            </li>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-secondary dropdown-toggle ml-3 mt-2 w-100" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{asset('ad_asset/img/khac/coupon.png')}}" class="navbar-brand-img">Giảm giá
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.discounts.new-discount-form') }}">
+                                    <span class="nav-link-text">Tạo mới giảm giá</span>
+                                </a>
+                                <a class="nav-link" href="{{ route('admin.discounts.new-discount-form') }}">
+                                    <span class="nav-link-text">Danh sách giảm giá Available</span>
+                                </a>
+                                <a class="nav-link" href="{{ route('admin.discounts.list') }}">
+                                    <span class="nav-link-text">Danh sách giảm giá Expired</span>
                                 </a>
                             </li>
                         </div>

@@ -68,12 +68,17 @@ class CheckoutController extends Controller
             'delivery_cost' => (float) $dataUpdate['delivery_cost'],
             'payment_method' => $dataUpdate['payment_method']
         ]);
+
+        //get discount by code
+        //=> lay tu bang discount theo cot code
+
+        //update gia tong
+        //=> tong = tong*discount->value/100
+
         $this->processOrderDetais($request, $order->id);
         SendMailConfirmEvent::dispatch(
             $order
         );
-
-
         // return view('user.thanks');
         return redirect()->route('index');
         //dd($dataUpdate);
@@ -106,44 +111,5 @@ class CheckoutController extends Controller
         session()->put('cart', []);
         //dd($order_details);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Checkout  $checkout
-     */
-    public function show(Checkout $checkout)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Checkout  $checkout
-     */
-    public function edit(Checkout $checkout)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     */
-    public function update(Request $request, Checkout $checkout)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Checkout  $checkout
-     */
-    public function destroy(Checkout $checkout)
-    {
-        //
-    }
+    
 }

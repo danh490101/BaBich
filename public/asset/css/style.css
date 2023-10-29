@@ -9206,7 +9206,7 @@ textarea.form-control {
   font-size: 24px; }
 
 .ftco-section {
-  padding: 6em 0;
+  padding: 2em 0;
   position: relative; }
   @media (max-width: 767.98px) {
     .ftco-section {
@@ -10322,6 +10322,19 @@ textarea.form-control {
  .cta:active {
   transform: scale(0.95);
  }
+
+
+ .sale-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color:  #b7472a; /* Màu nền của biểu tượng */
+  color: #ffffff; /* Màu chữ của biểu tượng */
+  padding: 5px 10px; /* Kích thước và khoảng cách của biểu tượng */
+  border-top-left-radius: 5px; /* Đảm bảo góc trên bên trái bo tròn */
+  font-weight: bold; /* Độ đậm của chữ */
+}
+
 
 
  
