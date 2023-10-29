@@ -22,7 +22,7 @@ class RevenueChart extends Component
             ->get();
 
         $dates = $data->pluck('date');
-        $revenue= $data->pluck('revenue');
+        $revenue = $data->pluck('revenue');
 
         return view('livewire.revenue-chart', [
             'dates' => $dates,

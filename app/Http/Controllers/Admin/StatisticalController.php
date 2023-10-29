@@ -11,7 +11,7 @@ use Carbon\Carbon;
 
 class StatisticalController extends Controller
 {
-    CONST OPTION_DAYS = [
+    public const OPTION_DAYS = [
         'day' => 1,
         'month' => 2,
         'year' => 3,
@@ -28,28 +28,27 @@ class StatisticalController extends Controller
         $order = Order::all();
         $categories = Category::all();
         $numberOrder = 0;
-        foreach($order as $or){
+        foreach($order as $or) {
             $numberOrder += 1;
         }
 
         $numberStatis = 0;
-        foreach($order as $ord)
-        {
-            if($ord->status == 1){
+        foreach($order as $ord) {
+            if($ord->status == 1) {
                 $numberStatis += $ord->totalamount;
             }
         }
 
         $user = User::all();
         $numberUser = 0;
-        foreach($user as $us){
-            $numberUser +=1;
+        foreach($user as $us) {
+            $numberUser += 1;
         }
 
         $now = Carbon::now()->format('d-m-Y');
 
         $orders = $this->orders;
-        return view('admin.statistical.index',compact('numberOrder', 'numberUser','numberStatis', 'now', 'categories', 'orders'));
+        return view('admin.statistical.index', compact('numberOrder', 'numberUser', 'numberStatis', 'now', 'categories', 'orders'));
     }
 
     /**
@@ -78,7 +77,7 @@ class StatisticalController extends Controller
      */
     public function show(Order $order)
     {
-      
+
     }
 
     /**
@@ -115,7 +114,7 @@ class StatisticalController extends Controller
 
     public function getQuantityOrder(Order $order)
     {
-        
+
     }
 
     public function search(Request $request)
@@ -128,10 +127,10 @@ class StatisticalController extends Controller
         $this->orders = $orders;
 
         return redirect()->route('admin.statistical.index')->with('orders', $orders);
-        
+
     }
 
-    public function getOptionDatetime($data) 
+    public function getOptionDatetime($data)
     {
         if ($data['optionDatetimeType']) {
             $date = new \DateTime($data['optionDatetime']);

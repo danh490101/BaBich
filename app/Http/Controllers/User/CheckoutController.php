@@ -21,18 +21,20 @@ class CheckoutController extends Controller
     {
         $categories = Category::all();
         $brands = Brand::all();
-        $skins = Skin ::all();
+        $skins = Skin::all();
         $cart = $request->session()->get('cart');
         $totalPrice = 0;
         foreach ($cart as $id => $item) {
-            if ($id == 'totalAmount') continue;
+            if ($id == 'totalAmount') {
+                continue;
+            }
             $totalPrice += $item['price'] * $item['quantity'];
         }
         $cart['totalPrice'] = $totalPrice;
         unset($cart['totalAmount']);
         $user_id = $request->user()->id;
         $user = User::findOrFail($user_id);
-        return view('user.checkout', compact('cart', 'user', 'categories','skins', 'brands'));
+        return view('user.checkout', compact('cart', 'user', 'categories', 'skins', 'brands'));
     }
     public function create()
     {
@@ -62,7 +64,7 @@ class CheckoutController extends Controller
         $order = Order::create([
             'name' => $dataUpdate['name'],
             'address' => $dataUpdate['address'],
-            'phone' => $dataUpdate['phone'],    
+            'phone' => $dataUpdate['phone'],
             'email' => $dataUpdate['email'],
             'totalamount' => (float) $dataUpdate['totalamount'],
             'delivery_cost' => (float) $dataUpdate['delivery_cost'],
@@ -86,7 +88,9 @@ class CheckoutController extends Controller
         $cart = $request->session()->get('cart');
         $order_details = [];
         foreach ($cart as $item) {
-            if (!is_array($item)) continue;
+            if (!is_array($item)) {
+                continue;
+            }
             $order_details[] = [
                 'order_id' => $orderId,
                 'product_id' => $item['id'],

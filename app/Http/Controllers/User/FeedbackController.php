@@ -36,12 +36,12 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
-       // dd($request->user()->id);
+        // dd($request->user()->id);
         $data = $request->all();
-       // dd($request);
-    //    dd($data);
+        // dd($request);
+        //    dd($data);
         $feedback = $request ->validate([
-           'comment'=> 'required|string',
+           'comment' => 'required|string',
            //add exist rule in product table
            //relationship of model
            'product_id' => 'numeric|required|min:1',

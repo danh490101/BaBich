@@ -9,7 +9,6 @@ use App\Models\Product;
 use App\Models\Skin;
 use App\Models\User;
 use App\Models\Category;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -18,17 +17,18 @@ class ProductDetailsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * 
+     *
      */
     public function index()
     {
         //
-        
+
     }
-    public function getDetails($id){
+    public function getDetails($id)
+    {
         $categories = Category::all();
         $comments = Product::where('id', $id)->get();
-        return view('product',['id' => $id['id']], compact('categories'));
+        return view('product', ['id' => $id['id']], compact('categories'));
     }
 
     /**
@@ -61,25 +61,25 @@ class ProductDetailsController extends Controller
     {
         $categories = Category::all();
         $brands = Brand::all();
-        $skins = Skin ::all();
+        $skins = Skin::all();
         $ratings = Feedback::where('product_id', $product->id)->get('rating')->toArray();
         $ratingValue = array_map(function ($rating) {
             $rating = $rating['rating'];
             return $rating;
         }, $ratings);
         $avgRating = Collection::make($ratingValue)->avg();
-        
+
         $product = Product::findOrFail($product->id);
-        $comments = Feedback::where('product_id', $product->id)->get()->toArray(); 
+        $comments = Feedback::where('product_id', $product->id)->get()->toArray();
         // dd($comments);
-        $comments = array_map(function($comment) {
+        $comments = array_map(function ($comment) {
             $user = User::findOrFail($comment['user_id']);
             $comment['user'] = $user;
             return $comment;
         }, $comments);
 
 
-        return view('user.product-details', compact('product', 'comments', 'avgRating','categories', 'skins', 'brands'));
+        return view('user.product-details', compact('product', 'comments', 'avgRating', 'categories', 'skins', 'brands'));
     }
 
     /**

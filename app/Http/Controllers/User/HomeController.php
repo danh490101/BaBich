@@ -21,18 +21,18 @@ class HomeController extends Controller
             $bproducts = $this->groupProductByBrand();
             $sproducts = $this->groupProductBySkin();
             $brands = Brand::all();
-            $skins = Skin ::all();
+            $skins = Skin::all();
             $categories = Category::all();
             $suggestion = $this->getProductSuggestion($request);
-            return view('user.home.index', compact('categories', 'brands', 'products', 'suggestion','skins'));
+            return view('user.home.index', compact('categories', 'brands', 'products', 'suggestion', 'skins'));
         } else {
             $products = $this->groupProductByCategory();
             $bproducts = $this->groupProductByBrand();
             $sproducts = $this->groupProductBySkin();
             $brands = Brand::all();
-            $skins = Skin ::all();
+            $skins = Skin::all();
             $categories = Category::all();
-            return view('user.home.index', compact('categories', 'brands', 'products','skins'));
+            return view('user.home.index', compact('categories', 'brands', 'products', 'skins'));
         }
     }
 
@@ -40,8 +40,8 @@ class HomeController extends Controller
     {
         $categories = Category::all();
         $brands = Brand::all();
-        $skins = Skin ::all();
-        return view('user.about',compact('categories', 'brands', 'skins')) ;
+        $skins = Skin::all();
+        return view('user.about', compact('categories', 'brands', 'skins')) ;
     }
 
     //Product suggestion
@@ -82,6 +82,7 @@ class HomeController extends Controller
 
         return $orderDetails;
     }
+
     public function groupProductByCategory()
     {
         $products = Product::all();
@@ -92,6 +93,7 @@ class HomeController extends Controller
         }
         return $productList;
     }
+
     public function showByCategory($categoryId)
     {
         $products = Product::where('category_id', $categoryId)->get();
@@ -124,6 +126,7 @@ class HomeController extends Controller
         $products = Product::where('brand_id', $brandId)->get();
         return view('products.by_brand', ['products' => $products]);
     }
+
     public function groupProductBySkin()
     {
         $products = Product::all();
@@ -134,6 +137,7 @@ class HomeController extends Controller
         }
         return $productList2;
     }
+
     public function showBySkin($skinId)
     {
         $products = Product::where('skin_id', $skinId)->get();

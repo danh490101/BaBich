@@ -46,7 +46,7 @@ class SkinController extends Controller
         //B2: validation
         $skin = $request->validate([
             'name' => 'required|string|min:1'
-            
+
         ]);
         //dd($category);
         $skin = Skin::create($skin);

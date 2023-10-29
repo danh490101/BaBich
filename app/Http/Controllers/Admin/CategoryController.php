@@ -7,7 +7,6 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-
 class CategoryController extends Controller
 {
     /**
@@ -45,7 +44,7 @@ class CategoryController extends Controller
         //B2: validation
         $category = $request->validate([
             'name' => 'required|string|min:1'
-            
+
         ]);
         //dd($category);
         $category = Category::create($category);
@@ -105,7 +104,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->delete();
-        session()->flash('success','Xóa thành công!');
+        session()->flash('success', 'Xóa thành công!');
         return redirect()->route('admin.categories.index');
     }
 }

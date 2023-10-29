@@ -4,10 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use App\Models\OrderDetails;
-use App\Models\Product;
 use App\Models\User;
-use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,9 +17,9 @@ class OrderController extends Controller
     public function index()
     {
         //
-       $users = User::all();
-       $orders = Order::paginate(10); // Phân trang với mỗi trang hiển thị 20 dòng
-        return view('admin.orders.index', compact('orders'),['orders' => $orders]);
+        $users = User::all();
+        $orders = Order::paginate(10); // Phân trang với mỗi trang hiển thị 20 dòng
+        return view('admin.orders.index', compact('orders'), ['orders' => $orders]);
     }
 
     /**
@@ -38,23 +35,23 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      */
     public function store(Request $request)
-{
-    // Kiểm tra và xác thực dữ liệu từ yêu cầu
-    // $data = $request->validate([
-    //     'delivery_date' => 'required',
-    // ]);   
+    {
+        // Kiểm tra và xác thực dữ liệu từ yêu cầu
+        // $data = $request->validate([
+        //     'delivery_date' => 'required',
+        // ]);
 
-    // // Tạo một bản ghi mới trong cơ sở dữ liệu với status mặc định là 0
-    // $order = Order::create(array_merge($data, ['status' => 0]));
+        // // Tạo một bản ghi mới trong cơ sở dữ liệu với status mặc định là 0
+        // $order = Order::create(array_merge($data, ['status' => 0]));
 
-    // // Cập nhật trạng thái (status) thành 1
-    // $order->update(['status' => 1]);
+        // // Cập nhật trạng thái (status) thành 1
+        // $order->update(['status' => 1]);
 
-    // // Chuyển hướng người dùng đến trang danh sách đơn đặt hàng sau khi tạo thành công
-    // return redirect()->route('admin.orders.index');
-}
+        // // Chuyển hướng người dùng đến trang danh sách đơn đặt hàng sau khi tạo thành công
+        // return redirect()->route('admin.orders.index');
+    }
 
-    
+
 
     /**
      * Display the specified resource.
@@ -93,26 +90,26 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      */
     public function update(Request $request, Order $order)
-{
-    // Tìm bản ghi Order dựa trên ID
-    $order = Order::findOrFail($order->id);
+    {
+        // Tìm bản ghi Order dựa trên ID
+        $order = Order::findOrFail($order->id);
 
-    // Kiểm tra và xác thực dữ liệu từ yêu cầu
-    $orderUpdate = $request->validate([
-        'delivery_date' => [
-            'required',
-        ],
-    ]);
+        // Kiểm tra và xác thực dữ liệu từ yêu cầu
+        $orderUpdate = $request->validate([
+            'delivery_date' => [
+                'required',
+            ],
+        ]);
 
-    // Cập nhật thông tin của bản ghi Order với dữ liệu được xác thực
-    $order->update($orderUpdate);
+        // Cập nhật thông tin của bản ghi Order với dữ liệu được xác thực
+        $order->update($orderUpdate);
 
-    // Cập nhật cột 'status' từ 0 thành 1
-    $order->update(['status' => 1]);
+        // Cập nhật cột 'status' từ 0 thành 1
+        $order->update(['status' => 1]);
 
-    // Chuyển hướng người dùng đến trang danh sách đơn đặt hàng sau khi cập nhật thành công
-    return redirect()->route('admin.orders.index');
-}
+        // Chuyển hướng người dùng đến trang danh sách đơn đặt hàng sau khi cập nhật thành công
+        return redirect()->route('admin.orders.index');
+    }
 
 
     /**

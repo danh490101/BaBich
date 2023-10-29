@@ -22,7 +22,7 @@ class ProductController extends Controller
     public function addToCart(Request $request, $id)
     {
         $data = $request->validate([
-            'quantity'=>'required|numeric|min:1'
+            'quantity' => 'required|numeric|min:1'
         ]);
 
         $product = Product::findOrFail($id);
@@ -42,9 +42,8 @@ class ProductController extends Controller
         if (isset($cart[$id])) {
             if($data['quantity'] > 1) {
                 $cart[$id]['quantity'] = $cart[$id]['quantity'] + $data['quantity'];
-            } 
-            else {
-            $cart[$id]['quantity']++;
+            } else {
+                $cart[$id]['quantity']++;
             }
         } else {
             $cart[$id] = [
@@ -64,7 +63,7 @@ class ProductController extends Controller
 
     public function addToCartGet(Request $request, $id)
     {
-        $data['quantity']=1;
+        $data['quantity'] = 1;
         $product = Product::findOrFail($id);
 
         if (!$product) {
@@ -82,9 +81,8 @@ class ProductController extends Controller
         if (isset($cart[$id])) {
             if($data['quantity'] > 1) {
                 $cart[$id]['quantity'] = $cart[$id]['quantity'] + $data['quantity'];
-            } 
-            else {
-            $cart[$id]['quantity']++;
+            } else {
+                $cart[$id]['quantity']++;
             }
         } else {
             $cart[$id] = [
@@ -106,7 +104,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $brands = Brand::all();
-        $skins = Skin ::all();
+        $skins = Skin::all();
         $categoryId = $request->get('categoryId', null);
         $brandId = $request->get('brandId', null);
         $minPrice = $request->input('min_price', 0);
@@ -120,7 +118,7 @@ class ProductController extends Controller
                 'brandId' => $brandId,
             ], [$minPrice, $maxPrice]);
         }
-        
+
 
         return view('user.shop', compact('products', 'categories', 'brands', 'skins'));
     }
@@ -129,40 +127,42 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $brands = Brand::all();
-        $skins = Skin ::all();
+        $skins = Skin::all();
         $cart = $request->session()->get('cart');
         $totalPrice = 0;
         foreach ($cart as $id => $item) {
-            if ($id == 'totalAmount') continue;
+            if ($id == 'totalAmount') {
+                continue;
+            }
             $totalPrice += $item['price'] * $item['quantity'];
         }
         $cart['totalPrice'] = $totalPrice;
-        return view('user.cart', compact('cart', 'categories','skins', 'brands'));
+        return view('user.cart', compact('cart', 'categories', 'skins', 'brands'));
     }
 
 
 
     public function addToFavorites($productId)
-{
-    $user = User::where('id', Auth::id())->firstOrFail(); // Lấy người dùng
-    $product = Product::find($productId); // Lấy sản phẩm bạn muốn thêm
-// dd($product);
-    if (!$product) {
-        return redirect()->back()->with('error', 'Không tìm thấy sản phẩm.');
+    {
+        $user = User::where('id', Auth::id())->firstOrFail(); // Lấy người dùng
+        $product = Product::find($productId); // Lấy sản phẩm bạn muốn thêm
+        // dd($product);
+        if (!$product) {
+            return redirect()->back()->with('error', 'Không tìm thấy sản phẩm.');
+        }
+        if ($user->favoriteProducts->contains($product)) {
+            return redirect()->back()->with('info', 'Sản phẩm đã có trong danh sách yêu thích.');
+        }
+        try {
+            DB::beginTransaction();
+            $user->favoriteProducts()->attach($product);
+            DB::commit();
+            return redirect()->back()->with('success', 'Đã thêm sản phẩm vào danh sách yêu thích.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Đã xảy ra lỗi khi thêm sản phẩm vào danh sách yêu thích.');
+        }
     }
-    if ($user->favoriteProducts->contains($product)) {
-        return redirect()->back()->with('info', 'Sản phẩm đã có trong danh sách yêu thích.');
-    }
-    try {
-        DB::beginTransaction();
-        $user->favoriteProducts()->attach($product);
-        DB::commit();
-        return redirect()->back()->with('success', 'Đã thêm sản phẩm vào danh sách yêu thích.');
-    } catch (\Exception $e) {
-        DB::rollBack();
-        return redirect()->back()->with('error', 'Đã xảy ra lỗi khi thêm sản phẩm vào danh sách yêu thích.');
-    }
-}
 
 
     public function favorites()
@@ -175,7 +175,7 @@ class ProductController extends Controller
         }
         $categories = Category::all();
         $brands = Brand::all();
-        $skins = Skin ::all();
+        $skins = Skin::all();
         return view('user.favorite', compact('products', 'categories', 'skins', 'brands'));
     }
 
@@ -222,12 +222,12 @@ class ProductController extends Controller
                     if ($key === 'totalAmount') {
                         continue;
                     }
-    
+
                     $totalAmount = $totalAmount + ($item['quantity'] ?? 0);
                 }
 
                 $cart['totalAmount'] = $totalAmount;
-                
+
                 session()->put('cart', $cart);
             }
             session()->flash('success', 'Product successfully removed!');
@@ -239,26 +239,25 @@ class ProductController extends Controller
         if (isset($condition['categoryId']) && isset($condition['brandId'])) {
             $products = Product::where('category_id', '=', $condition['categoryId'])
                                 ->where('brand_id', '=', $condition['brandId'])
-                                ->where(function($query) use ($filter){
+                                ->where(function ($query) use ($filter) {
                                     $query->whereBetween('price', $filter);
-                                })->get();    
-        } else if (isset($condition['brandId'])) {
+                                })->get();
+        } elseif (isset($condition['brandId'])) {
             $products = Product::where('brand_id', '=', $condition['brandId'])
-                                ->where(function($query) use ($filter){
+                                ->where(function ($query) use ($filter) {
                                     $query->whereBetween('price', $filter);
                                 })->get();
-        } else if (isset($condition['categoryId'])) {
+        } elseif (isset($condition['categoryId'])) {
             $products = Product::where('category_id', '=', $condition['categoryId'])
-                                ->where(function($query) use ($filter){
+                                ->where(function ($query) use ($filter) {
                                     $query->whereBetween('price', $filter);
                                 })->get();
-        }
-        else {
-            $products = Product::where(function($query) use ($filter){
-                                    $query->whereBetween('price', $filter);
-                                })->get();
+        } else {
+            $products = Product::where(function ($query) use ($filter) {
+                $query->whereBetween('price', $filter);
+            })->get();
         }
         return $products;
     }
-    
+
 }
