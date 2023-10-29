@@ -1,12 +1,13 @@
 <?php
+
 namespace App\Http\Livewire\Admin;
 
 // use App\Models\Category;
 use Livewire\Component;
+
 // use Livewire\WithPagination;
 // use Illuminate\Support\Facades\Facade;
 // class Illuminate\Support\Facades\DB extends Facade;
-use DB;
 
 class AdminCategoriesComponent extends Component
 {
@@ -17,6 +18,6 @@ class AdminCategoriesComponent extends Component
         // foreach ($categories as $category) {
         //     echo "ID: " . $category->id . ", Name: " . $category->name . "<br>";
         // }
-        return view('livewire.admin.admin-categories-component',['categories'=>$categories]);
+        return view('livewire.admin.admin-categories-component', ['categories' => $categories]);
     }
 }

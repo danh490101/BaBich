@@ -16,7 +16,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-10 ftco-animate">
-                    <form action="{{route('user.checkout.store')}}" method="post" class="billing-form">
+                    <form action="{{ route('user.checkout.store') }}" method="post" class="billing-form">
                         @csrf
                         <h3 class="mb-4 billing-heading">Chi tiết thanh toán</h3>
                         <div class="row align-items-end">
@@ -92,14 +92,14 @@
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <div class="radio">
-                                                <label><input name="payment_method" value="1" type="radio" name="optradio" class="mr-2">Thanh toán nhận hàng</label>
+                                                <label><input name="payment_method" value="COD" type="radio" name="optradio" class="mr-2">Thanh toán nhận hàng</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <div class="radio">
-                                                <label><input name="payment_method" value="2" type="radio" name="optradio" class="mr-2"> VNPay</label>
+                                                <label><input name="payment_method" value="VNPAY" type="radio" name="optradio" class="mr-2"> VNPay</label>
                                             </div>
                                         </div>
                                     </div>
@@ -110,6 +110,13 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    @error('payment_method')
+                                    <span class="text-danger">
+                                        {{ $message }}
+                                    </span>
+                                    @enderror
+
                                     <button type="submit" id="orderButton" class="btn btn-primary py-3 px-4">
                                         <span class="btn-txt">Đặt hàng</span>
                                     </button>
@@ -122,18 +129,4 @@
         </div>
     </section>
 </div>
-<script>
-    document.getElementById('orderButton').addEventListener('click', function() {
-        Swal.fire({
-            title: 'Đặt hàng thành công',
-            text: 'Cảm ơn bạn đã đặt hàng!',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = '/'; // Chuyển hướng về trang chủ
-            }
-        });
-    });
-</script>
 @endsection

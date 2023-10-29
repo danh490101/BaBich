@@ -111,6 +111,6 @@ Route::middleware(['auth', 'authadmin'])->group(function () {
 
 Route::get('auth/{provider}/redirect', [SocialiteController::class, 'redirect'])->name('socialite.redirect');
 Route::get('auth/{provider}/callback', [SocialiteController::class, 'callback'])->name('socialite.callback');
-
+Route::get('payments/vnpay/callback', [CheckoutController::class, 'paymentCallback'])->name('vnpay.payment-callback')->middleware('auth');
 
 require __DIR__ . '/auth.php';

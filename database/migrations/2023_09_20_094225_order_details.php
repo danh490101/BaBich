@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -17,9 +16,9 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('order_id')->unsigned()->nullable();
             $table->bigInteger('product_id')->unsigned()->nullable();
-            $table->decimal('price',10,3);
+            $table->decimal('price', 10, 3);
             $table->integer('quantity')->default(1);
-            $table->decimal('totalamount',10,3);
+            $table->decimal('totalamount', 10, 3);
             $table->timestamps();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

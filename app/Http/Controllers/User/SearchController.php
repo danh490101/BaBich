@@ -19,7 +19,7 @@ class SearchController extends Controller
         $brands = Brand::all();
         $categories = Category::all();
         $searchTerm = $request->get('keyword'); // Lấy từ request
-       // dd($searchTerm);
+        // dd($searchTerm);
         $results = Product::where('name', 'like', "%$searchTerm%")
             ->orWhereHas('brand', function ($query) use ($searchTerm) {
                 $query->where('name', 'like', "%$searchTerm%");
@@ -33,6 +33,7 @@ class SearchController extends Controller
             ->get();
            // dd($results);
             return view('user.home.search', ['results' => $results], compact('categories', 'brands', 'skins'));
+
 
     }
 

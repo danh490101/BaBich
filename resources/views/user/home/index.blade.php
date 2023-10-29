@@ -154,6 +154,7 @@
                 <div class="col-md-7 heading-section text-center ftco-animate">
                     <!-- <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span> -->
                     <h2>Sản Phẩm {{ $mappingCates[$index] ?? '-' }}</h2>
+
                 </div>
             </div>
             <div class="row">

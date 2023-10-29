@@ -73,7 +73,7 @@ class AdFeedbackController extends Controller
         //
         $feedback = Feedback::findOrFail($feedback->id);
         $feedbackUpdate = $request -> validate([
-            'status' =>'required| '
+            'status' => 'required| '
         ]);
     }
 
@@ -98,7 +98,7 @@ class AdFeedbackController extends Controller
     {
         //
         $feedback = Feedback::findOrFail($feedback->id);
-        
+
         $dataUpdate['status'] = 0;
         if ($feedback->status === 0) {
             $dataUpdate['status'] = 1;
@@ -109,7 +109,8 @@ class AdFeedbackController extends Controller
     }
 
 
-    public function getCommentsOfProductId ($productId) {
+    public function getCommentsOfProductId($productId)
+    {
         $comments = Feedback::where('product_id', $productId)->get();
     }
 }

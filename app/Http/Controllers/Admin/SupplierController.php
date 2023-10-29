@@ -46,7 +46,7 @@ class SupplierController extends Controller
             'email' => 'nullable|string',
             'phone' => 'required|string|min:1',
             'address' => 'required|string|min:1'
-            
+
         ]);
         $supplier = Supplier::create($supplier);
         return redirect()->route('admin.suppliers.index');
@@ -92,13 +92,13 @@ class SupplierController extends Controller
                 'required',
                 Rule::unique('suppliers')->ignore($supplier->id),
             ],
-            'email'=> [
+            'email' => [
                 'nullable'
             ],
-            'phone'=> [
+            'phone' => [
                 'required'
             ],
-            'address'=> [
+            'address' => [
                 'required'
             ],
         ]);
@@ -118,7 +118,7 @@ class SupplierController extends Controller
         //
         $supplier = Supplier::findOrFail($id);
         $supplier->delete();
-        session()->flash('success','Xóa thành công!');
+        session()->flash('success', 'Xóa thành công!');
         return redirect()->route('admin.suppliers.index');
     }
 }

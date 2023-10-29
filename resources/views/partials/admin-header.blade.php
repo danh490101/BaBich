@@ -55,11 +55,6 @@
                                     <span class="nav-link-text">Nhập kho</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.products.index') }}">
-                                    <span class="nav-link-text">Giảm giá</span>
-                                </a>
-                            </li>
                         </div>
                     </div>
                     <div class="dropdown">
@@ -104,9 +99,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.discounts.new-discount-form') }}">
                                     <span class="nav-link-text">Tạo mới giảm giá</span>
-                                </a>
-                                <a class="nav-link" href="{{ route('admin.discounts.new-discount-form') }}">
-                                    <span class="nav-link-text">Danh sách giảm giá Available</span>
                                 </a>
                                 <a class="nav-link" href="{{ route('admin.discounts.list') }}">
                                     <span class="nav-link-text">Danh sách giảm giá Expired</span>

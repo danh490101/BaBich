@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -18,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->text('desc')->nullable();
-            $table->decimal('price',10,2);
-            $table->enum('stock_status',['instock','outofstock']);
+            $table->decimal('price', 10, 2);
+            $table->enum('stock_status', ['instock','outofstock']);
             $table->integer('quantity')->default(10)->nullable();
             $table->string('image');
             $table->string('images')->nullable();
@@ -29,7 +28,6 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
         });
-
     }
 
     /**
