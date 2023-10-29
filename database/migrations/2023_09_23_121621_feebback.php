@@ -15,7 +15,7 @@ return new class extends Migration
     {
         //
         Schema::create('feedback', function (Blueprint $table) {
-            $table->id()->nullable();
+            $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('product_id')->unsigned();
             $table->string('comment');

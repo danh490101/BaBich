@@ -23,7 +23,9 @@ class User extends Authenticatable
         'email',
         'password',
         'address',
-        'phone'
+        'phone',
+        'provider_id',
+        'auth_type',
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -47,10 +49,9 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
     // Trong model User
-public function favoriteProducts()
-{
-    return $this->belongsToMany(Product::class, 'user_favorite_products', 'user_id', 'product_id')
-        ->withTimestamps();
-}
-
+    public function favoriteProducts()
+    {
+        return $this->belongsToMany(Product::class, 'user_favorite_products', 'user_id', 'product_id')
+            ->withTimestamps();
+    }
 }
