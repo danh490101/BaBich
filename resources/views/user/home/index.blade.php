@@ -69,122 +69,122 @@
         </div>
     </section>
     @if(Auth::check())
-        <section class="ftco-section">
-            <div class="container">
-                <div class="row justify-content-center pb-5">
-                    <div class="col-md-7 heading-section text-center ftco-animate">
-                        <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span>
-                        <h2>Có Thể Bạn Sẽ Thích</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    @foreach($suggestion as $product)
-                    <div class="col-md-3 d-flex">
-                        <div class="product ftco-animate shadow">
-                            <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
-                                <div class="desc">
-                                    <p class="meta-prod d-flex">
-                                        <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                        <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
-                                        <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="text text-center">
-                                <span class="sale">Gợi ý</span>
-                                <span class="category">{{$product->category->name}}</span>
-                                <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
-                                <p class="mb-0"><span class="price">{{number_format($product->price,0, ',','.')}}</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center pb-5">
+                <div class="col-md-7 heading-section text-center ftco-animate">
+                    <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span>
+                    <h2>Có Thể Bạn Sẽ Thích</h2>
                 </div>
             </div>
-        </section>
-        @foreach ($products as $index => $group)
-        <section class="ftco-section">
-            <div class="container">
-                <div class="row justify-content-center pb-5">
-                    <div class="col-md-7 heading-section text-center ftco-animate">
-                        <!-- <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span> -->
-                        <h2>Sản Phẩm {{ $index }}</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    @foreach($group as $product)
-                    <div class="col-md-3 d-flex">
-                        <div class="product ftco-animate shadow">
-                            <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
-                                <div class="desc">
-                                    <p class="meta-prod d-flex">
-                                        <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                        <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
-                                        <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="text text-center">
-                                <!-- <span class="sale">Sale</span> -->
-
-                                <span class="category">{{$product->category->name}}</span>
-                                <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
-                                <p class="mb-0 fw-bolder"><span class="price">{{number_format($product->price,0, ',','.')}}</span></p>
+            <div class="row">
+                @foreach($suggestion as $product)
+                <div class="col-md-3 d-flex">
+                    <div class="product ftco-animate shadow">
+                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
+                            <div class="desc">
+                                <p class="meta-prod d-flex">
+                                    <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
+                                    <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
+                                    <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
+                                </p>
                             </div>
                         </div>
+                        <div class="text text-center">
+                            <span class="sale">Gợi ý</span>
+                            <span class="category">{{$product->category->name}}</span>
+                            <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
+                            <p class="mb-0"><span class="price">{{number_format($product->price,0, ',','.')}}</span></p>
+                        </div>
                     </div>
-                    @endforeach
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-4">
-                        <a href="{{ route('user.shop', ['categoryId' => $product->category_id]) }}" class="btn btn-primary d-block">Tất cả sản phẩm<span class="fa fa-long-arrow-right"></span></a>
-                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @foreach ($products as $index => $group)
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center pb-5">
+                <div class="col-md-7 heading-section text-center ftco-animate">
+                    <!-- <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span> -->
+                    <h2>Sản Phẩm {{ $index }}</h2>
                 </div>
             </div>
-        </section>
-        @endforeach
-    @else
-        @foreach ($products as $index => $group)
-        <section class="ftco-section">
-            <div class="container">
-                <div class="row justify-content-center pb-5">
-                    <div class="col-md-7 heading-section text-center ftco-animate">
-                        <!-- <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span> -->
-                        <h2>Sản Phẩm {{$index}}</h2>
-                    </div>
-                </div>
-                <div class="row ">
+            <div class="row">
                 @foreach($group as $product)
-                    <div class="col-md-3 d-flex ">
-                        <div class="product ftco-animate shadow">
-
-                            <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
-                                <div class="desc">
-                                    <p class="meta-prod d-flex">
-                                        <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                        <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
-                                        <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="text text-center">
-                                <!-- <span class="sale">Sale</span> -->
-                                <span class="category">{{$product->category->name}}</span>
-                                <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
-                                <p class="mb-0 "><span class="price">{{number_format($product->price,0, ',','.')}}</span></p>
+                <div class="col-md-3 d-flex">
+                    <div class="product ftco-animate shadow">
+                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
+                            <div class="desc">
+                                <p class="meta-prod d-flex">
+                                    <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
+                                    <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
+                                    <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
+                                </p>
                             </div>
                         </div>
+                        <div class="text text-center">
+                            <!-- <span class="sale">Sale</span> -->
+
+                            <span class="category">{{$product->category->name}}</span>
+                            <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
+                            <p class="mb-0 fw-bolder"><span class="price">{{number_format($product->price,0, ',','.')}}</span></p>
+                        </div>
                     </div>
-                    @endforeach
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-4">
-                        <a href="{{ route('user.shop', ['categoryId' => $product->category_id]) }}" class="btn btn-primary d-block">Tất cả sản phẩm<span class="fa fa-long-arrow-right"></span></a>
-                    </div>
+                @endforeach
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <a href="{{ route('user.shop', ['categoryId' => $product->category_id]) }}" class="btn btn-primary d-block">Tất cả sản phẩm<span class="fa fa-long-arrow-right"></span></a>
                 </div>
             </div>
-        </section>
-        @endforeach
+        </div>
+    </section>
+    @endforeach
+    @else
+    @foreach ($products as $index => $group)
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center pb-5">
+                <div class="col-md-7 heading-section text-center ftco-animate">
+                    <!-- <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span> -->
+                    <h2>Sản Phẩm {{$index}}</h2>
+                </div>
+            </div>
+            <div class="row ">
+                @foreach($group as $product)
+                <div class="col-md-3 d-flex ">
+                    <div class="product ftco-animate shadow">
+
+                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
+                            <div class="desc">
+                                <p class="meta-prod d-flex">
+                                    <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
+                                    <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
+                                    <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="text text-center">
+                            <!-- <span class="sale">Sale</span> -->
+                            <span class="category">{{$product->category->name}}</span>
+                            <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
+                            <p class="mb-0 "><span class="price">{{number_format($product->price,0, ',','.')}}</span></p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <a href="{{ route('user.shop', ['categoryId' => $product->category_id]) }}" class="btn btn-primary d-block">Tất cả sản phẩm<span class="fa fa-long-arrow-right"></span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endforeach
     @endif
     <section class="ftco-section testimony-section img" style="background-image: url(asset/images/bg_4.jpg);">
         <div class="overlay"></div>
@@ -282,9 +282,9 @@
 @endsection
 <script>
     // Chờ tài liệu tải xong
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Xử lý sự kiện khi nút "Yêu thích" được nhấn
-        $('.favorite-button').click(function (e) {
+        $('.favorite-button').click(function(e) {
             e.preventDefault(); // Ngăn chặn mặc định hành vi điều hướng
 
             var button = $(this);
@@ -297,7 +297,7 @@
                 data: {
                     productId: productId // Gửi productId của sản phẩm
                 },
-                success: function (response) {
+                success: function(response) {
                     if (response === 'added') {
                         button.addClass('favorited');
                     } else if (response === 'removed') {

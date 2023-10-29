@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\odel=Product>
  */
@@ -16,18 +17,18 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-        $product_name = $this->faker->unique()->words($nb=26,$asText = true);
-        $slug = Str::slug($product_name,'-');
+        $product_name = $this->faker->unique()->words($nb = 26, $asText = true);
+        $slug = Str::slug($product_name, '-');
         return [
             //
-            'name'=>$product_name,
-            'slug'=> $slug,
-            'desc'=> $this->faker->text(500),
-            'price'=>$this->faker->numberBetween(10,500),
-            'stock_status'=>'instock',
-            'quantity'=>$this->faker->numberBetween(10,50),
-            'image'=>'product-'.$this->faker->numberBetween(1,16),
-            'category_id'=>$this->faker->numberBetween(1,5)
+            'name' => $product_name,
+            'slug' => $slug,
+            'desc' => $this->faker->text(500),
+            'price' => $this->faker->numberBetween(10, 500),
+            'stock_status' => 'instock',
+            'quantity' => $this->faker->numberBetween(10, 50),
+            'image' => 'product-'.$this->faker->numberBetween(1, 16),
+            'category_id' => $this->faker->numberBetween(1, 5)
         ];
     }
 }

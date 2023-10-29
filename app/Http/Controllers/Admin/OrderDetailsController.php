@@ -15,9 +15,9 @@ class OrderDetailsController extends Controller
      */
     public function index()
     {
-        $order_details = OrderDetails :: all();
-        $orders = Order ::all();
-        return view('admin.order_details.index', compact('order_details','orders'));
+        $order_details = OrderDetails::all();
+        $orders = Order::all();
+        return view('admin.order_details.index', compact('order_details', 'orders'));
     }
 
     /**
@@ -46,7 +46,7 @@ class OrderDetailsController extends Controller
     public function show(OrderDetails $orderDetails)
     {
         //
-        
+
     }
 
     /**

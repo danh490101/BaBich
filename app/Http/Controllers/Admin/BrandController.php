@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 
 class BrandController extends Controller
 {
-    CONST PREFIX_IMAGE_URL = 'public/storage/img/brands/';
+    public const PREFIX_IMAGE_URL = 'public/storage/img/brands/';
     /**
      * Display a listing of the resource.
      *
@@ -40,18 +40,18 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         $brand = $request->validate([
             'name' => 'required|string|min:1|max:30|unique:brands',
             'fileUpload' => 'required|image'
-            
+
         ]);
         if ($request->file('fileUpload')) {
             $imageUrl = substr($request->file('fileUpload')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
             $brand['image'] = $imageUrl;
         }
 
-        
+
         $brand = Brand::create($brand);
         return redirect()->route('admin.brands.index');
     }
@@ -94,11 +94,11 @@ class BrandController extends Controller
                 'required',
                 Rule::unique('brands')->ignore($brand->id),
             ],
-            'fileUpload'=>[
+            'fileUpload' => [
                 'nullable',
                 'image'
             ]
-            
+
         ]);
 
         if ($request->file('fileUpload')) {
@@ -106,7 +106,7 @@ class BrandController extends Controller
             $brand['image'] = $imageUrl;
         }
         $brand->update($brandUpdate);
-        session()->flash('success','Cập nhật thành công!');
+        session()->flash('success', 'Cập nhật thành công!');
 
         return redirect()->route('admin.brands.index');
     }
@@ -121,7 +121,7 @@ class BrandController extends Controller
     {
         $brand = Brand::findOrFail($brand->id);
         $brand->delete();
-        session()->flash('success','Xóa thành công!');
+        session()->flash('success', 'Xóa thành công!');
         return redirect()->route('admin.brands.index');
     }
 }

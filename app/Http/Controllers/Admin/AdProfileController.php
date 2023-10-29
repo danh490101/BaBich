@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
 
 class AdProfileController extends Controller
@@ -61,20 +60,20 @@ class AdProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         //
         $user = User::findOrFail($id);
         $userUpdate = $request->validate([
-            'phone'=>[
+            'phone' => [
                 'required'
             ],
-            'address'=>[
+            'address' => [
                 'required'
             ]
         ]);
         $user->update($userUpdate);
-        return redirect()->route('admin.profile.edit', $id)->with('success','Cập nhật thành công!');
+        return redirect()->route('admin.profile.edit', $id)->with('success', 'Cập nhật thành công!');
     }
 
     /**

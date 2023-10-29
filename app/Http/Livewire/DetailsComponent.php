@@ -7,7 +7,8 @@ use App\Models\Product;
 
 class DetailsComponent extends Component
 {
-    public function mount($id){
+    public function mount($id)
+    {
         $this->id = $id;
     }
     public function render()

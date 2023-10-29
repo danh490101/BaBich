@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -11,7 +10,8 @@ use Illuminate\Queue\SerializesModels;
 
 class ConfirmEmail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     public $order;
     /**
@@ -44,7 +44,7 @@ class ConfirmEmail extends Mailable
     public function content()
     {
         $order = $this->order;
-       // dd($order);
+        // dd($order);
         return new Content(
             view: 'user.mail-template.confirm-email',
             with: [

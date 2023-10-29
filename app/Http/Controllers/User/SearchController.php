@@ -15,7 +15,7 @@ class SearchController extends Controller
         //dd($request->get('keyword'));
         $categories = Category::all();
         $searchTerm = $request->get('keyword'); // Lấy từ request
-       // dd($searchTerm);
+        // dd($searchTerm);
         $results = Product::where('name', 'like', "%$searchTerm%")
             ->orWhereHas('brand', function ($query) use ($searchTerm) {
                 $query->where('name', 'like', "%$searchTerm%");
@@ -24,8 +24,8 @@ class SearchController extends Controller
                 $query->where('name', 'like', "%$searchTerm%");
             })
             ->get();
-           // dd($results);
-            return view('user.home.search', ['results' => $results], compact('categories'));
+        // dd($results);
+        return view('user.home.search', ['results' => $results], compact('categories'));
 
     }
 
