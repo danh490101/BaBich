@@ -5,15 +5,15 @@ namespace App\Http\Controllers\User;
 use App\Events\SendMailConfirmEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
-use App\Models\Checkout;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
 use App\Models\Skin;
 use App\Models\User;
 use App\Models\Category;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
@@ -36,53 +36,105 @@ class CheckoutController extends Controller
         $user = User::findOrFail($user_id);
         return view('user.checkout', compact('cart', 'user', 'categories', 'skins', 'brands'));
     }
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     */
     public function store(Request $request)
     {
-        // dd($request->session()->get('cart'));
-        $dataUpdate = $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required',
             'address' => 'required',
             'phone' => 'required',
             'email' => 'required',
             'totalamount' => 'required',
             'delivery_cost' => 'required',
-            'payment_method' => ' required|numeric|min:1|max:2'
+            'payment_method' => ' required|in:COD,VNPAY'
         ]);
 
-        $dataUpdate['order_date'] = Carbon::now()->format('Y-m-d');
-        $dataUpdate['user_id'] = $request->user()->id;
         $order = Order::create([
-            'name' => $dataUpdate['name'],
-            'address' => $dataUpdate['address'],
-            'phone' => $dataUpdate['phone'],
-            'email' => $dataUpdate['email'],
-            'totalamount' => (float) $dataUpdate['totalamount'],
-            'delivery_cost' => (float) $dataUpdate['delivery_cost'],
-            'payment_method' => $dataUpdate['payment_method']
+            'name' => $validatedData['name'],
+            'address' => $validatedData['address'],
+            'phone' => $validatedData['phone'],
+            'email' => $validatedData['email'],
+            'totalamount' => (float) $validatedData['totalamount'],
+            'delivery_cost' => (float) $validatedData['delivery_cost'],
+            'payment_method' => $validatedData['payment_method'],
+            'user_id' => Auth::id(),
         ]);
+
         $this->processOrderDetais($request, $order->id);
-        SendMailConfirmEvent::dispatch(
-            $order
-        );
 
+        if ($validatedData['payment_method'] == 'VNPAY') {
+            $vnpUrl = 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html';
 
-        // return view('user.thanks');
+            if (!App::environment('local')) {
+                $vnpUrl = 'https://sandbox.vnpayment.vn/merchant_webapi/merchant.html';
+            }
+
+            $vnpReturnurl = env('APP_URL') . '/payments/vnpay/callback';
+            $vnpTmnCode = config('services.vnpay.vnp_tmn_code');
+            $vnpHashSecret = config('services.vnpay.vnp_hash_secret');
+            $vnpTxnRef = $order['id'];
+            $vnpOrderInfo = 'Thanh toan online';
+            $vnpOrderType = 'billpayment';
+            $vnpAmount = $order['totalamount'] * 100;
+            $vnpLocale = config('app.locale');
+            $vnpBankCode = 'NCB';
+            $vnpIpAddr = request()->ip();
+
+            $inputData = array(
+                'vnp_Version' => '2.1.0',
+                'vnp_TmnCode' => $vnpTmnCode,
+                'vnp_Amount' => $vnpAmount,
+                'vnp_Command' => 'pay',
+                'vnp_CreateDate' => date('YmdHis'),
+                'vnp_CurrCode' => 'VND',
+                'vnp_IpAddr' => $vnpIpAddr,
+                'vnp_Locale' => $vnpLocale,
+                'vnp_OrderInfo' => $vnpOrderInfo,
+                'vnp_OrderType' => $vnpOrderType,
+                'vnp_ReturnUrl' => $vnpReturnurl,
+                'vnp_TxnRef' => $vnpTxnRef,
+            );
+
+            if (isset($vnpBankCode) && $vnpBankCode != '') {
+                $inputData['vnp_BankCode'] = $vnpBankCode;
+            }
+
+            if (isset($vnpBillState) && $vnpBillState != '') {
+                $inputData['vnp_Bill_State'] = $vnpBillState;
+            }
+
+            ksort($inputData);
+            $query = '';
+            $i = 0;
+            $hashdata = '';
+            foreach ($inputData as $key => $value) {
+                if ($i == 1) {
+                    $hashdata .= '&' . urlencode($key) . '=' . urlencode($value);
+                } else {
+                    $hashdata .= urlencode($key) . '=' . urlencode($value);
+                    $i = 1;
+                }
+
+                $query .= urlencode($key) . '=' . urlencode($value) . '&';
+            }
+
+            $vnpUrl = $vnpUrl . '?' . $query;
+
+            if (isset($vnpHashSecret)) {
+                $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnpHashSecret);
+                $vnpUrl .= 'vnp_SecureHash=' . $vnpSecureHash;
+            }
+
+            return redirect($vnpUrl)->with([
+                'code' => '00',
+                'message' => 'success',
+            ]);
+        }
+
+        SendMailConfirmEvent::dispatch($order);
         return redirect()->route('index');
-        //dd($dataUpdate);
-        // $cart = $request->session()->get('cart');
-        // dd($cart);
-        //dd($checkout);
     }
+
     public function processOrderDetais(Request $request, $orderId)
     {
         $cart = $request->session()->get('cart');
@@ -91,6 +143,7 @@ class CheckoutController extends Controller
             if (!is_array($item)) {
                 continue;
             }
+
             $order_details[] = [
                 'order_id' => $orderId,
                 'product_id' => $item['id'],
@@ -98,56 +151,60 @@ class CheckoutController extends Controller
                 'quantity' => $item['quantity'],
                 'totalamount' => $item['price'] * $item['quantity'],
             ];
+
             $product = Product::findOrFail($item['id']);
-            $product -> update([
+            $product->update([
                 'quantity' =>  $product->quantity - $item['quantity']
             ]);
         }
+
         $order_details = OrderDetails::insert($order_details);
-        // $product = Product::find($product_id); // Thay $productID bằng ID của sản phẩm cần giảm số lượng.
-        // $newQuantity = $product->quantity - $quantity; // Giảm đi số lượng cần giảm.
-        // $product->update(['quantity' => $newQuantity]);
         session()->put('cart', []);
-        //dd($order_details);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Checkout  $checkout
-     */
-    public function show(Checkout $checkout)
+    public function paymentCallback()
     {
-        //
-    }
+        $message = 'Giao dịch thành công';
+        $vnpSecureHash = request('vnp_SecureHash');
+        $vnpHashSecret = config('services.vnpay.vnp_hash_secret');
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Checkout  $checkout
-     */
-    public function edit(Checkout $checkout)
-    {
-        //
-    }
+        $inputData = array();
+        foreach (request()->query() as $key => $value) {
+            if (substr($key, 0, 4) == 'vnp_') {
+                $inputData[$key] = $value;
+            }
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     */
-    public function update(Request $request, Checkout $checkout)
-    {
-        //
-    }
+        unset($inputData['vnp_SecureHash']);
+        ksort($inputData);
+        $i = 0;
+        $hashData = '';
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Checkout  $checkout
-     */
-    public function destroy(Checkout $checkout)
-    {
-        //
+        foreach ($inputData as $key => $value) {
+            if ($i == 1) {
+                $hashData = $hashData . '&' . urlencode($key) . '=' . urlencode($value);
+            } else {
+                $hashData = $hashData . urlencode($key) . '=' . urlencode($value);
+                $i = 1;
+            }
+        }
+
+        $secureHash = hash_hmac('sha512', $hashData, $vnpHashSecret);
+
+        if ($secureHash != $vnpSecureHash) {
+            return $message = 'Chữ ký không hợp lệ!';
+        }
+
+        if (request('vnp_ResponseCode') != '00') {
+            return $message = 'Giao dịch không thành công!';
+        }
+
+        Order::where('id', request('vnp_TxnRef'))->update([
+            'payment_status' => 'paid'
+        ]);
+
+        return view('payment.success', [
+            'message' => $message,
+        ]);
     }
 }

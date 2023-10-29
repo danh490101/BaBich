@@ -8,10 +8,9 @@ use Illuminate\Support\Facades\DB;
 
 class FrontendController extends Controller
 {
-    //
     public function getSearch(Request $request)
     {
-        $result = $request -> result;
+        $result = $request->result;
         dd($result);
         // $keyword = $request->name;
         // $keyword1 = $request->name;
