@@ -14,8 +14,7 @@ return new class () extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->date('order_date');
-            $table->date('delivery_date');
+            $table->date('delivery_date')->nullable();
             $table->decimal('totalamount', 10, 3);
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->smallInteger('status')->default(0);
@@ -25,6 +24,7 @@ return new class () extends Migration {
             $table->string('address');
             $table->string('phone', 10);
             $table->string('payment_method');
+            $table->string('payment_status')->default('Not paid yet');
             $table->text('order_notes')->nullable();
             $table->timestamps();
         });
