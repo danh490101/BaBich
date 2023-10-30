@@ -22,7 +22,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Tháng</th>
+                            <th scope="col">Năm</th>
                             <th scope="col">Số Lượng Đơn hàng</th>
                         </tr>
                     </thead>

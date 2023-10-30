@@ -190,13 +190,22 @@
     </section>
     @endforeach
     @else
+    @php
+        $i=0
+    @endphp
     @foreach ($products as $index => $group)
+    @if($i==3)
+        @break 
+    @endif
+    @php
+        $i++
+    @endphp
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center pb-5">
                 <div class="col-md-7 heading-section text-center ftco-animate">
                     <!-- <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span> -->
-                    <h2>Sản Phẩm {{$index}}</h2>
+                    <h2>Sản Phẩm {{$mappingCates[$index] ?? '-'}}</h2>
                 </div>
             </div>
             <div class="row ">
