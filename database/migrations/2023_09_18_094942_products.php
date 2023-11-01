@@ -19,7 +19,7 @@ return new class () extends Migration {
             $table->text('desc')->nullable();
             $table->decimal('price', 10, 2);
             $table->enum('stock_status', ['instock','outofstock']);
-            $table->integer('quantity')->default(10)->nullable();
+            $table->integer('quantity')->default(0)->nullable();
             $table->string('image');
             $table->string('images')->nullable();
             $table->bigInteger('category_id')->unsigned()->nullable();

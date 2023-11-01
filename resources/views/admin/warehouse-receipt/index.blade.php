@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-lg-6 col-5 text-right">
                     <li class="nav-item dropdown">
-                        <a class="nav-link pr-0" href="/admin/suppliers/create/" role="button">
+                        <a class="nav-link pr-0" href="{{route('admin.warehouse-receipt.create')}}" role="button">
                             <div class="media align-items-center">
                                 <span class="btn btn-sm btn-neutral">
                                     <i class="ni ni-fat-add text-blue"></i>
@@ -40,33 +40,33 @@
                             </tr>
                         </thead>
                         <tbody class="list">
-                            @foreach($suppliers as $supplier)
+                            @foreach($warehouse_receipt as $warehouse)
                             <tr>
                                 <td>
                                     <a href="">
                                         <span>
-                                            {{$supplier->id}}
+                                            {{$warehouse->id}}
                                         </span>
                                     </a>
                                 </td>
                                 <td>
                                     <span>
-                                        {{$supplier->name}}
+                                        {{$warehouse->supplier()->first()->name}}
                                     </span>
                                 </td>
                                 <td>
                                     <span>
-                                        {{$supplier->email}}
+                                    {{$warehouse->user()->first()->name}}
                                     </span>
                                 </td>
                                 <td>
                                     <span>
-                                        {{$supplier->phone}}
+                                        {{$warehouse->created_at}}
                                     </span>
                                 </td>
                                 <td>
                                     <span>
-                                        {{$supplier->address}}
+                                    {{number_format($warehouse->total_warehouse,0, ',','.')}}
                                     </span>
                                 </td>
                                 <td class="text-right">
@@ -75,8 +75,8 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="{{ route('admin.suppliers.edit', ['supplier' => $supplier->id]) }}">Xem & chỉnh sửa</a>
-                                            <form action="{{ route('admin.suppliers.destroy', ['supplier' => $supplier->id]) }}" method="POST">
+                                            <a class="dropdown-item" href="">Xem & chỉnh sửa</a>
+                                            <form action="" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="dropdown-item" type="submit">Xóa</button>

@@ -41,33 +41,33 @@
                         </thead>
 
                         <tbody class="list">
-                            @foreach($products as $product)
+                           
                             <tr>
                                 <td>
                                     <a href="">
                                         <span>
-                                            {{$product->id}}
+                                            
                                         </span>
                                     </a>
                                 </td>
                                 <td>
                                     <span>
-                                        {{ Illuminate\Support\Str::limit($product->name, 15) }}
+                                        
                                     </span>
                                 </td>
                                 <td>
                                     <span>
-                                        {{$product->price}}
+                                       
                                     </span>
                                 </td>
                                 <td>
                                     <span>
-                                        {{$product->stock_status}}
+                                        
                                     </span>
                                 </td>
                                 <td>
                                     <span>
-                                        {{$product->quantity}}
+                                        
                                     </span>
                                 </td>
                                 <td class="text-right">

@@ -10,4 +10,8 @@ class Supplier extends Model
     use HasFactory;
     protected $primaryKey = 'id';
     protected $fillable = ['name', 'address', 'phone', 'email'];
+
+    public function warehouseReceipts(){
+        return $this->hasMany(WarehouseReceipt::class);
+    }
 }

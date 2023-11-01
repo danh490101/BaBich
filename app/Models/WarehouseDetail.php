@@ -11,5 +11,5 @@ class WarehouseDetail extends Model
 
     protected $table = 'warehouse_detail';
     protected $primaryKey = 'id';
-    protected $fillable = ['price', 'quantity', 'product_id'];
+    protected $fillable = ['price', 'quantity', 'product_id', 'warehouse_receipt_id'];
 }

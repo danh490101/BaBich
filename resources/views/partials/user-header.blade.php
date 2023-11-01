@@ -81,6 +81,7 @@
                                     <span>Đăng xuất</span>
                                 </a>
                                 <a class="dropdown-item" href="{{route('user.favorites')}}">Yêu thích</a>
+                                <a class="dropdown-item" href="{{route('user.order-history',['status' => '0'])}}">Lịch sử mua hàng</a>
                             </form>
                         </div>
                     </li>

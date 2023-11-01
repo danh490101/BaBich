@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\OrderDetailsController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\FeedbackController;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\OrderHistoryController;
 use App\Http\Controllers\User\ProductController as UserProductController;
 use App\Http\Controllers\User\ProductDetailsController;
 use App\Http\Controllers\User\SearchController;
@@ -20,9 +21,11 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SkinController;
 use App\Http\Controllers\Admin\StatisticalController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\WarehousReceiptController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\User\UsProfileController;
+use App\Models\WarehouseReceipt;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +69,9 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/feedback', FeedbackController::class);
         Route::resource('/checkout', CheckoutController::class);
         Route::resource('/user-profile', UsProfileController::class);
+        // Route::resource('/order-history', OrderHistoryController::class);
+        // Route::get('/order-history/{id}', [OrderHistoryController::class,'destroy'])->name('order-history.destroy');
+        Route::get('/order-history/{status}', [OrderHistoryController::class,'findOrderStatus'])->name('order-history');
         Route::get('/add-to-favorites/{productId}', [App\Http\Controllers\User\ProductController::class, 'addToFavorites'])->name('add_to_favorites');
         Route::get('/favorite', [App\Http\Controllers\User\ProductController::class, 'favorites'])->name('favorites');
         Route::get('/suggestion', [HomeController::class, 'getProductSuggestion'])->name('suggestion');
@@ -91,6 +97,7 @@ Route::middleware(['auth', 'authadmin'])->group(function () {
         Route::resource('/profile', AdProfileController::class);
         Route::resource('/orders', OrderController::class);
         Route::resource('/order_details', OrderDetailsController::class);
+        Route::resource('/warehouse-receipt', WarehousReceiptController::class);
         Route::resource('/feedback', AdFeedbackController::class);
         Route::get('/feedback/change-status/{feedback}', [AdFeedbackController::class, 'changeStatus'])->name('feedback.changeStatus');
         Route::resource('/statistical', StatisticalController::class);

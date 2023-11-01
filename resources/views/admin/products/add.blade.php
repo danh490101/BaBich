@@ -69,7 +69,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="goods">Thuộc loại da</label>
+                                        <label class="form-control-label" for="skin_id">Thuộc loại da</label>
                                         <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
                                         <select class="form-control form-select mt-3" name='skin_id'>
                                             @foreach ($skins as $skin)
@@ -77,24 +77,6 @@
                                             @endforeach
                                         </select>
                                         <!-- <input type="text" name="id-goods" class="form-control" placeholder="Mã loại hàng" value=""> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="goods">Giá</label>
-                                        <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
-                                        <input type="text" name="price" class="form-control" placeholder="Giá hàng hóa" value="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="goods">Số lượng</label>
-                                        <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
-                                        <input type="text" name="quantity" class="form-control" placeholder="Số lượng" value="">
                                     </div>
                                 </div>
                             </div>

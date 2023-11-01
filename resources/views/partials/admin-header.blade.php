@@ -45,16 +45,7 @@
                                     <span class="nav-link-text">Thương hiệu</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.suppliers.index') }}">
-                                    <span class="nav-link-text">Nhà cung cấp</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.products.index') }}">
-                                    <span class="nav-link-text">Nhập kho</span>
-                                </a>
-                            </li>
+
                         </div>
                     </div>
                     <div class="dropdown">
@@ -102,6 +93,23 @@
                                 </a>
                                 <a class="nav-link" href="{{ route('admin.discounts.list') }}">
                                     <span class="nav-link-text">Danh sách giảm giá Expired</span>
+                                </a>
+                            </li>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-secondary dropdown-toggle ml-3 mt-2 w-100" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{asset('ad_asset/img/khac/warehouse.png')}}" class="navbar-brand-img">Nhập kho
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.suppliers.index') }}">
+                                    <span class="nav-link-text">Nhà cung cấp</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.warehouse-receipt.index') }}">
+                                    <span class="nav-link-text">Nhập kho</span>
                                 </a>
                             </li>
                         </div>

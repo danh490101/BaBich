@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Events\SendMailConfirmEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Models\Discount;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
@@ -185,7 +186,6 @@ class CheckoutController extends Controller
                 $inputData[$key] = $value;
             }
         }
-
         unset($inputData['vnp_SecureHash']);
         ksort($inputData);
         $i = 0;
@@ -205,17 +205,20 @@ class CheckoutController extends Controller
         if ($secureHash != $vnpSecureHash) {
             return $message = 'Chữ ký không hợp lệ!';
         }
-
         if (request('vnp_ResponseCode') != '00') {
             return $message = 'Giao dịch không thành công!';
         }
-
         Order::where('id', request('vnp_TxnRef'))->update([
             'payment_status' => 'paid'
         ]);
-
         return view('payment.success', [
             'message' => $message,
         ]);
+    }
+
+    public function findDiscount($code){
+        return Discount::where(array(
+            'code' => $code,
+        ))->where('expire_day' ,'>','0')->first();
     }
 }

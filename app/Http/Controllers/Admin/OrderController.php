@@ -18,7 +18,7 @@ class OrderController extends Controller
     {
         //
         $users = User::all();
-        $orders = Order::paginate(10); // Phân trang với mỗi trang hiển thị 20 dòng
+        $orders = Order::all(); // Phân trang với mỗi trang hiển thị 20 dòng
         return view('admin.orders.index', compact('orders'), ['orders' => $orders]);
     }
 

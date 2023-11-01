@@ -71,7 +71,8 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="discount">Nhập mã giảm giá</label>
-                                            <input type="text" name="code" class="form-control" placeholder="" value="">
+                                            <input type="text" id="discountCode" name="code" class="form-control" placeholder="" value="">
+                                            <div id="searchDiscount" style="width: 100px; height: 30px; border: 1px solid black; border-radius: 10%; ">Tim</div>
                                         </div>
                                     </div>
                                     <!-- <p class="d-flex">
@@ -81,8 +82,8 @@
                                     <hr>
                                     <p class="d-flex total-price">
                                         <span>Total</span>
-                                        <input type="text" name="totalamount" class="form-control" placeholder="" value="{{ round($cart['totalPrice']*0.05 + $cart['totalPrice']) }}" hidden>
-                                        <span>{{ number_format(round($cart['totalPrice']*0.05 + $cart['totalPrice'])) }}</span>
+                                        <input type="hidden" name="totalamount" id="total_order_input" class="form-control" placeholder="" value="{{ round($cart['totalPrice']*0.05 + $cart['totalPrice']) }}">
+                                        <span id="total_order_span">{{ number_format(round($cart['totalPrice']*0.05 + $cart['totalPrice'])) }}</span>
                                     </p>
                                 </div>
                             </div>
@@ -129,4 +130,26 @@
         </div>
     </section>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#searchDiscount').click(function() {
+            var discountCode = $('#discountCode').val();
+            $.ajax({
+                url: '/api/find-discount/' + discountCode,
+                type: 'GET',
+                success: function(data) {
+                    console.log(data);   
+                    let total = $('#total_order_input').val() - ($('#total_order_input').val() * data.value / 100)
+                    console.log(total);
+                    $('#total_order_input').val(total);
+                    $('#total_order_span').text(total);
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr);   
+                }
+            });
+        });
+    });
+</script>
 @endsection

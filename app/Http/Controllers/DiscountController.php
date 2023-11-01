@@ -26,8 +26,6 @@ class DiscountController extends Controller
         $products = Product::all();
         return view("admin.discounts.add-form", compact("products"));
     }
-
-
     public function addDiscountCode(Request $request)
     {
         $datavalidated = $request->validate([

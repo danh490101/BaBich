@@ -16,6 +16,9 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        if(Auth::check() && Auth::user()->utype =='ADM'){
+            return view('admin.dashboard');
+        }
         $discountList = $this->getDiscount();
         $brands = Brand::all();
         $skins = Skin ::all();

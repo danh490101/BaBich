@@ -45,8 +45,6 @@ class ProductController extends Controller
         $product = $request->validate([
             'name' => 'required|string|unique:products',
             'desc' => 'required|string',
-            'price' => 'required|string',
-            'quantity' => 'required|string',
             'fileUpload' => 'required|image',
             'fileUpload1' => 'required|image',
             'fileUpload2' => 'required|image',
@@ -65,6 +63,7 @@ class ProductController extends Controller
         //dd($product);
 
         $product = Product::create($product);
+        session()->flash('success', 'Thêm thành công!');
         return redirect()->route('admin.products.index');
     }
 
@@ -110,12 +109,6 @@ class ProductController extends Controller
                'nullable'
             ],
             'desc' => [
-                'required'
-            ],
-            'price' => [
-                'required'
-            ],
-            'quantity' => [
                 'required'
             ],
             'brand_id' => [

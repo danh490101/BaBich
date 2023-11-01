@@ -341,10 +341,8 @@
         // Xử lý sự kiện khi nút "Yêu thích" được nhấn
         $('.favorite-button').click(function(e) {
             e.preventDefault(); // Ngăn chặn mặc định hành vi điều hướng
-
             var button = $(this);
             var productId = button.data('product-id');
-
             // Gửi yêu cầu AJAX
             $.ajax({
                 type: 'POST', // Sử dụng phương thức POST

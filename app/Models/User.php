@@ -54,4 +54,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Product::class, 'user_favorite_products', 'user_id', 'product_id')
             ->withTimestamps();
     }
+    public function warehouseReceipts(){
+        return $this->hasMany(WarehouseReceipt::class);
+    }
 }
