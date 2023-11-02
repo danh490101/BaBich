@@ -18,4 +18,8 @@ class WarehouseReceipt extends Model
     public function user(){
         return $this->belongsTo(User::class,'user_id','id');
     }
+    public function warehouseDetails()
+    {
+        return $this->hasMany(WarehouseDetail::class);
+    }
 }

@@ -35,6 +35,8 @@
                                 <th scope="col" class="sort" data-sort="name">Tên nhà cung cấp</th>
                                 <th scope="col" class="sort" data-sort="name">Nhân viên xử lý</th>
                                 <th scope="col" class="sort" data-sort="name">Ngày nhập</th>
+                                <th scope="col" class="sort" data-sort="name">Sản phẩm</th>
+                                <th scope="col" class="sort" data-sort="name">Số lượng</th>
                                 <th scope="col" class="sort" data-sort="name">Tổng đơn</th>
                                 <th scope="col"></th>
                             </tr>
@@ -56,7 +58,7 @@
                                 </td>
                                 <td>
                                     <span>
-                                    {{$warehouse->user()->first()->name}}
+                                        {{$warehouse->user()->first()->name}}
                                     </span>
                                 </td>
                                 <td>
@@ -65,8 +67,20 @@
                                     </span>
                                 </td>
                                 <td>
+                                    @foreach($warehouse->warehouseDetails()->get() as $item)
+                                            <span>
+                                                {{$item->product()->first()->name}}
+                                            </span>
+                                    @endforeach
+                                </td>
+                                <td>
                                     <span>
-                                    {{number_format($warehouse->total_warehouse,0, ',','.')}}
+                                        {{$warehouse->warehouseDetails()->first()->quantity}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>
+                                        {{number_format($warehouse->total_warehouse,0, ',','.')}}
                                     </span>
                                 </td>
                                 <td class="text-right">

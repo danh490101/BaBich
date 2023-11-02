@@ -149,11 +149,13 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'Không tìm thấy sản phẩm.');
         }
         if ($user->favoriteProducts->contains($product)) {
-            return redirect()->back()->with('info', 'Sản phẩm đã có trong danh sách yêu thích.');
+            $user->favoriteProducts()->detach($product);
+            return redirect()->back()->with('error', 'Sản phẩm đã xóa trong danh sách yêu thích.');
         }
         try {
             DB::beginTransaction();
             $user->favoriteProducts()->attach($product);
+
             DB::commit();
             return redirect()->back()->with('success', 'Đã thêm sản phẩm vào danh sách yêu thích.');
         } catch (\Exception $e) {

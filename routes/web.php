@@ -70,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/checkout', CheckoutController::class);
         Route::resource('/user-profile', UsProfileController::class);
         // Route::resource('/order-history', OrderHistoryController::class);
-        // Route::get('/order-history/{id}', [OrderHistoryController::class,'destroy'])->name('order-history.destroy');
+        Route::delete('/order-history/cancel/{id}', [OrderHistoryController::class,'destroy'])->name('order-history.destroy');
         Route::get('/order-history/{status}', [OrderHistoryController::class,'findOrderStatus'])->name('order-history');
         Route::get('/add-to-favorites/{productId}', [App\Http\Controllers\User\ProductController::class, 'addToFavorites'])->name('add_to_favorites');
         Route::get('/favorite', [App\Http\Controllers\User\ProductController::class, 'favorites'])->name('favorites');

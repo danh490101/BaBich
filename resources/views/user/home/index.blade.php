@@ -53,7 +53,6 @@
             </div>
         </div>
     </section>
-
     <section class="ftco-section ftco-no-pb">
         <div class="container">
             <div class="row">
@@ -87,7 +86,7 @@
                             <div class="desc">
                                 <p class="meta-prod d-flex">
                                     <a href="{{route('add_to_cart',['id' => $product['item']->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                    <a href="{{ route('user.add_to_favorites', ['productId' => $product['item']->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
+                                    <a href="{{ route('user.add_to_favorites', ['productId' => $product['item']->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart favorite-icon"></span></a>
                                     <a href="{{ route('user.product-details', ['product' => $product['item']->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
                                 </p>
                             </div>
@@ -154,7 +153,6 @@
                 <div class="col-md-7 heading-section text-center ftco-animate">
                     <!-- <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span> -->
                     <h2>Sản Phẩm {{ $mappingCates[$index] ?? '-' }}</h2>
-
                 </div>
             </div>
             <div class="row">
@@ -212,7 +210,6 @@
                 @foreach($group as $product)
                 <div class="col-md-3 d-flex ">
                     <div class="product ftco-animate shadow">
-
                         <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
                             <div class="desc">
                                 <p class="meta-prod d-flex">
@@ -335,7 +332,17 @@
     </section>
 </div>
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
+    $(document).ready(function() {
+        $(".favorite-icon").hover(function() {
+            $(".favorite-icon").css("color", "red");
+        },
+        function() {
+            $(".favorite-icon").css("color", "white");
+        }); 
+    });
     // Chờ tài liệu tải xong
     $(document).ready(function() {
         // Xử lý sự kiện khi nút "Yêu thích" được nhấn

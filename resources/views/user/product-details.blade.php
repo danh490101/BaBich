@@ -250,6 +250,29 @@
             </div>
         </div>
     </div>
+    <div class="row ">
+                @foreach($pdcate as $product)
+                <div class="col-md-3 d-flex ">
+                    <div class="product ftco-animate shadow">
+                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
+                            <div class="desc">
+                                <p class="meta-prod d-flex">
+                                    <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
+                                    <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
+                                    <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="text text-center">
+                            <!-- <span class="sale">Sale</span> -->
+                            <span class="category">{{$product->category->name}}</span>
+                            <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
+                            <p class="mb-0 "><span class="price">{{number_format($product->price,0, ',','.')}}</span></p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
     </div>
 </section>
 

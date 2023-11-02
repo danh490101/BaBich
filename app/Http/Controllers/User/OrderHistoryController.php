@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\OrderDetails;
 use App\Models\Skin;
 use App\Models\User;
 use Auth;
@@ -95,6 +96,7 @@ class OrderHistoryController extends Controller
     {
         //
         $order = Order::findOrFail($id);
+        $oddetail = OrderDetails::where('order_id',$id)->delete();
         $order->delete();
         session()->flash('success', 'Xóa thành công!');
         return redirect()->back();

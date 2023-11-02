@@ -65,6 +65,13 @@
                         @endforeach
                     </div>
                     <hr class="my-4" />
+                    <form action="{{ route('user.order-history.destroy', ['id' => $order->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <p>
+                        <button type="submit" class="btn btn-primary ">Hủy đơn hàng</button>
+                    </p>
+                    </form>
                     <h3 class="mt-1 d-flex justify-content-end"><strong>Tổng tiền: {{ number_format($order->totalamount, 0, ',', '.') }} VNĐ</strong></h3>
                 </div>
             </div>
