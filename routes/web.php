@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\OrderDetailsController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\FeedbackController;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\LocationController;
 use App\Http\Controllers\User\OrderHistoryController;
 use App\Http\Controllers\User\ProductController as UserProductController;
 use App\Http\Controllers\User\ProductDetailsController;
@@ -25,7 +26,6 @@ use App\Http\Controllers\Admin\WarehousReceiptController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\User\UsProfileController;
-use App\Models\WarehouseReceipt;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +60,12 @@ Route::post('/user/home/search', [SearchController::class, 'getSearch'])->name('
 Route::get('add-to-cart/{id}', [UserProductController::class, 'addToCart'])->name('add-to-cart');
 // Route::get('/shop/{categoryId}', 'ProductController@showByCategory')->name('user.shop');
 
+Route::prefix('locations')->namespace('Locations')->name('locations.')->group(function () {
+    Route::post('/get-district-by-province', [LocationController::class, 'getDistrict'])->name('get-district');
+    Route::post('/get-ward-by-district', [LocationController::class, 'getWard'])->name('get-ward');
+});
+
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -68,6 +74,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dasboard', UserDashboardComponent::class)->name('user.dasboard');
         Route::resource('/feedback', FeedbackController::class);
         Route::resource('/checkout', CheckoutController::class);
+        Route::get('/delivery-fee/{id}', [CheckoutController::class, 'deliveryFee'])->name('delivery-fee');
         Route::resource('/user-profile', UsProfileController::class);
         // Route::resource('/order-history', OrderHistoryController::class);
         Route::delete('/order-history/cancel/{id}', [OrderHistoryController::class,'destroy'])->name('order-history.destroy');

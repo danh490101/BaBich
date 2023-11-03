@@ -29,8 +29,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            <!-- <div class="w-100"></div>
-                            <div class="w-100"></div> -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="address">Địa chỉ</label>
@@ -40,7 +38,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="w-100"></div>
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="phone">Số điện thoại</label>
@@ -49,10 +47,62 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="province">Tỉnh</label>
+                                    <select class="form-control" id="province-dropdown">
+                                        <option value="">Chọn tỉnh</option>                                        
+                                        @if(Auth()->user()->ward_id != NULL)
+                                            <option value="  {{ Auth()->user()->ward()->first()->district()->first()->province()->first()->id }}" selected>
+                                                {{ Auth()->user()->ward()->first()->district()->first()->province()->first()->name }}
+                                            </option>
+                                        @endif
+                                            @foreach($provinces as $province)
+                                                <option value="  {{ $province->id }}">
+                                                    {{ $province->name}}
+                                                </option>
+                                            @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="text" name="email" class="form-control" placeholder="" value="{{$user->email}}">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="district">Quận/Huyện</label>
+                                    @if(Auth()->user()->ward_id != NULL)
+                                    <select class="form-control" id="district-dropdown">
+                                        <option value="  {{ Auth()->user()->ward()->first()->district()->first()->id }}">
+                                            {{ Auth()->user()->ward()->first()->district()->first()->name }}
+                                        </option>
+                                    </select>
+                                    @else
+                                    <select class="form-control" id="district-dropdown">
+                                    </select>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="ward">Xã/Phường</label>
+                                    @if (Auth()->user()->ward_id != null)
+                                    <select class="form-control" id="ward-dropdown" name="ward_id">
+                                        <option value="{{ Auth()->user()->ward_id }}">
+                                            {{ Auth()->user()->ward->name }}
+                                        </option>
+                                    </select>
+                                    @else
+                                    <select class="form-control" id="ward-dropdown" name="ward_id">
+                                    </select>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="w-100"></div>
+
                             <div class="w-100"></div>
                         </div>
                         <div class="row mt-5 pt-3 d-flex">
@@ -65,8 +115,8 @@
                                     </p>
                                     <p class="d-flex">
                                         <span>Delivery</span>
-                                        <input type="text" name="delivery_cost" class="form-control" placeholder="" value="{{ number_format(round($cart['totalPrice']*0.05)) }}" hidden>
-                                        <span>{{ number_format(round($cart['totalPrice']*0.05)) }}</span>
+                                        <input id="delivery-fee" type="hidden" name="delivery_cost" class="form-control" placeholder="" value="{{ 00 }}" >
+                                        <span id="delivery-fee-span">{{ 00 }}</span>
                                     </p>
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -82,8 +132,8 @@
                                     <hr>
                                     <p class="d-flex total-price">
                                         <span>Total</span>
-                                        <input type="hidden" name="totalamount" id="total_order_input" class="form-control" placeholder="" value="{{ round($cart['totalPrice']*0.05 + $cart['totalPrice']) }}">
-                                        <span id="total_order_span">{{ number_format(round($cart['totalPrice']*0.05 + $cart['totalPrice'])) }}</span>
+                                        <input type="hidden" name="totalamount" id="total_order_input" class="form-control" placeholder="" value="{{ round( $cart['totalPrice']) }}">
+                                        <span id="total_order_span">{{ number_format( $cart['totalPrice']) }}</span>
                                     </p>
                                 </div>
                             </div>
@@ -139,17 +189,110 @@
                 url: '/api/find-discount/' + discountCode,
                 type: 'GET',
                 success: function(data) {
-                    console.log(data);   
+                    console.log(data);
                     let total = $('#total_order_input').val() - ($('#total_order_input').val() * data.value / 100)
                     console.log(total);
                     $('#total_order_input').val(total);
                     $('#total_order_span').text(total);
                 },
                 error: function(xhr, status, error) {
-                    console.log(xhr);   
+                    console.log(xhr);
                 }
             });
         });
     });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript">
+</script>
+<script>
+    $(document).ready(function() {
+        $('#province-dropdown').on('change', function() {
+            var province_id = this.value;
+
+            $.ajax({
+                url: '/user/delivery-fee/' + province_id,
+                type: 'GET',
+                success: function(data) {
+                    console.log(data);
+                    $('#delivery-fee').val(data);
+                    $('#delivery-fee-span').text(data);
+                    let total = BigInt($('#total_order_input').val()) + BigInt(data);
+                    $('#total_order_input').val(total);
+                    $('#total_order_span').text(total);
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr);
+                }
+            });
+
+            $("#district-dropdown").html('');
+            $.ajax({
+                url: "{{ route('locations.get-district') }}",
+                type: "POST",
+                data: {
+                    province_id: province_id,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $('#district-dropdown').html(
+                        '<option value="">Chọn quận/huyện</option>'
+                    );
+                    $.each(result.districts, function(
+                        key, value) {
+                        $("#district-dropdown")
+                            .append(
+                                '<option value="' +
+                                value
+                                .id +
+                                '">' + value
+                                .name +
+                                '</option>');
+                    });
+                    $('#ward-dropdown').html(
+                        '<option value="">Chọn phường xã </option>'
+                    );
+                }
+            });
+        });
+
+        $('#district-dropdown').on('change', function() {
+            var district_id = this.value;
+            $("#ward-dropdown").html('');
+            $.ajax({
+                url: "{{ route('locations.get-ward') }}",
+                type: "POST",
+                data: {
+                    district_id: district_id,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $('#ward-dropdown').html(
+                        '<option value="">Chọn phường/xã</option>'
+                    );
+                    $.each(result.wards, function(key,
+                        value) {
+                        $("#ward-dropdown")
+                            .append(
+                                '<option value="' +
+                                value.id +
+                                '">' + value
+                                .name +
+                                '</option>');
+                    });
+                }
+            });
+        });
+
+    });
+</script>
+<script>
+    imgInp.onchange = evt => {
+        const [file] = imgInp.files
+        if (file) {
+            preview.src = URL.createObjectURL(file)
+        }
+    }
 </script>
 @endsection

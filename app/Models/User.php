@@ -26,6 +26,7 @@ class User extends Authenticatable
         'phone',
         'provider_id',
         'auth_type',
+        'ward_id',
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -56,5 +57,9 @@ class User extends Authenticatable
     }
     public function warehouseReceipts(){
         return $this->hasMany(WarehouseReceipt::class);
+    }
+    public function ward()
+    {
+        return $this->belongsTo(Ward::class, 'ward_id','id');
     }
 }

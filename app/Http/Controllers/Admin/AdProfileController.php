@@ -12,6 +12,7 @@ class AdProfileController extends Controller
      * Display a listing of the resource.
      *
      */
+    public const PREFIX_IMAGE_URL = 'public/storage/img/brands/';
     public function index()
     {
         return  view('admin.profile.index');
@@ -70,8 +71,17 @@ class AdProfileController extends Controller
             ],
             'address' => [
                 'required'
+            ],
+            'fileUpload' => [
+                'nullable',
+                'image'
             ]
+
         ]);
+        if ($request->file('fileUpload')) {
+            $imageUrl = substr($request->file('fileUpload')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
+            $user['avatar'] = $imageUrl;
+        }
         $user->update($userUpdate);
         return redirect()->route('admin.profile.edit', $id)->with('success', 'Cập nhật thành công!');
     }

@@ -12,7 +12,6 @@
             </div>
         </div>
     </section>
-
     <section class="ftco-section">
         <div class="container">
             <div class="row">
@@ -69,22 +68,12 @@
                 <div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate">
                     <div class="cart-total mb-3">
                         <h3>Cart Totals</h3>
-                        <p class="d-flex">
-                            <span>Subtotal</span>
-                            <span>{{ number_format($cart['totalPrice']) }}</span>
-                        </p>
-                        <p class="d-flex">
-                            <span>Delivery</span>
-                            <span>{{ number_format(round($cart['totalPrice']*0.05)) }}</span>
-                        </p>
-                        <p class="d-flex">
-                            <span>Discount</span>
-                            <span>00</span>
-                        </p>
                         <hr>
                         <p class="d-flex total-price">
                             <span>Total</span>
-                            <span>{{ number_format(round($cart['totalPrice']*0.05 + $cart['totalPrice'])) }}</span>
+                            <span>
+                            {{number_format($cart['totalPrice'],0, ',','.')}}
+                            </span>
                         </p>
                     </div>
                     <p class="text-center"><a href="{{route('user.checkout.index')}}" class="btn btn-primary py-3 px-4">Đặt hàng</a></p>

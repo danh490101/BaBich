@@ -12,6 +12,7 @@ use App\Models\Product;
 use App\Models\Skin;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +36,8 @@ class CheckoutController extends Controller
         unset($cart['totalAmount']);
         $user_id = $request->user()->id;
         $user = User::findOrFail($user_id);
-        return view('user.checkout', compact('cart', 'user', 'categories', 'skins', 'brands'));
+        $provinces = Province::orderBy('name','asc')->get();
+        return view('user.checkout', compact('cart', 'user', 'categories', 'skins', 'brands','provinces'));
     }
 
     public function store(Request $request)
@@ -47,6 +49,7 @@ class CheckoutController extends Controller
             'email' => 'required',
             'totalamount' => 'required',
             'delivery_cost' => 'required',
+            'ward_id'=>'required',
             'payment_method' => ' required|in:COD,VNPAY'
         ]);
 
@@ -58,6 +61,7 @@ class CheckoutController extends Controller
             'totalamount' => (float) $validatedData['totalamount'],
             'delivery_cost' => (float) $validatedData['delivery_cost'],
             'payment_method' => $validatedData['payment_method'],
+            'ward_id' => $validatedData['ward_id'],
             'user_id' => Auth::id(),
         ]);
         //get discount by code
@@ -220,5 +224,10 @@ class CheckoutController extends Controller
         return Discount::where(array(
             'code' => $code,
         ))->where('expire_day' ,'>','0')->first();
+    }
+
+    public function deliveryFee($id){
+        $province = Province::find($id);
+        return $province->deliveryFee()->first()->price;
     }
 }
