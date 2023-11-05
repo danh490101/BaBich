@@ -18,7 +18,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col-11">
-                            <h3 class="mb-0">Information Details</h3></h3>
+                            <h3 class="mb-0">Chi tiết thông tin giảm giá</h3></h3>
                         </div>
                         <div class="col-1">
                             <span class="ni ni-bell-55" data-toggle="tooltip" data-placement="left" title="Mã sản phẩm sẽ được tạo tự động"></span>
@@ -80,7 +80,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="form-control-label" for="product_ids">Choose products</label>
+                                            <label class="form-control-label" for="product_ids">Sản phẩm</label>
                                             <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
 
                                             <select id="product_ids" class="form-control form-select mt-3" name="product_ids[]">

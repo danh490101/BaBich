@@ -210,7 +210,7 @@
                 @foreach($group as $product)
                 <div class="col-md-3 d-flex ">
                     <div class="product ftco-animate shadow">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
+                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset($product->image)}});">
                             <div class="desc">
                                 <p class="meta-prod d-flex">
                                     <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>

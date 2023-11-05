@@ -31,7 +31,7 @@
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col" class="sort" data-sort="name">Mã nhập hàng</th>
+                                <th scope="col" class="sort" data-sort="name">Mã</th>
                                 <th scope="col" class="sort" data-sort="name">Tên nhà cung cấp</th>
                                 <th scope="col" class="sort" data-sort="name">Nhân viên xử lý</th>
                                 <th scope="col" class="sort" data-sort="name">Ngày nhập</th>
@@ -63,13 +63,13 @@
                                 </td>
                                 <td>
                                     <span>
-                                        {{$warehouse->created_at}}
+                                        {{$warehouse->created_at->format('d-m-Y')}}
                                     </span>
                                 </td>
                                 <td>
                                     @foreach($warehouse->warehouseDetails()->get() as $item)
                                             <span>
-                                                {{$item->product()->first()->name}}
+                                                {{ Illuminate\Support\Str::limit($item->product()->first()->name, 20) }}
                                             </span>
                                     @endforeach
                                 </td>

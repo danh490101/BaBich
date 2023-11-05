@@ -59,7 +59,7 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                             <a class="dropdown-item" href="{{ route('admin.brands.edit', ['brand' => $brand->id]) }}">Xem & chỉnh sửa</a>
-                                            
+
 
                                             <form action="{{ route('admin.brands.destroy', ['brand' => $brand->id]) }}" method="POST">
                                                 @csrf
@@ -82,6 +82,13 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="card-footer py-4 page-link">
+                        <nav aria-label="...">
+                            <ul class="pagination justify-content-start">
+                                {{$brands->links()}}
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>

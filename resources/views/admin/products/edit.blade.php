@@ -108,7 +108,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">Ảnh minh họa</label>
                                             <span style="display: block;">
-                                                <img src="{{ asset('storage/'.$product->image) }}" width="70px" height="auto" />
+                                                <img src="{{ asset($product->image) }}" width="70px" height="auto" />
                                             </span>
                                             <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
                                             <div class="custom-file">
@@ -124,7 +124,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">Ảnh minh họa</label>
                                             <span style="display: block;">
-                                                <img src="{{ asset('storage/'.$product->images) }}" width="70px" height="auto" />
+                                                <img src="{{ asset($product->images) }}" width="70px" height="auto" />
                                             </span>
                                             <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
                                             <div class="custom-file">
@@ -140,7 +140,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">Ảnh minh họa</label>
                                             <span style="display: block;">
-                                                <img src="{{ asset('storage/'.$product->image2) }}" width="70px" height="auto" />
+                                                <img src="{{ asset($product->image2) }}" width="70px" height="auto" />
                                             </span>
                                             <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
                                             <div class="custom-file">

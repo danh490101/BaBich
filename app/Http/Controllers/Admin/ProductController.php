@@ -8,10 +8,11 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Skin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public const PREFIX_IMAGE_URL = 'public/storage/image/products';
+    public const PREFIX_IMAGE_URL = 'public/image/products';
 
     /**
      * Display a listing of the resource.
@@ -20,7 +21,6 @@ class ProductController extends Controller
     {
         $products = Product::all();
         return view('admin.products.index', compact('products'), ['products' => $products]);
-
     }
 
     /**
@@ -52,16 +52,19 @@ class ProductController extends Controller
             'category_id' => 'numeric|required|min:1',
             'skin_id' => 'numeric|required|min:1'
         ]);
-        $imageUrl = substr($request->file('fileUpload')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
+        $imageUrl = $request->file('fileUpload')->store(self::PREFIX_IMAGE_URL);
+        $imageUrl = Storage::url($imageUrl);
         $product['image'] = $imageUrl;
 
-        $imageUrl1 = substr($request->file('fileUpload1')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
+        $imageUrl1 = $request->file('fileUpload1')->store(self::PREFIX_IMAGE_URL);
+        $imageUrl1 = Storage::url($imageUrl1);
         $product['images'] = $imageUrl1;
 
-        $imageUrl2 = substr($request->file('fileUpload2')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
+        $imageUrl2 = $request->file('fileUpload2')->store(self::PREFIX_IMAGE_URL);
+        $imageUrl2 = Storage::url($imageUrl2);
         $product['image2'] = $imageUrl2;
-        //dd($product);
 
+        //dd($product);
         $product = Product::create($product);
         session()->flash('success', 'Thêm thành công!');
         return redirect()->route('admin.products.index');
@@ -106,7 +109,7 @@ class ProductController extends Controller
         // dd($product);
         $productUpdate = $request->validate([
             'name' => [
-               'nullable'
+                'nullable'
             ],
             'desc' => [
                 'required'
@@ -117,7 +120,8 @@ class ProductController extends Controller
             'category_id' => [
                 'required'
             ],
-            'skin_id' => ['required'
+            'skin_id' => [
+                'required'
             ],
             'fileUpload' => [
                 'nullable',
@@ -135,16 +139,19 @@ class ProductController extends Controller
         ]);
 
         if ($request->file('fileUpload')) {
-            $imageUrl = substr($request->file('fileUpload')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
+            $imageUrl = $request->file('fileUpload')->store(self::PREFIX_IMAGE_URL);
+            $imageUrl = Storage::url($imageUrl);
             $product['image'] = $imageUrl;
         }
         if ($request->file('fileUpload1')) {
-            $imageUrl = substr($request->file('fileUpload1')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
-            $product['images'] = $imageUrl;
+            $imageUrl1 = $request->file('fileUpload1')->store(self::PREFIX_IMAGE_URL);
+            $imageUrl1 = Storage::url($imageUrl1);
+            $product['images'] = $imageUrl1;
         }
         if ($request->file('fileUpload2')) {
-            $imageUrl = substr($request->file('fileUpload2')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
-            $product['image2'] = $imageUrl;
+            $imageUrl2 = $request->file('fileUpload2')->store(self::PREFIX_IMAGE_URL);
+            $imageUrl2 = Storage::url($imageUrl2);
+            $product['image2'] = $imageUrl2;
         }
         $product->update($productUpdate);
 

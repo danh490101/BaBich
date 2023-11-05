@@ -46,7 +46,7 @@
                                     <span class="status">{{$order->totalamount}}</span>
                                 </td>
                                 <td>
-                                    <span class="status">{{$order -> order_date}}</span>
+                                    <span class="status">{{$order -> created_at->format('d-m-Y')}}</span>
                                 </td>
                                 <td>
                                     <span class="status">{{$order -> delivery_date}}</span>

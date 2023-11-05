@@ -45,7 +45,7 @@
                         <span class="status">{{$order->totalamount}}</span>
                     </td>
                     <td>
-                        <span class="status">{{$order -> created_at}}</span>
+                        <span class="status">{{$order -> created_at->format('d-m-Y')}}</span>
                     </td>
                     <td class="text-right">
                       <div class="dropdown">
