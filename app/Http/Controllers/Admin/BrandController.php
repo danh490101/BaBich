@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class BrandController extends Controller
 {
-    public const PREFIX_IMAGE_URL = 'public/storage/img/brands/';
+    public const PREFIX_IMAGE_URL = 'public/image/brands';
     /**
      * Display a listing of the resource.
      *
@@ -47,7 +48,8 @@ class BrandController extends Controller
 
         ]);
         if ($request->file('fileUpload')) {
-            $imageUrl = substr($request->file('fileUpload')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
+            $imageUrl = $request->file('fileUpload')->store(self::PREFIX_IMAGE_URL);
+            $imageUrl = Storage::url($imageUrl);
             $brand['image'] = $imageUrl;
         }
 
@@ -102,7 +104,8 @@ class BrandController extends Controller
         ]);
 
         if ($request->file('fileUpload')) {
-            $imageUrl = substr($request->file('fileUpload')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
+            $imageUrl = $request->file('fileUpload')->store(self::PREFIX_IMAGE_URL);
+            $imageUrl = Storage::url($imageUrl);
             $brand['image'] = $imageUrl;
         }
         $brand->update($brandUpdate);

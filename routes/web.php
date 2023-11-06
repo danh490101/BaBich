@@ -106,6 +106,7 @@ Route::middleware(['auth', 'authadmin'])->group(function () {
         Route::resource('/order_details', OrderDetailsController::class);
         Route::resource('/warehouse-receipt', WarehousReceiptController::class);
         Route::resource('/feedback', AdFeedbackController::class);
+        Route::post('/admin/orders/search', [OrderController::class, 'getSearchOrder'])->name('orders.search');
         Route::get('/feedback/change-status/{feedback}', [AdFeedbackController::class, 'changeStatus'])->name('feedback.changeStatus');
         Route::resource('/statistical', StatisticalController::class);
         Route::post('/statistical/search', [StatisticalController::class, 'search'])->name('statistical.search');
@@ -113,6 +114,7 @@ Route::middleware(['auth', 'authadmin'])->group(function () {
             Route::get('/', [DiscountController::class,'index'])->name('list');
             Route::get('/add-new', [DiscountController::class,'showFormAddDiscount'])->name('new-discount-form');
             Route::post('/add-new', [DiscountController::class,'addDiscountCode'])->name('handle-new-discount');
+            Route::delete('/destroy/{id}', [DiscountController::class,'destroyDiscountCode'])->name('destroy');
         });
         // Route::get('/statistical',[StatisticalController::class,'getQuantityOrder'])->name('statistical.getQuantityOrder');
     });
@@ -126,5 +128,7 @@ Route::middleware(['auth', 'authadmin'])->group(function () {
 Route::get('auth/{provider}/redirect', [SocialiteController::class, 'redirect'])->name('socialite.redirect');
 Route::get('auth/{provider}/callback', [SocialiteController::class, 'callback'])->name('socialite.callback');
 Route::get('payments/vnpay/callback', [CheckoutController::class, 'paymentCallback'])->name('vnpay.payment-callback')->middleware('auth');
+
+Route::get('checkExpiredDay', [DiscountController::class,'updateStatus'])->name('discount.updateStatus');
 
 require __DIR__ . '/auth.php';

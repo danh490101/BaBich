@@ -32,12 +32,11 @@
                         <th scope="col">Số Lượng Còn Lại</th>
                     </tr>
                 </thead>
-
                 <tbody>
                     @foreach ($topSellingProducts as $key => $product)
                     <tr>
                         <th scope="row">{{ $key + 1 }}</th>
-                        <td>{{ $product->name }}</td>
+                        <td>{{ Illuminate\Support\Str::limit($product->name, 25)}}</td>
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->quantity }}</td>
                     </tr>

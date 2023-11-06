@@ -1,5 +1,7 @@
 <?php
 
+use App\Console\Commands\UpdateDiscountStatus;
+use App\Http\Controllers\DiscountController;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 

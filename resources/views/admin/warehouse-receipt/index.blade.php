@@ -89,8 +89,8 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="">Xem & chỉnh sửa</a>
-                                            <form action="" method="POST">
+                                            <a class="dropdown-item" href="{{ route('admin.warehouse-receipt.edit', ['warehouse_receipt' => $warehouse->id])}}">Xem & chỉnh sửa</a>
+                                            <form action="{{ route('admin.warehouse-receipt.destroy', ['warehouse_receipt' => $warehouse->id]) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="dropdown-item" type="submit">Xóa</button>

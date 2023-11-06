@@ -21,9 +21,9 @@ class ProductSeeder extends Seeder
             array(
                 'id' => 1,
                 'name' => 'Sữa Chống Nắng Anessa Dưỡng Da Kiềm Dầu 60ml',
-                'category_id' => '123',
-                'brand_id' => '16',
-                'Skin_id' => '123',
+                // 'category_id' => 123,
+                // 'brand_id' => 16,
+                // 'Skin_id' => 123,
                 'desc' => 'Sữa Chống Nắng Anessa Dưỡng Da Kiềm Dầu Bảo Vệ Hoàn Hảo là sản phẩm chống nắng đến từ thương hiệu chống nắng dưỡng da ANESSA hàng đầu Nhật Bản suốt 21 năm liên tiếp, giúp chống lại tác hại của tia UV & bụi mịn tối ưu dưới mọi điều kiện sinh hoạt, kể cả thời tiết khắc nghiệt nhất. Sản phẩm đặc biệt phù hợp với làn da thiên dầu.
                     Anessa Perfect UV Sunscreen Skincare Milk N SPF50+ PA++++ ứng dụng công nghệ Auto Booster và Very Water Resistant độc quyền từ thương hiệu ANESSA, giúp cho lớp màng chống UV trở nên bền vững hơn khi gặp NHIỆT ĐỘ CAO - ĐỘ ẨM - MỒ HÔI - NƯỚC - MA SÁT, đồng thời chống trôi trong nước lên đến 80 phút, chống bụi mịn PM.25 và chống dính cát. Ngoài ra, sự bổ sung của phức hợp 50% thành phần dưỡng da giúp ngăn ngừa lão hoá do tia UV hiệu quả và nuôi dưỡng da ẩm mịn.
                     Sữa Chống Nắng Anessa Perfect UV Sunscreen Skincare Milk N SPF50+ PA++++ 60ml hiện đã có mặt tại BaBich.',
@@ -35,9 +35,9 @@ class ProductSeeder extends Seeder
             array(
                 'id' => 2,
                 'name' => 'Kem Chống Nắng Cocoon Bí Đao Quang Phổ Rộng 50ml',
-                'category_id' => '123',
-                'brand_id' => '2',
-                'skin_id' => '791',
+                // 'category_id' => 123,
+                // 'brand_id' => 2,
+                // 'skin_id' => 791,
                 'desc' => 'em Chống Nắng Cocoon Bí Đao Quang Phổ Rộng 50ml là sản phẩm chống nắng da mặt đến từ thương hiệu mỹ phẩm Cocoon của Việt Nam, với công thức đột phá kết hợp các màng lọc thế hệ mới, chiết xuất bí đao và các thành phần chống oxi hoá, kem chống nắng bí đao mang lại khả năng bảo vệ phổ rộng chống lại bức xạ UVA và UVB là nguyên nhân gây ra tác hại lên da như bỏng rát, cháy nắng, kích ứng, lão hoá và tổn thương tế bào da. Cocoon Winter Melon Suncreen với khả năng bảo vệ rất cao SPF 50+, PA ++++ và hỗ trợ làm giảm độ bóng nhờn trên da hiệu quả.
                     Loại da phù hợp: 
 Da dầu mụn
@@ -89,9 +89,9 @@ Parsol 1789 (Avobenzone - Butyl Methoxydibenzoylmethane) được xem là màng 
             array(
                 'id' => 3,
                 'name' => 'Tẩy Tế Bào Chết Da Mặt Cocoon Cà Phê Đắk Lắk 150ml',
-                'category_id' => '341',
-                'brand_id' => '2',
-                'skin_id' => '791',
+                // 'category_id' => 341,
+                // 'brand_id' => 2,
+                // 'skin_id' => 791,
                 'desc' => 'Cà Phê Đắk Lắk làm sạch da chết mặt Dak Lak coffee face polish 150ml là dòng sản phẩm tẩy tế bào chết da mặt đến từ thương hiệu mỹ phẩm Cocoon Việt Nam. Thành phần được làm từ những hạt cà phê Đắk Lắk xay nhuyễn giàu cafeine hòa quyện với bơ cacao Tiền Giang giúp bạn loại bỏ lớp tế bào chết già cỗi và xỉn màu, đánh thức làn da tươi mới đầy năng lượng cùng cảm giác mượt mà và mềm mịn lan tỏa.
                 Với lợi thế Việt Nam là đất nước đứng thứ hai trên thế giới về xuất khẩu cà phê, thương hiệu Cocoon đã tận dụng nguồn nguyên liệu đặc hữu này để tạo ra sản phẩm làm sạch da chết từ hạt cà phê. Cocoon Dak Lak coffee face polish sử dụng hạt scrub từ cà phê được xay nhuyễn và sàng lọc theo tỉ lệ phù hợp, hoàn toàn không chứa hạt vi nhựa. Sản phẩm đảm bảo dễ dàng cuốn trôi những lớp da chết già cỗi nhưng không làm tổn thương đến làn da của bạn.
 
@@ -126,11 +126,11 @@ Tránh ánh nắng trực tiếp, nơi có nhiệt độ cao hoặc ẩm ướt.
             ),
             3 =>
             array(
-                'id' => 3,
+                'id' => 4,
                 'name' => 'Tẩy Tế Bào Chết Toàn Thân Cocoon Cà Phê Đắk Lắk 200ml',
-                'category_id' => '341',
-                'brand_id' => '2',
-                'skin_id' => '791',
+                // 'category_id' => 341,
+                // 'brand_id' => 2,
+                // 'skin_id' => 791,
                 'desc' => 'Tẩy Da Chết Toàn Thân Cocoon Cà Phê Đắk Lắk là dòng tẩy tế bào chết toàn thân từ thương hiệu mỹ phẩm Cocoon của Việt Nam là một trong những sản phẩm với thành phần tự nhiên có nguồn gốc trong nước như hạt cà phê Đắk Lắk nguyên chất xay nhuyễn, hòa quyện cùng bơ cacao Tiền Giang giúp loại bỏ tế bào chết hiệu quả, làm đều màu da, mang lại năng lượng, giúp da trở nên mềm mại và rạng rỡ giúp mang đến cho bạn sản phẩm thuần chay tốt nhất với niềm tự hào từ nguyên liệu thuần Việt.
                 Ưu thế nổi bật:
 Cà phê giúp da trở nên săn chắc đều màu, mang lại nguồn năng lượng cho làn da luôn mềm mại và rạng rỡ.
@@ -160,11 +160,11 @@ Tránh ánh nắng trực tiếp, nơi có nhiệt độ cao hoặc ẩm ướt.
             ),
             4 =>
             array(
-                'id' => 4,
+                'id' => 5,
                 'name' => 'Kem Chống Nắng La Roche-Posay Kiểm Soát Dầu SPF50+ 50ml',
-                'category_id' => '123',
-                'brand_id' => '3',
-                'skin_id' => '123',
+                // 'category_id' => 123,
+                // 'brand_id' => 3,
+                // 'skin_id' => 123,
                 'desc' => 'Kem chống nắng giúp bảo vệ da khỏi tia UVB & UVA dài và giảm bóng nhờn La Roche-Posay Anthelios UV Mune 400 Oil Control Gel-Cream 50ml là kem chống nắng dành cho da dầu phiên bản công thức cải tiến mới đến từ thương hiệu dược mỹ phẩm La Roche-Posay, giúp kiểm soát bóng nhờn và bảo vệ da trước tác hại từ ánh nắng & ô nhiễm, ngăn chặn các tác nhân gây lão hóa sớm. Sản phẩm có công thức chống thấm nước thích hợp dùng hằng ngày và cả những hoạt động ngoài trời.
 
                 Tia UVA dài được mệnh danh là kẻ thù nguy hiểm nhất với làn da, bởi bước sóng lên đến 380nm-400nm, làm tổn thương những tế bào sâu dưới da. Với cường độ mạnh vào mùa hè, tia UVA dài sẽ gây ra những tác hại lâu dài như thâm nám, lão hóa da.
@@ -223,11 +223,11 @@ Tránh ánh nắng trực tiếp.
             ),
             5 =>
             array(
-                'id' => 5,
+                'id' => 6,
                 'name' => 'Kem Dưỡng La Roche-Posay Giúp Phục Hồi Da Đa Công Dụng 40m',
-                'category_id' => '338',
-                'brand_id' => '3',
-                'skin_id' => '234',
+                // 'category_id' => 338,
+                // 'brand_id' => 3,
+                // 'skin_id' => 234,
                 'desc' => 'Kem dưỡng Cicaplast Baume B5+ Ultra-Repairing Soothing Balm mới từ thương hiệu dược mỹ phẩm La Roche-Posay được thiết kế chuyên biệt dành cho làn da khô, kích ứng và thương tổn, giúp phục hồi da sau 1H và bảo vệ hàng rào độ ẩm da với công nghệ cải tiến mới Tribioma và các hoạt chất phục hồi chuyên sâu.
                 Loại da phù hợp:
 Sản phẩm phù hợp cho da khô.
@@ -281,11 +281,11 @@ Tránh xa tầm tay trẻ em.
             ),
             6 =>
             array(
-                'id' => 6,
+                'id' => 7,
                 'name' => 'Nước Tẩy Trang La Roche-Posay Dành Cho Da Nhạy Cảm 400ml',
-                'category_id' => '321',
-                'brand_id' => '3',
-                'skin_id' => '789',
+                // 'category_id' => 321,
+                // 'brand_id' => 3,
+                // 'skin_id' => 789,
                 'desc' => 'Nước Tẩy Trang La Roche-Posay Micellar Water Ultra Sensitive Skin đến từ thương hiệu dược mỹ phẩm La Roche-Posay của Pháp là dòng sản phẩm tẩy trang dành cho da mặt, vùng mắt và môi, ứng dụng công nghệ Glyco Micellar giúp làm sạch sâu lớp trang điểm và bụi bẩn, bã nhờn trên da vượt trội mà vẫn êm dịu, không gây căng rát hay kích ứng da; đồng thời cung cấp độ ẩm, mang đến làn da mềm mại & thoáng nhẹ sau khi sử dụng.
                 Loại da phù hợp:
 Sản phẩm phù hợp cho da thường và da nhạy cảm.
@@ -331,11 +331,11 @@ Ngày sản xuất: Xem trên bao bì sản phẩm',
             ),
             7 =>
             array(
-                'id' => 7,
+                'id' => 8,
                 'name' => 'Gel Rửa Mặt La Roche-Posay Dành Cho Da Dầu, Nhạy Cảm 200ml',
-                'category_id' => '112',
-                'brand_id' => '3',
-                'skin_id' => '123',
+                // 'category_id' => 112,
+                // 'brand_id' => 3,
+                // 'skin_id' => 123,
                 'desc' => 'Gel Rửa Mặt La Roche-Posay Effaclar Purifying Foaming Gel For Oily Sensitive Skin là dòng sản phẩm sữa rửa mặt chuyên biệt dành cho làn da dầu, mụn, nhạy cảm đến từ thương hiệu dược mỹ phẩm La Roche-Posay nổi tiếng của Pháp, với kết cấu dạng gel tạo bọt nhẹ nhàng giúp loại bỏ bụi bẩn, tạp chất và bã nhờn dư thừa trên da hiệu quả, mang đến làn da sạch mịn, thoáng nhẹ và tươi mát. Công thức sản phẩm an toàn, lành tính, giảm thiểu tình trạng kích ứng đối với làn da nhạy cảm.
                 Giải pháp cho tình trạng da:
 Dầu thừa - lỗ chân lông to
@@ -373,11 +373,11 @@ Tránh xa tầm tay trẻ em.
             ),
             8 =>
             array(
-                'id' => 3,
+                'id' => 9,
                 'name' => 'Gel Rửa Mặt SVR Không Chứa Xà Phòng Cho Da Dầu 400ml',
-                'category_id' => '112',
-                'brand_id' => '15',
-                'skin_id' => '123',
+                // 'category_id' => 112,
+                // 'brand_id' => 15,
+                // 'skin_id' => 123,
                 'desc' => 'Gel Rửa Mặt SVR Sebiaclear Gel Moussant là sản phẩm sữa rửa mặt dành cho làn da dầu mụn đến từ thương hiệu dược mỹ phẩm SVR của Pháp, với công thức không chứa xà phòng giúp làm sạch, nhẹ nhàng làm thông thoáng làn da. Khả năng tạo bọt mịn giúp loại trừ các chất bẩn và lượng bã nhờn dư thừa mà không làm khô da. Có thể rửa sạch dễ dàng, mang lại một làn da sạch, tươi mát và khô thoáng.
                 Loại da phù hợp:
 Sản phẩm phù hợp với da hỗn hợp đến da dầu, da mụn nhạy cảm.
@@ -412,11 +412,11 @@ Không chứa xà phòng- Không chứa cồn- Không chứa chất tạo màu- 
             ),
             9 =>
             array(
-                'id' => 9,
+                'id' => 10,
                 'name' => 'Serum SVR Làm Giảm Mụn, Mờ Nám, Làm Mềm Mịn Da 30ml',
-                'category_id' => '337',
-                'brand_id' => '15',
-                'skin_id' => '123',
+                // 'category_id' => 337,
+                // 'brand_id' => 15,
+                // 'skin_id' => 123,
                 'desc' => 'Tinh Chất Làm Giảm Mụn, Mờ Nám, Làm Mềm Mịn Da SVR Sebiaclear Serum là dòng sản phẩm chăm sóc da hằng ngày mới ra mắt từ thương hiệu dược mỹ phẩm SVR (Pháp), được thiết kế dành cho làn da người trưởng thành dễ bị mụn trứng cá, giúp mang lại đa tác dụng cho da bao gồm: làm giảm các đốm mụn sưng viêm, mụn đầu đen; hỗ trợ se khít lỗ chân lông và giảm vết thâm rõ rệt; đồng thời giữ ẩm và làm mịn da.
                 Công thức SVR Sebiaclear Serum chứa nồng độ cao các hoạt chất da liễu tiên tiến giúp mang lại hiệu quả gấp ba: làm giảm mụn và khuyết điểm trên da, làm mờ vết thâm và nếp nhăn. SVR Sebiaclear Serum là sự kết hợp độc đáo giữa các phức hợp dưỡng da bao gồm:
 
@@ -465,11 +465,11 @@ Tránh ánh nắng trực tiếp, nơi có nhiệt độ cao hoặc ẩm ướt.
             ),
             10 =>
             array(
-                'id' => 10,
+                'id' => 11,
                 'name' => 'Gel Dưỡng SVR Giảm Mụn & Loại Bỏ Dầu Cho Da 40ml',
-                'category_id' => '338',
-                'brand_id' => '15',
-                'skin_id' => '123',
+                // 'category_id' => 338,
+                // 'brand_id' => 15,
+                // 'skin_id' => 123,
                 'desc' => 'Kem Dưỡng SVR SLàm Giảm Mụn & Giúp Loại Bỏ Dầu Cho Da 40ml là sản phẩm kem dưỡng chăm sóc da chuyên sâu của thương hiệu dược mỹ phẩm SVR, được điều chế để xử lý các vấn đề về da dầu và mụn. Công thức chứa các hoạt chất da liễu có nống độ cao nhằm mang lại hiệu quả rõ rệt với các khuyết điểm sau 7 ngày. Các đốm mụn và mụn đầu đen được giảm đáng kể, chất lượng da được cải thiện, giảm bóng nhờn và các vết đỏ/nâu được khắc phục.
                 Loại da phù hợp:
 Sản phẩm phù hợp cho da dầu, da mụn nhạy cảm.
@@ -512,11 +512,11 @@ Bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp ho�
             ),
             11 =>
             array(
-                'id' => 11,
+                'id' => 12,
                 'name' => 'Sữa Rửa Mặt CeraVe Sạch Sâu Cho Da Thường 88ml',
-                'category_id' => '112',
-                'brand_id' => '7',
-                'skin_id' => '791',
+                // 'category_id' => 112,
+                // 'brand_id' => 7,
+                // 'skin_id' => 791,
                 'desc' => 'Sữa Rửa Mặt Cerave Sạch Sâu là sản phẩm sữa rửa mặt đến từ thương hiệu mỹ phẩm Cerave của Mỹ, với sự kết hợp của ba Ceramides thiết yếu, Hyaluronic Acid sản phẩm giúp làm sạch và giữ ẩm cho làn da mà không ảnh hưởng đến hàng rào bảo vệ da mặt và cơ thể.
                 Sữa Rửa Mặt Cerave Foaming Cleanser kết cấu dạng gel tạo bọt rất lý tưởng để loại bỏ dầu thừa, bụi bẩn và lớp trang điểm với công thức nhẹ nhàng, không phá vỡ hàng rào bảo vệ tự nhiên của da và chứa các thành phần giúp duy trì độ ẩm cân bằng da. Cerave Foaming Cleanser chứa Ceramides, Axit Hyaluronic và Niacinamide giúp duy trì hàng rào bảo vệ da, khóa ẩm và làm dịu làn da của bạn.
                 Loại da phù hợp: 
@@ -540,11 +540,11 @@ Kết cấu dạng gel tạo bọt giúp làm sạch sâu, loại bỏ dầu th�
             ),
             12 =>
             array(
-                'id' => 12,
+                'id' => 13,
                 'name' => 'Kem Dưỡng CeraVe Cho Da Khô 454g',
-                'category_id' => '338',
-                'brand_id' => '7',
-                'skin_id' => '234',
+                // 'category_id' => 338,
+                // 'brand_id' => 7,
+                // 'skin_id' => 234,
                 'desc' => 'Kem Dưỡng Cerave Cho Da Khô là sản phẩm kem dưỡng đến từ thương hiệu mỹ phẩm Cerave của Mỹ, với 3 ceramide tự nhiên và Axit Hyaluronic, những chất cần thiết trong việc hỗ trợ hàng rào bảo vệ da và duy trì độ ẩm. Sử dụng công nghệ phân phối MVE đã được cấp bằng sáng chế để giúp bổ sung ceramides và cung cấp quá trình hydrat hóa lâu dài có kiểm soát, khoá ẩm cho làn da suốt cả ngày.
                 Loại da phù hợp: 
 Sản phẩm thích hợp cho da khô đến rất khô.
@@ -589,11 +589,11 @@ Tránh ánh nắng trực tiếp, nơi có nhiệt độ cao hoặc ẩm ướt.
             ),
             13 =>
             array(
-                'id' => 13,
+                'id' => 14,
                 'name' => 'Sữa Rửa Mặt CeraVe Cho Da Thường 473ml',
-                'category_id' => '112',
-                'brand_id' => '7',
-                'skin_id' => '791',
+                // 'category_id' => 112,
+                // 'brand_id' => 7,
+                // 'skin_id' => 791,
                 'desc' => 'Sữa Rửa Mặt Cerave Sạch Sâu là sản phẩm sữa rửa mặt đến từ thương hiệu mỹ phẩm Cerave của Mỹ, với sự kết hợp của ba Ceramides thiết yếu, Hyaluronic Acid sản phẩm giúp làm sạch và giữ ẩm cho làn da mà không ảnh hưởng đến hàng rào bảo vệ da mặt và cơ thể.
                 Sữa Rửa Mặt Cerave Foaming Cleanser kết cấu dạng gel tạo bọt rất lý tưởng để loại bỏ dầu thừa, bụi bẩn và lớp trang điểm với công thức nhẹ nhàng, không phá vỡ hàng rào bảo vệ tự nhiên của da và chứa các thành phần giúp duy trì độ ẩm cân bằng da. Cerave Foaming Cleanser chứa Ceramides, Axit Hyaluronic và Niacinamide giúp duy trì hàng rào bảo vệ da, khóa ẩm và làm dịu làn da của bạn.
                 Loại da phù hợp: 
@@ -617,11 +617,11 @@ Kết cấu dạng gel tạo bọt giúp làm sạch sâu, loại bỏ dầu th�
             ),
             14 =>
             array(
-                'id' => 14,
+                'id' => 15,
                 'name' => 'Nước Tẩy Trang Bioderma Dành Cho Da Nhạy Cảm 500ml',
-                'category_id' => '321',
-                'brand_id' => '6',
-                'skin_id' => '789',
+                // 'category_id' => 321,
+                // 'brand_id' => 6,
+                // 'skin_id' => 789,
                 'desc' => 'Nước Tẩy Trang Dành Cho Da Nhạy Cảm Bioderma Sensibio H2O là sản phẩm nước tẩy trang công nghệ Micellar đầu tiên trên thế giới, do thương hiệu dược mỹ phẩm Bioderma nổi tiếng của Pháp phát minh. Dung dịch giúp làm sạch sâu da và loại bỏ lớp trang điểm nhanh chóng mà không cần rửa lại bằng nước. Công thức dịu nhẹ, không kích ứng, không gây khô căng da, đặc biệt phù hợp với làn da nhạy cảm.
                 Da nhạy cảm đến da không dung nạp không thể thực hiện vai trò của mình như một hàng rào bảo vệ chống lại các tác nhân gây kích ứng. Lớp trang điểm, việc tẩy trang, sự ô nhiễm, các tác động từ bên ngoài khiến làn da bị yếu đi và trở nên khô căng ngày này qua ngày khác. Da nhạy cảm biểu hiện thông qua cảm giác nóng, khó chịu và mẩn đỏ lan rộng hoặc cục bộ. Da dễ bị mất nước và tình trạng da khô kéo dài sẽ tự động duy trì độ mỏng manh của làn da, dẫn đến cảm giác khô căng khó chịu. Tình trạng da nhạy cảm quá mức có thể chỉ xảy ra tạm thời hoặc vĩnh viễn.
 
@@ -653,11 +653,11 @@ Không cần rửa lại với nước.',
             ),
             15 =>
             array(
-                'id' => 15,
+                'id' => 16,
                 'name' => 'Nước Tẩy Trang Bioderma Dành Cho Da Dầu 500ml',
-                'category_id' => '321',
-                'brand_id' => '6',
-                'skin_id' => '123',
+                // 'category_id' => 321,
+                // 'brand_id' => 6,
+                // 'skin_id' => 123,
                 'desc' => 'Nước Tẩy Trang Bioderma Sébium H2O là sản phẩm tẩy trang dành cho da dầu, da hỗn hợp đến từ thương hiệu dược mỹ phẩm Bioderma, được ứng dụng công nghệ Micellar đình đám giúp loại bỏ lớp trang điểm cùng bụi bẩn và dầu thừa trên da hiệu quả mà không gây khô căng hay nhờn rít, tạo cảm giác thông thoáng cho da sau một ngày dài mệt mỏi.
                 Da hỗn hợp đến da dầu có lượng bã nhờn dư thừa tập trung ở vùng chữ T (da hỗn hợp) hoặc trên toàn bộ khuôn mặt (da dầu). Các dấu hiệu lâm sàng đi kèm với loại da này là tình trạng bóng dầu, da xỉn màu và lỗ chân lông to. Đôi khi còn có thể xuất hiện mụn trứng cá hoặc mụn đầu đen. Nếu những dấu hiệu này cứ liên tục tái phát, da được coi là có xu hướng dễ bị mụn.
 
@@ -688,56 +688,56 @@ Dung nạp tốt - Không gây mụn - Không cần rửa lại với nước.',
             ),
             16 =>
             array(
-                'id' => 16,
+                'id' => 17,
                 'name' => 'Kem Dưỡng Bioderma Hỗ Trợ Phục Hồi Da Tổn Thương 40ml',
-                'category_id' => '338',
-                'brand_id' => '6',
-                'skin_id' => '791',
+                // 'category_id' => 338,
+                // 'brand_id' => 6,
+                // 'skin_id' => 791,
                 'desc' => 'Bioderma Cicabio Crème là sản phẩm kem dưỡng ẩm hỗ trợ phục hồi và làm dịu làn da tổn thương, da nhạy cảm - kích ứng đến từ thương hiệu dược mỹ phẩm Bioderma nổi tiếng của Pháp, được các bác sĩ da liễu Pháp tin dùng. Sản phẩm có khả năng làm giảm các triệu chứng ngứa và khó chịu gần như ngay lập tức, đồng thời dưỡng ẩm và khôi phục lớp biểu bì, tạo lớp màng bảo vệ da tối ưu mà vẫn mỏng nhẹ và thoáng khí, giúp da luôn thoải mái dễ chịu.
-                Sau liệu trình điều trị thẩm mỹ chuyên sâu như laser, lăn kim, peel da hay nặn mụn,... da có xu hướng trở nên nhạy cảm và dễ bị tác động bởi các yếu tố bên ngoài.
-Đừng lo lắng vì đã có Kem Dưỡng Phục Hồi Da Bioderma Cicabio Crème chính là “vị cứu tinh” cho bạn, giúp làn da tổn thương được chăm sóc đúng cách và phục hồi nhanh chóng.
+                                            Sau liệu trình điều trị thẩm mỹ chuyên sâu như laser, lăn kim, peel da hay nặn mụn,... da có xu hướng trở nên nhạy cảm và dễ bị tác động bởi các yếu tố bên ngoài.
+                            Đừng lo lắng vì đã có Kem Dưỡng Phục Hồi Da Bioderma Cicabio Crème chính là “vị cứu tinh” cho bạn, giúp làn da tổn thương được chăm sóc đúng cách và phục hồi nhanh chóng.
 
 
-Bioderma Cicabio Crème là sự kết hợp hiệp đồng của các thành phần resveratrol, đồng và centella asiatica sẽ đẩy mạnh khả năng phục hồi của làn da. Bên cạnh đó, thành phần kẽm giúp ngăn chặn sự phát triển vi khuẩn. Bổ sung đồng thời với Antalgicine™ nhanh chóng làm dịu cảm giác khó chịu và giảm thôi thúc muốn gãi. Nhờ vào đó, sản phẩm giúp hồi phục làn da bị kích ứng bằng cách tác động vào từng giai đoạn của quá trình tái cấu trúc sinh học của lớp biểu bì.
+                            Bioderma Cicabio Crème là sự kết hợp hiệp đồng của các thành phần resveratrol, đồng và centella asiatica sẽ đẩy mạnh khả năng phục hồi của làn da. Bên cạnh đó, thành phần kẽm giúp ngăn chặn sự phát triển vi khuẩn. Bổ sung đồng thời với Antalgicine™ nhanh chóng làm dịu cảm giác khó chịu và giảm thôi thúc muốn gãi. Nhờ vào đó, sản phẩm giúp hồi phục làn da bị kích ứng bằng cách tác động vào từng giai đoạn của quá trình tái cấu trúc sinh học của lớp biểu bì.
 
-Sử dụng Bioderma Cicabio Crème là giải pháp hiệu quả để phục hồi da tổn thương và hạn chế sẹo - thâm.
+                            Sử dụng Bioderma Cicabio Crème là giải pháp hiệu quả để phục hồi da tổn thương và hạn chế sẹo - thâm.
 
-Kem Dưỡng Ẩm Hỗ Trợ Phục Hồi Và Làm Dịu Làn Da Tổn Thương Bioderma Cicabio Crème 40ml hiện đã có mặt tại Hasaki. 
+                            Kem Dưỡng Ẩm Hỗ Trợ Phục Hồi Và Làm Dịu Làn Da Tổn Thương Bioderma Cicabio Crème 40ml hiện đã có mặt tại Hasaki. 
 
-Loại da phù hợp:
-Kem Dưỡng Ẩm Bioderma Cicabio Creme phù hợp cho mọi loại da, đặc biệt là da nhạy cảm.
+                            Loại da phù hợp:
+                            Kem Dưỡng Ẩm Bioderma Cicabio Creme phù hợp cho mọi loại da, đặc biệt là da nhạy cảm.
 
-Là giải pháp chăm sóc dành cho mọi thành viên trong gia đình, kể cả trẻ sơ sinh (trừ trẻ sinh non).
+                            Là giải pháp chăm sóc dành cho mọi thành viên trong gia đình, kể cả trẻ sơ sinh (trừ trẻ sinh non).
 
-Có thể sử dụng cho cả da mặt và da cơ thể.
+                            Có thể sử dụng cho cả da mặt và da cơ thể.
 
-Giải pháp cho tình trạng da:
-Mọi vùng da trên cơ thể bị tổn thương, kích ứng.
+                            Giải pháp cho tình trạng da:
+                            Mọi vùng da trên cơ thể bị tổn thương, kích ứng.
 
-Da khô căng, ngứa, bong tróc vẩy.
+                            Da khô căng, ngứa, bong tróc vẩy.
 
-Da tổn thương sau trị liệu thẩm mỹ: peel da nông, laser không xâm lấn, triệt lông,...
+                            Da tổn thương sau trị liệu thẩm mỹ: peel da nông, laser không xâm lấn, triệt lông,...
 
-Da tổn thương nhẹ: trầy xước, vết đứt nhẹ, phồng rộp da, mụn vừa mới lành...
-Độ an toàn:
-Không chứa paraben
+                            Da tổn thương nhẹ: trầy xước, vết đứt nhẹ, phồng rộp da, mụn vừa mới lành...
+                            Độ an toàn:
+                            Không chứa paraben
 
-Không mùi hương
+                            Không mùi hương
 
-Không chứa thành phần tạo màu
+                            Không chứa thành phần tạo màu
 
-Màu nâu nhạt của sản phẩm là màu tự nhiên của hoạt chất
+                            Màu nâu nhạt của sản phẩm là màu tự nhiên của hoạt chất
 
-Độ dung nạp tốt
+                            Độ dung nạp tốt
 
-Không gây mụn
+                            Không gây mụn
 
-Bảo quản:
-Nơi khô ráo, thoáng mát.
+                            Bảo quản:
+                            Nơi khô ráo, thoáng mát.
 
-Tránh ánh nắng trực tiếp.
+                            Tránh ánh nắng trực tiếp.
 
-Đậy nắp kín sau khi sử dụng.',
+                            Đậy nắp kín sau khi sử dụng.',
                 'image' => asset('asset/images/google-shopping-kem-duong-bioderma-phuc-hoi-va-lam-diu-da-bi-kich-ung-40ml-1_img_358x358_843626_fit_center.jpg'),
                 'images' => asset('asset/images/kem-duong-bioderma-ho-tro-phuc-hoi-va-lam-diu-da-40ml-3_img_358x358_843626_fit_center.jpg'),
                 'image2' => asset('asset/images/kem-duong-bioderma-ho-tro-phuc-hoi-va-lam-diu-da-40ml-4_img_358x358_843626_fit_center.jpg'),

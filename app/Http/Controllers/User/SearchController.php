@@ -33,8 +33,6 @@ class SearchController extends Controller
             ->get();
            // dd($results);
             return view('user.home.search', ['results' => $results], compact('categories', 'brands', 'skins'));
-
-
     }
 
 

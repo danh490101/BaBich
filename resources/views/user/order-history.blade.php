@@ -56,7 +56,7 @@
                     <div class="row">
                         @foreach($order->details()->get() as $item)
                         <div class="product-item col-md-6">
-                            <img src="{{ asset('storage/' . $item->product()->first()->image) }}" alt="Ảnh sản phẩm" class="product-image">
+                            <img src="{{ asset( $item->product()->first()->image) }}" alt="Ảnh sản phẩm" class="product-image">
                             <div class="product-details">
                                 <div class="product-name">{{ $item->product()->first()->name }}</div>
                                 <div class="product-quantity">{{ $item->quantity }} x {{ number_format($item->product()->first()->price, 0, ',', '.') }} VNĐ</div>

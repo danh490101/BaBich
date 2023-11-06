@@ -5,19 +5,7 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">NHẬP KHO</h6>
-                </div>
-                <div class="col-lg-6 col-5 text-right">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link pr-0" href="{{ route('admin.products.create')}}" role="button">
-                            <div class="media align-items-center">
-                                <span class="btn btn-sm btn-neutral">
-                                    <i class="ni ni-fat-add text-blue"></i>
-                                    <span> Thêm hàng</span>
-                                </span>
-                            </div>
-                        </a>
-                    </li>
+                    <h6 class="h2 text-white d-inline-block mb-0">Phiếu nhập kho</h6>
                 </div>
             </div>
         </div>
@@ -27,71 +15,94 @@
     <div class="row">
         <div class="col">
             <div class="card">
-                <div class="table-responsive">
-                    <table class="table align-items-center table-flush">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col" class="sort" data-sort="name">Mã hàng</th>
-                                <th scope="col" class="sort" data-sort="name">Tên hàng</th>
-                                <th scope="col" class="sort" data-sort="name">Giá</th>
-                                <th scope="col" class="sort" data-sort="name">Trạng thái</th>
-                                <th scope="col" class="sort" data-sort="name">Số lượng</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-
-                        <tbody class="list">
-                           
-                            <tr>
-                                <td>
-                                    <a href="">
-                                        <span>
-                                            
-                                        </span>
-                                    </a>
-                                </td>
-                                <td>
-                                    <span>
-                                        
-                                    </span>
-                                </td>
-                                <td>
-                                    <span>
-                                       
-                                    </span>
-                                </td>
-                                <td>
-                                    <span>
-                                        
-                                    </span>
-                                </td>
-                                <td>
-                                    <span>
-                                        
-                                    </span>
-                                </td>
-                                <td class="text-right">
-                                    <div class="dropdown">
-                                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="{{ route('admin.products.edit', ['product' => $product]) }}">Xem & chỉnh sửa</a>
-                                            <form action="{{ route('admin.products.destroy', ['product' => $product->id]) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="dropdown-item" type="submit">Xóa</button>
-                                            </form>
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-11">
+                            <h3 class="mb-0">Thông tin </h3>
+                        </div>
+                        <div class="col-1">
+                            <span class="ni ni-bell-55" data-toggle="tooltip" data-placement="left" title="Mã phiếu nhập sẽ được tạo tự động"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="flex items-center justify-center fixed left-0 bottom-0 w-full h-full bg-gray-800 bg-opacity-90">
+                        <form action="{{ route('admin.warehouse-receipt.store',['warehouse_receipt' => $warehouseReceipt]) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="name">Nhà cung cấp</label>
+                                            <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
+                                            <select class="form-control form-select mt-3" name='supplier_id'>
+                                                @foreach($suppliers as $supllier)
+                                                <option value="{{$supllier->id}}">{{$supllier->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('name')
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
                                         </div>
                                     </div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="product_id">Sản phẩm</label>
+                                            <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
+                                            <select class="form-control form-select mt-3" name='product_id'>
+                                                @foreach($products as $product)
+                                                <option value="{{$product->id}}">{{$product->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('name')
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="name">Số lượng</label>
+                                            <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
+
+                                            <input type="number" name="quantity" class="form-control" placeholder="Số lượng sản phẩm" value="{{$warehouseReceipt->warehouseDetails()->first()->quantity}}">
+
+                                            @error('name')
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="price">Giá</label>
+                                            <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
+
+                                            <input type="text" name="price" class="form-control" placeholder="Giá sản phẩm" value="{{$warehouseReceipt->warehouseDetails()->first()->price}}">
+
+                                            @error('name')
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-6 text-left">
+                                        <div class="form-group">
+                                            <a href="hang-hoa.php" class="btn btn-sm btn-outline-primary">Quay lại</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-sm btn-primary"> Thêm hàng hóa </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+    @endsection

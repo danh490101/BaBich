@@ -56,10 +56,19 @@
     <section class="ftco-section ftco-no-pb">
         <div class="container">
             <div class="row">
+                @php
+                $i=0
+                @endphp
                 @foreach($brands as $brand)
+                @if($i==6)
+                @break
+                @endif
+                @php
+                $i++
+                @endphp
                 <div class="col-lg-2 col-md-4 ">
                     <div class="sort w-100 text-center ftco-animate">
-                        <div class="img" style="background-image: url({{asset('storage/'.$brand->image)}});"></div>
+                        <div class="img" style="background-image: url({{asset($brand->image)}});"></div>
                         <h3>{{$brand->name}}</h3>
                     </div>
                 </div>
@@ -68,21 +77,22 @@
         </div>
     </section>
     <section class="ftco-section">
-        <div class="container">
+        <div class="container12">
             <div class="row justify-content-center pb-5">
                 <div class="col-md-7 heading-section text-center ftco-animate">
                     <!-- <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span> -->
                     <h2>Sản Phẩm giảm giá</h2>
                 </div>
             </div>
-            <div class="row">
+            <div class="row card shadow" style="background: #FF8E4D">
                 @foreach($discountList as $product)
-                <div class="col-md-3 d-flex">
-                    <div class="product ftco-animate shadow">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product['item']->image)}});">
-                            <div class="sale-badge">
+                <div class="col-sm-3 d-flex">
+                    <div class="product ftco-animate shadow mt-3" style="background: #fff">
+                    <div class="sale-badge">
                                 Giảm giá
                             </div>
+                        <div class="mt-3 img d-flex align-items-center justify-content-center m-5" style="background-image: url({{asset($product['item']->image)}});">
+                            
                             <div class="desc">
                                 <p class="meta-prod d-flex">
                                     <a href="{{route('add_to_cart',['id' => $product['item']->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
@@ -94,7 +104,7 @@
                         <div class="text text-center">
                             <!-- <span class="sale">Sale</span> -->
                             <span class="category">{{$product['item']->category->name}}</span>
-                            <h2>{{ Illuminate\Support\Str::limit($product['item']->name, 25)}}</h2>
+                            <h5>{{ Illuminate\Support\Str::limit($product['item']->name, 25)}}</h5>
                             <p class="mb-0 "><span class="price price-sale">{{number_format($product['item']->price,0, ',','.')}}</span> <span class="price fw-bolder"> {{ number_format($product['value'],0, ',','.')}}</span></p>
                         </div>
                     </div>
@@ -105,7 +115,7 @@
     </section>
     @if(Auth::check())
     <section class="ftco-section">
-        <div class="container">
+        <div class="container12">
             <div class="row justify-content-center pb-5">
                 <div class="col-md-7 heading-section text-center ftco-animate">
                     <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span>
@@ -115,8 +125,8 @@
             <div class="row">
                 @foreach($suggestion as $product)
                 <div class="col-md-3 d-flex">
-                    <div class="product ftco-animate shadow">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
+                    <div class="product ftco-animate shadow mt-3">
+                        <div class="img d-flex align-items-center justify-content-center m-5" style="background-image: url({{asset($product->image)}});">
                             <div class="desc">
                                 <p class="meta-prod d-flex">
                                     <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
@@ -137,18 +147,41 @@
             </div>
         </div>
     </section>
+    <section class="ftco-section ftco-no-pb">
+        <div class="">
+            <div class="row col-12">
+                <div class="col-2">
+                    <div class="card13">
+                        <div class="text-center font-weight-bold"></div>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="col-12 row">
+                        @foreach($skins as $skin)
+                        <div class="col-1 ml-5 skin-item">
+                            <div class="card12">
+                                <div class="text-center font-weight-bold">{{$skin->name}}</div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
     @php
-        $i=0
+    $i=0
     @endphp
     @foreach ($products as $index => $group)
     @if($i==3)
-        @break 
+    @break
     @endif
     @php
-        $i++
+    $i++
     @endphp
     <section class="ftco-section">
-        <div class="container">
+        <div class="container12">
             <div class="row justify-content-center pb-5">
                 <div class="col-md-7 heading-section text-center ftco-animate">
                     <!-- <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span> -->
@@ -158,8 +191,8 @@
             <div class="row">
                 @foreach($group as $product)
                 <div class="col-md-3 d-flex">
-                    <div class="product ftco-animate shadow">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
+                    <div class="product ftco-animate shadow mt-3">
+                        <div class="img d-flex align-items-center justify-content-center m-5" style="background-image: url({{asset($product->image)}});">
                             <div class="desc">
                                 <p class="meta-prod d-flex">
                                     <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
@@ -189,14 +222,14 @@
     @endforeach
     @else
     @php
-        $i=0
+    $i=0
     @endphp
     @foreach ($products as $index => $group)
     @if($i==3)
-        @break 
+    @break
     @endif
     @php
-        $i++
+    $i++
     @endphp
     <section class="ftco-section">
         <div class="container">
@@ -334,14 +367,13 @@
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-
     $(document).ready(function() {
         $(".favorite-icon").hover(function() {
-            $(".favorite-icon").css("color", "red");
-        },
-        function() {
-            $(".favorite-icon").css("color", "white");
-        }); 
+                $(".favorite-icon").css("color", "red");
+            },
+            function() {
+                $(".favorite-icon").css("color", "white");
+            });
     });
     // Chờ tài liệu tải xong
     $(document).ready(function() {

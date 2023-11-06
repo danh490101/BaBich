@@ -42,6 +42,7 @@ class WarehousReceiptController extends Controller
     {
         //
         // dd(12);
+        
         $validate = $request->validate([
             'quantity' => 'required',
             'price' => 'required',
@@ -88,8 +89,10 @@ class WarehousReceiptController extends Controller
     public function edit(WarehouseReceipt $warehouseReceipt)
     {
         //
+        $products = Product::all();
+        $suppliers = Supplier::all();
         $warehouseReceipt = WarehouseReceipt::findOrFail($warehouseReceipt->id);
-        return view('admin.warehouse-edit.edit', compact('warehouseReceipt'));
+        return view('admin.warehouse-receipt.edit', compact('warehouseReceipt','products', 'suppliers'));
     }
 
     /**
@@ -101,6 +104,30 @@ class WarehousReceiptController extends Controller
     public function update(Request $request, WarehouseReceipt $warehouseReceipt)
     {
         //
+        $warehouseReceipt = WarehouseReceipt::findOrFail($warehouseReceipt->id);
+        $validate = $request->validate([
+            'quantity' => 'required',
+            'price' => 'required',
+        ]);
+        $whreceipt = array(
+            'note' => $request['note'],
+            'total_warehouse' => $request['price'] * $request['quantity'],
+            'supplier_id' => $request['supplier_id'],
+            'user_id' => \Illuminate\Support\Facades\Auth::id(),
+        );
+        $whreceipt = WarehouseReceipt::update($whreceipt); 
+        $whdetail = array(
+            'quantity' => $request['quantity'],
+            'price'=> $request['price'],
+            'product_id' => $request['product_id'],
+        );
+        $product = Product::findOrFail($request['product_id']);
+        $product->quantity = $request['quantity'] +  $product->quantity ;
+        $product->price = $request['price'];
+        $whdetail = WarehouseDetail::update($whdetail);
+        $product = $product->update();
+
+        return redirect()->back();
     }
 
     /**
@@ -108,8 +135,13 @@ class WarehousReceiptController extends Controller
      *
      * @param  \App\Models\WarehouseReceipt  $warehouseReceipt
      */
-    public function destroy(WarehouseReceipt $warehouseReceipt)
+    public function destroy($id)
     {
         //
+        $warehouseReceipt = WarehouseReceipt::findOrFail($id);
+        // dd($warehouseReceipt);
+        $warehouseReceipt->delete();
+        session()->flash('success', 'Xóa thành công!');
+        return redirect()->back();
     }
 }

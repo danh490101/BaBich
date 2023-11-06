@@ -57,12 +57,16 @@
                                 </td>
                                 <td>
                                     <span>
-                                        {{$product->price}}
+                                    {{number_format($product->price,0, ',','.')}}
                                     </span>
                                 </td>
                                 <td>
                                     <span>
-                                        {{$product->stock_status}}
+                                        @if ($product->quantity > 0)
+                                        Còn hàng
+                                        @else
+                                        Hết hàng
+                                        @endif
                                     </span>
                                 </td>
                                 <td>

@@ -39,7 +39,7 @@
                       <div class="col-lg-6 col-md-6">
                           <div class="form-group">
                               <label class="form-control-label" for="id">Ngày đặt hàng</label>
-                              <span class="form-control">{{$orders->order_date}}</span>
+                              <span class="form-control">{{$orders -> created_at->format('d-m-Y')}}</span>
                           </div>
                       </div>
                   </div>
@@ -126,7 +126,7 @@
                     {{ $or->quantity }} 
                     </td>
                     <td>
-                    {{ number_format($or->price * $or->quantity,3) }} 
+                    {{ number_format($or->price * $or->quantity) }} 
                     </td>
                   </tr>
                   @endif

@@ -84,15 +84,14 @@ class HomeController extends Controller
 
     public function groupProductByCategory()
     {
-        $products = Product::all();
-
+        $products = Product::where('quantity','>', 0)->get();
         $productList = [];
         foreach ($products as $product) {
+            // if($product->quantity > 0)
             $productList[$product->category_id][] = $product;
         }
         return $productList;
     }
-
     public function showByCategory($categoryId)
     {
         $products = Product::where('category_id', $categoryId)->get();
@@ -111,7 +110,7 @@ class HomeController extends Controller
 
     public function groupProductByBrand()
     {
-        $products = Product::all();
+        $products = Product::where('quantity','>', 0)->get();;
 
         $productList1 = [];
         foreach ($products as $product) {
@@ -146,6 +145,7 @@ class HomeController extends Controller
     public function getDiscount()
     {
         //set discount with id products
+        //get all with status = 1, noted dung where
         $discounts = \App\Models\Discount::all()->toArray();
         $productDiscounts = [];
         foreach ($discounts as $item) {
@@ -155,7 +155,7 @@ class HomeController extends Controller
         }
 
         //get list discount
-        $products = Product::all();
+        $products = Product::where('quantity','>', 0)->get();
         $discountList = [];
         foreach ($products as $product) {
             if (isset($productDiscounts[$product->id])) {

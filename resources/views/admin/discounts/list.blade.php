@@ -76,22 +76,19 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="">Xem & chỉnh sửa</a>
-                                            
-
-                                            <form action="" method="POST">
+                                            <form action="{{route('admin.discounts.destroy',['id' => $discount->id])}}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="dropdown-item" type="submit">Xóa</button>
                                             </form>
-                                            <script>
+                                            <!-- <script>
                                                 function alertFunction(brand) {
                                                     console.log(brand);
                                                     event.preventDefault();
                                                     // if (confirm("Are you sure to delete")) {
                                                     // }
                                                 }
-                                            </script>
+                                            </script> -->
                                         </div>
                                     </div>
                                 </td>

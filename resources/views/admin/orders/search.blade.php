@@ -6,18 +6,7 @@
       <div class="row align-items-center py-4">
         <div class="col-lg-6 col-7">
           <h6 class="h2 text-white d-inline-block mb-0">Đơn đặt hàng chưa xử lý</h6>
-          <form action="{{route('admin.orders.search')}}" method="POST">
-                    @csrf
-          <div class="col-lg-6 col-7">
-            <h6 class="h2 text-white d-inline-block mb-0">
-              <div class="container-input">
-                <input type="text" placeholder="Tìm kiếm" name="text" class="input font-italic font-weight-light">
-              </div>
-            </h6>
-          </div>
-        </form>
         </div>
-       
       </div>
     </div>
   </div>
@@ -38,24 +27,24 @@
               </tr>
             </thead>
             <tbody class="list">
-              @foreach($orders as $order)
-              @if($order->status == 0)
+            @foreach ($results as $result)
+              @if($result->status == 0)
               <tr>
                 <th scope="row">
                   <div class="media align-items-center">
                     <a href="#" class="media-body">
-                      <span class="name mb-0 text-sm">{{$order->id}}</span>
+                      <span class="name mb-0 text-sm">{{$result->id}}</span>
                     </a>
                   </div>
                 </th>
                 <td>
-                  <span class="name">{{$order->user_id}}</span>
+                  <span class="name">{{$result->user_id}}</span>
                 </td>
                 <td>
-                  <span class="status">{{number_format($order->totalamount,0, ',','.')}}</span>
+                  <span class="status">{{number_format($result->totalamount,0, ',','.')}}</span>
                 </td>
                 <td>
-                  <span class="status">{{$order -> created_at->format('d-m-Y')}}</span>
+                  <span class="status">{{$result -> created_at->format('d-m-Y')}}</span>
                 </td>
                 <td class="text-right">
                   <div class="dropdown">
@@ -63,7 +52,7 @@
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="{{ route('admin.orders.edit', ['order' => $order]) }}">Xem chi tiết</a>
+                      <a class="dropdown-item" href="{{ route('admin.orders.edit', ['order' => $result]) }}">Xem chi tiết</a>
                     </div>
                   </div>
                 </td>

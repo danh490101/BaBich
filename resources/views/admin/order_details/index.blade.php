@@ -43,13 +43,13 @@
                                     <span class="name">{{$order->user_id}}</span>
                                 </td>
                                 <td>
-                                    <span class="status">{{$order->totalamount}}</span>
+                                    <span class="status">{{number_format($order->totalamount,0, ',','.')}}</span>
                                 </td>
                                 <td>
-                                    <span class="status">{{$order -> created_at->format('d-m-Y')}}</span>
+                                    <span class="status">{{$order->created_at->format('d-m-Y')}}</span>
                                 </td>
                                 <td>
-                                    <span class="status">{{$order -> delivery_date}}</span>
+                                    <span class="status">{{$order->delivery_date}}</span>
                                 </td>
                                 <td class="text-right">
                                     <div class="dropdown">

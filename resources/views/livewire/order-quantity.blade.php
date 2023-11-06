@@ -16,17 +16,17 @@
                 </div>
             </div>
         </div>
+        
 
         <div class="card body">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Năm</th>
-                            <th scope="col">Số Lượng Đơn hàng</th>
+                            <th class="col-6">Năm</th>
+                            <th class="col-6">Số Lượng Đơn hàng</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         @foreach ($yearlyOrders as $yearlyOrder)
                         <tr>
@@ -42,17 +42,14 @@
                     </tbody>
                 </table>
             </div>
-
-
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Quý</th>
-                            <th scope="col">Số Lượng Đơn Hàng</th>
+                            <th class="col-6">Quý</th>
+                            <th class="col-6">Số Lượng Đơn Hàng</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         @foreach ($quarterlyOrders as $quarterlyOrder)
                         <tr>
@@ -68,16 +65,14 @@
                     </tbody>
                 </table>
             </div>
-
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Tháng</th>
-                            <th scope="col">Số Lượng Đơn Hàng</th>
+                            <th class="col-6">Tháng</th>
+                            <th class="col-6">Số Lượng Đơn Hàng</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         @foreach ($monthlyOrders as $monthlyOrder)
                         <tr>

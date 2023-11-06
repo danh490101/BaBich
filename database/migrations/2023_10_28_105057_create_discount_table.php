@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('code');
             $table->integer('value');
             $table->integer('expire_day');
+            $table->integer('status')->default(1);
             $table->json('product_ids');
             $table->timestamps();
         });

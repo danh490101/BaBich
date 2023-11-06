@@ -39,7 +39,7 @@
                                     </label>
                                 </td> -->
                                 <td>
-                                    <div class="img" style="background-image: url({{asset('storage/'.$detail['image'])}});"></div>
+                                    <div class="img" style="background-image: url({{asset($detail['image'])}});"></div>
                                 </td>
                                 <td>
                                     <div class="name">

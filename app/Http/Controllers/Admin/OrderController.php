@@ -50,6 +50,19 @@ class OrderController extends Controller
         // // Chuyển hướng người dùng đến trang danh sách đơn đặt hàng sau khi tạo thành công
         // return redirect()->route('admin.orders.index');
     }
+    public function getSearchOrder(Request $request)
+    {
+        // dd(123);
+        //dd($request->all());
+        //  $result = $request->result;
+        //dd($request->get('keyword'));
+        $searchTerm = $request->get('text'); // Lấy từ request
+       // dd($searchTerm);
+        $results = Order::where('id', 'like', "%$searchTerm%")
+            ->get();
+           // dd($results);
+            return view('admin.orders.search', ['results' => $results]);
+    }
 
 
 

@@ -45,4 +45,11 @@ class DiscountController extends Controller
 
         return redirect()->route('admin.discounts.list')->with("success","Thêm giảm giá thành công!");
     }
+
+    public function destroyDiscountCode($id){
+        $code = Discount::findOrFail($id);
+        $code->delete();
+        session()->flash('success', 'Xóa thành công!');
+        return redirect()->back();
+    }
 }
