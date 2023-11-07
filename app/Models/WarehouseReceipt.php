@@ -12,11 +12,13 @@ class WarehouseReceipt extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['note', 'total_warehouse', 'user_id', 'supplier_id' ];
 
-    public function supplier(){
-        return $this->belongsTo(Supplier::class,'supplier_id','id');
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class, 'supplier_id', 'id');
     }
-    public function user(){
-        return $this->belongsTo(User::class,'user_id','id');
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
     public function warehouseDetails()
     {

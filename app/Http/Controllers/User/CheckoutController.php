@@ -36,8 +36,8 @@ class CheckoutController extends Controller
         unset($cart['totalAmount']);
         $user_id = $request->user()->id;
         $user = User::findOrFail($user_id);
-        $provinces = Province::orderBy('name','asc')->get();
-        return view('user.checkout', compact('cart', 'user', 'categories', 'skins', 'brands','provinces'));
+        $provinces = Province::orderBy('name', 'asc')->get();
+        return view('user.checkout', compact('cart', 'user', 'categories', 'skins', 'brands', 'provinces'));
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class CheckoutController extends Controller
             'email' => 'required',
             'totalamount' => 'required',
             'delivery_cost' => 'required',
-            'ward_id'=>'required',
+            'ward_id' => 'required',
             'payment_method' => ' required|in:COD,VNPAY'
         ]);
 
@@ -220,13 +220,15 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function findDiscount($code){
+    public function findDiscount($code)
+    {
         return Discount::where(array(
             'code' => $code,
-        ))->where('expire_day' ,'>','0')->first();
+        ))->where('expire_day', '>', '0')->first();
     }
 
-    public function deliveryFee($id){
+    public function deliveryFee($id)
+    {
         $province = Province::find($id);
         return $province->deliveryFee()->first()->price;
     }

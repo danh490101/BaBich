@@ -12,7 +12,7 @@ class DiscountController extends Controller
     public function index(Request $request)
     {
         $discounts = Discount::all();
-        
+
         return view("admin.discounts.list", compact("discounts"));
     }
 
@@ -30,10 +30,10 @@ class DiscountController extends Controller
     {
         $datavalidated = $request->validate([
             "name" => "required|string|unique:discounts,name",
-            "code"=> "string|required|unique:discounts,code",
-            "value"=> "numeric|required|min:0|max:100",
-            "product_ids"=> "nullable",
-            "expire_day"=> "numeric|required|min:0",
+            "code" => "string|required|unique:discounts,code",
+            "value" => "numeric|required|min:0|max:100",
+            "product_ids" => "nullable",
+            "expire_day" => "numeric|required|min:0",
             "created_at" => Carbon::now(),
             "updated_at" => Carbon::now(),
         ]);
@@ -43,10 +43,11 @@ class DiscountController extends Controller
         // dd($datavalidated);
         Discount::insert($datavalidated);
 
-        return redirect()->route('admin.discounts.list')->with("success","Thêm giảm giá thành công!");
+        return redirect()->route('admin.discounts.list')->with("success", "Thêm giảm giá thành công!");
     }
 
-    public function destroyDiscountCode($id){
+    public function destroyDiscountCode($id)
+    {
         $code = Discount::findOrFail($id);
         $code->delete();
         session()->flash('success', 'Xóa thành công!');

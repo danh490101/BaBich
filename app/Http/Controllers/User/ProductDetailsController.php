@@ -78,7 +78,7 @@ class ProductDetailsController extends Controller
             return $comment;
         }, $comments);
         $pdcate = Product::where('category_id', $product->category()->first()->id)->get();
-        return view('user.product-details', compact('product', 'comments', 'avgRating', 'categories', 'skins', 'brands','pdcate'));
+        return view('user.product-details', compact('product', 'comments', 'avgRating', 'categories', 'skins', 'brands', 'pdcate'));
     }
 
     /**

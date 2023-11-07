@@ -12,7 +12,7 @@ class Province extends Model
 
     public function deliveryfee()
     {
-        return $this->belongsTo(DeliveryFee::class, 'delivery_fee_id','id');
+        return $this->belongsTo(DeliveryFee::class, 'delivery_fee_id', 'id');
     }
 
     public function districts()

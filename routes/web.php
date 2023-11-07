@@ -110,7 +110,7 @@ Route::middleware(['auth', 'authadmin'])->group(function () {
         Route::get('/feedback/change-status/{feedback}', [AdFeedbackController::class, 'changeStatus'])->name('feedback.changeStatus');
         Route::resource('/statistical', StatisticalController::class);
         Route::post('/statistical/search', [StatisticalController::class, 'search'])->name('statistical.search');
-        Route::group(['prefix'=> '/discounts','as'=> 'discounts.'], function () {
+        Route::group(['prefix' => '/discounts','as' => 'discounts.'], function () {
             Route::get('/', [DiscountController::class,'index'])->name('list');
             Route::get('/add-new', [DiscountController::class,'showFormAddDiscount'])->name('new-discount-form');
             Route::post('/add-new', [DiscountController::class,'addDiscountCode'])->name('handle-new-discount');

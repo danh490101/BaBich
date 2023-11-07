@@ -55,11 +55,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Product::class, 'user_favorite_products', 'user_id', 'product_id')
             ->withTimestamps();
     }
-    public function warehouseReceipts(){
+    public function warehouseReceipts()
+    {
         return $this->hasMany(WarehouseReceipt::class);
     }
     public function ward()
     {
-        return $this->belongsTo(Ward::class, 'ward_id','id');
+        return $this->belongsTo(Ward::class, 'ward_id', 'id');
     }
 }
