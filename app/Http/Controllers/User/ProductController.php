@@ -29,7 +29,7 @@ class ProductController extends Controller
         }
 
 
-        if($data['quantity'] > $product->quantity) {
+        if ($data['quantity'] > $product->quantity) {
             toastr()->warning('Số lượng hàng trong kho không đủ!');
             return redirect()->back();
         }
@@ -37,7 +37,7 @@ class ProductController extends Controller
         $cart = session()->get('cart', []);
         $cart['totalAmount'] = $cart['totalAmount'] ?? 0;
         if (isset($cart[$id])) {
-            if($data['quantity'] > 1) {
+            if ($data['quantity'] > 1) {
                 $cart[$id]['quantity'] = $cart[$id]['quantity'] + $data['quantity'];
             } else {
                 $cart[$id]['quantity']++;
@@ -70,7 +70,7 @@ class ProductController extends Controller
         }
 
 
-        if($data['quantity'] > $product->quantity) {
+        if ($data['quantity'] > $product->quantity) {
             toastr()->warning('Số lượng hàng trong kho không đủ!');
             return redirect()->back();
         }
@@ -78,7 +78,7 @@ class ProductController extends Controller
         $cart = session()->get('cart', []);
         $cart['totalAmount'] = $cart['totalAmount'] ?? 0;
         if (isset($cart[$id])) {
-            if($data['quantity'] > 1) {
+            if ($data['quantity'] > 1) {
                 $cart[$id]['quantity'] = $cart[$id]['quantity'] + $data['quantity'];
             } else {
                 $cart[$id]['quantity']++;
@@ -238,20 +238,20 @@ class ProductController extends Controller
     {
         if (isset($condition['categoryId']) && isset($condition['brandId'])) {
             $products = Product::where('category_id', '=', $condition['categoryId'])
-                                ->where('brand_id', '=', $condition['brandId'])
-                                ->where(function ($query) use ($filter) {
-                                    $query->whereBetween('price', $filter);
-                                })->get();
+                ->where('brand_id', '=', $condition['brandId'])
+                ->where(function ($query) use ($filter) {
+                    $query->whereBetween('price', $filter);
+                })->get();
         } elseif (isset($condition['brandId'])) {
             $products = Product::where('brand_id', '=', $condition['brandId'])
-                                ->where(function ($query) use ($filter) {
-                                    $query->whereBetween('price', $filter);
-                                })->get();
+                ->where(function ($query) use ($filter) {
+                    $query->whereBetween('price', $filter);
+                })->get();
         } elseif (isset($condition['categoryId'])) {
             $products = Product::where('category_id', '=', $condition['categoryId'])
-                                ->where(function ($query) use ($filter) {
-                                    $query->whereBetween('price', $filter);
-                                })->get();
+                ->where(function ($query) use ($filter) {
+                    $query->whereBetween('price', $filter);
+                })->get();
         } else {
             $products = Product::where(function ($query) use ($filter) {
                 $query->whereBetween('price', $filter);
@@ -284,6 +284,4 @@ class ProductController extends Controller
 
         return $discountList;
     }
-
-
 }
