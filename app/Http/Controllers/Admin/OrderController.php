@@ -57,11 +57,11 @@ class OrderController extends Controller
         //  $result = $request->result;
         //dd($request->get('keyword'));
         $searchTerm = $request->get('text'); // Lấy từ request
-       // dd($searchTerm);
+        // dd($searchTerm);
         $results = Order::where('id', 'like', "%$searchTerm%")
             ->get();
-           // dd($results);
-            return view('admin.orders.search', ['results' => $results]);
+        // dd($results);
+        return view('admin.orders.search', ['results' => $results]);
     }
 
 

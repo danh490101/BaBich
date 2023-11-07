@@ -29,7 +29,7 @@ class ProductController extends Controller
         }
 
 
-        if($data['quantity'] > $product->quantity) {
+        if ($data['quantity'] > $product->quantity) {
             toastr()->warning('Số lượng hàng trong kho không đủ!');
             return redirect()->back();
         }
@@ -37,7 +37,7 @@ class ProductController extends Controller
         $cart = session()->get('cart', []);
         $cart['totalAmount'] = $cart['totalAmount'] ?? 0;
         if (isset($cart[$id])) {
-            if($data['quantity'] > 1) {
+            if ($data['quantity'] > 1) {
                 $cart[$id]['quantity'] = $cart[$id]['quantity'] + $data['quantity'];
             } else {
                 $cart[$id]['quantity']++;
@@ -46,7 +46,7 @@ class ProductController extends Controller
             $cart[$id] = [
                 "id" => $id,
                 "name" => $product->name,
-                "price" => isset($productList[$product->id])  ? $productList[$product->id]['value'] : $product->price,
+                "price" => isset($productList[$product->id]) ? $productList[$product->id]['value'] : $product->price,
                 "quantity" => $data['quantity'],
                 "image" => $product->image
             ];
@@ -61,7 +61,7 @@ class ProductController extends Controller
     public function addToCartGet(Request $request, $id)
     {
         $productList = $this->getDiscount();
-        $data['quantity']=1;
+        $data['quantity'] = 1;
 
         $product = Product::findOrFail($id);
 
@@ -70,7 +70,7 @@ class ProductController extends Controller
         }
 
 
-        if($data['quantity'] > $product->quantity) {
+        if ($data['quantity'] > $product->quantity) {
             toastr()->warning('Số lượng hàng trong kho không đủ!');
             return redirect()->back();
         }
@@ -78,7 +78,7 @@ class ProductController extends Controller
         $cart = session()->get('cart', []);
         $cart['totalAmount'] = $cart['totalAmount'] ?? 0;
         if (isset($cart[$id])) {
-            if($data['quantity'] > 1) {
+            if ($data['quantity'] > 1) {
                 $cart[$id]['quantity'] = $cart[$id]['quantity'] + $data['quantity'];
             } else {
                 $cart[$id]['quantity']++;
@@ -87,7 +87,7 @@ class ProductController extends Controller
             $cart[$id] = [
                 "id" => $id,
                 "name" => $product->name,
-                "price" => isset($productList[$product->id])  ? $productList[$product->id]['value'] : $product->price,
+                "price" => isset($productList[$product->id]) ? $productList[$product->id]['value'] : $product->price,
                 "quantity" => $data['quantity'],
                 "image" => $product->image
             ];
@@ -126,7 +126,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $brands = Brand::all();
         $skins = Skin::all();
-        $cart = $request->session()->get('cart');
+        $cart = $request->session()->get('cart') ?? [];
         $totalPrice = 0;
         foreach ($cart as $id => $item) {
             if ($id == 'totalAmount') {
@@ -134,6 +134,7 @@ class ProductController extends Controller
             }
             $totalPrice += $item['price'] * $item['quantity'];
         }
+
         $cart['totalPrice'] = $totalPrice;
         return view('user.cart', compact('cart', 'categories', 'skins', 'brands'));
     }
@@ -144,7 +145,7 @@ class ProductController extends Controller
     {
         $user = User::where('id', Auth::id())->firstOrFail(); // Lấy người dùng
         $product = Product::find($productId); // Lấy sản phẩm bạn muốn thêm
-        // dd($product);
+
         if (!$product) {
             return redirect()->back()->with('error', 'Không tìm thấy sản phẩm.');
         }
@@ -238,20 +239,20 @@ class ProductController extends Controller
     {
         if (isset($condition['categoryId']) && isset($condition['brandId'])) {
             $products = Product::where('category_id', '=', $condition['categoryId'])
-                                ->where('brand_id', '=', $condition['brandId'])
-                                ->where(function ($query) use ($filter) {
-                                    $query->whereBetween('price', $filter);
-                                })->get();
+                ->where('brand_id', '=', $condition['brandId'])
+                ->where(function ($query) use ($filter) {
+                    $query->whereBetween('price', $filter);
+                })->get();
         } elseif (isset($condition['brandId'])) {
             $products = Product::where('brand_id', '=', $condition['brandId'])
-                                ->where(function ($query) use ($filter) {
-                                    $query->whereBetween('price', $filter);
-                                })->get();
+                ->where(function ($query) use ($filter) {
+                    $query->whereBetween('price', $filter);
+                })->get();
         } elseif (isset($condition['categoryId'])) {
             $products = Product::where('category_id', '=', $condition['categoryId'])
-                                ->where(function ($query) use ($filter) {
-                                    $query->whereBetween('price', $filter);
-                                })->get();
+                ->where(function ($query) use ($filter) {
+                    $query->whereBetween('price', $filter);
+                })->get();
         } else {
             $products = Product::where(function ($query) use ($filter) {
                 $query->whereBetween('price', $filter);
@@ -278,12 +279,10 @@ class ProductController extends Controller
         foreach ($products as $product) {
             if (isset($productDiscounts[$product->id])) {
                 $discountList[$product->id]['item'] =  $product;
-                $discountList[$product->id]['value'] =  $product->price - $product->price*$productDiscounts[$product->id]/100;
+                $discountList[$product->id]['value'] =  $product->price - $product->price * $productDiscounts[$product->id] / 100;
             }
         }
 
         return $discountList;
     }
-    
-
 }

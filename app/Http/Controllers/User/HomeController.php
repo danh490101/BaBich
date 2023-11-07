@@ -16,23 +16,23 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        if(Auth::check() && Auth::user()->utype =='ADM'){
+        if(Auth::check() && Auth::user()->utype == 'ADM') {
             return view('admin.dashboard');
         }
         $discountList = $this->getDiscount();
         $brands = Brand::all();
-        $skins = Skin ::all();
+        $skins = Skin::all();
         $categories = Category::all();
         $products = $this->groupProductByCategory();
         $bproducts = $this->groupProductByBrand();
         $sproducts = $this->groupProductBySkin();
-        $mappingCates = Category::all()->pluck("name","id")->toArray();
+        $mappingCates = Category::all()->pluck("name", "id")->toArray();
         if (Auth::check()) {
             $suggestion = $this->getProductSuggestion($request);
-            return view('user.home.index', compact('categories', 'brands', 'products', 'suggestion','skins', 'discountList', 'mappingCates'));
+            return view('user.home.index', compact('categories', 'brands', 'products', 'suggestion', 'skins', 'discountList', 'mappingCates'));
         } else {
-            return view('user.home.index', compact('categories', 'brands', 'products','skins', 'discountList', 'mappingCates'));
-        } 
+            return view('user.home.index', compact('categories', 'brands', 'products', 'skins', 'discountList', 'mappingCates'));
+        }
     }
 
     public function contact()
@@ -84,7 +84,7 @@ class HomeController extends Controller
 
     public function groupProductByCategory()
     {
-        $products = Product::where('quantity','>', 0)->get();
+        $products = Product::where('quantity', '>', 0)->get();
         $productList = [];
         foreach ($products as $product) {
             // if($product->quantity > 0)
@@ -110,7 +110,8 @@ class HomeController extends Controller
 
     public function groupProductByBrand()
     {
-        $products = Product::where('quantity','>', 0)->get();;
+        $products = Product::where('quantity', '>', 0)->get();
+        ;
 
         $productList1 = [];
         foreach ($products as $product) {
@@ -155,12 +156,12 @@ class HomeController extends Controller
         }
 
         //get list discount
-        $products = Product::where('quantity','>', 0)->get();
+        $products = Product::where('quantity', '>', 0)->get();
         $discountList = [];
         foreach ($products as $product) {
             if (isset($productDiscounts[$product->id])) {
                 $discountList[$product->id]['item'] =  $product;
-                $discountList[$product->id]['value'] =  $product->price - $product->price*$productDiscounts[$product->id]/100;
+                $discountList[$product->id]['value'] =  $product->price - $product->price * $productDiscounts[$product->id] / 100;
             }
         }
 

@@ -9,10 +9,10 @@ class Ward extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'district_id','type'];
-    
+
     public function district()
     {
-        return $this->belongsTo(District::class, 'district_id','id');
+        return $this->belongsTo(District::class, 'district_id', 'id');
     }
 
     public function users()

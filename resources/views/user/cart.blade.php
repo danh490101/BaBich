@@ -32,18 +32,12 @@
                             @foreach ($cart as $id => $detail)
                             @if (!is_numeric($id)) @continue @endif
                             <tr class="alert" role="alert" data-id="{{ $detail['id'] }}">
-                                <!-- <td>
-                                    <label class="checkbox-wrap checkbox-primary">
-                                        <input type="checkbox" checked>
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </td> -->
                                 <td>
-                                    <div class="img" style="background-image: url({{asset($detail['image'])}});"></div>
+                                    <div class="img" style="background-image: url({{ asset($detail['image']) }});"></div>
                                 </td>
                                 <td>
                                     <div class="name">
-                                        <span> {{ Illuminate\Support\Str::limit($detail['name'], 15) }}</span>
+                                        <span> {{ Str::limit($detail['name'], 15) }}</span>
                                     </div>
                                 </td>
                                 <td>{{ $detail['price'] }}</td>
@@ -52,7 +46,7 @@
                                         <input type="text" name="quantity" class="cart_update input-quantity form-control input-number" value="{{ $detail['quantity'] }}" min="1" max="100">
                                     </div>
                                 </td>
-                                <td>{{ number_format($detail['price']*$detail['quantity']) }}</td>
+                                <td>{{ number_format($detail['price'] * $detail['quantity']) }}</td>
                                 <td>
                                     <button type="button" class="close cart_remove" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true"><i class="fa fa-close"></i></span>
@@ -72,7 +66,7 @@
                         <p class="d-flex total-price">
                             <span>Total</span>
                             <span>
-                            {{number_format($cart['totalPrice'],0, ',','.')}}
+                                {{number_format($cart['totalPrice'],0, ',','.')}}
                             </span>
                         </p>
                     </div>
@@ -86,7 +80,7 @@
 
 @section('scripts')
 <script type="text/javascript">
-    $(".cart_update").change(function (e) {
+    $(".cart_update").change(function(e) {
         e.preventDefault();
         var ele = $(this);
         console.log(ele.parents("tr").find(".input-quantity").val());
@@ -94,34 +88,33 @@
             url: "{{ route('update_cart') }}",
             method: "patch",
             data: {
-                _token: '{{ csrf_token() }}', 
-                id: ele.parents("tr").attr("data-id"), 
+                _token: '{{ csrf_token() }}',
+                id: ele.parents("tr").attr("data-id"),
                 quantity: ele.parents("tr").find(".input-quantity").val()
             },
-            success: function (response) {
-               window.location.reload();
+            success: function(response) {
+                window.location.reload();
             }
         });
     });
 
-    $(".cart_remove").click(function (e) {
+    $(".cart_remove").click(function(e) {
         e.preventDefault();
         var ele = $(this);
-   
-        if(confirm("Do you really want to remove?")) {
+
+        if (confirm("Do you really want to remove?")) {
             $.ajax({
                 url: "{{ route('remove_from_cart') }}",
                 method: "DELETE",
                 data: {
-                    _token: '{{ csrf_token() }}', 
+                    _token: '{{ csrf_token() }}',
                     id: ele.parents("tr").attr("data-id")
                 },
-                success: function (response) {
+                success: function(response) {
                     window.location.reload();
                 }
             });
         }
     });
-   
 </script>
 @endsection
