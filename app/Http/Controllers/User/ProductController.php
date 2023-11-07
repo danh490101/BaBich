@@ -46,7 +46,7 @@ class ProductController extends Controller
             $cart[$id] = [
                 "id" => $id,
                 "name" => $product->name,
-                "price" => isset($productList[$product->id])  ? $productList[$product->id]['value'] : $product->price,
+                "price" => isset($productList[$product->id]) ? $productList[$product->id]['value'] : $product->price,
                 "quantity" => $data['quantity'],
                 "image" => $product->image
             ];
@@ -61,7 +61,7 @@ class ProductController extends Controller
     public function addToCartGet(Request $request, $id)
     {
         $productList = $this->getDiscount();
-        $data['quantity']=1;
+        $data['quantity'] = 1;
 
         $product = Product::findOrFail($id);
 
@@ -87,7 +87,7 @@ class ProductController extends Controller
             $cart[$id] = [
                 "id" => $id,
                 "name" => $product->name,
-                "price" => isset($productList[$product->id])  ? $productList[$product->id]['value'] : $product->price,
+                "price" => isset($productList[$product->id]) ? $productList[$product->id]['value'] : $product->price,
                 "quantity" => $data['quantity'],
                 "image" => $product->image
             ];
@@ -278,12 +278,12 @@ class ProductController extends Controller
         foreach ($products as $product) {
             if (isset($productDiscounts[$product->id])) {
                 $discountList[$product->id]['item'] =  $product;
-                $discountList[$product->id]['value'] =  $product->price - $product->price*$productDiscounts[$product->id]/100;
+                $discountList[$product->id]['value'] =  $product->price - $product->price * $productDiscounts[$product->id] / 100;
             }
         }
 
         return $discountList;
     }
-    
+
 
 }

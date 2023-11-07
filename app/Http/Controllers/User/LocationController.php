@@ -12,13 +12,13 @@ class LocationController extends Controller
     //
     public function getDistrict(Request $request)
     {
-        $data['districts'] = District::where("province_id", $request->province_id)->orderBy('name','asc')
+        $data['districts'] = District::where("province_id", $request->province_id)->orderBy('name', 'asc')
             ->get(["name", "id"]);
         return response()->json($data);
     }
     public function getWard(Request $request)
     {
-        $data['wards'] = Ward::where("district_id", $request->district_id)->orderBy('name','asc')
+        $data['wards'] = Ward::where("district_id", $request->district_id)->orderBy('name', 'asc')
             ->get(["name", "id"]);
         return response()->json($data);
     }

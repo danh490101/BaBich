@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use DB;
 
@@ -23,19 +22,19 @@ class DeliveryFeeSeeder extends Seeder
             array(
                 'id' => 1,
                 'name' => 'Miền Bắc',
-                'price'=> '45000',
+                'price' => '45000',
             ),
             1 =>
             array(
                 'id' => 2,
                 'name' => 'Miền Trung',
-                'price'=> '30000',
+                'price' => '30000',
             ),
             2 =>
             array(
                 'id' => 3,
                 'name' => 'Miền Nam',
-                'price'=>'15000'
+                'price' => '15000'
             ),
         ));
     }

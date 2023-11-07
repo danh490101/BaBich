@@ -9,7 +9,6 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Skin;
 use App\Models\User;
-use Auth;
 use Illuminate\Http\Request;
 
 class OrderHistoryController extends Controller
@@ -27,19 +26,20 @@ class OrderHistoryController extends Controller
         $customer = User::findOrFail(\Illuminate\Support\Facades\Auth::user()->id);
         $orders = $customer->orders; // Lấy danh sách đơn hàng của khách hàng
 
-        return view('user.order-history', compact('customer', 'orders','brands', 'skins', 'categories'));
+        return view('user.order-history', compact('customer', 'orders', 'brands', 'skins', 'categories'));
     }
 
 
-    public function findOrderStatus($status){
+    public function findOrderStatus($status)
+    {
         // $order = Order::findOrFail($id);
         $categories = Category::all();
         $brands = Brand::all();
         $skins = Skin::all();
         $user_id = \Illuminate\Support\Facades\Auth::id();
-        $orders = Order::where('user_id', $user_id)->where('status',$status)->get();
+        $orders = Order::where('user_id', $user_id)->where('status', $status)->get();
 
-        return view('user.order-history', compact('user_id', 'orders','brands', 'skins', 'categories','status'));
+        return view('user.order-history', compact('user_id', 'orders', 'brands', 'skins', 'categories', 'status'));
     }
 
     /**
@@ -96,7 +96,7 @@ class OrderHistoryController extends Controller
     {
         //
         $order = Order::findOrFail($id);
-        $oddetail = OrderDetails::where('order_id',$id)->delete();
+        $oddetail = OrderDetails::where('order_id', $id)->delete();
         $order->delete();
         session()->flash('success', 'Xóa thành công!');
         return redirect()->back();

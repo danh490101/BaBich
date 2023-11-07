@@ -31,8 +31,8 @@ class SearchController extends Controller
                 $query->where('name', 'like', "%$searchTerm%");
             })
             ->get();
-           // dd($results);
-            return view('user.home.search', ['results' => $results], compact('categories', 'brands', 'skins'));
+        // dd($results);
+        return view('user.home.search', ['results' => $results], compact('categories', 'brands', 'skins'));
     }
 
 

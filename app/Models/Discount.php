@@ -17,6 +17,6 @@ class Discount extends Model
     {
         return array_map(function ($id) {
             return Product::find($id);
-        },$this->product_ids);
+        }, $this->product_ids);
     }
 }

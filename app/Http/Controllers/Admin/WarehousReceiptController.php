@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Models\Supplier;
 use App\Models\WarehouseDetail;
 use App\Models\WarehouseReceipt;
@@ -42,7 +43,7 @@ class WarehousReceiptController extends Controller
     {
         //
         // dd(12);
-        
+
         $validate = $request->validate([
             'quantity' => 'required',
             'price' => 'required',
@@ -53,10 +54,10 @@ class WarehousReceiptController extends Controller
             'supplier_id' => $request['supplier_id'],
             'user_id' => \Illuminate\Support\Facades\Auth::id(),
         );
-        $whreceipt = WarehouseReceipt::create($whreceipt); 
+        $whreceipt = WarehouseReceipt::create($whreceipt);
         $whdetail = array(
             'quantity' => $request['quantity'],
-            'price'=> $request['price'],
+            'price' => $request['price'],
             'product_id' => $request['product_id'],
             'warehouse_receipt_id' => $whreceipt->id
         );
@@ -92,7 +93,7 @@ class WarehousReceiptController extends Controller
         $products = Product::all();
         $suppliers = Supplier::all();
         $warehouseReceipt = WarehouseReceipt::findOrFail($warehouseReceipt->id);
-        return view('admin.warehouse-receipt.edit', compact('warehouseReceipt','products', 'suppliers'));
+        return view('admin.warehouse-receipt.edit', compact('warehouseReceipt', 'products', 'suppliers'));
     }
 
     /**
@@ -115,10 +116,10 @@ class WarehousReceiptController extends Controller
             'supplier_id' => $request['supplier_id'],
             'user_id' => \Illuminate\Support\Facades\Auth::id(),
         );
-        $whreceipt = WarehouseReceipt::update($whreceipt); 
+        $whreceipt = WarehouseReceipt::update($whreceipt);
         $whdetail = array(
             'quantity' => $request['quantity'],
-            'price'=> $request['price'],
+            'price' => $request['price'],
             'product_id' => $request['product_id'],
         );
         $product = Product::findOrFail($request['product_id']);
