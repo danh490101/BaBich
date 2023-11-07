@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\WarehousReceiptController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\User\UsProfileController;
+use App\Http\Controllers\User\ViewHistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,8 +78,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/delivery-fee/{id}', [CheckoutController::class, 'deliveryFee'])->name('delivery-fee');
         Route::resource('/user-profile', UsProfileController::class);
         // Route::resource('/order-history', OrderHistoryController::class);
-        Route::delete('/order-history/cancel/{id}', [OrderHistoryController::class,'destroy'])->name('order-history.destroy');
-        Route::get('/order-history/{status}', [OrderHistoryController::class,'findOrderStatus'])->name('order-history');
+        Route::delete('/order-history/cancel/{id}', [OrderHistoryController::class, 'destroy'])->name('order-history.destroy');
+        Route::get('/order-history/{status}', [OrderHistoryController::class, 'findOrderStatus'])->name('order-history');
         Route::get('/add-to-favorites/{productId}', [App\Http\Controllers\User\ProductController::class, 'addToFavorites'])->name('add_to_favorites');
         Route::get('/favorite', [App\Http\Controllers\User\ProductController::class, 'favorites'])->name('favorites');
         Route::get('/suggestion', [HomeController::class, 'getProductSuggestion'])->name('suggestion');
@@ -115,7 +116,6 @@ Route::middleware(['auth', 'authadmin'])->group(function () {
             Route::get('/add-new', [DiscountController::class,'showFormAddDiscount'])->name('new-discount-form');
             Route::post('/add-new', [DiscountController::class,'addDiscountCode'])->name('handle-new-discount');
             Route::delete('/destroy/{id}', [DiscountController::class,'destroyDiscountCode'])->name('destroy');
-        });
         // Route::get('/statistical',[StatisticalController::class,'getQuantityOrder'])->name('statistical.getQuantityOrder');
     });
 });
@@ -128,7 +128,8 @@ Route::middleware(['auth', 'authadmin'])->group(function () {
 Route::get('auth/{provider}/redirect', [SocialiteController::class, 'redirect'])->name('socialite.redirect');
 Route::get('auth/{provider}/callback', [SocialiteController::class, 'callback'])->name('socialite.callback');
 Route::get('payments/vnpay/callback', [CheckoutController::class, 'paymentCallback'])->name('vnpay.payment-callback')->middleware('auth');
+Route::get('user/view-histories', [ViewHistoryController::class, '__invoke'])->name('user.view-histories');
 
-Route::get('checkExpiredDay', [DiscountController::class,'updateStatus'])->name('discount.updateStatus');
+Route::get('checkExpiredDay', [DiscountController::class, 'updateStatus'])->name('discount.updateStatus');
 
 require __DIR__ . '/auth.php';
