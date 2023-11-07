@@ -106,15 +106,17 @@ class ProductController extends Controller
         $skins = Skin::all();
         $categoryId = $request->get('categoryId', null);
         $brandId = $request->get('brandId', null);
+        $skinId = $request->get('skinId', null);
         $minPrice = $request->input('min_price', 0);
         $maxPrice = $request->input('max_price', 1000000);
 
-        if (is_null($categoryId) && is_null($brandId)) {
-            $products = Product::whereBetween('price', [$minPrice, $maxPrice])->get();
+        if (is_null($categoryId) && is_null($brandId) && is_null($skinId)) {
+            $products = Product::whereBetween('price', [$minPrice, $maxPrice])->where('quantity','>','0')->get();
         } else {
             $products = $this->getProductByCondition([
                 'categoryId' => $categoryId,
                 'brandId' => $brandId,
+                'skinId' =>$skinId,
             ], [$minPrice, $maxPrice]);
         }
 

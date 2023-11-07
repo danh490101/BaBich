@@ -54,7 +54,7 @@
                                     <div class="form-group">
                                         <label class="form-control-label">Ảnh minh họa</label>
                                         <span style="display: block;">
-                                            <img src="{{ asset('storage/'.$brand->image) }}" width="70px" height="auto" />
+                                            <img src="{{ asset($brand->image) }}" width="70px" height="auto" />
                                         </span>
                                         <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
                                         <div class="custom-file">

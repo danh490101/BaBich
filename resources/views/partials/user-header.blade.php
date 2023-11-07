@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{asset('asset/css/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{asset('asset/css/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
+    @include('partials.messenger')
 </head>
 
 <body>
@@ -34,7 +35,7 @@
                         </small>
                     </div>
                 </a>
-                <a href="{{ route('user.view-histories') }}" class="btn-cart dropdown-toggle dropdown-toggle-split">
+                <a href="{{ route('user.view-histories') }}" class="btn-cart dropdown-toggle dropdown-toggle-split ml-3">
                     <span class="text-center">
                         <svg height="24" width="24" version="1.1" viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1">

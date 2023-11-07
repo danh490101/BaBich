@@ -170,57 +170,7 @@
             </div>
         </div>
     </section>
-    @php
-    $i=0
-    @endphp
-    @foreach ($products as $index => $group)
-    @if($i==3)
-    @break
     @endif
-    @php
-    $i++
-    @endphp
-    <section class="ftco-section">
-        <div class="container12">
-            <div class="row justify-content-center pb-5">
-                <div class="col-md-7 heading-section text-center ftco-animate">
-                    <!-- <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span> -->
-                    <h2>Sản Phẩm {{ $mappingCates[$index] ?? '-' }}</h2>
-                </div>
-            </div>
-            <div class="row">
-                @foreach($group as $product)
-                <div class="col-md-3 d-flex">
-                    <div class="product ftco-animate shadow mt-3">
-                        <div class="img d-flex align-items-center justify-content-center m-5" style="background-image: url({{asset($product->image)}});">
-                            <div class="desc">
-                                <p class="meta-prod d-flex">
-                                    <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                    <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
-                                    <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="text text-center">
-                            <!-- <span class="sale">Sale</span> -->
-
-                            <span class="category">{{$product->category->name}}</span>
-                            <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
-                            <p class="mb-0 fw-bolder"><span class="price">{{number_format($product->price,0, ',','.')}}</span></p>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-4">
-                    <a href="{{ route('user.shop', ['categoryId' => $product->category_id]) }}" class="btn btn-primary d-block">Tất cả sản phẩm<span class="fa fa-long-arrow-right"></span></a>
-                </div>
-            </div>
-        </div>
-    </section>
-    @endforeach
-    @else
     @php
     $i=0
     @endphp
@@ -270,7 +220,6 @@
         </div>
     </section>
     @endforeach
-    @endif
     <section class="ftco-section testimony-section img" style="background-image: url(asset/images/bg_4.jpg);">
         <div class="overlay"></div>
         <div class="container">

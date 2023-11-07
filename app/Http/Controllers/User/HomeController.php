@@ -147,7 +147,7 @@ class HomeController extends Controller
     {
         //set discount with id products
         //get all with status = 1, noted dung where
-        $discounts = \App\Models\Discount::all()->toArray();
+        $discounts = \App\Models\Discount::where('status','=','1')->get()->toArray();
         $productDiscounts = [];
         foreach ($discounts as $item) {
             foreach (json_decode($item['product_ids']) as $productId) {
