@@ -78,7 +78,6 @@ class HomeController extends Controller
                 $orderDetails[] = $detail;
             }
         }
-
         return $orderDetails;
     }
 
@@ -94,24 +93,13 @@ class HomeController extends Controller
     }
     public function showByCategory($categoryId)
     {
-        $products = Product::where('category_id', $categoryId)->get();
+        $products = Product::where('category_id', $categoryId)->where('quantity','.',0)->get();
         return view('products.by_category', ['products' => $products]);
     }
-
-    //     public function showProductsByCategory($categoryId)
-    // {
-    //     $productList = $this->groupProductByCategory(); // Gọi hàm để nhóm sản phẩm theo loại
-
-    //     return view('user.shop', [
-    //         'categoryId' => $categoryId,
-    //         'products' => $productList[$categoryId]
-    //     ]);
-    // }
-
     public function groupProductByBrand()
     {
         $products = Product::where('quantity', '>', 0)->get();
-        ;
+        
 
         $productList1 = [];
         foreach ($products as $product) {
@@ -122,13 +110,13 @@ class HomeController extends Controller
 
     public function showByBrand($brandId)
     {
-        $products = Product::where('brand_id', $brandId)->get();
+        $products = Product::where('brand_id', $brandId)->where('quantity','>',0)->get();
         return view('products.by_brand', ['products' => $products]);
     }
 
     public function groupProductBySkin()
     {
-        $products = Product::all();
+        $products = Product::where('quantity', '>', 0)->get();
 
         $productList2 = [];
         foreach ($products as $product) {
@@ -139,7 +127,7 @@ class HomeController extends Controller
 
     public function showBySkin($skinId)
     {
-        $products = Product::where('skin_id', $skinId)->get();
+        $products = Product::where('skin_id', $skinId)->where('quantity','>',0)->get();
         return view('products.by_skin', ['products' => $products]);
     }
 

@@ -10649,6 +10649,21 @@ textarea.form-control {
       max-width: 1140px; } }
 
 
+
+      .card-profile-image1 img
+      {
+          position: absolute;
+          left: 50%;
+      
+          max-width: 185px;
+      
+          transition: all .15s ease; 
+          transform: translate(-50%, -50%) scale(1);
+      
+          border: 3px solid #fff;
+          border-radius: .375rem;
+      }
+
  
 
 

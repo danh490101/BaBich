@@ -96,7 +96,7 @@
                             <div class="desc">
                                 <p class="meta-prod d-flex">
                                     <a href="{{route('add_to_cart',['id' => $product['item']->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                    <a href="{{ route('user.add_to_favorites', ['productId' => $product['item']->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart favorite-icon"></span></a>
+                                    <a href="{{ route('user.add_to_favorites', ['productId' => $product['item']->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart favorite-icon"><input type="hidden" value=" $product['item']->id" ></span></a>
                                     <a href="{{ route('user.product-details', ['product' => $product['item']->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
                                 </p>
                             </div>
@@ -171,16 +171,16 @@
         </div>
     </section>
     @endif
-    @php
-    $i=0
-    @endphp
+        @php
+        $i=0
+        @endphp
     @foreach ($products as $index => $group)
-    @if($i==3)
-    @break
-    @endif
-    @php
-    $i++
-    @endphp
+        @if($i==3)
+        @break
+        @endif
+        @php
+        $i++
+        @endphp
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center pb-5">
@@ -316,36 +316,5 @@
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $(".favorite-icon").hover(function() {
-                $(".favorite-icon").css("color", "red");
-            },
-            function() {
-                $(".favorite-icon").css("color", "white");
-            });
-    });
-    // Chờ tài liệu tải xong
-    $(document).ready(function() {
-        // Xử lý sự kiện khi nút "Yêu thích" được nhấn
-        $('.favorite-button').click(function(e) {
-            e.preventDefault(); // Ngăn chặn mặc định hành vi điều hướng
-            var button = $(this);
-            var productId = button.data('product-id');
-            // Gửi yêu cầu AJAX
-            $.ajax({
-                type: 'POST', // Sử dụng phương thức POST
-                url: "{{ route('user.add_to_favorites', ['productId' => $product->id]) }}", // Đường dẫn đến tuyến đường xử lý
-                data: {
-                    productId: productId // Gửi productId của sản phẩm
-                },
-                success: function(response) {
-                    if (response === 'added') {
-                        button.addClass('favorited');
-                    } else if (response === 'removed') {
-                        button.removeClass('favorited');
-                    }
-                }
-            });
-        });
-    });
+ 
 </script>

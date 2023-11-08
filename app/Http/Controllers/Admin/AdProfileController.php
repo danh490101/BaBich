@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdProfileController extends Controller
 {
@@ -12,7 +13,7 @@ class AdProfileController extends Controller
      * Display a listing of the resource.
      *
      */
-    public const PREFIX_IMAGE_URL = 'public/storage/img/brands/';
+    public const PREFIX_IMAGE_URL = 'public/image/user';
     public function index()
     {
         return  view('admin.profile.index');
@@ -79,7 +80,8 @@ class AdProfileController extends Controller
 
         ]);
         if ($request->file('fileUpload')) {
-            $imageUrl = substr($request->file('fileUpload')->store(self::PREFIX_IMAGE_URL), strlen('public/'));
+            $imageUrl = $request->file('fileUpload')->store(self::PREFIX_IMAGE_URL);
+            $imageUrl = Storage::url($imageUrl);
             $user['avatar'] = $imageUrl;
         }
         $user->update($userUpdate);

@@ -52,7 +52,7 @@
 							<br>
 							<label for="max_price">Giá tối đa:</label><span id="max_price_display"></span>
 							<br>
-							<input type="range" id="max_price" name="max_price" min="0" max="1000000" step="10" value="{{ request('max_price', 1000) }}">
+							<input type="range" id="max_price" name="max_price" min="0" max="1000000" step="10" value="{{ request('max_price', 1000000) }}">
 							<br>
 							<button class="cta" type="submit">
 								<span>Lọc theo giá</span>
@@ -73,6 +73,31 @@
 									<a href="{{ route('user.shop', [
 										'categoryId' => $category->id, 
 										'brandId' => Request::get('brandId'),
+										'min_price' => Request::get('min_price'),
+										'max_price' => Request::get('max_price')
+									])}}">
+										{{$category->name}}
+										<span class="fa fa-chevron-right"></span>
+									</a>
+								</li>
+								@elseif ( Request::get('skinId'))
+								<li>
+									<a href="{{ route('user.shop', [
+										'categoryId' => $category->id, 
+										'skinId' => Request::get('skinId'),
+										'min_price' => Request::get('min_price'),
+										'max_price' => Request::get('max_price')
+									])}}">
+										{{$category->name}}
+										<span class="fa fa-chevron-right"></span>
+									</a>
+								</li>
+								@elseif ( Request::get('skinId') &&  Request::get('brandId'))
+								<li>
+									<a href="{{ route('user.shop', [
+										'categoryId' => $category->id, 
+										'brandId' => Request::get('brandId'),
+										'skinId' => Request::get('skinId'),
 										'min_price' => Request::get('min_price'),
 										'max_price' => Request::get('max_price')
 									])}}">
@@ -114,6 +139,31 @@
 										<span class="fa fa-chevron-right"></span>
 									</a>
 								</li>
+								@elseif ( Request::get('skinId'))
+								<li>
+									<a href="{{ route('user.shop', [
+										'brandId' => $brand->id, 
+										'skinId' => Request::get('skinId'),
+										'min_price' => Request::get('min_price'),
+										'max_price' => Request::get('max_price')
+									])}}">
+										{{$brand->name}}
+										<span class="fa fa-chevron-right"></span>
+									</a>
+								</li>
+								@elseif ( Request::get('categoryId') && Request::get('skinId'))
+								<li>
+									<a href="{{ route('user.shop', [
+										'brandId' => $brand->id, 
+										'categoryId' => Request::get('categoryId'),
+										'skinId' => Request::get('skinId'),
+										'min_price' => Request::get('min_price'),
+										'max_price' => Request::get('max_price')
+									])}}">
+										{{$brand->name}}
+										<span class="fa fa-chevron-right"></span>
+									</a>
+								</li>
 								@else
 								<li>
 									<a href="{{ route('user.shop', [
@@ -136,7 +186,58 @@
 							<h3>Loại da</h3>
 							@foreach($skins as $skin)
 							<ul class="p-0">
-								<li><a href="#">{{$skin->name}}<span class="fa fa-chevron-right"></span></a></li>
+							<ul class="p-0">
+								@if ( Request::get('categoryId'))
+								<li>
+									<a href="{{ route('user.shop', [
+										'skinId' => $skin->id, 
+										'categoryId' => Request::get('categoryId'),
+										'min_price' => Request::get('min_price'),
+										'max_price' => Request::get('max_price')
+									])}}">
+										{{$skin->name}}
+										<span class="fa fa-chevron-right"></span>
+									</a>
+								</li>
+								@elseif ( Request::get('brandId'))
+								<li>
+									<a href="{{ route('user.shop', [
+										'skinId' => $skin->id, 
+										'brandId' => Request::get('brandId'),
+										'min_price' => Request::get('min_price'),
+										'max_price' => Request::get('max_price')
+									])}}">
+										{{$skin->name}}
+										<span class="fa fa-chevron-right"></span>
+									</a>
+								</li>
+								@elseif ( Request::get('categoryId') && Request::get('brandId'))
+								<li>
+									<a href="{{ route('user.shop', [
+										'skinId' => $skin->id, 
+										'categoryId' => Request::get('categoryId'),
+										'brandId' => Request::get('brandId'),
+										'min_price' => Request::get('min_price'),
+										'max_price' => Request::get('max_price')
+									])}}">
+										{{$skin->name}}
+										<span class="fa fa-chevron-right"></span>
+									</a>
+								</li>
+								@else
+								<li>
+									<a href="{{ route('user.shop', [
+										'skinId' => $skin->id, 
+										'min_price' => Request::get('min_price'),
+										'max_price' => Request::get('max_price')
+									])}}">
+										{{$brand->name}}
+										<span class="fa fa-chevron-right"></span>
+									</a>
+								</li>
+								@endif
+								<!-- <li><a href="{{ route('user.shop', ['brandId' => $brand->id]) }}">{{$brand->name}}<span class="fa fa-chevron-right"></span></a></li> -->
+							</ul>
 							</ul>
 							@endforeach
 						</div>
@@ -159,13 +260,13 @@
 									<span class="category">{{$product->category->name}}</span>
 									<h2>{{ Illuminate\Support\Str::limit($product->name, 25) }}
 									</h2>
-									<p class="mb-0"><span class="price ">{{$product->price}}</span></p>
+									<p class="mb-0"><span class="price ">{{number_format($product->price,0, ',','.')}}</span></p>
 								</div>
 							</div>
 						</div>
 						@endforeach
 					</div>
-					<div class="row mt-5">
+					<!-- <div class="row mt-5">
 						<div class="col text-center">
 							<div class="block-27">
 								<ul>
@@ -179,20 +280,8 @@
 								</ul>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
-				<!-- <div class="col-md-3">
-					<div class="sidebar-box ftco-animate">
-						<div class="categories">
-							<h3>Phân loại</h3>
-							@foreach($categories as $category)
-							<ul class="p-0">
-								<li><a href="{{ route('user.shop', ['categoryId' => $category->id]) }}">{{$category->name}}<span class="fa fa-chevron-right"></span></a></li>
-							</ul>
-							@endforeach
-						</div>
-					</div>
-				</div> -->
 			</div>
 			@endif
 		</div>

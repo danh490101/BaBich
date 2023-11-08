@@ -237,31 +237,55 @@ class ProductController extends Controller
         }
     }
 
-    public function getProductByCondition($condition, $filter)
-    {
-        if (isset($condition['categoryId']) && isset($condition['brandId'])) {
-            $products = Product::where('category_id', '=', $condition['categoryId'])
-                ->where('brand_id', '=', $condition['brandId'])
-                ->where(function ($query) use ($filter) {
-                    $query->whereBetween('price', $filter);
-                })->get();
-        } elseif (isset($condition['brandId'])) {
-            $products = Product::where('brand_id', '=', $condition['brandId'])
-                ->where(function ($query) use ($filter) {
-                    $query->whereBetween('price', $filter);
-                })->get();
-        } elseif (isset($condition['categoryId'])) {
-            $products = Product::where('category_id', '=', $condition['categoryId'])
-                ->where(function ($query) use ($filter) {
-                    $query->whereBetween('price', $filter);
-                })->get();
-        } else {
-            $products = Product::where(function ($query) use ($filter) {
-                $query->whereBetween('price', $filter);
-            })->get();
-        }
+    // public function getProductByCondition($condition, $filter)
+    // {
+    //     if (isset($condition['categoryId']) && isset($condition['brandId']) && isset($condition['skinId'])) {
+    //         $products = Product::where('category_id', '=', $condition['categoryId'])
+    //             ->where('brand_id', '=', $condition['brandId'])
+    //             ->where('skin_id', '=', $condition['skinId'])
+    //             ->where(function ($query) use ($filter) {
+    //                 $query->whereBetween('price', $filter);
+    //             })->get();
+    //     }   elseif (isset($condition['brandId'])) {
+    //         $products = Product::where('brand_id', '=', $condition['brandId'])
+    //             ->where(function ($query) use ($filter) {
+    //                 $query->whereBetween('price', $filter);
+    //             })->get();
+    //     }   elseif (isset($condition['categoryId'])) {
+    //         $products = Product::where('category_id', '=', $condition['categoryId'])
+    //             ->where(function ($query) use ($filter) {
+    //                 $query->whereBetween('price', $filter);
+    //             })->get();
+    //     }   elseif (isset($condition['skinId'])) {
+    //         $products = Product::where('skin_id', '=', $condition['skinId'])
+    //             ->where(function ($query) use ($filter) {
+    //                 $query->whereBetween('price', $filter);
+    //             })->get();
+    //      }  else {
+    //         $products = Product::where(function ($query) use ($filter) {
+    //             $query->whereBetween('price', $filter);
+    //         })->get();
+    //     }
 
-        return $products;
+    //     return $products;
+    // }
+
+    public function getProductByCondition($condition, $filter){
+        $products = Product::where('quantity','>',0)->where(function ($query) use ($filter) {
+            $query->whereBetween('price', $filter);
+        });
+        if(isset($condition['skinId'])){
+            $products = $products->where('skin_id', '=', $condition['skinId']);
+        }
+        if(isset($condition['brandId'])){
+            $products = $products->where('brand_id', '=', $condition['brandId']);
+        }
+        if(isset($condition['categoryId'])){
+            $products = $products->where('category_id', '=', $condition['categoryId']);
+        }
+        return $products->get();
+
+
     }
 
     public function getDiscount()

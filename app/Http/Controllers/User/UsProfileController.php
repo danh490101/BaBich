@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Skin;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UsProfileController extends Controller
 {
+    public const PREFIX_IMAGE_URL = 'public/image/user';
     public function index()
     {
         //
@@ -46,7 +51,9 @@ class UsProfileController extends Controller
     public function edit($id)
     {
         //
-        compact('products', 'categories', 'brands', 'skins') ;
+        $categories = Category::all();
+        $brands = Brand::all();
+        $skins = Skin::all();
         $user = User::findOrFail($id);
         // dd($user);
         return view('user.user-profile.edit', compact('user', 'categories', 'brands', 'skins'));
@@ -57,18 +64,36 @@ class UsProfileController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $userUpdate = $request->validate([
+            'phone' => [
+                'required'
+            ],
+            'address' => [
+                'required'
+            ],
+            'fileUpload' => [
+                'nullable',
+                'image'
+            ]
+
+        ]);
+        if ($request->file('fileUpload')) {
+            $imageUrl = $request->file('fileUpload')->store(self::PREFIX_IMAGE_URL);
+            $imageUrl = Storage::url($imageUrl);
+            $user['avatar'] = $imageUrl;
+        }
+        $user->update($userUpdate);
+        return redirect()->back()->with('success', 'Cập nhật thành công!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
     {
