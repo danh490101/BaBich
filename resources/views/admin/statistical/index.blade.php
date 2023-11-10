@@ -13,6 +13,7 @@
             </div>
         </div>
     </div>
+
     <div class="container">
         <div class="row text-center py-4">
             <div class="col-xl-3 col-md-6">
@@ -71,6 +72,7 @@
             </div>
         </div>
     </div>
+
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
@@ -79,6 +81,28 @@
 
             <div class="col-lg-6">
                 <livewire:revenue-chart wire:key="revenueChart"></livewire:revenue-chart>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        Số lượng đơn hàng theo tháng trong năm hiện tại
+                    </div>
+                    <div class="card-body">
+                        <canvas id="orderGroupByMonthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        Thống kê nhập kho theo tháng trong năm hiện tại
+                    </div>
+                    <div class="card-body">
+                        <canvas id="receiptGroupByMonthOfYearChart"></canvas>
+                    </div>
+                </div>
             </div>
 
             <div class="col-lg-12">
@@ -91,4 +115,56 @@
         </div>
     </div>
 </div>
+
+    <script>
+        var orderGroupByMonthChart = document.getElementById("orderGroupByMonthChart");
+
+        new Chart(orderGroupByMonthChart, {
+                    type: 'line',
+                    data: {
+                    labels: {{ Js::from($monthLabels) }},
+                    datasets: [{
+                    label: 'Số lượng đơn hàng theo tháng trong năm hiện tại',
+                    data: {{ Js::from($orderByMonth) }},
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        display: true,
+                    },
+                    y: {
+                        display: true,
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var receiptGroupByMonthOfYearChart = document.getElementById("receiptGroupByMonthOfYearChart");
+
+        new Chart(receiptGroupByMonthOfYearChart, {
+                    type: 'line',
+                    data: {
+                    labels: {{ Js::from($monthImportLabels) }},
+                    datasets: [{
+                    label: 'Số lượng đơn hàng theo tháng trong năm hiện tại',
+                    data: {{ Js::from($importData) }},
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        display: true,
+                    },
+                    y: {
+                        display: true,
+                    }
+                }
+            }
+        });
+    </script>
 @endsection

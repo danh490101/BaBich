@@ -7,14 +7,13 @@
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
     <meta name="author" content="Creative Tim">
     <title>BABICH</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" href="{{asset('img/khac/favicon.png')}}" type="image/png">
     <link rel="stylesheet" href="{{asset('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700')}}">
     <link rel="stylesheet" href="{{asset('ad_asset/assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('ad_asset/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('ad_asset/assets/css/argon.css?v=1.2.0')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css')}}">
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @livewireStyles
 
 </head>
