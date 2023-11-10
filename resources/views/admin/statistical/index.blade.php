@@ -106,6 +106,17 @@
             </div>
 
             <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        Thống doanh thu theo tháng trong năm hiện tại
+                    </div>
+                    <div class="card-body">
+                        <canvas id="salesGroupByMonthOfYearChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
                 <livewire:top-selling-product wire:ket="topSellingProduct"></livewire:top-selling-product>
             </div>
 
@@ -152,6 +163,32 @@
                     datasets: [{
                     label: 'Số lượng đơn hàng theo tháng trong năm hiện tại',
                     data: {{ Js::from($importData) }},
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        display: true,
+                    },
+                    y: {
+                        display: true,
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var salesGroupByMonthOfYearChart = document.getElementById("salesGroupByMonthOfYearChart");
+
+        new Chart(salesGroupByMonthOfYearChart, {
+                    type: 'line',
+                    data: {
+                    labels: {{ Js::from($monthsOfSale) }},
+                    datasets: [{
+                    label: 'Số doanh thu theo tháng trong năm hiện tại',
+                    data: {{ Js::from($sales) }},
                     borderWidth: 1
                 }]
             },
