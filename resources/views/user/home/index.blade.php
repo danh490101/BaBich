@@ -85,31 +85,32 @@
                 </div>
             </div>
             <div class="row card shadow" style="background: #FF8E4D">
-                @foreach($discountList as $product)
-                <div class="col-sm-3 d-flex">
-                    <div class="product ftco-animate shadow mt-3" style="background: #fff">
-                    <div class="sale-badge">
+                <div class="col-sm-12  d-flex flex-wrap">
+                    @foreach($discountList as $product)
+                    <div class="col-sm-3">
+                        <div class="product ftco-animate shadow mt-3" style="background: #fff">
+                            <div class="sale-badge">
                                 Giảm giá
                             </div>
-                        <div class="mt-3 img d-flex align-items-center justify-content-center m-5" style="background-image: url({{asset($product['item']->image)}});">
-                            
-                            <div class="desc">
-                                <p class="meta-prod d-flex">
-                                    <a href="{{route('add_to_cart',['id' => $product['item']->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                    <a href="{{ route('user.add_to_favorites', ['productId' => $product['item']->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart favorite-icon"><input type="hidden" value=" $product['item']->id" ></span></a>
-                                    <a href="{{ route('user.product-details', ['product' => $product['item']->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
-                                </p>
+                            <div class="mt-3 img d-flex align-items-center justify-content-center m-5" style="background-image: url({{asset($product['item']->image)}});">
+                                <div class="desc">
+                                    <p class="meta-prod d-flex">
+                                        <a href="{{route('add_to_cart',['id' => $product['item']->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
+                                        <a href="{{ route('user.add_to_favorites', ['productId' => $product['item']->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart favorite-icon"><input type="hidden" value=" $product['item']->id"></span></a>
+                                        <a href="{{ route('user.product-details', ['product' => $product['item']->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="text text-center">
+                                <!-- <span class="sale">Sale</span> -->
+                                <span class="category">{{$product['item']->category->name}}</span>
+                                <h5>{{ Illuminate\Support\Str::limit($product['item']->name, 25)}}</h5>
+                                <p class="mb-0 "><span class="price price-sale">{{number_format($product['item']->price,0, ',','.')}}</span> <span class="price fw-bolder"> {{ number_format($product['value'],0, ',','.')}}</span></p>
                             </div>
                         </div>
-                        <div class="text text-center">
-                            <!-- <span class="sale">Sale</span> -->
-                            <span class="category">{{$product['item']->category->name}}</span>
-                            <h5>{{ Illuminate\Support\Str::limit($product['item']->name, 25)}}</h5>
-                            <p class="mb-0 "><span class="price price-sale">{{number_format($product['item']->price,0, ',','.')}}</span> <span class="price fw-bolder"> {{ number_format($product['value'],0, ',','.')}}</span></p>
-                        </div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
         </div>
     </section>
@@ -171,16 +172,16 @@
         </div>
     </section>
     @endif
-        @php
-        $i=0
-        @endphp
+    @php
+    $i=0
+    @endphp
     @foreach ($products as $index => $group)
-        @if($i==3)
-        @break
-        @endif
-        @php
-        $i++
-        @endphp
+    @if($i==3)
+    @break
+    @endif
+    @php
+    $i++
+    @endphp
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center pb-5">
@@ -316,5 +317,5 @@
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
- 
+
 </script>

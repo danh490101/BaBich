@@ -93,7 +93,13 @@
                     <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
                         <div class="p-4">
                             <h3 class="mb-4">{{$product->name}}</h3>
-                            <p>{{$product->desc}}</p>
+                            <div id="productDescription" class="limited-height" style="white-space: pre-line;">
+                                {{ $product->desc }}
+                            </div>
+                            @if(strlen($product->desc) > 200)
+                            <a href="javascript:void(0)" id="readMoreBtn">Xem thêm</a>
+                            @endif
+
                         </div>
                     </div>
                     <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-day-2-tab">
@@ -250,29 +256,39 @@
             </div>
         </div>
     </div>
-    <div class="row ">
-                @foreach($pdcate as $product)
-                <div class="col-md-3 d-flex ">
-                    <div class="product ftco-animate shadow">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset('storage/'.$product->image)}});">
-                            <div class="desc">
-                                <p class="meta-prod d-flex">
-                                    <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-                                    <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
-                                    <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="text text-center">
-                            <!-- <span class="sale">Sale</span> -->
-                            <span class="category">{{$product->category->name}}</span>
-                            <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
-                            <p class="mb-0 "><span class="price">{{number_format($product->price,0, ',','.')}}</span></p>
+
+</section>
+<section class="ftco-section">
+    <div class="container12">
+        <div class="row justify-content-center pb-5">
+            <div class="col-md-7 heading-section text-center ftco-animate">
+                <!-- <span class="subheading">Gợi Ý Dành Riêng Cho Bạn</span> -->
+                <h2>Sản Phẩm Tương Tự</h2>
+            </div>
+        </div>
+        <div class="row ">
+            @foreach($pdcate as $product)
+            <div class="col-md-2 d-flex ">
+                <div class="product ftco-animate shadow">
+                    <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset($product->image)}});">
+                        <div class="desc">
+                            <p class="meta-prod d-flex">
+                                <a href="{{route('add_to_cart',['id' => $product->id])}}" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
+                                <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
+                                <a href="{{ route('user.product-details', ['product' => $product->id]) }}" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
+                            </p>
                         </div>
                     </div>
+                    <div class="text text-center">
+                        <!-- <span class="sale">Sale</span> -->
+                        <span class="category">{{$product->category->name}}</span>
+                        <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
+                        <p class="mb-0 "><span class="price">{{number_format($product->price,0, ',','.')}}</span></p>
+                    </div>
                 </div>
-                @endforeach
             </div>
+            @endforeach
+        </div>
     </div>
 </section>
 
@@ -297,4 +313,28 @@
         intQty.value = parseInt(intQty.value) + 1;
     }
 </script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var productDescription = $('#productDescription');
+        var readMoreBtn = $('#readMoreBtn');
+
+        if (productDescription.text().length > 200) {
+            var truncatedText = productDescription.text().substring(0, 200);
+            productDescription.data('fullText', productDescription.text());
+
+            // Hiển thị mô tả giới hạn ban đầu
+            productDescription.text(truncatedText);
+
+            // Khi nhấn vào nút "Xem thêm", hiển thị mô tả đầy đủ
+            readMoreBtn.click(function() {
+                productDescription.text(productDescription.data('fullText'));
+                readMoreBtn.hide();
+            });
+        } else {
+            readMoreBtn.hide();
+        }
+    });
+</script>
+
 @endsection

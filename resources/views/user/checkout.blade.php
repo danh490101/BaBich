@@ -51,7 +51,7 @@
                                     <select class="form-control" id="province-dropdown">
                                         <option value="">Chọn tỉnh</option>                                        
                                         @if(Auth()->user()->ward_id != NULL)
-                                            <option value="  {{ Auth()->user()->ward()->first()->district()->first()->province()->first()->id }}" selected>
+                                            <option value="{{ Auth()->user()->ward()->first()->district()->first()->province()->first()->id }}" selected>
                                                 {{ Auth()->user()->ward()->first()->district()->first()->province()->first()->name }}
                                             </option>
                                         @endif
@@ -116,15 +116,28 @@
                                     <p class="d-flex">
                                         <span>Delivery</span>
                                         <input id="delivery-fee" type="hidden" name="delivery_cost" class="form-control" placeholder="" value="{{ 00 }}" >
-                                        <span id="delivery-fee-span">{{ 00 }}</span>
+                                        <span id="delivery-fee-span">
+                                        @if(Auth()->user()->ward_id != NULL)        
+                                            {{ Auth()->user()->ward()->first()->district()->first()->province()->first()->deliveryfee()->first()->price }}
+                                            @endif
+                                        </span>
                                     </p>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="discount">Nhập mã giảm giá</label>
-                                            <input type="text" id="discountCode" name="code" class="form-control" placeholder="" value="">
-                                            <div id="searchDiscount" style="width: 100px; height: 30px; border: 1px solid black; border-radius: 10%; ">Tim</div>
-                                        </div>
-                                    </div>
+                                    <div class="d-flex">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="discount">Nhập mã giảm giá</label>
+            <input type="text" id="discountCode" name="code" class="form-control" placeholder="" value="">
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="discount">&nbsp;</label>
+            <div id="searchDiscount" style="width: 100px; height: 30px; border: 1px solid black; border-radius: 10%;">Tìm</div>
+        </div>
+    </div>
+</div>
+
                                     <!-- <p class="d-flex">
                                         <span>Discount</span>
                                         <span>00</span>
@@ -133,7 +146,11 @@
                                     <p class="d-flex total-price">
                                         <span>Total</span>
                                         <input type="hidden" name="totalamount" id="total_order_input" class="form-control" placeholder="" value="{{ round( $cart['totalPrice']) }}">
-                                        <span id="total_order_span">{{ number_format( $cart['totalPrice']) }}</span>
+                                        <span id="total_order_span"> @if(Auth()->user()->ward_id != NULL)        
+                                            {{ number_format( $cart['totalPrice'] + Auth()->user()->ward()->first()->district()->first()->province()->first()->deliveryfee()->first()->price) }}
+                                            @else
+                                            {{ number_format( $cart['totalPrice']) }}
+                                            @endif</span>
                                     </p>
                                 </div>
                             </div>

@@ -21,10 +21,10 @@
                             <tr>
                                 <th>&nbsp;</th>
                                 <th>&nbsp;</th>
-                                <th>Product</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>total</th>
+                                <th>Sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
@@ -64,7 +64,7 @@
                         <h3>Cart Totals</h3>
                         <hr>
                         <p class="d-flex total-price">
-                            <span>Total</span>
+                            <span>Tổng</span>
                             <span>
                                 {{number_format($cart['totalPrice'],0, ',','.')}}
                             </span>

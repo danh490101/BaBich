@@ -148,7 +148,7 @@ class CheckoutController extends Controller
         }
 
         SendMailConfirmEvent::dispatch($order);
-        return redirect()->route('index');
+        return redirect()->route('user.order-history',['status' => '0']);
     }
 
     public function processOrderDetais(Request $request, $orderId)

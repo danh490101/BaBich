@@ -10,21 +10,24 @@
         </div>
     </div>
 </div>
-<div class="container-fluid mt--6">
-    <div class="row">
-        <div class="col-xl-4 order-xl-2">
-            <div class="card card-profile">
-                <div class="row justify-content-center">
-                    <div class="col-lg-3 order-lg-2">
-                        <div class="card-profile-image " style="border-radius: 5px;">
-                            <a href="#">
-                                <img src="{{ asset($user->avatar) }}" class="rounded-circle">
-                            </a>
+<form action="{{ route ('admin.profile.update', ['profile' => $user->id]) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PATCH')
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col-xl-4 order-xl-2">
+                <div class="card card-profile">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-3 order-lg-2">
+                            <div class="card-profile-image " style="border-radius: 5px;">
+                                <a href="#">
+                                    <img src="{{ asset($user->avatar) }}" class="rounded-circle">
+                                </a>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- <div class="pl-lg-4">
+                    <!-- <div class="pl-lg-4">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
@@ -35,33 +38,31 @@
                         </div>
                     </div>
                 </div> -->
-                <div class="card-header text-center border-0 pt-7 pt-md-4 pb-0 pb-md-6">
-                    <div class="d-flex justify-content-between">
+                    <div class="card-header text-center border-0 pt-7 pt-md-4 pb-0 pb-md-6">
+                        <div class="d-flex justify-content-between">
+                        </div>
                     </div>
-                </div>
-                <div class="card-body pt-0">
-                    <div class="text-center">
-                        <h5 class="h3">
-                            {{$user->name}}<span class="font-weight-light"></span>
-                        </h5>
-                        <!-- <div class="h5 font-weight-300">
+                    <div class="card-body pt-0">
+                        <div class="text-center">
+                            <h5 class="h3">
+                                {{$user->name}}<span class="font-weight-light"></span>
+                            </h5>
+                            <!-- <div class="h5 font-weight-300">
                                 <i class="ni location_pin mr-2">Giám Đốc</i>
                             </div> -->
-                        <div>
-                            <i class="ni education_hat mr-2"></i>Ba Bich Comestics
-                        </div>
-                        <div class="custom-file">
-                            <input type="file" class=" form-control" name="fileUpload" value="Cập nhật ảnh đại diện!">
+                            <div>
+                                <i class="ni education_hat mr-2"></i>Ba Bich Comestics
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class=" form-control" name="fileUpload" value="Cập nhật ảnh đại diện!">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xl-8 order-xl-1">
-            <div class="card">
-                <form action="{{ route ('admin.profile.update', ['profile' => $user->id]) }}" method="POST">
-                    @csrf
-                    @method('PATCH')
+            <div class="col-xl-8 order-xl-1">
+                <div class="card">
+
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col-8">
@@ -102,9 +103,10 @@
                             </div>
                         </div>
                     </div>
-                </form>
+
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 @endsection

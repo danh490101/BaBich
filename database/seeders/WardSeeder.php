@@ -71945,7 +71945,7 @@ class WardSeeder extends Seeder
             269 =>
                 array(
                     'id' => 29824,
-                    'name' => 'Xã Xuân Hiệp',
+                    'name' => 'Xã Xuân Hiệp',ng
                     'type' => 'Xã',
                     'district_id' => 862,
                 ),

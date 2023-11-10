@@ -114,6 +114,18 @@
                             </li>
                         </div>
                     </div>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-secondary dropdown-toggle ml-3 mt-2 w-100" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{asset('ad_asset/img/khac/group.png')}}" class="navbar-brand-img">Khách hàng
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.client.index') }}">
+                                    <span class="nav-link-text">Danh sách khách hàng</span>
+                                </a>
+                            </li>
+                        </div>
+                    </div>
                 </ul>
             </div>
         </div>

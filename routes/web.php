@@ -19,6 +19,7 @@ use App\Http\Livewire\User\UserDashboardComponent;
 use Illuminate\Support\Facades\Route;
 use App\Events\SendMailConfirmEvent;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\SkinController;
 use App\Http\Controllers\Admin\StatisticalController;
 use App\Http\Controllers\Admin\SupplierController;
@@ -107,6 +108,7 @@ Route::middleware(['auth', 'authadmin'])->group(function () {
         Route::resource('/order_details', OrderDetailsController::class);
         Route::resource('/warehouse-receipt', WarehousReceiptController::class);
         Route::resource('/feedback', AdFeedbackController::class);
+        Route::resource('/client', ClientController::class);
         Route::post('/admin/orders/search', [OrderController::class, 'getSearchOrder'])->name('orders.search');
         Route::get('/feedback/change-status/{feedback}', [AdFeedbackController::class, 'changeStatus'])->name('feedback.changeStatus');
         Route::resource('/statistical', StatisticalController::class);

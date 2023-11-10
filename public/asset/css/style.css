@@ -8634,6 +8634,7 @@ h1, h2, h3, h4, h5,
     display: block;
     border-radius: 4px;
     height: 290px;
+    margin-top: 50px;
     position: relative;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -10327,6 +10328,7 @@ textarea.form-control {
 
  .sale-badge {
   position: absolute;
+  z-index: 1;
   top: 0;
   right: 0;
   background-color:  #b7472a; /* Màu nền của biểu tượng */
@@ -10664,7 +10666,7 @@ textarea.form-control {
           border-radius: .375rem;
       }
 
- 
+
 
 
 
