@@ -93,13 +93,13 @@ class HomeController extends Controller
     }
     public function showByCategory($categoryId)
     {
-        $products = Product::where('category_id', $categoryId)->where('quantity','.',0)->get();
+        $products = Product::where('category_id', $categoryId)->where('quantity', '.', 0)->get();
         return view('products.by_category', ['products' => $products]);
     }
     public function groupProductByBrand()
     {
         $products = Product::where('quantity', '>', 0)->get();
-        
+
 
         $productList1 = [];
         foreach ($products as $product) {
@@ -110,7 +110,7 @@ class HomeController extends Controller
 
     public function showByBrand($brandId)
     {
-        $products = Product::where('brand_id', $brandId)->where('quantity','>',0)->get();
+        $products = Product::where('brand_id', $brandId)->where('quantity', '>', 0)->get();
         return view('products.by_brand', ['products' => $products]);
     }
 
@@ -127,7 +127,7 @@ class HomeController extends Controller
 
     public function showBySkin($skinId)
     {
-        $products = Product::where('skin_id', $skinId)->where('quantity','>',0)->get();
+        $products = Product::where('skin_id', $skinId)->where('quantity', '>', 0)->get();
         return view('products.by_skin', ['products' => $products]);
     }
 
@@ -135,7 +135,7 @@ class HomeController extends Controller
     {
         //set discount with id products
         //get all with status = 1, noted dung where
-        $discounts = \App\Models\Discount::where('status','=','1')->get()->toArray();
+        $discounts = \App\Models\Discount::where('status', '=', '1')->get()->toArray();
         $productDiscounts = [];
         foreach ($discounts as $item) {
             foreach (json_decode($item['product_ids']) as $productId) {

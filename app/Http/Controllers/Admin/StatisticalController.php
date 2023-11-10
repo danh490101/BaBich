@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class StatisticalController extends Controller
 {
@@ -28,27 +29,62 @@ class StatisticalController extends Controller
         $order = Order::all();
         $categories = Category::all();
         $numberOrder = 0;
-        foreach($order as $or) {
+        foreach ($order as $or) {
             $numberOrder += 1;
         }
 
         $numberStatis = 0;
-        foreach($order as $ord) {
-            if($ord->status == 1) {
+        foreach ($order as $ord) {
+            if ($ord->status == 1) {
                 $numberStatis += $ord->totalamount;
             }
         }
 
         $user = User::all();
         $numberUser = 0;
-        foreach($user as $us) {
+        foreach ($user as $us) {
             $numberUser += 1;
         }
 
         $now = Carbon::now()->format('d-m-Y');
 
         $orders = $this->orders;
-        return view('admin.statistical.index', compact('numberOrder', 'numberUser', 'numberStatis', 'now', 'categories', 'orders'));
+
+        $orderGroupByMonthOfYear = Order::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+            ->groupByRaw('MONTH(created_at)')
+            ->whereYear('created_at', date('Y'))
+            ->get();
+
+        $orderByMonth = $orderGroupByMonthOfYear->pluck('count')->toArray();
+
+        $monthLabels = [];
+        foreach ($orderGroupByMonthOfYear as $data) {
+            $month = $data->month;
+            $monthName = date('F', mktime(0, 0, 0, $month, 1));
+            $monthLabels[$month] = $monthName;
+        }
+
+        $monthLabels = array_values($monthLabels);
+
+        $currentYear = Carbon::now()->year;
+
+        $importData = DB::table('warehouse_detail')
+            ->whereYear('created_at', $currentYear)
+            ->selectRaw('MONTH(created_at) as month, SUM(price * quantity) as import_value')
+            ->groupBy('month')
+            ->get();
+
+        $monthImportLabels = [];
+        foreach ($importData as $import) {
+            $month = $import->month;
+            $monthName = date('F', mktime(0, 0, 0, $month, 1));
+            $monthImportLabels[$month] = $monthName;
+        }
+
+        $monthImportLabels = array_values($monthImportLabels);
+        $importData = $importData->pluck('import_value')->toArray();
+
+        return view('admin.statistical.index', compact('numberOrder', 'numberUser', 'numberStatis', 'now', 'categories', 'orders', 'orderByMonth', 'monthLabels', 'importData', 'monthImportLabels'));
     }
 
     /**
@@ -77,7 +113,6 @@ class StatisticalController extends Controller
      */
     public function show(Order $order)
     {
-
     }
 
     /**
@@ -114,7 +149,6 @@ class StatisticalController extends Controller
 
     public function getQuantityOrder(Order $order)
     {
-
     }
 
     public function search(Request $request)
@@ -127,7 +161,6 @@ class StatisticalController extends Controller
         $this->orders = $orders;
 
         return redirect()->route('admin.statistical.index')->with('orders', $orders);
-
     }
 
     public function getOptionDatetime($data)

@@ -111,12 +111,12 @@ class ProductController extends Controller
         $maxPrice = $request->input('max_price', 1000000);
 
         if (is_null($categoryId) && is_null($brandId) && is_null($skinId)) {
-            $products = Product::whereBetween('price', [$minPrice, $maxPrice])->where('quantity','>','0')->get();
+            $products = Product::whereBetween('price', [$minPrice, $maxPrice])->where('quantity', '>', '0')->get();
         } else {
             $products = $this->getProductByCondition([
                 'categoryId' => $categoryId,
                 'brandId' => $brandId,
-                'skinId' =>$skinId,
+                'skinId' => $skinId,
             ], [$minPrice, $maxPrice]);
         }
 
@@ -270,17 +270,18 @@ class ProductController extends Controller
     //     return $products;
     // }
 
-    public function getProductByCondition($condition, $filter){
-        $products = Product::where('quantity','>',0)->where(function ($query) use ($filter) {
+    public function getProductByCondition($condition, $filter)
+    {
+        $products = Product::where('quantity', '>', 0)->where(function ($query) use ($filter) {
             $query->whereBetween('price', $filter);
         });
-        if(isset($condition['skinId'])){
+        if(isset($condition['skinId'])) {
             $products = $products->where('skin_id', '=', $condition['skinId']);
         }
-        if(isset($condition['brandId'])){
+        if(isset($condition['brandId'])) {
             $products = $products->where('brand_id', '=', $condition['brandId']);
         }
-        if(isset($condition['categoryId'])){
+        if(isset($condition['categoryId'])) {
             $products = $products->where('category_id', '=', $condition['categoryId']);
         }
         return $products->get();

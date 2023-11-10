@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +14,7 @@ class BrandSeeder extends Seeder
      */
     public function run()
     {
-        // 
+        //
         DB::table('brands')->delete();
 
         DB::table('brands')->insert(array(
@@ -43,7 +42,7 @@ class BrandSeeder extends Seeder
                 'name' => 'Martiderm',
                 'image' => asset('asset/images/109491710_3456480031029831_3387049435560837690_n_16bb7b8b76524608991f125c3272ead3.JPG'),
             ),
-            4=>
+            4 =>
             array(
                 'id' => 5,
                 'name' => 'Bioderma',
