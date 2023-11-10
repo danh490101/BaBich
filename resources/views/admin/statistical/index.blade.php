@@ -150,7 +150,7 @@
                     data: {
                     labels: {{ Js::from($monthImportLabels) }},
                     datasets: [{
-                    label: 'Số lượng đơn hàng theo tháng trong năm hiện tại',
+                    label: 'Số tiền nhập kho theo tháng trong năm hiện tại',
                     data: {{ Js::from($importData) }},
                     borderWidth: 1
                 }]

@@ -16,6 +16,7 @@ class RevenueChart extends Component
 
         $data = OrderDetails::join('orders', 'order_details.order_id', '=', 'orders.id')
             ->selectRaw('DATE(orders.created_at) as date, SUM(order_details.totalamount) as revenue')
+            ->where('status', 1)
             ->whereBetween('orders.created_at', [$startDate, $endDate])
             ->groupBy('date')
             ->orderBy('date')
