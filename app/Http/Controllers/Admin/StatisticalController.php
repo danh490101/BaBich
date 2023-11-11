@@ -53,6 +53,7 @@ class StatisticalController extends Controller
         $orderGroupByMonthOfYear = Order::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
             ->groupByRaw('MONTH(created_at)')
             ->whereYear('created_at', date('Y'))
+            ->orderByRaw('MONTH(created_at)')
             ->get();
 
         $orderByMonth = $orderGroupByMonthOfYear->pluck('count')->toArray();
@@ -72,6 +73,7 @@ class StatisticalController extends Controller
             ->whereYear('created_at', $currentYear)
             ->selectRaw('MONTH(created_at) as month, SUM(price * quantity) as import_value')
             ->groupBy('month')
+            ->orderBy('month')
             ->get();
 
         $monthImportLabels = [];
@@ -84,7 +86,26 @@ class StatisticalController extends Controller
         $monthImportLabels = array_values($monthImportLabels);
         $importData = $importData->pluck('import_value')->toArray();
 
-        return view('admin.statistical.index', compact('numberOrder', 'numberUser', 'numberStatis', 'now', 'categories', 'orders', 'orderByMonth', 'monthLabels', 'importData', 'monthImportLabels'));
+        $revenueByMonth = DB::table('orders')
+            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('SUM(totalamount) as revenue'))
+            ->where('status', 1)
+            ->whereYear('created_at', '=', date('Y'))
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->orderBy(DB::raw('MONTH(created_at)'))
+            ->get();
+
+        $monthsOfSale = [];
+        $sales = [];
+
+        foreach ($revenueByMonth as $row) {
+            $month = date('M', mktime(0, 0, 0, $row->month, 1));
+            $revenue = $row->revenue;
+
+            $monthsOfSale[] = $month;
+            $sales[] = $revenue;
+        }
+
+        return view('admin.statistical.index', compact('numberOrder', 'numberUser', 'numberStatis', 'now', 'categories', 'orders', 'orderByMonth', 'monthLabels', 'importData', 'monthImportLabels', 'monthsOfSale', 'sales'));
     }
 
     /**
