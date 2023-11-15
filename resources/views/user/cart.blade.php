@@ -61,7 +61,7 @@
             <div class="row justify-content-end">
                 <div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate">
                     <div class="cart-total mb-3">
-                        <h3>Cart Totals</h3>
+                        <h3>Tổng giỏ hàng</h3>
                         <hr>
                         <p class="d-flex total-price">
                             <span>Tổng</span>

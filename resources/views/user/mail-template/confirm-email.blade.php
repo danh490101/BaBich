@@ -5,7 +5,7 @@
             <p><span class="info">Khách hàng: </span> {{$order->name}} </p>
             <p><span class="info">Email: </span> {{$order->email}} </p>
             <p><span class="info">Điện thoại: </span> {{$order->phone}} </p>
-            <p><span class="info">Địa chỉ: </span> {{$order->address}} </p>
+            <p><span class="info">Địa chỉ: </span>  {{ $order->address}},{{ Auth()->user()->ward()->first()->name }},{{ Auth()->user()->ward()->first()->district()->first()->name }},{{ Auth()->user()->ward()->first()->district()->first()->province()->first()->name}} </p>
             <p><span class="info">Phương thức thanh toán: </span> @if ($order->payment_method == 1)
                                                                     Thanh toán khi nhận hàng
                                                                 @else ($order->payment_method == 2)
@@ -40,8 +40,8 @@
             <br>
             <p alignt="justify">
                 <b>Quý khách đã đặt hàng thành công!</b><br />
-                • Sản phẩm của Quý khách sẽ được chuyển đến Địa chỉ có trong phần Thông tin Khách hàng của chúng Tôi sau thời gian 2 đến 3 ngày, tính từ thời điểm này.<br />
-                • Nhân viên giao hàng sẽ liên hệ với Quý khách qua Số Điện thoại trước khi giao hàng 24 tiếng.<br />
+                • Sản phẩm của Quý khách sẽ được chuyển đến địa chỉ có trong phần thông tin hhách hàng của chúng tôi sau thời gian 2 đến 3 ngày, tính từ thời điểm này.<br />
+                • Nhân viên giao hàng sẽ liên hệ với quý khách qua số điện thoại trước khi giao hàng 24 tiếng.<br />
                 <b><br/>Cám ơn Quý khách đã tin tưởng lựa chọn sản phẩm của BaBich!</b>
             </p>
         </div>

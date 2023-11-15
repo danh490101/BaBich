@@ -45,10 +45,18 @@
                     <div class="row">
                         <article class="card col-12 pl-5">
                             <div class="card-body col-12 row">
-                                <div class="col-4"> <strong>Ngày đặt hàng:</strong> <br>{{ $order->created_at->format('d-m-Y') }} </div>
-                                <div class="col-4"> <strong>Số điện thoại giao hàng:</strong> <br> <i class="fa fa-phone"></i> {{
+                                <div class="col-3"> <strong>Ngày đặt hàng:</strong> <br>{{ $order->created_at->format('d-m-Y') }} </div>
+                                <div class="col-3"> <strong>Phương thức thanh toán:</strong> <br> @if ($order->payment_method == 1)
+                                                                    Thanh toán khi nhận hàng
+                                                                @else ($order->payment_method == 2)
+                                                                    Thanh toán online
+                                                                @endif</div>
+                                <div class="col-3"> <strong>Số điện thoại giao hàng:</strong> <br> <i class="fa fa-phone"></i> {{
                                 $order->phone }}</div>
-                                <div class="col-4"> <strong>Địa chỉ giao hàng:</strong> <br> {{ $order->address }} </div>
+                                <div class="col-3"> <strong>Địa chỉ giao hàng:</strong> <br> {{ $order->address}},
+                                @if(Auth()->user()->ward_id != NULL)
+                                {{ Auth()->user()->ward()->first()->name }},{{ Auth()->user()->ward()->first()->district()->first()->name }},{{ Auth()->user()->ward()->first()->district()->first()->province()->first()->name}}</div>
+                                @endif
                             </div>
                         </article>
                     </div>

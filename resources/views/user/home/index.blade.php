@@ -149,25 +149,54 @@
         </div>
     </section>
     <section class="ftco-section ftco-no-pb">
-        <div class="">
-            <div class="row col-12">
+        <div class="row col-12 justify-content-center">
+            <div class="col-2">
+                <div class="card13">
+                    <div class="text-center font-weight-bold">Tuýp chăm da cho bạn nên biết biết!</div>
+                    <img src="{{asset('asset/images/beauty-treatment.png')}}" class="navbar-brand-img">
+                </div>
+            </div>
+            <div class="row col-10">
                 <div class="col-2">
-                    <div class="card13">
-                        <div class="text-center font-weight-bold"></div>
-                    </div>
-                </div>
-                <div class="col-10">
-                    <div class="col-12 row">
-                        @foreach($skins as $skin)
-                        <div class="col-1 ml-5 skin-item">
-                            <div class="card12">
-                                <div class="text-center font-weight-bold">{{$skin->name}}</div>
-                            </div>
+                    <div class="col-1 skin-item pl-5 ml-5">
+                        <div class="card12">
+                            <div class="text-center font-weight-bold">Cần sử dụng kem chống nắng hằng ngày cho dù nắng hay mưa!</div>
+                            <img style="height: 55px; width: 55px; position: absolute; top: 80%; left: 200%; transform: translate(-50%, -50%);" src="{{asset('asset/images/sunscreen.png')}}" class="navbar-brand-img">
                         </div>
-                        @endforeach
                     </div>
                 </div>
-
+                <div class="col-2">
+                    <div class="col-1 skin-item ml-5 pl-4">
+                        <div class="card12">
+                            <div class="text-center font-weight-bold">Cho dù là da gì bạn cũng sẽ cần khóa ẩm lại sau các bước dưỡng.</div>
+                            <img style="height: 55px; width: 55px; position: absolute; top: 80%; left: 260%; transform: translate(-50%, -50%);" src="{{asset('asset/images/cream.png')}}" class="navbar-brand-img">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="col-1 skin-item ml-5">
+                        <div class="card12">
+                            <div class="text-center font-weight-bold">Serum là một sản phẩm chăm sóc da chuyên sâu.</div>
+                            <img style="height: 55px; width: 55px; position: absolute; top: 80%; left: 260%; transform: translate(-50%, -50%);" src="{{asset('asset/images/serum.png')}}" class="navbar-brand-img">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="col-1 skin-item ml-5">
+                        <div class="card12">
+                            <div class="text-center font-weight-bold">Sữa rửa mặt là bước không thể thiếu trong chăm sóc da hàng ngày.</div>
+                            <img style="height: 55px; width: 55px; position: absolute; top: 80%; left: 260%; transform: translate(-50%, -50%);" src="{{asset('asset/images/wash-face.png')}}" class="navbar-brand-img">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="col-1 skin-item ml-5">
+                        <div class="card12">
+                            <div class="text-center font-weight-bold">Mặt nạ giấy giải pháp nhanh, hiệu quả mang lại sự tươi mới cho làn da.</div>
+                            <img style="height: 55px; width: 55px; position: absolute; top: 80%; left: 260%; transform: translate(-50%, -50%);" src="{{asset('asset/images/sheet-mask.png')}}" class="navbar-brand-img">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -204,7 +233,6 @@
                             </div>
                         </div>
                         <div class="text text-center">
-                            <!-- <span class="sale">Sale</span> -->
                             <span class="category">{{$product->category->name}}</span>
                             <h2>{{ Illuminate\Support\Str::limit($product->name, 25)}}</h2>
                             <p class="mb-0 "><span class="price">{{number_format($product->price,0, ',','.')}}</span></p>
@@ -221,7 +249,7 @@
         </div>
     </section>
     @endforeach
-    <section class="ftco-section testimony-section img" style="background-image: url(asset/images/bg_4.jpg);">
+    <!-- <section class="ftco-section testimony-section img" style="background-image: url(asset/images/bg_4.jpg);">
         <div class="overlay"></div>
         <div class="container">
             <div class="row justify-content-center mb-5">
@@ -312,7 +340,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 </div>
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

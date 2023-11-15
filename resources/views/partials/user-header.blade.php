@@ -66,32 +66,44 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sản phẩm</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            @foreach($categories as $category)
-                            <a class="dropdown-item" href="{{ route('user.shop', ['categoryId' => $category->id]) }}">{{$category->name}}</a>
-                            @endforeach
+                            <div class="col-sm-12  d-flex flex-wrap">
+                                @foreach($categories as $category)
+                                <div class="col-sm-3">
+                                    <a class="dropdown-item" href="{{ route('user.shop', ['categoryId' => $category->id]) }}">{{$category->name}}</a>
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thương hiệu</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            @foreach($brands as $brand)
-                            <a class="dropdown-item" href="{{ route('user.shop', ['brandId' => $brand->id]) }}">{{$brand->name}}</a>
-                            @endforeach
+                            <div class="col-sm-12  d-flex flex-wrap">
+                                @foreach($brands as $brand)
+                                <div class="col-sm-3">
+                                    <a class="dropdown-item" href="{{ route('user.shop', ['brandId' => $brand->id]) }}">{{$brand->name}}</a>
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Loại da</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            @foreach($skins as $skin)
-                            <a class="dropdown-item" href="{{ route('user.shop', ['skinId' => $skin->id]) }}">{{$skin->name}}</a>
-                            @endforeach
+                            <div class="col-sm-12  d-flex flex-wrap">
+                                @foreach($skins as $skin)
+                                <div class="col-sm-6">
+                                    <a class="dropdown-item" href="{{ route('user.shop', ['skinId' => $skin->id]) }}">{{$skin->name}}</a>
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
                     </li>
                     <li class="nav-item"><a href="{{ route('user.about')}}" class="nav-link">Thông tin</a></li>
                     @auth
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name}}</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        <div class="dropdown-menu w-75" aria-labelledby="dropdown04">
                             <form method="POST" action="{{route('logout')}}">
                                 @csrf
                                 <a class="dropdown-item" href="{{ route('user.user-profile.edit', ['user_profile' => Auth::id()]) }}">Thông tin</a>

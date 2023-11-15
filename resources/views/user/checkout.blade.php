@@ -23,7 +23,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name">Tên khách hàng</label>
-                                    <input id="name" type="text" name="name" class="form-control" placeholder="" value="{{$user->name}}">
+                                    <input id="name" type="text" name="name" class="form-control" placeholder="" value="{{ old('name') ?? $user->name }}">
                                     @error('name')
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
@@ -32,7 +32,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="address">Địa chỉ</label>
-                                    <input type="text" name="address" class="form-control" placeholder="" value="{{$user->address}}">
+                                    <input type="text" name="address" class="form-control" placeholder="" value="{{ old('address') ?? $user->address }}">
                                     @error('address')
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
@@ -42,7 +42,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="phone">Số điện thoại</label>
-                                    <input type="text" name="phone" class="form-control" placeholder="" value="{{$user->phone}}">
+                                    <input type="text" name="phone" class="form-control" placeholder="" value="{{ old('phone') ??  $user->phone}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -66,7 +66,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="text" name="email" class="form-control" placeholder="" value="{{$user->email}}">
+                                    <input type="text" name="email" class="form-control" placeholder="" value="{{ old('email') ??  $user->email}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -174,7 +174,7 @@
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <div class="checkbox">
-                                                <label><input type="checkbox" value="" class="mr-2"> Đã kiểm tra và đồng ý</label>
+                                                <label><input type="checkbox" value="" class="mr-2" required> Đã kiểm tra và đồng ý</label>
                                             </div>
                                         </div>
                                     </div>

@@ -180,6 +180,9 @@ class CheckoutController extends Controller
 
     public function paymentCallback()
     {
+        $categories = Category::all();
+        $brands = Brand::all();
+        $skins = Skin::all();
         $message = 'Giao dịch thành công';
         $vnpSecureHash = request('vnp_SecureHash');
         $vnpHashSecret = config('services.vnpay.vnp_hash_secret');
@@ -217,7 +220,7 @@ class CheckoutController extends Controller
         ]);
         return view('payment.success', [
             'message' => $message,
-        ]);
+        ],compact('categories', 'skins', 'brands'));
     }
 
     public function findDiscount($code)
