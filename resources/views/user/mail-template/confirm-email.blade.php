@@ -16,14 +16,14 @@
         </div>
         <div id="hoa-don">
             <h3>Hóa đơn mua hàng</h3>
-            @foreach($order->details as $orderItem)
+           
             <table class="table-bordered table-responsive">
                 <tr class="bold">
                     <td width="25%"><b>Tên sản phẩm</b></td>
                     <td width="20%"><b>Giá</b></td>
                     <td width="20%"><b>Số lượng</b></td>
                 </tr>
-             
+                @foreach($order->details as $orderItem)
                 <tr>
                     <td> {{ $orderItem->product->name}}</td>
                     <td class="price"> {{ $orderItem->price}}VND</td>
@@ -31,8 +31,8 @@
                 </tr>
                 @endforeach
                 <tr style="color: red;font-size:20px">
-                    <td><b>Tổng tiền:</b> {{number_format($order->totalamount)}}</td>
-                    <td class="total-price">VND</td>
+                    <td><b>Tổng tiền:</b> {{number_format($order->totalamount)}}VNĐ</td>
+                    <td class="total-price"></td>
                 </tr>
             </table>
         </div>

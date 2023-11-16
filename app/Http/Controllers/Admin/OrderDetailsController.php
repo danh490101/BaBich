@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderDetailsController extends Controller
 {
@@ -54,9 +55,21 @@ class OrderDetailsController extends Controller
      *
      * @param  \App\Models\OrderDetails  $orderDetails
      */
-    public function edit(OrderDetails $orderDetails)
+    public function edit($id)
     {
         //
+        // dd($id);
+        $orderDetail = Order::findOrFail($id);
+        // dd($orderDetail);
+        // dd($order);
+        $orderDetails = DB::table('order_details')
+        ->join('products', 'products.id', '=', 'order_details.product_id')
+        ->join('orders', 'orders.id', '=', 'order_details.order_id')
+        ->select('products.*', 'products.name as product_name', 'order_details.*', 'orders.*')
+        ->get();
+        // dd($order);
+        // $order = Order::with('users', 'products')->find($order->id);
+        return view('admin.order_details.edit', compact('orderDetail', 'orderDetails'));
     }
 
     /**

@@ -1,10 +1,8 @@
 <!-- Messenger Plugin chat Code -->
 <div id="fb-root"></div>
-
 <!-- Your Plugin chat code -->
 <div id="fb-customer-chat" class="fb-customerchat">
 </div>
-
 <script>
   var chatbox = document.getElementById('fb-customer-chat');
   chatbox.setAttribute("page_id", "151679438033631");

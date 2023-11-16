@@ -32,7 +32,7 @@
                             <div class="col-lg-6 ">
                                 <div class="card-profile-image mt-3">
                                     <a href="#">
-                                        <img src="{{ asset($user->avatar) }}" class="rounded-circle"  style="margin-top:45px; height: 200px;">
+                                        <img src="{{ asset($user->avatar) }}" class="rounded-circle"  style="margin-top:45px; height: 200px; width:300px">
                                     </a>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                 <div class="row">
                                     <div class="col-lg-12 col-md-6">
                                         <div class="form-group">
-                                            <label class="form-control-label" for="id">Mã nhân viên</label>
+                                            <label class="form-control-label" for="id">Mã khách hàng</label>
                                             <span name="id" class="form-control">{{$user->id}}</span>
                                         </div>
                                     </div>
@@ -70,8 +70,16 @@
                                 <div class="row">
                                     <div class="col-md-12 col-md-12">
                                         <div class="form-group">
-                                            <label class="form-control-label" for="input-address">Địa chỉ</label>
+                                            <label class="form-control-label" for="input-address">Địa chỉ cụ thể (số nhà, đường)</label>
                                             <input type="text" name="address" class="form-control" placeholder="Địa chỉ" value="{{$user->address}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-address">Địa chỉ</label>
+                                            <input type="text" name="address12" class="form-control" placeholder="Địa chỉ" value="@if(Auth()->user()->ward_id != NULL){{Auth()->user()->ward()->first()->name }},{{ Auth()->user()->ward()->first()->district()->first()->name }},{{ Auth()->user()->ward()->first()->district()->first()->province()->first()->name}}@endif">
                                         </div>
                                     </div>
                                 </div>

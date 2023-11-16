@@ -118,7 +118,7 @@
                     @else
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tài khoản</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        <div class="dropdown-menu w-75" aria-labelledby="dropdown04">
                             <form method="POST" action="{{route('logout')}}">
                                 @csrf
                                 <a class="dropdown-item" href="{{route('login')}}">Đăng nhập</a>

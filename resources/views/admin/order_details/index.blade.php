@@ -57,7 +57,7 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="#">Xem chi tiết</a>
+                                            <a class="dropdown-item" href="{{ route('admin.order_details.edit', ['order_detail' => $order->id]) }}">Xem chi tiết</a>
                                         </div>
                                     </div>
                                 </td>
