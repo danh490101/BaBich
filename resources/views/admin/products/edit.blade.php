@@ -51,6 +51,19 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
+                                            <label class="form-control-label" for="price">Giá hàng hóa</label>
+                                            <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
+                                            <input type="text" name="price" class="form-control" placeholder="Tên sản phẩm" value="{{$product->price}}">
+
+                                            @error('name')
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
                                             <label class="form-control-label" for="goods">Loại hàng</label>
                                             <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
                                             <!-- <input type="text" name="id-goods" class="form-control" placeholder="Loại hàng" value="{{$product -> category->name}}"> -->
@@ -67,7 +80,6 @@
                                         <div class="form-group">
                                             <label class="form-control-label" for="goods">Thương hiệu</label>
                                             <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
-                                            <!-- <input type="text" name="id-goods" class="form-control" placeholder="Thương hiệu" value="{{$product -> brand->name}}"> -->
                                             <select class="form-control form-select mt-3" name='brand_id'>
                                                 @foreach ($brands as $brand)
                                                 <option value="{{$brand->id}}">{{ $brand->name }}</option>
@@ -81,7 +93,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label" for="goods">Loại da</label>
                                             <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
-                                            <!-- <input type="text" name="id-goods" class="form-control" placeholder="Thương hiệu" value="{{$product -> brand->name}}"> -->
+                                           
                                             <select class="form-control form-select mt-3" name='skin_id'>
                                                 @foreach ($skins as $skin)
                                                 <option value="{{$skin->id}}">{{ $skin->name }}</option>
@@ -93,6 +105,7 @@
                             </div>
                             <!-- <hr class="my-4" /> -->
                             <div class="pl-lg-4">
+                                
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
@@ -159,7 +172,7 @@
                                     </div>
                                     <div class="col-6 text-right">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-sm btn-primary"> Thêm hàng hóa </button>
+                                            <button type="submit" class="btn btn-sm btn-primary"> Lưu </button>
                                         </div>
                                     </div>
                                 </div>

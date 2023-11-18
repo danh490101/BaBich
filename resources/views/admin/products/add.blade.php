@@ -45,7 +45,7 @@
                                         <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
                                         <select class="form-control form-select mt-3" name='category_id'>
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                         <!-- <input type="text" name="id-goods" class="form-control" placeholder="Mã loại hàng" value=""> -->
@@ -59,7 +59,7 @@
                                         <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
                                         <select class="form-control form-select mt-3" name='brand_id'>
                                             @foreach ($brands as $brand)
-                                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                             @endforeach
                                         </select>
                                         <!-- <input type="text" name="id-goods" class="form-control" placeholder="Mã loại hàng" value=""> -->
@@ -73,7 +73,7 @@
                                         <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
                                         <select class="form-control form-select mt-3" name='skin_id'>
                                             @foreach ($skins as $skin)
-                                                <option value="{{ $skin->id }}">{{ $skin->name }}</option>
+                                            <option value="{{ $skin->id }}">{{ $skin->name }}</option>
                                             @endforeach
                                         </select>
                                         <!-- <input type="text" name="id-goods" class="form-control" placeholder="Mã loại hàng" value=""> -->
@@ -83,6 +83,14 @@
                         </div>
                         <!-- <hr class="my-4" /> -->
                         <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Giá</label>
+                                        <textarea name="price" rows="4" class="form-control" placeholder="Giá sản phẩm"></textarea>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">

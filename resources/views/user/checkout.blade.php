@@ -38,7 +38,6 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="phone">Số điện thoại</label>
@@ -49,17 +48,18 @@
                                 <div class="form-group">
                                     <label for="province">Tỉnh</label>
                                     <select class="form-control" id="province-dropdown">
-                                        <option value="">Chọn tỉnh</option>                                        
+                                        <option value="">Chọn tỉnh</option>
                                         @if(Auth()->user()->ward_id != NULL)
-                                            <option value="{{ Auth()->user()->ward()->first()->district()->first()->province()->first()->id }}" selected>
-                                                {{ Auth()->user()->ward()->first()->district()->first()->province()->first()->name }}
-                                            </option>
-                                        @endif
+                                        <option value="{{ Auth()->user()->ward()->first()->district()->first()->province()->first()->id }}" selected>
+                                            {{ Auth()->user()->ward()->first()->district()->first()->province()->first()->name }}
+                                        </option>
+                                        @else
                                             @foreach($provinces as $province)
-                                                <option value="  {{ $province->id }}">
-                                                    {{ $province->name}}
-                                                </option>
+                                            <option value="  {{ $province->id }}">
+                                                {{ $province->name}}
+                                            </option>
                                             @endforeach
+                                        @endif
                                     </select>
                                 </div>
                             </div>
@@ -100,43 +100,36 @@
                                     @endif
                                 </div>
                             </div>
-
                             <div class="w-100"></div>
-
                             <div class="w-100"></div>
                         </div>
                         <div class="row mt-5 pt-3 d-flex">
                             <div class="col-md-6 d-flex">
                                 <div class="cart-detail cart-total p-3 p-md-4">
-                                    <h3 class="billing-heading mb-4">Cart Total</h3>
+                                    <h3 class="billing-heading mb-4">TỔNG</h3>
                                     <p class="d-flex">
-                                        <span>Subtotal</span>
+                                        <span>Tổng đơn hàng</span>
                                         <span>{{ number_format($cart['totalPrice']) }}</span>
                                     </p>
                                     <p class="d-flex">
-                                        <span>Delivery</span>
-                                        <input id="delivery-fee" type="hidden" name="delivery_cost" class="form-control" placeholder="" value="{{ 00 }}" >
+                                        <span>Phí vận chuyển</span>
                                         <span id="delivery-fee-span">
-                                        @if(Auth()->user()->ward_id != NULL)        
+                                            @if(Auth()->user()->ward_id != NULL)
+                                            <input id="delivery-fee" type="hidden" name="delivery_cost" class="form-control" placeholder="" value="{{ Auth()->user()->ward()->first()->district()->first()->province()->first()->deliveryfee()->first()->price }}">
                                             {{ Auth()->user()->ward()->first()->district()->first()->province()->first()->deliveryfee()->first()->price }}
+                                            @else
+                                            <input id="delivery-fee" type="hidden" name="delivery_cost" class="form-control" placeholder="" value="00">
                                             @endif
                                         </span>
                                     </p>
                                     <div class="d-flex">
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="discount">Nhập mã giảm giá</label>
-            <input type="text" id="discountCode" name="code" class="form-control" placeholder="" value="">
-        </div>
-    </div>
-    
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="discount">&nbsp;</label>
-            <div id="searchDiscount" style="width: 100px; height: 30px; border: 1px solid black; border-radius: 10%;">Tìm</div>
-        </div>
-    </div>
-</div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="discount">Nhập mã giảm giá</label>
+                                                <input type="text" id="discountCode" name="code" class="form-control" placeholder="" value="">
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <!-- <p class="d-flex">
                                         <span>Discount</span>
@@ -144,9 +137,10 @@
                                     </p> -->
                                     <hr>
                                     <p class="d-flex total-price">
-                                        <span>Total</span>
+                                        <span>Tổng</span>
+                                        <input type="hidden" id="cartTotal" value="{{ round( $cart['totalPrice']) }}">
                                         <input type="hidden" name="totalamount" id="total_order_input" class="form-control" placeholder="" value="{{ round( $cart['totalPrice']) }}">
-                                        <span id="total_order_span"> @if(Auth()->user()->ward_id != NULL)        
+                                        <span id="total_order_span"> @if(Auth()->user()->ward_id != NULL)
                                             {{ number_format( $cart['totalPrice'] + Auth()->user()->ward()->first()->district()->first()->province()->first()->deliveryfee()->first()->price) }}
                                             @else
                                             {{ number_format( $cart['totalPrice']) }}
@@ -311,5 +305,29 @@
             preview.src = URL.createObjectURL(file)
         }
     }
+</script>
+
+<script>
+    $(document).ready(function () {
+            $('#discountCode').on('input', function () {
+                $.ajax({
+                    url: '/user/check-coupon',
+                    type: 'GET',
+                    data: { code: this.value },
+                    dataType: 'json',
+                    success: function (response) {
+                        let value =  $('#cartTotal').val()
+                        let fee =  $('#delivery-fee').val()
+                        let total = parseInt(value) + parseInt(fee)
+                        let newTotal = parseInt(total) - (parseInt(total) * response.data.value)/100 
+                        $('#total_order_input').val(newTotal);
+                        $('#total_order_span').text(newTotal);
+                    },
+                    error: function (error) {
+                        console.log('Error:', error);
+                    }
+                });
+            });
+        });
 </script>
 @endsection

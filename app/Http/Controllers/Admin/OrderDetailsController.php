@@ -18,6 +18,7 @@ class OrderDetailsController extends Controller
     {
         $order_details = OrderDetails::all();
         $orders = Order::all();
+        
         return view('admin.order_details.index', compact('order_details', 'orders'));
     }
 
@@ -68,6 +69,7 @@ class OrderDetailsController extends Controller
         ->select('products.*', 'products.name as product_name', 'order_details.*', 'orders.*')
         ->get();
         // dd($order);
+        // dd($orderDetail, $orderDetails);
         // $order = Order::with('users', 'products')->find($order->id);
         return view('admin.order_details.edit', compact('orderDetail', 'orderDetails'));
     }

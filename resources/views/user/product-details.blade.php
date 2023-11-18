@@ -14,18 +14,18 @@
 <section class="ftco-section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 mb-5 ftco-animate">
+            <div class="col-lg-6 ftco-animate">
                 <div class="slider">
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img class="d-block w-100" src="{{ asset( $product->image) }}" alt="First slide">
+                                <img class="d-block w-75" src="{{ asset( $product->image) }}" alt="First slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block w-100" src="{{ asset($product->images) }}" alt="Second slide">
+                                <img class="d-block w-75" src="{{ asset($product->images) }}" alt="Second slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block w-100" src="{{ asset( $product->image2) }}" alt="Second slide">
+                                <img class="d-block w-75" src="{{ asset( $product->image2) }}" alt="Second slide">
                             </div>
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -42,10 +42,13 @@
                     <!-- Thêm hình -->
                 </div>
             </div>
-            <div class="col-lg-6 product-details pl-md-5 ftco-animate mt-5">
+            <div class="col-lg-6 product-details ftco-animate mt-5">
                 <h3>{{$product->name}}</h3>
-                <p class="price"><span>Giá: {{$product->price}}</span></p>
-
+                @if (isset($discount)) 
+                    <p class="price"><span class="price price-sale" style="text-decoration: line-through;">{{number_format($product->price,0, ',','.')}}</span><span class="price fw-bolder"> {{ number_format($discount,0, ',','.')}}</span></p>
+                @else
+                    <p class="price"><span>Giá: {{number_format($product->price,0, ',','.')}}đ</span></p>
+                @endif
                 <form action="{{route('add_to_cart',['id' => $product->id])}}" method="post">
                     <div class="row mt-4">
                         <div class="input-group col-md-6 d-flex mb-3">

@@ -2,11 +2,13 @@
 
 namespace App\Mail;
 
+use PDF;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Response;
 
 class ConfirmEmail extends Mailable
 {
@@ -14,6 +16,7 @@ class ConfirmEmail extends Mailable
     use SerializesModels;
 
     public $order;
+    public $pdfFile;
     /**
      * Create a new message instance.
      *
@@ -50,7 +53,7 @@ class ConfirmEmail extends Mailable
             with: [
                 'order' => $order
             ],
-        );
+        );git
     }
 
     /**

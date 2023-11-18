@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Province;
 use App\Models\Skin;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -55,8 +56,9 @@ class UsProfileController extends Controller
         $brands = Brand::all();
         $skins = Skin::all();
         $user = User::findOrFail($id);
+        $provinces = Province::orderBy('name', 'asc')->get();
         // dd($user);
-        return view('user.user-profile.edit', compact('user', 'categories', 'brands', 'skins'));
+        return view('user.user-profile.edit', compact('user', 'categories', 'brands', 'skins', 'provinces'));
     }
 
     /**
@@ -78,6 +80,9 @@ class UsProfileController extends Controller
             'fileUpload' => [
                 'nullable',
                 'image'
+            ],
+            'ward_id' =>[
+                'required'
             ]
 
         ]);

@@ -34,6 +34,17 @@ class SearchController extends Controller
         ->where('quantity', '>', 0)
         ->get();
 
+        session()->put('results', $results);
+
+        return redirect()->route('user.search-view');
+    // return view('user.home.search', ['results' => $results], compact('categories', 'brands', 'skins'));
+}
+
+public function searchView(Request $request) {
+    $skins = Skin::all();
+    $brands = Brand::all();
+    $categories = Category::all();
+    $results = session('results') ?? [];
     return view('user.home.search', ['results' => $results], compact('categories', 'brands', 'skins'));
 }
 

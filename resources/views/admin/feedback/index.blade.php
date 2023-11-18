@@ -20,11 +20,11 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col" class="sort" data-sort="name">Mã </th>
-                                <th scope="col" class="sort" data-sort="name">Mã hàng</th>
-                                <th scope="col" class="sort" data-sort="name">Mã khách</th>
+                                <th scope="col" class="sort" data-sort="name">Tên sản phẩm</th>
+                                <th scope="col" class="sort" data-sort="name">Tên khách hàng</th>
                                 <th scope="col" class="sort" data-sort="name">Bình luận</th>
                                 <th scope="col" class="sort" data-sort="name">Đánh giá</th>
-                                <th scope="col" class="sort" data-sort="name">Status</th>
+                                <th scope="col" class="sort" data-sort="name">Trạng thái</th>
                                 <th scope="col"></th>
 
                             </tr>
@@ -41,12 +41,12 @@
                                 </td>
                                 <td>
                                     <span>
-                                        {{$feedback->product_id}}
+                                        {{ Illuminate\Support\Str::limit($feedback->product->name, 20) }}
                                     </span>
                                 </td>
                                 <td>
                                     <span>
-                                        {{$feedback->user_id}}
+                                        {{$feedback->user->name}}
                                     </span>
                                 </td>
                                 <td>
@@ -62,9 +62,9 @@
                                 <td>
                                     <span>
                                         @if ($feedback->status)
-                                        Show
+                                        Hiện
                                         @else
-                                        Hide
+                                        Ẩn
                                         @endif
                                     </span>
                                 </td>
@@ -81,7 +81,7 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="{{ route('admin.feedback.changeStatus', ['feedback' => $feedback->id]) }}">Change</a>
+                                            <a class="dropdown-item" href="{{ route('admin.feedback.changeStatus', ['feedback' => $feedback->id]) }}">Thay đổi</a>
                                         </div>
                                     </div>
                                 </td>

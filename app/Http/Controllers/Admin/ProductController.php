@@ -45,6 +45,7 @@ class ProductController extends Controller
         $product = $request->validate([
             'name' => 'required|string|unique:products',
             'desc' => 'required|string',
+            'price' => 'required',
             'fileUpload' => 'required|image',
             'fileUpload1' => 'required|image',
             'fileUpload2' => 'required|image',
@@ -115,6 +116,9 @@ class ProductController extends Controller
                 'required'
             ],
             'brand_id' => [
+                'required'
+            ],
+            'price' => [
                 'required'
             ],
             'category_id' => [

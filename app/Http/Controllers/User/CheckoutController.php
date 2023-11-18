@@ -50,8 +50,11 @@ class CheckoutController extends Controller
             'totalamount' => 'required',
             'delivery_cost' => 'required',
             'ward_id' => 'required',
-            'payment_method' => ' required|in:COD,VNPAY'
+            'payment_method' => ' required|in:COD,VNPAY',
+            'code' => 'nullable|string'
         ]);
+
+        $discount = Discount::where('code', '=', $validatedData['code'])->where('status', '=', 1)->first();
 
         $order = Order::create([
             'name' => $validatedData['name'],
@@ -63,6 +66,7 @@ class CheckoutController extends Controller
             'payment_method' => $validatedData['payment_method'],
             'ward_id' => $validatedData['ward_id'],
             'user_id' => Auth::id(),
+            'order_notes' => $discount ? $discount->name : ''
         ]);
         //get discount by code
         //=> lay tu bang discount theo cot code
@@ -234,5 +238,23 @@ class CheckoutController extends Controller
     {
         $province = Province::find($id);
         return $province->deliveryFee()->first()->price;
+    }
+
+    public function checkCoupon(Request $request) {
+        $code = $request->get('code', 0);
+
+        $discount = Discount::where('code', '=', $code)->where('status', '=', 1)->first();
+
+        if ($discount) {
+            $value = $discount->value;
+        } else $value = 0;
+        
+        return response()->json([
+            'status' => 'success', 
+            'message' => 'Function called successfully', 
+            'data' => [
+                'value' => $value
+            ]
+        ]);
     }
 }

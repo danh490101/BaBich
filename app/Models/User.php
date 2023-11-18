@@ -63,4 +63,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Ward::class, 'ward_id', 'id');
     }
+
+    public function feedbacks(){
+        return $this->hasMany(Feedback::class);
+    }
 }

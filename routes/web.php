@@ -59,6 +59,7 @@ Route::get('/user/add-to-cart/{id}', [App\Http\Controllers\User\ProductControlle
 Route::patch('/user/update-cart', [App\Http\Controllers\User\ProductController::class, 'update'])->name('update_cart');
 Route::delete('/user/remove-from-cart', [App\Http\Controllers\User\ProductController::class, 'remove'])->name('remove_from_cart');
 Route::post('/user/home/search', [SearchController::class, 'getSearch'])->name('user.search');
+Route::get('/user/home/search', [SearchController::class, 'searchView'])->name('user.search-view');
 Route::get('add-to-cart/{id}', [UserProductController::class, 'addToCart'])->name('add-to-cart');
 // Route::get('/shop/{categoryId}', 'ProductController@showByCategory')->name('user.shop');
 
@@ -76,6 +77,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dasboard', UserDashboardComponent::class)->name('user.dasboard');
         Route::resource('/feedback', FeedbackController::class);
         Route::resource('/checkout', CheckoutController::class);
+        Route::get('/check-coupon', [CheckoutController::class, 'checkCoupon'])->name('check-coupon');
         Route::get('/delivery-fee/{id}', [CheckoutController::class, 'deliveryFee'])->name('delivery-fee');
         Route::resource('/user-profile', UsProfileController::class);
         // Route::resource('/order-history', OrderHistoryController::class);

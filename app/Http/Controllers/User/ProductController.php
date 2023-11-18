@@ -54,7 +54,7 @@ class ProductController extends Controller
         // $cart['totalAmount'] += 1;
         $cart['totalAmount'] += $data['quantity'];
         session()->put('cart', $cart);
-        toastr()->success('Thêm vào giỏ hàng thành công');
+        session()->flash('success', 'Thêm vào giỏ hàng thành công');
         return redirect()->back();
     }
 
@@ -92,11 +92,10 @@ class ProductController extends Controller
                 "image" => $product->image
             ];
         }
-        // $cart['totalAmount'] += 1;
         $cart['totalAmount'] += $data['quantity'];
         session()->put('cart', $cart);
-        // toastr()->success('Thêm vào giỏ hàng thành công');
-        return redirect()->back()->with('success','Thêm vào giỏ hàng thành công');
+        session()->flash('success', 'Thêm vào giỏ hàng thành công');
+        return redirect()->back();
     }
 
     public function index(Request $request)
@@ -175,6 +174,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $brands = Brand::all();
         $skins = Skin::all();
+
         return view('user.favorite', compact('products', 'categories', 'skins', 'brands'));
     }
 

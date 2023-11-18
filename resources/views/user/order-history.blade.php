@@ -46,9 +46,9 @@
                         <article class="card col-12 pl-5">
                             <div class="card-body col-12 row">
                                 <div class="col-3"> <strong>Ngày đặt hàng:</strong> <br>{{ $order->created_at->format('d-m-Y') }} </div>
-                                <div class="col-3"> <strong>Phương thức thanh toán:</strong> <br> @if ($order->payment_method == 1)
+                                <div class="col-3"> <strong>Phương thức thanh toán:</strong> <br> @if ($order->payment_method == 'COD')
                                                                     Thanh toán khi nhận hàng
-                                                                @else ($order->payment_method == 2)
+                                                                @else ($order->payment_method == 'VNPAY')
                                                                     Thanh toán online
                                                                 @endif</div>
                                 <div class="col-3"> <strong>Số điện thoại giao hàng:</strong> <br> <i class="fa fa-phone"></i> {{
@@ -73,6 +73,7 @@
                         @endforeach
                     </div>
                     <hr class="my-4" />
+                    @if ($status == 0)
                     <form action="{{ route('user.order-history.destroy', ['id' => $order->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
@@ -80,6 +81,7 @@
                         <button type="submit" class="btn btn-primary ">Hủy đơn hàng</button>
                     </p>
                     </form>
+                    @endif
                     <h3 class="mt-1 d-flex justify-content-end"><strong>Tổng tiền: {{ number_format($order->totalamount, 0, ',', '.') }} VNĐ</strong></h3>
                 </div>
             </div>

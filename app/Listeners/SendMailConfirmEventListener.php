@@ -26,6 +26,7 @@ class SendMailConfirmEventListener
     public function handle(SendMailConfirmEvent $event)
     {
         $order = $event->order;
+        $pdfFile = "text";
 
         Mail::to($order->email)->send(new ConfirmEmail($order));
     }

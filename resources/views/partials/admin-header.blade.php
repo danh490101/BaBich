@@ -75,11 +75,6 @@
                                     <span class="nav-link-text">Đánh giá</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{'admin.users.index'}}">
-                                    <span class="nav-link-text">Danh sách khách hàng</span>
-                                </a>
-                            </li>
                         </div>
                     </div>
                     <div class="dropdown">

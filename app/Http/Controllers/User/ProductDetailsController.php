@@ -23,6 +23,7 @@ class ProductDetailsController extends Controller
 
     public function show(Product $product)
     {
+        $discount = $this->checkDiscount($product->id);
         $categories = Category::all();
         $brands = Brand::all();
         $skins = Skin::all();
@@ -36,14 +37,23 @@ class ProductDetailsController extends Controller
         $product = Product::findOrFail($product->id);
         $this->pushToViewHistory($product->id);
 
-        $comments = Feedback::where('product_id', $product->id)->get()->toArray();
+        $comments = Feedback::where('product_id', $product->id)->where('status', '=', 1)->get()->toArray();
 
         $comments = array_map(function ($comment) {
             $user = User::findOrFail($comment['user_id']);
             $comment['user'] = $user;
             return $comment;
         }, $comments);
-        $pdcate = Product::where('category_id', $product->category()->first()->id)->get();
+        $category_id = $product->category()->first()->id;
+        $pdcate = Product::where('category_id', $category_id)
+            ->where('id', '<>', $product->id)
+            ->get();
+
+
+
+        if ($discount != 0) {
+            return view('user.product-details', compact('product', 'comments', 'avgRating', 'categories', 'skins', 'brands', 'pdcate', 'discount'));
+        }
         return view('user.product-details', compact('product', 'comments', 'avgRating', 'categories', 'skins', 'brands', 'pdcate'));
     }
 
@@ -62,5 +72,23 @@ class ProductDetailsController extends Controller
             array_unshift($userViewHistories, $product->id);
             Session::put('user_history', $userViewHistories);
         }
+    }
+
+    public function checkDiscount($productId)
+    {
+        //set discount with id products
+        //get all with status = 1, noted dung where
+        $discounts = \App\Models\Discount::where('status', '=', '1')->get()->toArray();
+        $productDiscounts = [];
+        $product = Product::find(['id' => $productId])->first();
+        foreach ($discounts as $item) {
+            foreach (json_decode($item['product_ids']) as $id) {
+                if ($productId == $id) {
+                    return $product->price - $product->price * $item['value'] / 100;
+                }
+            }
+        }
+
+        return 0;
     }
 }

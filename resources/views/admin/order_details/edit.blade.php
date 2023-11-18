@@ -25,7 +25,7 @@
                       <div class="col-lg-6 col-md-6">
                           <div class="form-group">
                               <label class="form-control-label" for="id">Mã đơn hàng</label>
-                              <span id="id" class="form-control" >{{$orderDetails->id}}</span>
+                              <span id="id" class="form-control" >{{$orderDetail->id}}</span>
                           </div>
                       </div>
                       <div class="col-lg-6 col-md-6">
@@ -39,7 +39,13 @@
                       <div class="col-lg-6 col-md-6">
                           <div class="form-group">
                               <label class="form-control-label" for="id">Ngày đặt hàng</label>
-                              <span class="form-control">{{$orderDetails -> created_at->format('d-m-Y')}}</span>
+                              <span class="form-control">{{$orderDetail-> created_at-> format('d-m-Y')}}</span>
+                          </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6">
+                          <div class="form-group">
+                              <label class="form-control-label" for="id">Ngày gửi hàng</label>
+                              <span class="form-control">{{ date('d-m-Y', strtotime($orderDetail-> delivery_date)) }}</span>
                           </div>
                       </div>
                   </div>
@@ -47,13 +53,13 @@
                       <div class="col-lg-6 col-md-6">
                           <div class="form-group">
                               <label class="form-control-label" for="id">Mã khách hàng</label>
-                              <span class="form-control" >{{$orderDetails->user_id}}</span>
+                              <span class="form-control" >{{$orderDetail->user_id}}</span>
                           </div>
                       </div>
                       <div class="col-lg-6 col-md-6">
                           <div class="form-group">
                               <label class="form-control-label" for="office">Tên khách hàng</label>
-                              <span id="office" class="form-control" >{{$orderDetails->name}}</span>
+                              <span id="office" class="form-control" >{{$orderDetail->name}}</span>
                           </div>
                       </div>
                   </div>
@@ -61,13 +67,13 @@
                       <div class="col-lg-6 col-md-6">
                           <div class="form-group">
                               <label class="form-control-label" for="id">Số điện thoại</label>
-                              <span class="form-control" >{{$orderDetails->phone}}</span>
+                              <span class="form-control" >{{$orderDetail->phone}}</span>
                           </div>
                       </div>
                       <div class="col-lg-6 col-md-6">
                           <div class="form-group">
                               <label class="form-control-label" for="office">Email</label>
-                              <span id="office" class="form-control" >{{$orderDetails->email}}</span>
+                              <span id="office" class="form-control" >{{$orderDetail->email}}</span>
                           </div>
                       </div>
                   </div>
@@ -75,7 +81,7 @@
                       <div class="col-lg-12 col-md-12">
                           <div class="form-group">
                               <label class="form-control-label" for="id">Địa chỉ </label>
-                              <span class="form-control" >{{$orderDetails->address}}</span>
+                              <span class="form-control" >{{$orderDetail->address}}, {{$orderDetail->ward()->first()->name}}, ,{{ $orderDetail->ward()->first()->district()->first()->name }},{{$orderDetail->ward()->first()->district()->first()->province()->first()->name}}</span>
                           </div>
                       </div>
                   </div>
@@ -110,8 +116,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($order as $or)
-                  @if($orders->id === $or->id)
+                  @foreach($orderDetails as $or)
+                  @if($orderDetail->id === $or->id)
                   <tr>
                     <th scope="row">
                     {{$or->product_id}}
@@ -149,7 +155,7 @@
               </div>
               <div class="col-6 text-right pr-2">
                   <h5 class="card-title text-uppercase text-muted mb-2">Tổng thanh toán </h5>
-                  <span class="h2 font-weight-bold mb-2 ">{{$orders->totalamount}}</span>
+                  <span class="h2 font-weight-bold mb-2 ">{{$orderDetail->totalamount}}</span>
               </div>
           </div>
       </div>

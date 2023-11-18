@@ -47,7 +47,15 @@
         </div>
     </form> -->
 
-
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,700;0,800;1,200;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{asset('asset/css/animate.css')}}">
+<link rel="stylesheet" href="{{asset('asset/css/owl.carousel.min.css')}}">
+<link rel="stylesheet" href="{{asset('asset/css/owl.theme.default.min.css')}}">
+<link rel="stylesheet" href="{{asset('asset/css/magnific-popup.css')}}">
+<link rel="stylesheet" href="{{asset('asset/css/flaticon.css')}}">
+<link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
 
 
 <div class="container">
@@ -58,9 +66,40 @@
         <input required="" class="input" type="email" name="email" id="email" :value="old('email')" :messages="$errors->get('email')" placeholder="Email">
         <input required="" class="input" type="tel" name="phone" id="phone" :value="old('phone')" :messages="$errors->get('phone')" placeholder="Số điện thoại">
         <input required="" class="input" type="address" name="address" id="address" :value="old('address')" :messages="$errors->get('address')" placeholder="Địa chỉ">
+        <div class="col-12">
+            <div class="form-group">
+                <!-- <input type="address" class="input" required name="province_id" :value="old('$province->id')" placeholder="Tỉnh"> -->
+                <label for="province">Tỉnh</label>
+                <select class="form-control" id="province-dropdown">
+                    <option value="">Chọn tỉnh</option>
+                    @foreach($provinces as $province)
+                    <option value="  {{ $province->id }}">
+                        {{ $province->name}}
+                    </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="col-12 row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="district">Quận/Huyện</label>
+                    <select class="form-control" id="district-dropdown">
+                    </select>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="ward">Xã/Phường</label>
+                    <select class="form-control" id="ward-dropdown" name="ward_id">
+                    </select>
+                </div>
+            </div>
+        </div>
         <input required="" class="input" type="password" name="password" id="password" :messages="$errors->get('password')" required autocomplete="new-password" placeholder="Password">
         <input required="" class="input" type="password" name="password_confirmation" id="password_confirmation" :messages="$errors->get('password_confirmation')" required autocomplete="new-password" required autocomplete="new-password" placeholder="Password">
         <input class="login-button" type="submit" value="Đăng kí">
+        <span class="forgot-password"><a href="{{route('login')}}">Đăng nhập ?</a></span>
     </form>
     <div class="social-account-container">
         <span class="title">Or Sign in with</span>
@@ -73,6 +112,91 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript">
+</script>
+<script>
+    $(document).ready(function() {
+        $('#province-dropdown').on('change', function() {
+            var province_id = this.value;
+
+            $.ajax({
+                url: '/user/delivery-fee/' + province_id,
+                type: 'GET',
+                success: function(data) {
+                    console.log(data);
+                    $('#delivery-fee').val(data);
+                    $('#delivery-fee-span').text(data);
+                    let total = BigInt($('#total_order_input').val()) + BigInt(data);
+                    $('#total_order_input').val(total);
+                    $('#total_order_span').text(total);
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr);
+                }
+            });
+
+            $("#district-dropdown").html('');
+            $.ajax({
+                url: "{{ route('locations.get-district') }}",
+                type: "POST",
+                data: {
+                    province_id: province_id,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $('#district-dropdown').html(
+                        '<option value="">Chọn quận/huyện</option>'
+                    );
+                    $.each(result.districts, function(
+                        key, value) {
+                        $("#district-dropdown")
+                            .append(
+                                '<option value="' +
+                                value
+                                .id +
+                                '">' + value
+                                .name +
+                                '</option>');
+                    });
+                    $('#ward-dropdown').html(
+                        '<option value="">Chọn phường xã </option>'
+                    );
+                }
+            });
+        });
+
+        $('#district-dropdown').on('change', function() {
+            var district_id = this.value;
+            $("#ward-dropdown").html('');
+            $.ajax({
+                url: "{{ route('locations.get-ward') }}",
+                type: "POST",
+                data: {
+                    district_id: district_id,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $('#ward-dropdown').html(
+                        '<option value="">Chọn phường/xã</option>'
+                    );
+                    $.each(result.wards, function(key,
+                        value) {
+                        $("#ward-dropdown")
+                            .append(
+                                '<option value="' +
+                                value.id +
+                                '">' + value
+                                .name +
+                                '</option>');
+                    });
+                }
+            });
+        });
+
+    });
+</script>
 <style>
     .container {
         max-width: 350px;

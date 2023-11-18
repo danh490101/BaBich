@@ -49,7 +49,7 @@
                                     <span class="status">{{$order->created_at->format('d-m-Y')}}</span>
                                 </td>
                                 <td>
-                                    <span class="status">{{$order->delivery_date}}</span>
+                                    <span class="status">{{ date('d-m-Y', strtotime($order->delivery_date)) }}</span>
                                 </td>
                                 <td class="text-right">
                                     <div class="dropdown">

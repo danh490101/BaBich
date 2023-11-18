@@ -12,4 +12,11 @@ class Feedback extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['user_id','product_id','comment','rating', 'status'];
 
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

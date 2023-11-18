@@ -46,7 +46,6 @@ class WarehousReceiptController extends Controller
 
         $validate = $request->validate([
             'quantity' => 'required',
-            'price' => 'required',
         ]);
         $whreceipt = array(
             'note' => $request['note'],
@@ -63,7 +62,6 @@ class WarehousReceiptController extends Controller
         );
         $product = Product::findOrFail($request['product_id']);
         $product->quantity = $request['quantity'] +  $product->quantity ;
-        $product->price = $request['price'];
         $whdetail = WarehouseDetail::create($whdetail);
         $product = $product->update();
 
