@@ -53,13 +53,12 @@
                                         <option value="{{ Auth()->user()->ward()->first()->district()->first()->province()->first()->id }}" selected>
                                             {{ Auth()->user()->ward()->first()->district()->first()->province()->first()->name }}
                                         </option>
-                                        @else
+                                        @endif
                                             @foreach($provinces as $province)
                                             <option value="  {{ $province->id }}">
                                                 {{ $province->name}}
                                             </option>
                                             @endforeach
-                                        @endif
                                     </select>
                                 </div>
                             </div>
@@ -139,7 +138,7 @@
                                     <p class="d-flex total-price">
                                         <span>Tổng</span>
                                         <input type="hidden" id="cartTotal" value="{{ round( $cart['totalPrice']) }}">
-                                        <input type="hidden" name="totalamount" id="total_order_input" class="form-control" placeholder="" value="{{ round( $cart['totalPrice']) }}">
+                                        <input type="hidden" name="totalamount" id="total_order_input" class="form-control" placeholder="" value="{{ round( $cart['totalPrice'] + Auth()->user()->ward()->first()->district()->first()->province()->first()->deliveryfee()->first()->price) }}">
                                         <span id="total_order_span"> @if(Auth()->user()->ward_id != NULL)
                                             {{ number_format( $cart['totalPrice'] + Auth()->user()->ward()->first()->district()->first()->province()->first()->deliveryfee()->first()->price) }}
                                             @else

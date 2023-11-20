@@ -53,7 +53,7 @@ class ConfirmEmail extends Mailable
             with: [
                 'order' => $order
             ],
-        );git
+        );
     }
 
     /**

@@ -144,7 +144,7 @@ class CheckoutController extends Controller
                 $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnpHashSecret);
                 $vnpUrl .= 'vnp_SecureHash=' . $vnpSecureHash;
             }
-
+            SendMailConfirmEvent::dispatch($order);
             return redirect($vnpUrl)->with([
                 'code' => '00',
                 'message' => 'success',
@@ -222,6 +222,7 @@ class CheckoutController extends Controller
         Order::where('id', request('vnp_TxnRef'))->update([
             'payment_status' => 'paid'
         ]);
+        // SendMailConfirmEvent::dispatch($order);
         return view('payment.success', [
             'message' => $message,
         ],compact('categories', 'skins', 'brands'));
