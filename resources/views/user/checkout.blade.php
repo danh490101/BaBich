@@ -107,19 +107,24 @@
                                 <div class="cart-detail cart-total p-3 p-md-4">
                                     <h3 class="billing-heading mb-4">TỔNG</h3>
                                     <p class="d-flex">
-                                        <span>Tổng đơn hàng</span>
+                                        <span>Tổng đơn hàng:</span>
                                         <span>{{ number_format($cart['totalPrice']) }}</span>
                                     </p>
                                     <p class="d-flex">
-                                        <span>Phí vận chuyển</span>
+                                        <span>Phí vận chuyển:</span>
                                         <span id="delivery-fee-span">
                                             @if(Auth()->user()->ward_id != NULL)
                                             <input id="delivery-fee" type="hidden" name="delivery_cost" class="form-control" placeholder="" value="{{ Auth()->user()->ward()->first()->district()->first()->province()->first()->deliveryfee()->first()->price }}">
-                                            {{ Auth()->user()->ward()->first()->district()->first()->province()->first()->deliveryfee()->first()->price }}
+                                            {{  number_format(Auth()->user()->ward()->first()->district()->first()->province()->first()->deliveryfee()->first()->price) }}
                                             @else
                                             <input id="delivery-fee" type="hidden" name="delivery_cost" class="form-control" placeholder="" value="00">
                                             @endif
                                         </span>
+                                    </p>
+                                    <p class="d-flex">
+                                        <span>Giảm giá:</span>
+                                        <input type="hidden" id="discountValue" name="discountValue" class="form-control" placeholder="" value="">
+                                        <span id="discount">00</span>
                                     </p>
                                     <div class="d-flex">
                                         <div class="col-md-6">
@@ -129,11 +134,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!-- <p class="d-flex">
-                                        <span>Discount</span>
-                                        <span>00</span>
-                                    </p> -->
                                     <hr>
                                     <p class="d-flex total-price">
                                         <span>Tổng</span>
@@ -318,9 +318,12 @@
                         let value =  $('#cartTotal').val()
                         let fee =  $('#delivery-fee').val()
                         let total = parseInt(value) + parseInt(fee)
+                        let discount = (parseInt(total) * response.data.value)/100 
                         let newTotal = parseInt(total) - (parseInt(total) * response.data.value)/100 
                         $('#total_order_input').val(newTotal);
-                        $('#total_order_span').text(newTotal);
+                        $('#total_order_span').text(newTotal.toLocaleString('en-US'));
+                        $('#discount').text((discount.toLocaleString('en-US')));
+                        $('#discountValue').val((discount));
                     },
                     error: function (error) {
                         console.log('Error:', error);

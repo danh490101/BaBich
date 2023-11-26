@@ -22,9 +22,10 @@ class ConfirmEmail extends Mailable
      *
      * @return void
      */
-    public function __construct($order)
+    public function __construct($order, $pdfFile)
     {
         $this->order = $order;
+        $this->pdfFile = $pdfFile;
     }
 
     /**
@@ -63,6 +64,8 @@ class ConfirmEmail extends Mailable
      */
     public function attachments()
     {
-        return [];
+        return [
+            $this->pdfFile
+        ];
     }
 }

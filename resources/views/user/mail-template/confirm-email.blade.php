@@ -31,7 +31,9 @@
                 </tr>
                 @endforeach
                 <tr style="color: red;font-size:20px">
-                    <td><b>Tổng tiền:</b> {{number_format($order->totalamount)}}VNĐ</td>
+                    <td>Tổng tiền:</b> {{number_format($order->totalamount)}}VNĐ</td>
+                    <td>Giảm giá:</b> {{number_format($order->discountValue)}}VNĐ</td>
+                    <td><b>Thành tiền:</b> {{number_format($order->totalamount - $order->discountValue)}}VNĐ</td>
                     <td class="total-price"></td>
                 </tr>
             </table>

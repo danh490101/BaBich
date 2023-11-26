@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderDetails;
+use App\Models\Product;
 use App\Models\Skin;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -92,13 +93,21 @@ class OrderHistoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
-        //
         $order = Order::findOrFail($id);
-        $oddetail = OrderDetails::where('order_id', $id)->delete();
+        $orderDetails = OrderDetails::where('order_id', $id)->get();
+        foreach ($orderDetails as $detail) {
+            $product = Product::findOrFail($detail->product_id);
+            $product->update([
+                'quantity' => $product->quantity + $detail->quantity,
+            ]);
+        }
+        $order->details()->delete(); 
         $order->delete();
         session()->flash('success', 'Xóa thành công!');
         return redirect()->back();
     }
+
 }

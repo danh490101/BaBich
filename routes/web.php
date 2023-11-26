@@ -28,6 +28,7 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\User\UsProfileController;
 use App\Http\Controllers\User\ViewHistoryController;
+use Barryvdh\DomPDF\Facade as PDF;
 
 /*
 |--------------------------------------------------------------------------
@@ -129,6 +130,8 @@ Route::middleware(['auth', 'authadmin'])->group(function () {
 //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
+
+Route::get('/test', [CheckoutController::class, 'test']);
 
 Route::get('auth/{provider}/redirect', [SocialiteController::class, 'redirect'])->name('socialite.redirect');
 Route::get('auth/{provider}/callback', [SocialiteController::class, 'callback'])->name('socialite.callback');

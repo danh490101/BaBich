@@ -16,6 +16,8 @@ use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use PDF;
+use Illuminate\Support\Facades\View;
 
 class CheckoutController extends Controller
 {
@@ -51,7 +53,8 @@ class CheckoutController extends Controller
             'delivery_cost' => 'required',
             'ward_id' => 'required',
             'payment_method' => ' required|in:COD,VNPAY',
-            'code' => 'nullable|string'
+            'code' => 'nullable|string',
+            'discountValue' => 'string|nullable'
         ]);
 
         $discount = Discount::where('code', '=', $validatedData['code'])->where('status', '=', 1)->first();
@@ -61,7 +64,8 @@ class CheckoutController extends Controller
             'address' => $validatedData['address'],
             'phone' => $validatedData['phone'],
             'email' => $validatedData['email'],
-            'totalamount' => (float) $validatedData['totalamount'],
+            'totalamount' => (float) $validatedData['totalamount'] + (float) ($validatedData['discountValue'] ?? 0),
+            'discountValue' =>  (float)  ($validatedData['discountValue'] ?? 0),
             'delivery_cost' => (float) $validatedData['delivery_cost'],
             'payment_method' => $validatedData['payment_method'],
             'ward_id' => $validatedData['ward_id'],
@@ -257,5 +261,19 @@ class CheckoutController extends Controller
                 'value' => $value
             ]
         ]);
+    }
+
+    public function test()
+    {
+        $fontPath = public_path('font/OpenSans-Regular.ttf');
+        PDF::setOptions(['font_path' => $fontPath]);
+        PDF::setOptions(['font' => 'OpenSans-Regular.ttf']);
+
+        $view = View::make('user.mail-template.test');
+        // Generate the PDF from the view
+        $pdf = PDF::loadHTML($view)->setPaper('a4', 'portrait');
+
+        // Stream the PDF to the browser
+        return $pdf->stream('vietnamese_document.pdf');
     }
 }

@@ -178,7 +178,7 @@
      <form class="form" method="POST" action="{{ route('login') }}">
          @csrf
          <input required="" class="input" type="email" name="email" id="email" value="{{ old('email') }}" placeholder="E-mail">
-         <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
+         <input required="" class="input" type="password" name="password" id="password" placeholder="Mật khẩu">
          <span class="forgot-password"><a href="{{route ('password.email')}}">Quên mật khẩu ?</a></span>
          <span class="forgot-password"><a href="{{route('register')}}">Chưa có tài khoản ?</a></span>
          <input class="login-button" type="submit" value="Sign In">

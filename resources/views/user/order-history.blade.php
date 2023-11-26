@@ -82,7 +82,10 @@
                     </p>
                     </form>
                     @endif
-                    <h3 class="mt-1 d-flex justify-content-end"><strong>Tổng tiền: {{ number_format($order->totalamount, 0, ',', '.') }} VNĐ</strong></h3>
+                    
+                    <h5 class="mt-1 d-flex justify-content-end"><strong>Tổng tiền: {{ number_format($order->totalamount, 0, ',', '.') }} VNĐ</strong></h5>
+                    <h5 class="mt-1 d-flex justify-content-end"><strong><i style="color: red;">Giảm giá: {{ number_format($order->discountValue, 0, ',', '.') }} VNĐ</i></strong></h5>
+                    <h3 class="mt-1 d-flex justify-content-end"><strong>Thành tiền: {{ number_format($order->totalamount - $order->discountValue, 0, ',', '.') }} VNĐ</strong></h3>
                 </div>
             </div>
             @endforeach

@@ -96,7 +96,7 @@
                 </div>
             </div>
         </div>
-        <input required="" class="input" type="password" name="password" id="password" :messages="$errors->get('password')" required autocomplete="new-password" placeholder="Password">
+        <input required="" class="input" type="password" name="password" id="password" :messages="$errors->get('password')" required autocomplete="new-password" placeholder="Mật khẩu">
         <input required="" class="input" type="password" name="password_confirmation" id="password_confirmation" :messages="$errors->get('password_confirmation')" required autocomplete="new-password" required autocomplete="new-password" placeholder="Password">
         <input class="login-button" type="submit" value="Đăng kí">
         <span class="forgot-password"><a href="{{route('login')}}">Đăng nhập ?</a></span>

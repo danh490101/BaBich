@@ -97,7 +97,7 @@
                         <div class="p-4">
                             <h3 class="mb-4">{{$product->name}}</h3>
                             <div id="productDescription" class="limited-height" style="white-space: pre-line;">
-                                {{ $product->desc }}
+                                {!! $product->desc !!}
                             </div>
                             @if(strlen($product->desc) > 200)
                             <a href="javascript:void(0)" id="readMoreBtn">Xem thêm</a>
@@ -329,6 +329,7 @@
             var truncatedText = productDescription.text().substring(0, 200);
             productDescription.data('fullText', productDescription.text());
 
+            console.log(truncatedText)
             // Hiển thị mô tả giới hạn ban đầu
             productDescription.text(truncatedText);
 
