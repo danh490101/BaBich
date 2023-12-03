@@ -98,7 +98,7 @@
                                     </div>
                                     <div class="col-6 text-right">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-sm btn-primary"> Thêm hàng hóa </button>
+                                            <button type="submit" class="btn btn-sm btn-primary"> Nhập </button>
                                         </div>
                                     </div>
                                 </div>

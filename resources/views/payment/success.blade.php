@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <div class="text-center pt-5 pb-5">
+    <div class="text-center pt-5 pb-5 mt-5">
         <h1><span class="text-danger">{{ $message }}</span></h1>
         <h2>Cảm ơn bạn đã tin tưởng và mua hàng</h2>
     </div>

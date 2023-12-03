@@ -7,17 +7,17 @@
         <div class="col-lg-6 col-7">
           <h6 class="h2 text-white d-inline-block mb-0">Đơn đặt hàng chưa xử lý</h6>
           <form action="{{route('admin.orders.search')}}" method="POST">
-                    @csrf
-          <div class="col-lg-6 col-7">
-            <h6 class="h2 text-white d-inline-block mb-0">
-              <div class="container-input">
-                <input type="text" placeholder="Tìm kiếm" name="text" class="input font-italic font-weight-light">
-              </div>
-            </h6>
-          </div>
-        </form>
+            @csrf
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-white d-inline-block mb-0">
+                <div class="container-input">
+                  <input type="text" placeholder="Tìm kiếm" name="text" class="input font-italic font-weight-light">
+                </div>
+              </h6>
+            </div>
+          </form>
         </div>
-       
+
       </div>
     </div>
   </div>
@@ -72,6 +72,13 @@
               @endforeach
             </tbody>
           </table>
+          <div class="card-footer py-4 page-link">
+            <nav aria-label="...">
+              <ul class="pagination justify-content-start">
+                {{$orders->links("pagination::bootstrap-4")}}
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
     </div>

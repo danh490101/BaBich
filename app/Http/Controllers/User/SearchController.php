@@ -35,6 +35,7 @@ class SearchController extends Controller
         ->get();
 
         session()->put('results', $results);
+        session()->put('keyword', $searchTerm);
 
         return redirect()->route('user.search-view');
     // return view('user.home.search', ['results' => $results], compact('categories', 'brands', 'skins'));
@@ -45,7 +46,9 @@ public function searchView(Request $request) {
     $brands = Brand::all();
     $categories = Category::all();
     $results = session('results') ?? [];
-    return view('user.home.search', ['results' => $results], compact('categories', 'brands', 'skins'));
+    $keyword = session('keyword') ?? '';
+
+    return view('user.home.search', ['results' => $results, 'keyword' => $keyword], compact('categories', 'brands', 'skins'));
 }
 
 }

@@ -11,6 +11,8 @@ use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Favorite;
 
 class ProductDetailsController extends Controller
 {
@@ -37,7 +39,7 @@ class ProductDetailsController extends Controller
         $product = Product::findOrFail($product->id);
         $this->pushToViewHistory($product->id);
 
-        $comments = Feedback::where('product_id', $product->id)->where('status', '=', 1)->get()->toArray();
+        $comments = Feedback::where('product_id', $product->id)->where('status', '=', 0)->get()->toArray();
 
         $comments = array_map(function ($comment) {
             $user = User::findOrFail($comment['user_id']);
@@ -90,5 +92,21 @@ class ProductDetailsController extends Controller
         }
 
         return 0;
+    }
+
+    public function updateWishList()
+    {
+        $user = Auth::user();
+        $favorites = Favorite::where('user_id', '=', $user->id)->get('product_id');
+
+         $ids = array_map(function($item) {
+            return $item['product_id'];
+        }, $favorites->toArray());
+
+        session([
+            'wishList' => $ids
+        ]);
+
+        return true;
     }
 }

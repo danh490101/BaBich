@@ -5,6 +5,17 @@
     <title>Ba Bich</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Thêm CKEditor CSS -->
+    <link rel="stylesheet" href="{{asset('asset/ckeditor/contents.css')}}">
+    <!-- Thêm CKFinder CSS -->
+    <link rel="stylesheet" href="{{asset('asset/ckfinder/ckfinder.css')}}">
+    <link rel="stylesheet" href="{{asset('asset/ckeditor/contents.css')}}">
+
+    <script src="{{asset('asset/ckeditor/ckeditor.js')}}"></script>
+
+    <script src="{{asset('asset/ckfinder/ckfinder.js')}}"></script>
+
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" > -->
     <!-- <link rel="stylesheet" href="{{asset('https://cdn.jsdelivr.net/npm/sweetalert2@11')}}"> -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />

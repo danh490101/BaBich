@@ -50,7 +50,7 @@ class SocialiteController extends Controller
 
             Auth::login($user);
 
-            return redirect('/');
+            return redirect(session('url.intended'));
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }

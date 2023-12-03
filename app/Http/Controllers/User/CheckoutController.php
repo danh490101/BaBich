@@ -226,7 +226,7 @@ class CheckoutController extends Controller
         Order::where('id', request('vnp_TxnRef'))->update([
             'payment_status' => 'paid'
         ]);
-        // SendMailConfirmEvent::dispatch($order);
+        SendMailConfirmEvent::dispatch($order);
         return view('payment.success', [
             'message' => $message,
         ],compact('categories', 'skins', 'brands'));

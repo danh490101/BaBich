@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xác Nhận Đơn Hàng</title>
     <style>
+        * {
+            font-family: DejaVu Sans !important;
+        }
+    </style>
+    <style>
         body {
             font-family: sans-serif;
             padding: 20px;
@@ -50,32 +55,32 @@
 </head>
 
 <body>
-    <h2>Order Confirmation</h2>
+    <h2>Xác Nhận Đơn Hàng</h2>
     <div id="customer-info">
-        <h3>Customer Information</h3>
-        <p><span class="info">Customer: </span> {{$order->name}} </p>
+        <h3>Thông Tin Khách Hàng</h3>
+        <p><span class="info">Khách Hàng: </span> {{$order->name}} </p>
         <p><span class="info">Email: </span> {{$order->email}} </p>
-        <p><span class="info">Phone: </span> {{$order->phone}} </p>
-        <p><span class="info">Address: </span> {{ $order->address}},{{ Auth()->user()->ward()->first()->name }},{{ Auth()->user()->ward()->first()->district()->first()->name }},{{ Auth()->user()->ward()->first()->district()->first()->province()->first()->name}} </p>
-        <p><span class="info">Payment Method: </span> @if ($order->payment_method == 1)
-            Cash on Delivery
-            @else ($order->payment_method == 2)
-            Online Payment
+        <p><span class="info">Điện Thoại: </span> {{$order->phone}} </p>
+        <p><span class="info">Địa Chỉ: </span> {{ $order->address}},{{ Auth()->user()->ward()->first()->name }},{{ Auth()->user()->ward()->first()->district()->first()->name }},{{ Auth()->user()->ward()->first()->district()->first()->province()->first()->name}} </p>
+        <p><span class="info">Phương Thức Thanh Toán: </span> @if ($order->payment_method == "COD")
+            Thanh toán khi nhận hàng
+            @else 
+            Thanh toán trực tuyến
             @endif
         </p>
     </div>
 
     <div class="thank-you">
-        <p>Thank you for ordering from our store. Your order has been successfully confirmed.</p>
+        <p>Cảm ơn bạn đã đặt hàng từ cửa hàng của chúng tôi. Đơn hàng của bạn đã được xác nhận thành công.</p>
     </div>
 
     <div class="order-details">
-        <h3>Order Details</h3>
+        <h3>Chi Tiết Đơn Hàng</h3>
         <table>
             <tr class="bold">
-                <td width="25%"><b>Product Name</b></td>
-                <td width="20%"><b>Price</b></td>
-                <td width="20%"><b>Quantity</b></td>
+                <td width="25%"><b>Tên Sản Phẩm</b></td>
+                <td width="20%"><b>Giá</b></td>
+                <td width="20%"><b>Số Lượng</b></td>
             </tr>
             @foreach($order->details as $orderItem)
             <tr>
@@ -86,16 +91,15 @@
             @endforeach
         </table>
         <div style="color: red;font-size:20px">
-            <p><b>Total Amount:</b> {{number_format($order->totalamount)}}VNĐ</p>
-            <p><b>Discount:</b> {{number_format($order->discountValue)}}VNĐ</p>
-            <p><b>Final Amount:</b> {{number_format($order->totalamount - $order->discountValue)}}VNĐ</p>
+            <p><b>Tổng Tiền:</b> {{number_format($order->totalamount)}}VNĐ</p>
+            <p><b>Giảm Giá:</b> {{number_format($order->discountValue)}}VNĐ</p>
+            <p><b>Tổng Cộng:</b> {{number_format($order->totalamount - $order->discountValue)}}VNĐ</p>
         </div>
     </div>
 
-    <p>If you have any questions, please contact us via email: babich@example.com</p>
+    <p>Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ chúng tôi qua email: babich@gmail.com</p>
 
-    <p>Thank you for choosing our store!</p>
+    <p>Cảm ơn bạn đã chọn cửa hàng của chúng tôi!</p>
 </body>
-
 
 </html>

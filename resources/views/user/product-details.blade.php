@@ -19,13 +19,13 @@
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img class="d-block w-75" src="{{ asset( $product->image) }}" alt="First slide">
+                                <img class="d-block w-75 mr-5" src="{{ asset( $product->image) }}" alt="First slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block w-75" src="{{ asset($product->images) }}" alt="Second slide">
+                                <img class="d-block w-75 mr-5" src="{{ asset($product->images) }}" alt="Second slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block w-75" src="{{ asset( $product->image2) }}" alt="Second slide">
+                                <img class="d-block w-75 mr-5" src="{{ asset( $product->image2) }}" alt="Second slide">
                             </div>
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -44,10 +44,10 @@
             </div>
             <div class="col-lg-6 product-details ftco-animate mt-5">
                 <h3>{{$product->name}}</h3>
-                @if (isset($discount)) 
-                    <p class="price"><span class="price price-sale" style="text-decoration: line-through;">{{number_format($product->price,0, ',','.')}}</span><span class="price fw-bolder"> {{ number_format($discount,0, ',','.')}}</span></p>
+                @if (isset($discount))
+                <p class="price"><span class="price price-sale" style="text-decoration: line-through;">{{number_format($product->price,0, ',','.')}}</span><span class="price fw-bolder"> {{ number_format($discount,0, ',','.')}}</span></p>
                 @else
-                    <p class="price"><span>Giá: {{number_format($product->price,0, ',','.')}}đ</span></p>
+                <p class="price"><span>Giá: {{number_format($product->price,0, ',','.')}}đ</span></p>
                 @endif
                 <form action="{{route('add_to_cart',['id' => $product->id])}}" method="post">
                     <div class="row mt-4">
@@ -72,7 +72,18 @@
                     </div>
                     <p>
                         <button type="submit" class="btn btn-primary ">Thêm vào giỏ hàng</button>
+                        @if(in_array($product->id, session('wishList')))
+                        <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}">
+                            <span><i class="fas fa-heart"></i></span>
+                        </a>
+                        @else
+                        <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}">
+                            <span class="flaticon-heart"></span>
+                        </a>
+
+                        @endif
                     </p>
+
                 </form>
                 <!-- <div class="w-100"></div>
                     <div class="col-md-12">
@@ -95,13 +106,10 @@
                 <div class="tab-content bg-light" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
                         <div class="p-4">
-                            <h3 class="mb-4">{{$product->name}}</h3>
-                            <div id="productDescription" class="limited-height" style="white-space: pre-line;">
+                            <!-- <h3 class="mb-4">{{$product->name}}</h3> -->
+                            <div class="limited-height" style="white-space: pre-line;">
                                 {!! $product->desc !!}
                             </div>
-                            @if(strlen($product->desc) > 200)
-                            <a href="javascript:void(0)" id="readMoreBtn">Xem thêm</a>
-                            @endif
 
                         </div>
                     </div>
@@ -118,6 +126,7 @@
                                             <div class="w-32 mr-3">
                                             </div>
                                             <div class="media-body">
+                                                <img src="{{asset('asset/images/shield.png')}}" class="navbar-brand-img" style="height: 50px; width:50px">
                                                 Sản phẩm an toàn (Thương hiệu nổi tiếng). <b>Chính hãng</b>
                                             </div>
                                         </div>
@@ -125,6 +134,7 @@
                                             <div class="w-32 mr-3">
                                             </div>
                                             <div class="media-body">
+                                                <img src="{{asset('asset/images/commitment.png')}}" class="navbar-brand-img" style="height: 50px; width:50px">
                                                 Chất lượng cam kết - Hoàn trả <b> 100%</b> + đền bù thêm <b> 100% </b>giá trị nếu gặp vấn đề do nhà sản xuất hoặc cửa hàng.
                                             </div>
                                         </div>
@@ -132,6 +142,7 @@
                                             <div class="w-32 mr-3">
                                             </div>
                                             <div class="media-body">
+                                                <img src="{{asset('asset/images/support.png')}}" class="navbar-brand-img" style="height: 50px; width:50px">
                                                 <b>Dịch vụ vượt trội</b> (Hỗ trợ tận tình)
                                             </div>
                                         </div>
@@ -139,6 +150,7 @@
                                             <div class="w-32 mr-3">
                                             </div>
                                             <div class="media-body">
+                                                <img src="{{asset('asset/images/person.png')}}" class="navbar-brand-img" style="height: 50px; width:50px">
                                                 Giao hàng nhanh chóng<br>
                                             </div>
                                         </div>
@@ -341,6 +353,24 @@
         } else {
             readMoreBtn.hide();
         }
+    });
+</script>
+
+<script>
+    function reloadPage() {
+        //replace class in  a tag
+    }
+    $(document).ready(function() {
+        $.ajax({
+            url: '/user/update-wish-list',
+            type: 'GET',
+            success: function(data) {
+                setTimeout(reloadPage, 5000)
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr);
+            }
+        });
     });
 </script>
 

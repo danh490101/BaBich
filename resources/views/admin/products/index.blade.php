@@ -57,7 +57,7 @@
                                 </td>
                                 <td>
                                     <span>
-                                    {{number_format($product->price,0, ',','.')}}
+                                        {{number_format($product->price,0, ',','.')}}
                                     </span>
                                 </td>
                                 <td>
@@ -100,7 +100,15 @@
                             </tr>
                             @endforeach
                         </tbody>
+
                     </table>
+                    <div class="card-footer py-4 page-link">
+                        <nav aria-label="...">
+                            <ul class="pagination justify-content-start">
+                                {{$products->links("pagination::bootstrap-4")}}
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>

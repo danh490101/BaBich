@@ -80,17 +80,30 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="price">Giá</label>
+                                        <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
+                                        <input type="text" name="price" class="form-control" placeholder="Giá sản phẩm" value="">
+                                        <!-- <input type="text" name="id-goods" class="form-control" placeholder="Mã loại hàng" value=""> -->
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <!-- <label for="productDescription">Mô Tả Sản Phẩm:</label>
+                        <textarea class="ckeditor" id="productDescription" name="productDescription"></textarea> -->
+
                         <!-- <hr class="my-4" /> -->
                         <div class="pl-lg-4">
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="form-control-label">Giá</label>
                                         <textarea name="price" rows="4" class="form-control" placeholder="Giá sản phẩm"></textarea>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
@@ -155,3 +168,30 @@
 </div>
 
 @endsection
+
+
+<script>
+    CKEDITOR.replace('productDescription', {
+        // Cấu hình CKEditor theo ý muốn của bạn
+    });
+</script>
+<script>
+    CKEDITOR.replace('productDescription', {
+        filebrowserBrowseUrl: '/path/to/ckfinder/ckfinder.html',
+        filebrowserImageBrowseUrl: '/path/to/ckfinder/ckfinder.html?type=Images',
+        filebrowserUploadUrl: '/path/to/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+        filebrowserImageUploadUrl: '/path/to/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images'
+    });
+</script>
+<script src="path/to/ckeditor/ckeditor.js"></script>
+<!-- Thêm CKFinder JS -->
+<script src="path/to/ckfinder/ckfinder.js"></script>
+<script>
+    // Gọi CKEditor trên textarea
+    CKEDITOR.replace('productDescription', {
+        filebrowserBrowseUrl: '/path/to/ckfinder/ckfinder.html',
+        filebrowserImageBrowseUrl: '/path/to/ckfinder/ckfinder.html?type=Images',
+        filebrowserUploadUrl: '/path/to/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+        filebrowserImageUploadUrl: '/path/to/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images'
+    });
+</script>

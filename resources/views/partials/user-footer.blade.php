@@ -27,7 +27,7 @@
                         <h2 class="ftco-heading-2">Bạn có câu hỏi dành cho chúng tôi?</h2>
                         <div class="block-23 mb-3">
                             <ul>
-                                <li><span class="icon fa fa-map marker"></span><span class="text">520, đường 30/4, phương Hưng Lợi, quận Ninh Kiều, thành phố Cần Thơ</span></li>
+                                <li><span class="icon fa fa-map"></span><span class="text">520, đường 30/4, phương Hưng Lợi, quận Ninh Kiều, thành phố Cần Thơ</span></li>
                                 <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+0328292987</span></a></li>
                                 <li><a href="#"><span class="icon fa fa-paper-plane pr-4"></span><span class="text">babich@gmail.com</span></a></li>
                             </ul>

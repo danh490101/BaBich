@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 use App\Events\SendMailConfirmEvent;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\OrderDeliveryController;
+use App\Http\Controllers\Admin\OrderSuccessController;
 use App\Http\Controllers\Admin\SkinController;
 use App\Http\Controllers\Admin\StatisticalController;
 use App\Http\Controllers\Admin\SupplierController;
@@ -95,6 +97,7 @@ Route::middleware(['auth'])->group(function () {
                 $data
             );
         });
+        Route::get('/update-wish-list', [ProductDetailsController::class, 'updateWishList']);
     });
 });
 
@@ -109,6 +112,8 @@ Route::middleware(['auth', 'authadmin'])->group(function () {
         Route::resource('/profile', AdProfileController::class);
         Route::resource('/orders', OrderController::class);
         Route::resource('/order_details', OrderDetailsController::class);
+        Route::resource('/order_success', OrderSuccessController::class);
+        Route::resource('/order_delivery', OrderDeliveryController::class);
         Route::resource('/warehouse-receipt', WarehousReceiptController::class);
         Route::resource('/feedback', AdFeedbackController::class);
         Route::resource('/client', ClientController::class);

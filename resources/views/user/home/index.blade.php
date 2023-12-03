@@ -124,7 +124,16 @@
                 </div>
             </div>
             <div class="row">
+            @php
+                $i=0
+                @endphp
                 @foreach($suggestion as $product)
+                @if($i==4)
+                @break
+                @endif
+                @php
+                $i++
+                @endphp
                 <div class="col-md-3 d-flex">
                     <div class="product ftco-animate shadow mt-3">
                         <div class="img d-flex align-items-center justify-content-center m-5" style="background-image: url({{asset($product->image)}});">
@@ -220,7 +229,17 @@
                 </div>
             </div>
             <div class="row ">
+            @php
+                $i=0
+                @endphp
                 @foreach($group as $product)
+                @if($i==4)
+                @break
+                @endif
+                @php
+                $i++
+                @endphp
+                
                 <div class="col-md-3 d-flex ">
                     <div class="product ftco-animate shadow">
                         <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset($product->image)}});">

@@ -85,7 +85,7 @@
                     <div class="card-footer py-4 page-link">
                         <nav aria-label="...">
                             <ul class="pagination justify-content-start">
-                                {{$brands->links()}}
+                                {{$brands->links("pagination::bootstrap-4")}}
                             </ul>
                         </nav>
                     </div>

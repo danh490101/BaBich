@@ -64,7 +64,7 @@ class WarehousReceiptController extends Controller
         $product->quantity = $request['quantity'] +  $product->quantity ;
         $whdetail = WarehouseDetail::create($whdetail);
         $product = $product->update();
-
+        session()->flash('success', 'Thêm phiếu nhập thành công!');
         return redirect()->route('admin.warehouse-receipt.index');
     }
 

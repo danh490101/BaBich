@@ -23,6 +23,16 @@
                                     <span class="nav-link-text">Đơn đặt hàng đã xử lý</span>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('admin.order_delivery.index')}}">
+                                    <span class="nav-link-text">Đơn hàng đang giao</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('admin.order_success.index')}}">
+                                    <span class="nav-link-text">Đơn hàng đã giao thành công</span>
+                                </a>
+                            </li>
                         </div>
                     </div>
                     <div class="dropdown">

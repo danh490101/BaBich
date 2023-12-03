@@ -171,6 +171,15 @@ class ProductController extends Controller
         foreach ($favorites as $item) {
             $products[] = Product::find($item->product_id);
         }
+
+        $ids = array_map(function($item) {
+            return $item['product_id'];
+        }, $favorites->toArray());
+
+        session([
+            'wishList' => $ids
+        ]);
+        
         $categories = Category::all();
         $brands = Brand::all();
         $skins = Skin::all();

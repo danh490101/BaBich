@@ -7,7 +7,7 @@
 			<div class="row no-gutters slider-text align-items-end justify-content-center">
 				<div class="col-md-9 ftco-animate mb-5 text-center">
 					<p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Trang chủ <i class="fa fa-chevron-right"></i></a></span> <span>Sản phẩm tìm kiếm <i class="fa fa-chevron-right"></i></span></p>
-					<h2 class="mb-0 bread">Tìm kiếm</h2>
+					<h2 class="mb-0 bread">Tìm kiếm: {{ $keyword }}</h2>
 				</div>
 			</div>
 		</div>
@@ -246,4 +246,20 @@
 		</div>
 	</section>
 </div>
+@endsection
+@section('scripts')
+<script>
+	const minPriceRange = document.getElementById('min_price');
+	const maxPriceRange = document.getElementById('max_price');
+	const minPriceDisplay = document.getElementById('min_price_display');
+	const maxPriceDisplay = document.getElementById('max_price_display');
+	minPriceRange.addEventListener('input', function() {
+		minPriceDisplay.textContent = minPriceRange.value;
+	});
+	maxPriceRange.addEventListener('input', function() {
+		maxPriceDisplay.textContent = maxPriceRange.value;
+	});
+	minPriceDisplay.textContent = minPriceRange.value;
+	maxPriceDisplay.textContent = maxPriceRange.value;
+</script>
 @endsection

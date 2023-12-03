@@ -18,14 +18,13 @@ class BrandController extends Controller
     public function index()
     {
         //
-        $brands = Brand::paginate(6);
+        $brands = Brand::paginate(10);
         return view('admin.brands.index', compact('brands'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {

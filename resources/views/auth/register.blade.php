@@ -97,11 +97,11 @@
             </div>
         </div>
         <input required="" class="input" type="password" name="password" id="password" :messages="$errors->get('password')" required autocomplete="new-password" placeholder="Mật khẩu">
-        <input required="" class="input" type="password" name="password_confirmation" id="password_confirmation" :messages="$errors->get('password_confirmation')" required autocomplete="new-password" required autocomplete="new-password" placeholder="Password">
+        <input required="" class="input" type="password" name="password_confirmation" id="password_confirmation" :messages="$errors->get('password_confirmation')" required autocomplete="new-password" required autocomplete="new-password" placeholder="Nhập lại mật khẩu">
         <input class="login-button" type="submit" value="Đăng kí">
         <span class="forgot-password"><a href="{{route('login')}}">Đăng nhập ?</a></span>
     </form>
-    <div class="social-account-container">
+    <!-- <div class="social-account-container">
         <span class="title">Or Sign in with</span>
         <div class="social-accounts">
             <a href="{{ route('socialite.redirect', ['provider' => 'google']) }}" class="social-button google">
@@ -110,7 +110,7 @@
                 </svg>
             </a>
         </div>
-    </div>
+    </div> -->
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript">
 </script>
