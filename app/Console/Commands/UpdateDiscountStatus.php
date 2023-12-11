@@ -44,7 +44,6 @@ class UpdateDiscountStatus extends Command
             } else {
                 $discount->status = 1;
             }
-
             $discount->save();
         }
         return Command::SUCCESS;

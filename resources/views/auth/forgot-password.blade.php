@@ -1,6 +1,6 @@
 
 
-<div class="container">
+<div class="container" style="margin-top: 150px;">
      <div class="heading">Quên mật khẩu</div>
      <x-auth-session-status class="mb-4" :status="session('status')" />
      <form class="form" method="POST" action="{{ route('password.email') }}">

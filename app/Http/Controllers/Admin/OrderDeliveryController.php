@@ -17,7 +17,7 @@ class OrderDeliveryController extends Controller
     {
         //
         $users = User::all();
-        $orders = Order::paginate(10); // Phân trang với mỗi trang hiển thị 20 dòng
+        $orders = Order::where('status', '=', 2)->paginate(20); // Phân trang với mỗi trang hiển thị 20 dòng
         return view('admin.order_delivery.index', compact('orders'), ['orders' => $orders]);
     }
 

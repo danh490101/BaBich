@@ -16,9 +16,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
         $users = User::all();
-        $orders = Order::paginate(20); // Phân trang với mỗi trang hiển thị 20 dòng
+        $orders = Order::where('status', '=', 0)->paginate(20); 
         return view('admin.orders.index', compact('orders'), ['orders' => $orders]);
     }
 
@@ -52,15 +51,9 @@ class OrderController extends Controller
     }
     public function getSearchOrder(Request $request)
     {
-        // dd(123);
-        //dd($request->all());
-        //  $result = $request->result;
-        //dd($request->get('keyword'));
         $searchTerm = $request->get('text'); // Lấy từ request
-        // dd($searchTerm);
         $results = Order::where('id', 'like', "%$searchTerm%")
             ->get();
-        // dd($results);
         return view('admin.orders.search', ['results' => $results]);
     }
 

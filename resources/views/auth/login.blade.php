@@ -173,7 +173,7 @@
          font-size: 9px;
      }
  </style>
- <div class="container">
+ <div class="container" style="margin-top: 150px;">
      <div class="heading">Đăng nhập</div>
      <form class="form" method="POST" action="{{ route('login') }}">
          @csrf
@@ -181,7 +181,7 @@
          <input required="" class="input" type="password" name="password" id="password" placeholder="Mật khẩu">
          <span class="forgot-password"><a href="{{route ('password.email')}}">Quên mật khẩu ?</a></span>
          <span class="forgot-password"><a href="{{route('register')}}">Chưa có tài khoản ?</a></span>
-         <input class="login-button" type="submit" value="Sign In">
+         <input class="login-button" type="submit" value="Đăng nhập">
 
      </form>
      <div class="social-account-container">

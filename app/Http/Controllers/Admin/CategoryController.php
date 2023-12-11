@@ -48,6 +48,7 @@ class CategoryController extends Controller
         ]);
         //dd($category);
         $category = Category::create($category);
+        session()->flash('success', 'Thêm phân loại thành công!');
         return redirect()->route('admin.categories.index');
     }
 
@@ -90,7 +91,7 @@ class CategoryController extends Controller
             ],
         ]);
         $category->update($categoryUpdate);
-
+        session()->flash('success', 'Cập nhật thành công!');
         return redirect()->route('admin.categories.index');
     }
 

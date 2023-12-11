@@ -108,7 +108,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="form-control-label">Ghi chú</label>
-                                        <textarea name="desc" rows="4" class="form-control" placeholder="Mô tả chi tiết sản phẩm"></textarea>
+                                        <textarea name="desc" rows="4" class="form-control" placeholder="Mô tả chi tiết sản phẩm" id="note"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
                             <div class="row">
                                 <div class="col-6 text-left">
                                     <div class="form-group">
-                                        <a href="hang-hoa.php" class="btn btn-sm btn-outline-primary">Quay lại</a>
+                                        <a href="{{ route('admin.products.index') }}" class="btn btn-sm btn-outline-primary">Quay lại</a>
                                     </div>
                                 </div>
                                 <div class="col-6 text-right">
@@ -168,8 +168,7 @@
 </div>
 
 @endsection
-
-
+<!-- 
 <script>
     CKEDITOR.replace('productDescription', {
         // Cấu hình CKEditor theo ý muốn của bạn
@@ -184,8 +183,8 @@
     });
 </script>
 <script src="path/to/ckeditor/ckeditor.js"></script>
-<!-- Thêm CKFinder JS -->
-<script src="path/to/ckfinder/ckfinder.js"></script>
+Thêm CKFinder JS -->
+<!-- <script src="path/to/ckfinder/ckfinder.js"></script>
 <script>
     // Gọi CKEditor trên textarea
     CKEDITOR.replace('productDescription', {
@@ -194,4 +193,4 @@
         filebrowserUploadUrl: '/path/to/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
         filebrowserImageUploadUrl: '/path/to/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images'
     });
-</script>
+</script> -->

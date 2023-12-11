@@ -67,19 +67,6 @@ class WarehousReceiptController extends Controller
         session()->flash('success', 'Thêm phiếu nhập thành công!');
         return redirect()->route('admin.warehouse-receipt.index');
     }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\WarehouseReceipt  $warehouseReceipt
-     * @return \Illuminate\Http\Response
-     */
-    public function show(WarehouseReceipt $warehouseReceipt)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -108,37 +95,33 @@ class WarehousReceiptController extends Controller
             'quantity' => 'required',
             'price' => 'required',
         ]);
-        $whreceipt = array(
-            'note' => $request['note'],
-            'total_warehouse' => $request['price'] * $request['quantity'],
-            'supplier_id' => $request['supplier_id'],
-            'user_id' => \Illuminate\Support\Facades\Auth::id(),
-        );
-        $whreceipt = WarehouseReceipt::update($whreceipt);
-        $whdetail = array(
-            'quantity' => $request['quantity'],
-            'price' => $request['price'],
-            'product_id' => $request['product_id'],
-        );
+        $warehouseReceipt -> note = $request['note'];
+        $warehouseReceipt -> total_warehouse = $request['price'] * $request['quantity'];
+        $warehouseReceipt -> supplier_id = $request['supplier_id'];
+        $warehouseReceipt -> user_id =  \Illuminate\Support\Facades\Auth::id();
+        $warehouseReceipt ->save();
+        $warehouseDetail = WarehouseDetail::where('warehouse_receipt_id' ,'=', $warehouseReceipt->id)->where('product_id','=',$request['product_id'])->first();
+        $quantity = $warehouseDetail->quantity;
+        $warehouseDetail -> quantity = $request['quantity'];
+        $warehouseDetail -> price = $request['price'];
+        $warehouseDetail -> product_id = $request['product_id'];
+        $warehouseDetail -> save();
         $product = Product::findOrFail($request['product_id']);
-        $product->quantity = $request['quantity'] +  $product->quantity ;
-        $product->price = $request['price'];
-        $whdetail = WarehouseDetail::update($whdetail);
+        $product->quantity = $request['quantity'] +  $product->quantity - $quantity;
         $product = $product->update();
-
-        return redirect()->back();
+        return redirect()->route('admin.warehouse-receipt.index');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\WarehouseReceipt  $warehouseReceipt
-     */
     public function destroy($id)
     {
         //
         $warehouseReceipt = WarehouseReceipt::findOrFail($id);
-        // dd($warehouseReceipt);
+        $warehouseDetails = WarehouseDetail::where('warehouse_receipt_id' ,'=', $warehouseReceipt->id)->get();
+        foreach($warehouseDetails as $warehouseDetail){
+            $product = $warehouseDetail -> product() -> first();
+            $product ->quantity = $product ->quantity - $warehouseDetail -> quantity;
+            $product->save();
+        }
+        WarehouseDetail::where('warehouse_receipt_id' ,'=', $warehouseReceipt->id)->delete();
         $warehouseReceipt->delete();
         session()->flash('success', 'Xóa thành công!');
         return redirect()->back();

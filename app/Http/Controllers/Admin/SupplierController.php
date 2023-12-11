@@ -49,6 +49,7 @@ class SupplierController extends Controller
 
         ]);
         $supplier = Supplier::create($supplier);
+        session()->flash('success', 'Thêm nhà cung cấp thành công!');
         return redirect()->route('admin.suppliers.index');
     }
 
@@ -103,7 +104,7 @@ class SupplierController extends Controller
             ],
         ]);
         $supplier->update($supplierUpdate);
-
+        session()->flash('success', 'Cập nhật thành công!');
         return redirect()->route('admin.suppliers.index');
     }
 

@@ -226,7 +226,7 @@ class CheckoutController extends Controller
         Order::where('id', request('vnp_TxnRef'))->update([
             'payment_status' => 'paid'
         ]);
-        SendMailConfirmEvent::dispatch($order);
+        // SendMailConfirmEvent::dispatch($order);
         return view('payment.success', [
             'message' => $message,
         ],compact('categories', 'skins', 'brands'));
@@ -263,17 +263,17 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function test()
-    {
-        $fontPath = public_path('font/OpenSans-Regular.ttf');
-        PDF::setOptions(['font_path' => $fontPath]);
-        PDF::setOptions(['font' => 'OpenSans-Regular.ttf']);
+    // public function test()
+    // {
+    //     $fontPath = public_path('font/OpenSans-Regular.ttf');
+    //     PDF::setOptions(['font_path' => $fontPath]);
+    //     PDF::setOptions(['font' => 'OpenSans-Regular.ttf']);
 
-        $view = View::make('user.mail-template.test');
-        // Generate the PDF from the view
-        $pdf = PDF::loadHTML($view)->setPaper('a4', 'portrait');
+    //     $view = View::make('user.mail-template.test');
+    //     // Generate the PDF from the view
+    //     $pdf = PDF::loadHTML($view)->setPaper('a4', 'portrait');
 
-        // Stream the PDF to the browser
-        return $pdf->stream('vietnamese_document.pdf');
-    }
+    //     // Stream the PDF to the browser
+    //     return $pdf->stream('vietnamese_document.pdf');
+    // }
 }

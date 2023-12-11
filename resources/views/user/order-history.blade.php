@@ -47,15 +47,16 @@
                             <div class="card-body col-12 row">
                                 <div class="col-3"> <strong>Ngày đặt hàng:</strong> <br>{{ $order->created_at->format('d-m-Y') }} </div>
                                 <div class="col-3"> <strong>Phương thức thanh toán:</strong> <br> @if ($order->payment_method == 'COD')
-                                                                    Thanh toán khi nhận hàng
-                                                                @else ($order->payment_method == 'VNPAY')
-                                                                    Thanh toán online
-                                                                @endif</div>
+                                    Thanh toán khi nhận hàng
+                                    @else ($order->payment_method == 'VNPAY')
+                                    Thanh toán online
+                                    @endif</div>
                                 <div class="col-3"> <strong>Số điện thoại giao hàng:</strong> <br> <i class="fa fa-phone"></i> {{
                                 $order->phone }}</div>
                                 <div class="col-3"> <strong>Địa chỉ giao hàng:</strong> <br> {{ $order->address}},
-                                @if(Auth()->user()->ward_id != NULL)
-                                {{ Auth()->user()->ward()->first()->name }},{{ Auth()->user()->ward()->first()->district()->first()->name }},{{ Auth()->user()->ward()->first()->district()->first()->province()->first()->name}}</div>
+                                    @if(Auth()->user()->ward_id != NULL)
+                                    {{ Auth()->user()->ward()->first()->name }},{{ Auth()->user()->ward()->first()->district()->first()->name }},{{ Auth()->user()->ward()->first()->district()->first()->province()->first()->name}}
+                                </div>
                                 @endif
                             </div>
                         </article>
@@ -78,11 +79,16 @@
                         @csrf
                         @method('DELETE')
                         <p>
-                        <button type="submit" class="btn btn-primary ">Hủy đơn hàng</button>
-                    </p>
+                            <button type="submit" class="btn btn-primary ">Hủy đơn hàng</button>
+                        </p>
                     </form>
                     @endif
-                    
+                    @if ($status == 3)
+                    <p>
+                        <button type="submit" class="btn btn-success">Giao hàng thành công</button>
+                    </p>
+                    @endif
+
                     <h5 class="mt-1 d-flex justify-content-end"><strong>Tổng tiền: {{ number_format($order->totalamount, 0, ',', '.') }} VNĐ</strong></h5>
                     <h5 class="mt-1 d-flex justify-content-end"><strong><i style="color: red;">Giảm giá: {{ number_format($order->discountValue, 0, ',', '.') }} VNĐ</i></strong></h5>
                     <h3 class="mt-1 d-flex justify-content-end"><strong>Thành tiền: {{ number_format($order->totalamount - $order->discountValue, 0, ',', '.') }} VNĐ</strong></h3>

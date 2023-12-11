@@ -52,7 +52,7 @@
                                 <div class="row">
                                     <div class="col-6 text-left">
                                         <div class="form-group">
-                                            <a href="hang-hoa.php" class="btn btn-sm btn-outline-primary">Quay lại</a>
+                                            <a href="{{ route('admin.skins.index') }}" class="btn btn-sm btn-outline-primary">Quay lại</a>
                                         </div>
                                     </div>
                                     <div class="col-6 text-right">

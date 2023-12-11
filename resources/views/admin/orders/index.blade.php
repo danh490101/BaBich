@@ -17,7 +17,6 @@
             </div>
           </form>
         </div>
-
       </div>
     </div>
   </div>
@@ -39,7 +38,6 @@
             </thead>
             <tbody class="list">
               @foreach($orders as $order)
-              @if($order->status == 0)
               <tr>
                 <th scope="row">
                   <div class="media align-items-center">
@@ -52,7 +50,7 @@
                   <span class="name">{{$order->user_id}}</span>
                 </td>
                 <td>
-                  <span class="status">{{number_format($order->totalamount,0, ',','.')}}</span>
+                  <span class="status">{{ number_format($order->totalamount - $order->discountValue, 0, ',', '.') }}</span>
                 </td>
                 <td>
                   <span class="status">{{$order -> created_at->format('d-m-Y')}}</span>
@@ -68,7 +66,6 @@
                   </div>
                 </td>
               </tr>
-              @endif
               @endforeach
             </tbody>
           </table>

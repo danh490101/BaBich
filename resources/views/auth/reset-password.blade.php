@@ -142,7 +142,7 @@
         font-size: 9px;
     }
 </style>
-<div class="container">
+<div class="container" style="margin-top: 150px;">
     <div class="heading">Cập nhật lại mật khẩu</div>
     <form class="form" method="POST" action="{{ route('password.store') }}">
         @csrf

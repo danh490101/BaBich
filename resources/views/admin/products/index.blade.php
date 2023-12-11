@@ -61,7 +61,7 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <span>
+                                    <span style="color: {{ $product->quantity > 0 ? 'green' : 'red' }}">
                                         @if ($product->quantity > 0)
                                         Còn hàng
                                         @else
@@ -69,6 +69,7 @@
                                         @endif
                                     </span>
                                 </td>
+
                                 <td>
                                     <span>
                                         {{$product->quantity}}

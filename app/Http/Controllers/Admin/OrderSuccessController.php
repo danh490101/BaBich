@@ -17,7 +17,7 @@ class OrderSuccessController extends Controller
     {
         //
         $users = User::all();
-        $orders = Order::paginate(10); // Phân trang với mỗi trang hiển thị 20 dòng
+        $orders = Order::where('status', '=', 3)->paginate(20); // Phân trang với mỗi trang hiển thị 20 dòng
         return view('admin.order_success.index', compact('orders'), ['orders' => $orders]);
     }
     /**

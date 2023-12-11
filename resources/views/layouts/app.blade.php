@@ -14,14 +14,14 @@
     <link rel="stylesheet" href="{{asset('ad_asset/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('ad_asset/assets/css/argon.css?v=1.2.0')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css')}}">
+    {{--Ckeditor--}}
+    <script src="{{ asset('asset/plugins/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('asset/plugins/ckeditor/adapters/jquery.js') }}"></script>
     @livewireStyles
-
 </head>
-
 <body>
     @if(Auth::check() && Auth::user()->utype =='ADM')
     @include('partials.admin-header')
-
     <div class="content">
         @yield('content') <!-- Hthị phần thân -->
     </div>

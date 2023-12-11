@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Skin;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,26 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         if(Auth::check() && Auth::user()->utype == 'ADM') {
-            return view('admin.dashboard');
+            $order = Order::all();
+        $categories = Category::all();
+        $numberOrder = 0;
+        foreach ($order as $or) {
+            $numberOrder += 1;
+        }
+
+        $numberStatis = 0;
+        foreach ($order as $ord) {
+            if ($ord->status == 1) {
+                $numberStatis += $ord->totalamount;
+            }
+        }
+
+        $user = User::all();
+        $numberUser = 0;
+        foreach ($user as $us) {
+            $numberUser += 1;
+        }
+            return view('admin.dashboard', compact('numberOrder', 'numberStatis', 'numberUser'));
         }
         $discountList = $this->getDiscount();
         $brands = Brand::all();

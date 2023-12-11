@@ -62,9 +62,9 @@
                                 <td>
                                     <span>
                                         @if ($feedback->status)
-                                        Hiện
-                                        @else
                                         Ẩn
+                                        @else
+                                        Hiện
                                         @endif
                                     </span>
                                 </td>

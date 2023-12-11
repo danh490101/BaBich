@@ -97,7 +97,7 @@ Route::middleware(['auth'])->group(function () {
                 $data
             );
         });
-        Route::get('/update-wish-list', [ProductDetailsController::class, 'updateWishList']);
+        Route::get('/check-wish-list/{id}', [ProductDetailsController::class, 'checkWishList']);
     });
 });
 
@@ -118,6 +118,7 @@ Route::middleware(['auth', 'authadmin'])->group(function () {
         Route::resource('/feedback', AdFeedbackController::class);
         Route::resource('/client', ClientController::class);
         Route::post('/admin/orders/search', [OrderController::class, 'getSearchOrder'])->name('orders.search');
+        Route::post('/admin/order_details/search', [OrderDetailsController::class, 'getSearchOrderDetail'])->name('order_details.search');
         Route::get('/feedback/change-status/{feedback}', [AdFeedbackController::class, 'changeStatus'])->name('feedback.changeStatus');
         Route::resource('/statistical', StatisticalController::class);
         Route::post('/statistical/search', [StatisticalController::class, 'search'])->name('statistical.search');

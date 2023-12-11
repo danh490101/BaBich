@@ -3,6 +3,7 @@
 use App\Http\Controllers\User\CheckoutController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\ProductDetailsController;
 
 /*
 |--------------------------------------------------------------------------

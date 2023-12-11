@@ -54,6 +54,7 @@ class BrandController extends Controller
 
 
         $brand = Brand::create($brand);
+        session()->flash('success', 'Thêm thương hiệu thành công!');
         return redirect()->route('admin.brands.index');
     }
 
@@ -109,7 +110,6 @@ class BrandController extends Controller
         }
         $brand->update($brandUpdate);
         session()->flash('success', 'Cập nhật thành công!');
-
         return redirect()->route('admin.brands.index');
     }
 

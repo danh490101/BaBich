@@ -4,7 +4,7 @@
                 <div class="col-sm-12 col-md">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2 logo"><a href="#">Ba <span>Bich</span></a></h2>
-                        <p>Hãy tin tưởng chúng tôi, chúng tôi sẽ mang đến cho bạn một làn da</p>
+                        <p>Hãy tin tưởng chúng tôi, chúng tôi sẽ mang đến cho bạn một làn da tự tin.</p>
                         <ul class="ftco-footer-social list-unstyled mt-2">
                             <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
                             <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>

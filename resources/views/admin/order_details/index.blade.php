@@ -6,8 +6,17 @@
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
                     <h6 class="h2 text-white d-inline-block mb-0">Đơn đặt hàng đã xử lý</h6>
+                    <form action="{{route('admin.order_details.search')}}" method="POST">
+                        @csrf
+                        <div class="col-lg-6 col-7">
+                            <h6 class="h2 text-white d-inline-block mb-0">
+                                <div class="container-input">
+                                    <input type="text" placeholder="Tìm kiếm" name="text" class="input font-italic font-weight-light">
+                                </div>
+                            </h6>
+                        </div>
+                    </form>
                 </div>
-
             </div>
         </div>
     </div>
@@ -43,7 +52,7 @@
                                     <span class="name">{{$order->user_id}}</span>
                                 </td>
                                 <td>
-                                    <span class="status">{{number_format($order->totalamount,0, ',','.')}}</span>
+                                    <span class="status">{{ number_format($order->totalamount - $order->discountValue, 0, ',', '.') }}</span>
                                 </td>
                                 <td>
                                     <span class="status">{{$order->created_at->format('d-m-Y')}}</span>
@@ -62,11 +71,17 @@
                                     </div>
                                 </td>
                             </tr>
-
                             @endif
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="card-footer py-4 page-link">
+                        <nav aria-label="...">
+                            <ul class="pagination justify-content-start">
+                                {{$orders->links("pagination::bootstrap-4")}}
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>

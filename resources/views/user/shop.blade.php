@@ -68,7 +68,7 @@
 							<h3>Phân loại</h3>
 							@foreach($categories as $category)
 							<ul class="p-0">
-							<li>
+								<li>
 									<a href="{{ route('user.shop', [
 										'categoryId' => $category->id, 
 										'brandId' => Request::get('brandId', ''),
@@ -90,8 +90,8 @@
 							<h3>Thương hiệu</h3>
 							@foreach($brands as $brand)
 							<ul class="p-0">
-							<li>
-							<a href="{{ route('user.shop', [
+								<li>
+									<a href="{{ route('user.shop', [
 										'brandId' => $brand->id, 
 										'categoryId' => Request::get('categoryId', ''),
 										'skinId' => Request::get('skinId', ''),
@@ -112,7 +112,7 @@
 							<h3>Loại da</h3>
 							@foreach($skins as $skin)
 							<ul class="p-0">
-							<li>
+								<li>
 									<a href="{{ route('user.shop', [
 										'skinId' => $skin->id, 
 										'categoryId' => Request::get('categoryId', ''),
@@ -154,21 +154,16 @@
 						</div>
 						@endforeach
 					</div>
-					<!-- <div class="row mt-5">
+
+					<div class="row mt-5">
 						<div class="col text-center">
 							<div class="block-27">
 								<ul>
-									<li><a href="#">&lt;</a></li>
-									<li class="active"><span>1</span></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#">&gt;</a></li>
+									{{$products->links("pagination::bootstrap-4")}}
 								</ul>
 							</div>
 						</div>
-					</div> -->
+					</div>
 				</div>
 			</div>
 			@endif

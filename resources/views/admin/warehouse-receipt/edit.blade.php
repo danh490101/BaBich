@@ -27,8 +27,9 @@
                 </div>
                 <div class="card-body">
                     <div class="flex items-center justify-center fixed left-0 bottom-0 w-full h-full bg-gray-800 bg-opacity-90">
-                        <form action="{{ route('admin.warehouse-receipt.store',['warehouse_receipt' => $warehouseReceipt]) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.warehouse-receipt.update',['warehouse_receipt' => $warehouseReceipt]) }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method('PATCH')
                             <div class="pl-lg-4">
                                 <div class="row">
                                     <div class="col-12">
@@ -89,12 +90,12 @@
                                 <div class="row">
                                     <div class="col-6 text-left">
                                         <div class="form-group">
-                                            <a href="hang-hoa.php" class="btn btn-sm btn-outline-primary">Quay lại</a>
+                                            <a href="{{ route('admin.warehouse-receipt.index') }}" class="btn btn-sm btn-outline-primary">Quay lại</a>
                                         </div>
                                     </div>
                                     <div class="col-6 text-right">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-sm btn-primary"> Thêm hàng hóa </button>
+                                            <button type="submit" class="btn btn-sm btn-primary"> Cập nhật </button>
                                         </div>
                                     </div>
                                 </div>

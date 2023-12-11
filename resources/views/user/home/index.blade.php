@@ -124,7 +124,7 @@
                 </div>
             </div>
             <div class="row">
-            @php
+                @php
                 $i=0
                 @endphp
                 @foreach($suggestion as $product)
@@ -229,7 +229,7 @@
                 </div>
             </div>
             <div class="row ">
-            @php
+                @php
                 $i=0
                 @endphp
                 @foreach($group as $product)
@@ -239,7 +239,6 @@
                 @php
                 $i++
                 @endphp
-                
                 <div class="col-md-3 d-flex ">
                     <div class="product ftco-animate shadow">
                         <div class="img d-flex align-items-center justify-content-center" style="background-image: url({{asset($product->image)}});">

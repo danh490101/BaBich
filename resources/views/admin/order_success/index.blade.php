@@ -40,7 +40,6 @@
                         </thead>
                         <tbody class="list">
                             @foreach($orders as $order)
-                            @if($order->status == 4)
                             <tr>
                                 <th scope="row">
                                     <div class="media align-items-center">
@@ -72,17 +71,16 @@
                                     </div>
                                 </td>
                             </tr>
-                            @endif
                             @endforeach
                         </tbody>
                     </table>
-                    <!-- <div class="card-footer py-4 page-link">
+                    <div class="card-footer py-4 page-link">
                         <nav aria-label="...">
                             <ul class="pagination justify-content-start">
-                                {{$orders->links()}}
+                                {{$orders->links("pagination::bootstrap-4")}}
                             </ul>
                         </nav>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>

@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\DB;
 
 class OrderDetailsController extends Controller
 {
+    public function getSearchOrderDetail(Request $request)
+    {
+        $searchTerm = $request->get('text');
+        // dd($searchTerm);
+        $result = Order::where('id', 'like', "%$searchTerm%")
+            ->first();
+        // dd($results);
+        return view('admin.order_details.search', ['result' => $result]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +26,7 @@ class OrderDetailsController extends Controller
     public function index()
     {
         $order_details = OrderDetails::all();
-        $orders = Order::all();
-        
+        $orders = Order::where('status', '=', 1)->paginate(20);
         return view('admin.order_details.index', compact('order_details', 'orders'));
     }
 

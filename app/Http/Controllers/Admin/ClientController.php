@@ -87,7 +87,7 @@ class ClientController extends Controller
         //
         $user = User::findOrFail($id);
         $user->delete();
-        session()->flash('success', 'Xóa thành công!');
+        session()->flash('success', 'Xóa khách hàng thành công!');
         return redirect()->back();
     }
 }

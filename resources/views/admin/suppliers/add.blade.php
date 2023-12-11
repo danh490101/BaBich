@@ -21,7 +21,7 @@
                             <h3 class="mb-0">Thông tin </h3>
                         </div>
                         <div class="col-1">
-                            <span class="ni ni-bell-55" data-toggle="tooltip" data-placement="left" title="Mã sản phẩm sẽ được tạo tự động"></span>
+                            <span class="ni ni-bell-55" data-toggle="tooltip" data-placement="left" title="Mã nhà cung cấp sẽ được tạo tự động"></span>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                                             <label class="form-control-label" for="name">Tên nhà cung cấp</label>
                                             <span class="text-warning" data-toggle="tooltip" data-placement="left" title="Thông tin bắt buộc nhập">(*)</span>
 
-                                            <input type="text" name="name" class="form-control" placeholder="Tên sản phẩm" value="">
+                                            <input type="text" name="name" class="form-control" placeholder="Tên nhà cung cấp" value="">
 
                                             @error('name')
                                             <p class="text-danger">{{$message}}</p>
@@ -91,12 +91,12 @@
                                 <div class="row">
                                     <div class="col-6 text-left">
                                         <div class="form-group">
-                                            <a href="hang-hoa.php" class="btn btn-sm btn-outline-primary">Quay lại</a>
+                                            <a href="{{ route('admin.suppliers.index') }}" class="btn btn-sm btn-outline-primary">Quay lại</a>
                                         </div>
                                     </div>
                                     <div class="col-6 text-right">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-sm btn-primary"> Thêm hàng hóa </button>
+                                            <button type="submit" class="btn btn-sm btn-primary"> Thêm </button>
                                         </div>
                                     </div>
                                 </div>

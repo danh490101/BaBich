@@ -58,7 +58,7 @@
 <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
 
 
-<div class="container">
+<div class="container" style="margin-top: 150px;">
     <div class="heading">Đăng ký</div>
     <form class="form" method="POST" action="{{ route('register') }}">
         @csrf

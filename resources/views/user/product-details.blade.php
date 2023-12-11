@@ -72,28 +72,27 @@
                     </div>
                     <p>
                         <button type="submit" class="btn btn-primary ">Thêm vào giỏ hàng</button>
-                        @if(in_array($product->id, session('wishList')))
+                        <span id="productId" style="display: none;">{{$product->id}}</span>
+
+                        <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}">
+                            <span id="styleFavoriteProduct"><span class="flaticon-heart"></span></span>
+                        </a>
+
+                        <!-- @if(in_array($product->id, session('wishList') ?? []))
                         <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}">
                             <span><i class="fas fa-heart"></i></span>
                         </a>
                         @else
-                        <a href="{{ route('user.add_to_favorites', ['productId' => $product->id]) }}">
-                            <span class="flaticon-heart"></span>
-                        </a>
-
-                        @endif
+                        
+                        @endif -->
                     </p>
-
                 </form>
                 <!-- <div class="w-100"></div>
                     <div class="col-md-12">
                         <p style="color: #000;">Số lượng: {{$product ->quantity}}</p>
                     </div> -->
             </div>
-
-
         </div>
-
         <div class="row mt-5">
             <div class="col-md-12 nav-link-wrap">
                 <div class="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -110,7 +109,6 @@
                             <div class="limited-height" style="white-space: pre-line;">
                                 {!! $product->desc !!}
                             </div>
-
                         </div>
                     </div>
                     <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-day-2-tab">
@@ -231,9 +229,9 @@
                                             <span class="label-char" style="--index: 0">Bình luận</span>
                                         </label>
                                     </div> -->
-                                    <div class="input-container2">
+                                    <div class="input-container2 ">
                                         <input type="text" id="input" name="comment">
-                                        <label for="input" class="label">Bình luận:</label>
+                                        <label for="input" class="label  ml-3">Bình luận:</label>
                                         <div class="underline"></div>
                                     </div>
                                     <div class="input-container2">
@@ -357,15 +355,34 @@
 </script>
 
 <script>
-    function reloadPage() {
-        //replace class in  a tag
+    function replaceContent(data) {
+        if (data) {
+            var newElement = document.createElement('span');
+            newElement.innerHTML = '<span><i class="fas fa-heart"></i></span>';
+            newElement.id = 'styleFavoriteProduct';
+            var oldElement = document.getElementById('styleFavoriteProduct');
+            oldElement.replaceWith(newElement);
+        } else {
+            var newElement = document.createElement('span');
+            newElement.id = 'styleFavoriteProduct';
+            newElement.innerHTML = '<span class="flaticon-heart"></span>';
+            var oldElement = document.getElementById('styleFavoriteProduct');
+            oldElement.replaceWith(newElement);
+        }
     }
+
     $(document).ready(function() {
+        let productId = $('#productId').text()
+        let id = parseInt(productId)
         $.ajax({
-            url: '/user/update-wish-list',
+            url: '/user/check-wish-list/' + id,
             type: 'GET',
-            success: function(data) {
-                setTimeout(reloadPage, 5000)
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(response) {
+                replaceContent(response.data.value)
             },
             error: function(xhr, status, error) {
                 console.log(xhr);

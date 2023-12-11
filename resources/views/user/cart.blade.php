@@ -20,12 +20,13 @@
                         <thead class="thead-primary">
                             <tr>
                                 <th>&nbsp;</th>
-                                <th>&nbsp;</th>
                                 <th>Sản phẩm</th>
                                 <th>Giá</th>
                                 <th>Số lượng</th>
                                 <th>Thành tiền</th>
                                 <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                                
                             </tr>
                         </thead>
                         <tbody>

@@ -30,9 +30,9 @@ class ProductController extends Controller
 
 
         if ($data['quantity'] > $product->quantity) {
-            toastr()->warning('Số lượng hàng trong kho không đủ!');
-            return redirect()->back();
+            return redirect()->back()->with('warning', 'Số lượng trong kho không đủ');
         }
+        
 
         $cart = session()->get('cart', []);
         $cart['totalAmount'] = $cart['totalAmount'] ?? 0;
@@ -71,7 +71,7 @@ class ProductController extends Controller
 
 
         if ($data['quantity'] > $product->quantity) {
-            toastr()->warning('Số lượng hàng trong kho không đủ!');
+            toastr()->info('Số lượng hàng trong kho không đủ!');
             return redirect()->back();
         }
 
@@ -108,9 +108,8 @@ class ProductController extends Controller
         $skinId = $request->get('skinId', null);
         $minPrice = $request->input('min_price', 0);
         $maxPrice = $request->input('max_price', 1000000);
-
         if (is_null($categoryId) && is_null($brandId) && is_null($skinId)) {
-            $products = Product::whereBetween('price', [$minPrice, $maxPrice])->where('quantity', '>', '0')->get();
+            $products = Product::whereBetween('price', [$minPrice, $maxPrice])->where('quantity', '>', '0')->paginate(12);
         } else {
             $products = $this->getProductByCondition([
                 'categoryId' => $categoryId,
@@ -118,7 +117,6 @@ class ProductController extends Controller
                 'skinId' => $skinId,
             ], [$minPrice, $maxPrice]);
         }
-
         return view('user.shop', compact('products', 'categories', 'brands', 'skins'));
     }
 
@@ -289,11 +287,8 @@ class ProductController extends Controller
         if(isset($condition['categoryId'])) {
             $products = $products->where('category_id', '=', $condition['categoryId']);
         }
-        return $products->get();
-
-
+        return $products->paginate(12);
     }
-
     public function getDiscount()
     {
         //set discount with id products
@@ -304,7 +299,6 @@ class ProductController extends Controller
                 $productDiscounts[$productId] = $item['value'];
             }
         }
-
         //get list discount
         $products = Product::all();
         $discountList = [];

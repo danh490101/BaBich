@@ -223,12 +223,11 @@
                 url: '/user/delivery-fee/' + province_id,
                 type: 'GET',
                 success: function(data) {
-                    console.log(data);
-                    $('#delivery-fee').val(data);
-                    $('#delivery-fee-span').text(data);
+                    $('#delivery-fee-span').html(parseFloat(data).toLocaleString('en-US') +'<input id="delivery-fee" type="hidden" name="delivery_cost" class="form-control" placeholder="" value="">');
                     let total = BigInt($('#total_order_input').val()) + BigInt(data);
                     $('#total_order_input').val(total);
                     $('#total_order_span').text(total);
+                    $('#delivery-fee').val(BigInt(data));
                 },
                 error: function(xhr, status, error) {
                     console.log(xhr);
@@ -317,7 +316,7 @@
                     success: function (response) {
                         let value =  $('#cartTotal').val()
                         let fee =  $('#delivery-fee').val()
-                        let total = parseInt(value) + parseInt(fee)
+                        let total = parseInt(fee) + parseInt(value)
                         let discount = (parseInt(total) * response.data.value)/100 
                         let newTotal = parseInt(total) - (parseInt(total) * response.data.value)/100 
                         $('#total_order_input').val(newTotal);

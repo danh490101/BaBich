@@ -48,7 +48,7 @@ class ProductDetailsController extends Controller
         }, $comments);
         $category_id = $product->category()->first()->id;
         $pdcate = Product::where('category_id', $category_id)
-            ->where('id', '<>', $product->id)
+            ->where('id', '<>', $product->id) ->where('quantity', '>',0)
             ->get();
 
 
@@ -94,7 +94,7 @@ class ProductDetailsController extends Controller
         return 0;
     }
 
-    public function updateWishList()
+    public function checkWishList($id)
     {
         $user = Auth::user();
         $favorites = Favorite::where('user_id', '=', $user->id)->get('product_id');
@@ -103,10 +103,16 @@ class ProductDetailsController extends Controller
             return $item['product_id'];
         }, $favorites->toArray());
 
-        session([
-            'wishList' => $ids
-        ]);
+        if (count($ids)) {
+            $value = in_array($id, $ids);
+        };
 
-        return true;
+        return response()->json([
+            'status' => 'success', 
+            'message' => 'Function called successfully', 
+            'data' => [
+                'value' => $value
+            ]
+        ]);
     }
 }

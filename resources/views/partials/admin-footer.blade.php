@@ -26,11 +26,22 @@
             </div>
         </div>
 
-
-
     </div>
 </footer>
 </div>
+{{--Ckeditor--}}
+<link rel="stylesheet" href="{{ asset('asset/plugins/jquery/jquery-ui.min.css') }}">
+<link rel="stylesheet" href="{{ asset('asset/plugins/jquery-confirm/jquery-confirm.min.css') }}">
+<!-- Jquery -->
+<script src="{{ asset('asset/plugins/jquery/jquery-3.6.1.min.js') }}"></script>
+<script src="{{ asset('asset/plugins/jquery-confirm/jquery-confirm.min.js') }}"></script>
+<script src="{{ asset('asset/plugins/loading.js') }}"></script>
+{{--Datepicker--}}
+<script src="{{ asset('asset/plugins/jquery-datepicker/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('asset/plugins/jquery-datepicker/datepicker.js') }}"></script>
+<script src="{{ asset('asset/plugins/jquery-datepicker/datepicker-vi.js') }}"></script>
+<!-- <script src="{{ asset('asset/plugins/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('asset/plugins/ckeditor/adapters/jquery.js') }}"></script> -->
 <script src="{{asset('ad_asset/assets/vendor/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{asset('ad_asset/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('ad_asset/assets/vendor/js-cookie/js.cookie.js')}}"></script>
@@ -39,7 +50,7 @@
 <script src="{{asset('ad_asset/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
 <script src="{{asset('ad_asset/assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
 <script src="{{asset('ad_asset/assets/js/argon.js?v=1.2.0')}}"></script>
-<script src="{{asset('/ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js')}}"></script>
+<!-- <script src="{{asset('/ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js')}}"></script> -->
 <script src="{{asset('//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js')}}"></script>
 <script src="{{asset('//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js')}}"></script>
 <script src="{{asset('https://code.jquery.com/jquery-3.6.0.min.js')}}"></script>

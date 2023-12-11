@@ -148,8 +148,12 @@
                   </div>
               </div>
               <div class="col-6 text-right pr-2">
-                  <h5 class="card-title text-uppercase text-muted mb-2">Tổng thanh toán </h5>
-                  <span class="h2 font-weight-bold mb-2 ">{{$orders->totalamount}}</span>
+                  <h5 class="card-title text-uppercase text-muted mb-2">Thành tiền </h5>
+                  <span class="h2 font-weight-bold mb-2 ">{{ number_format($orders->totalamount, 0, ',', '.') }}</span>
+                  <h6 class="card-title text-uppercase text-muted mb-2">Giảm giá </h6>
+                  <span class="h2 font-weight-bold mb-2 ">{{ number_format($orders->discountValue, 0, ',', '.') }}</span>
+                  <h3 class="card-title text-uppercase text-muted mb-2">Tổng thanh toán </h3>
+                  <span class="h2 font-weight-bold mb-2 ">{{ number_format($orders->totalamount - $orders->discountValue, 0, ',', '.') }}</span>
               </div>
           </div>
       </div>

@@ -150,12 +150,17 @@
           <div class="row">
               <div class="col-6 text-left">
                   <div class="form-group">
-                      <a href="{{ route('admin.orders.index')}}" class="btn btn-sm btn-outline-primary">Quay lại</a>
+                      <a href="{{ route('admin.order_details.index')}}" class="btn btn-sm btn-outline-primary">Quay lại</a>
                   </div>
               </div>
               <div class="col-6 text-right pr-2">
-                  <h5 class="card-title text-uppercase text-muted mb-2">Tổng thanh toán </h5>
-                  <span class="h2 font-weight-bold mb-2 ">{{$orderDetail->totalamount}}</span>
+                  <h5 class="card-title text-uppercase text-muted mb-2">Thành tiền </h5>
+                  <span class="h2 font-weight-bold mb-2 ">{{ number_format($orderDetail->totalamount, 0, ',', '.') }}</span>
+                  <h6 class="card-title text-uppercase text-muted mb-2">Giảm giá </h6>
+                  <span class="h2 font-weight-bold mb-2 ">{{ number_format($orderDetail->discountValue, 0, ',', '.') }}</span>
+                  <h3 class="card-title text-uppercase text-muted mb-2">Tổng thanh toán </h3>
+                  <span class="h2 font-weight-bold mb-2 ">{{ number_format($orderDetail->totalamount - $orderDetail->discountValue, 0, ',', '.') }}</span>
+              </div>
               </div>
           </div>
       </div>

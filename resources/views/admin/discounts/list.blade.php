@@ -39,7 +39,6 @@
                                 <th scope="col"></th>
                             </tr>
                         </thead>
-
                         <tbody class="list">
                             @foreach($discounts as $discount)
                             <tr>
